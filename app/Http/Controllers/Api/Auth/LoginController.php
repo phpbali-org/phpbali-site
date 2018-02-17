@@ -20,7 +20,7 @@ class LoginController extends Controller
 
     	try {
     		$http = new Client;
-    		$response = $http->post(env('APP_LOCAL_URL').'/oauth/token',[
+    		$response = $http->post(url('/oauth/token'),[
     			'form_params'	=> [
     				'grant_type'	=> 'password',
     				'client_id'		=> env('PERSONAL_CLIENT_ID'),
