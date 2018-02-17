@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+$api_version = config('api.api_version');
+Route::group(['prefix' => "{$api_version}"], function() {
+	Route::prefix('auth')->group(base_path('routes/api/auth.php'));
+	Route::prefix('users')->group(base_path('routes/api/users.php'));
+	Route::prefix('articles')->group(base_path('routes/api/articles.php'));
 });

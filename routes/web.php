@@ -11,16 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/{any}', function () {
+    return view('index');
+})->where('any','.*');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('adminpage')->group(function() {
-	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-	Route::get('/', 'AdminController@index')->name('admin.home');
-});
+// Route::prefix('adminpage')->group(function() {
+// 	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+// 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+// 	Route::get('/', 'AdminController@index')->name('admin.home');
+// });
