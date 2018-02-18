@@ -7,16 +7,21 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import React from "react";
+import { render } from "react-dom";
+import { provider } from "react-redux";
+import store from "./store";
+import Routes from "./routes";
+import { authCheck } from "./modules/auth/store/actions";
 
-const app = new Vue({
-    el: '#app'
-});
+store.dispatch(authCheck());
+
+render((<Provider store={store} >
+		<Routes />
+	</Provider>), document.getElementById("app"));
