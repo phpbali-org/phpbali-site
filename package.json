@@ -18,7 +18,10 @@
     },
     "devDependencies": {
         "axios": "^0.17",
+        "babel-preset-react": "^6.24.1",
         "bootstrap": "^4.0.0",
+        "browser-sync": "^2.23.6",
+        "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
@@ -34,6 +37,7 @@
         "moment": "^2.20.1",
         "prop-types": "^15.6.0",
         "react": "^16.2.0",
+        "react-dom": "^16.2.0",
         "react-loadable": "^5.3.1",
         "react-redux": "^5.0.6",
         "react-router": "^4.2.0",
