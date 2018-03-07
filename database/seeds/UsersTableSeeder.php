@@ -15,8 +15,7 @@ class UsersTableSeeder extends Seeder
         User::truncate();
 
         User::create([
-        	'first_name'	=> 'PHP',
-        	'last_name'		=> 'Bali',
+        	'name'	=> 'PHP',
         	'email'			=> 'admin@phpbali.com',
         	'website'		=> null,
         	'is_admin'		=> 1,
