@@ -43,7 +43,7 @@
     <meta property="og:description" content="PHP Bali community websites." />
     <meta property="og:site_name" content="PHP Bali" />
 </head>
-<body class="ecommerce-page">
+<body class="ecommerce-page contact-page">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="500">
         <div class="container">
@@ -69,10 +69,10 @@
                         <a class="nav-link" href="">CONTACT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#modalLogin" href="">SIGN IN</a>
+                        <a class="nav-link modal-toggle" data-tab="tab_login" data-toggle="modal" data-target="#modalLogin" href="#link_login">SIGN IN</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#modalLogin" href="">REGISTER</a>
+                        <a class="nav-link modal-toggle" data-tab="tab_register" data-toggle="modal" data-target="#modalLogin" href="#link_register">REGISTER</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
@@ -149,62 +149,72 @@
                         <div class="modal-body">
                             <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#link7" role="tablist">
+                                    <a class="nav-link " id="link_register" data-toggle="tab" href="#tab_register" role="tablist">
                                         {{-- <i class="now-ui-icons users_single-02"></i> --}}
                                         REGISTER
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#link8" role="tablist">
+                                    <a class="nav-link" data-toggle="tab" id="link_login" href="#tab_login" role="tablist">
                                         {{-- <i class="now-ui-icons objects_key-25"></i> --}}
                                         SIGN IN
                                     </a>
                                 </li>
                             </ul>
                             <div class="tab-content tab-space">
-                                <div class="tab-pane active" id="link7">
-                                    <form class="form" method="" action="" id="register_form">
+                                <div class="tab-pane" id="tab_register">
+                                    {{--  Register Form  --}}
+                                    <form class="form" method="post" action="" id="register_form">
+                                        {{ csrf_field() }}
                                         <div class="card-body">
-                                            <div class="input-group form-group-no-border input-lg">
+                                            <div class="input-group ">
+                                              <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
+                                              </div>
+                                                <input type="email" value="{{ old('email') }}" name="email" id="register_email" class="form-control" placeholder="Your email...">
+                                            </div>
+                                            <div class="input-group ">
                                               <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
                                               </div>
-                                              <input type="email" name="email" id="register_email" class="form-control" placeholder="Your email...">
+                                                <input type="text" value="{{ old('name') }}" name="name" id="register_name" class="form-control" placeholder="Name...">
                                             </div>
-                                            <div class="input-group form-group-no-border input-lg">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
-                                              </div>
-                                              <input type="text" name="name" id="register_name" class="form-control" placeholder="Name...">
-                                            </div>
-                                            <div class="input-group form-group-no-border input-lg">
+                                            <div class="input-group ">
                                               <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
                                               </div>
                                               <input type="password" name="password" id="register_password" class="form-control" placeholder="Password...">
                                             </div>
+                                            <div class="input-group ">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                </div>
+                                                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password...">
+                                            </div>
                                         </div>
-                                        <button type="submit" class="btn btn-info btn-round btn-lg">Login</button>
+                                        <button type="submit" class="btn btn-info btn-block btn-round btn-lg">Register</button>
                                     </form>
                                 </div>
-                                <div class="tab-pane" id="link8">
-                                    <form class="form" method="" action="" id="login_form">
+                                <div class="tab-pane" id="tab_login">
+                                    {{--  Login Form  --}}
+                                    <form class="form" method="post" action="" id="login_form">
+                                        {{ csrf_field() }}
                                         <div class="card-body">
-                                            <div class="input-group form-group-no-border input-lg">
+                                            <div class="input-group ">
                                               <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
+                                                <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
                                               </div>
                                               <input type="email" name="email" id="login_email" class="form-control" placeholder="Your Email...">
                                             </div>
 
-                                            <div class="input-group form-group-no-border input-lg">
+                                            <div class="input-group ">
                                               <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
                                               </div>
                                               <input type="password" name="password" id="login_password" class="form-control" placeholder="Password...">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-info btn-round btn-lg">Login</button>
+                                        <button type="submit" class="btn btn-info btn-block btn-round btn-lg">Login</button>
                                     </form>
                                 </div>
                             </div>
@@ -220,13 +230,30 @@
     
     <!-- Scripts -->
     <!--   Core JS Files   -->
-    <script src="{{ asset('js/require.js') }}" data-main="/js/main.js" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuNtNC5mUcvdU0L2RnHlsqaXLe8Ht4Ddw"
-    async defer></script>
-    <!-- <script type="text/javascript">
-        $(document).ready(function(){
-            nowui.initContactUs2Map();
-        });
-    </script> -->
+    <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+    <script>
+        function initMap(){
+            var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+            var mapOptions = {
+                zoom: 13,
+                center: myLatlng,
+                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+                styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+            };
+
+            var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title:"Hello World!"
+            });
+
+            // To add the marker to the map, call setMap();
+            marker.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuNtNC5mUcvdU0L2RnHlsqaXLe8Ht4Ddw&callback=initMap" async defer></script>
 </body>
 </html>

@@ -6,8 +6,15 @@
  */
 
 require('./bootstrap');
+require('moment');
+require('./lib/bootstrap-datepicker');
+require('./lib/nouislider');
+require('./lib/fastclick');
+require('./lib/nice-select')
+require('./lib/now-ui-kit');
+require('./app/main');
 
-window.Vue = require('vue');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

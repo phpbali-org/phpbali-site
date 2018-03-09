@@ -33,12 +33,7 @@ requirejs.config({
 });
 
 require(["popper","jquery","niceselect"], function(p){
-    require(["core/now-ui-kit"], function(nowuikit){
-        nowuiKit.initContactUs2Map();
-    });
+    require(["core/now-ui-kit"], function(nowuikit){});
     window.Popper = p;
 	require(["app"]);
-    // $('#select_category').niceSelect();
- //    require(["plugins/niceselect/fastclick"]);
- //    require(["plugins/niceselect/jquery.nice-select"])
 });
