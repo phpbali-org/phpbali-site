@@ -1,162 +1,5 @@
-webpackJsonp([1],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(14);
-module.exports = __webpack_require__(36);
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(15);
-__webpack_require__(43);
-__webpack_require__(167);
-__webpack_require__(165);
-__webpack_require__(168);
-__webpack_require__(169);
-__webpack_require__(164);
-__webpack_require__(170);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// Vue.component('example', require('./components/Example.vue'));
-
-// const app = new Vue({
-//     el: '#app'
-// });
-
-
-// import React from "react";
-// import { render } from "react-dom";
-// import { provider } from "react-redux";
-// import store from "./store";
-// import Routes from "./routes";
-// import { authCheck } from "./modules/auth/store/actions";
-
-// store.dispatch(authCheck());
-
-// render((<Provider store={store} >
-// 		<Routes />
-// 	</Provider>), document.getElementById("app"));
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-window._ = __webpack_require__(4);
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
-try {
-  window.$ = window.jQuery = __webpack_require__(1);
-  __webpack_require__(2);
-  __webpack_require__(6);
-} catch (e) {}
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = __webpack_require__(7);
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
- */
-
-var token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from 'laravel-echo'
-
-// window.Pusher = require('pusher-js');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
-
-/***/ }),
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */
+webpackJsonp([0],[
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
@@ -2003,7 +1846,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(163)("./" + name);
+            __webpack_require__(157)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4695,10 +4538,24 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)(module)))
 
 /***/ }),
-/* 44 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -4706,7 +4563,7 @@ return hooks;
 //! author : Werner Mollentze : https://github.com/wernerm
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -4777,7 +4634,7 @@ return af;
 
 
 /***/ }),
-/* 45 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -4787,7 +4644,7 @@ return af;
 //! author : forabi https://github.com/forabi
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -4925,7 +4782,7 @@ return ar;
 
 
 /***/ }),
-/* 46 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -4933,7 +4790,7 @@ return ar;
 //! author : Noureddine LOUAHEDJ : https://github.com/noureddineme
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -4990,7 +4847,7 @@ return arDz;
 
 
 /***/ }),
-/* 47 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -4998,7 +4855,7 @@ return arDz;
 //! author : Nusret Parlak: https://github.com/nusretparlak
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5055,7 +4912,7 @@ return arKw;
 
 
 /***/ }),
-/* 48 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5063,7 +4920,7 @@ return arKw;
 //! author : Ali Hmer: https://github.com/kikoanis
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5187,7 +5044,7 @@ return arLy;
 
 
 /***/ }),
-/* 49 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5196,7 +5053,7 @@ return arLy;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5253,7 +5110,7 @@ return arMa;
 
 
 /***/ }),
-/* 50 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5261,7 +5118,7 @@ return arMa;
 //! author : Suhail Alkowaileet : https://github.com/xsoh
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5364,7 +5221,7 @@ return arSa;
 
 
 /***/ }),
-/* 51 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5372,7 +5229,7 @@ return arSa;
 //! author : Nader Toukabri : https://github.com/naderio
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5429,7 +5286,7 @@ return arTn;
 
 
 /***/ }),
-/* 52 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5437,7 +5294,7 @@ return arTn;
 //! author : topchiyev : https://github.com/topchiyev
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5540,7 +5397,7 @@ return az;
 
 
 /***/ }),
-/* 53 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5550,7 +5407,7 @@ return az;
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5680,7 +5537,7 @@ return be;
 
 
 /***/ }),
-/* 54 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5688,7 +5545,7 @@ return be;
 //! author : Krasen Borisov : https://github.com/kraz
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5776,7 +5633,7 @@ return bg;
 
 
 /***/ }),
-/* 55 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5784,7 +5641,7 @@ return bg;
 //! author : Estelle Comment : https://github.com/estellecomment
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5841,7 +5698,7 @@ return bm;
 
 
 /***/ }),
-/* 56 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5849,7 +5706,7 @@ return bm;
 //! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -5966,7 +5823,7 @@ return bn;
 
 
 /***/ }),
-/* 57 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -5974,7 +5831,7 @@ return bn;
 //! author : Thupten N. Chakrishar : https://github.com/vajradog
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6091,7 +5948,7 @@ return bo;
 
 
 /***/ }),
-/* 58 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6099,7 +5956,7 @@ return bo;
 //! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6205,7 +6062,7 @@ return br;
 
 
 /***/ }),
-/* 59 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6214,7 +6071,7 @@ return br;
 //! based on (hr) translation by Bojan Marković
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6363,7 +6220,7 @@ return bs;
 
 
 /***/ }),
-/* 60 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6371,7 +6228,7 @@ return bs;
 //! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6457,7 +6314,7 @@ return ca;
 
 
 /***/ }),
-/* 61 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6465,7 +6322,7 @@ return ca;
 //! author : petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6642,7 +6499,7 @@ return cs;
 
 
 /***/ }),
-/* 62 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6650,7 +6507,7 @@ return cs;
 //! author : Anatoly Mironov : https://github.com/mirontoli
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6711,7 +6568,7 @@ return cv;
 
 
 /***/ }),
-/* 63 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6720,7 +6577,7 @@ return cv;
 //! author : https://github.com/ryangreaves
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6798,7 +6655,7 @@ return cy;
 
 
 /***/ }),
-/* 64 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6806,7 +6663,7 @@ return cy;
 //! author : Ulrik Nielsen : https://github.com/mrbase
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6864,7 +6721,7 @@ return da;
 
 
 /***/ }),
-/* 65 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6874,7 +6731,7 @@ return da;
 //! author : Mikolaj Dadela : https://github.com/mik01aj
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6948,7 +6805,7 @@ return de;
 
 
 /***/ }),
-/* 66 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -6959,7 +6816,7 @@ return de;
 //! author : Mikolaj Dadela : https://github.com/mik01aj
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7033,7 +6890,7 @@ return deAt;
 
 
 /***/ }),
-/* 67 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7041,7 +6898,7 @@ return deAt;
 //! author : sschueller : https://github.com/sschueller
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7117,7 +6974,7 @@ return deCh;
 
 
 /***/ }),
-/* 68 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7125,7 +6982,7 @@ return deCh;
 //! author : Jawish Hameed : https://github.com/jawish
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7223,7 +7080,7 @@ return dv;
 
 
 /***/ }),
-/* 69 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7231,7 +7088,7 @@ return dv;
 //! author : Aggelos Karalias : https://github.com/mehiel
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7329,7 +7186,7 @@ return el;
 
 
 /***/ }),
-/* 70 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7337,7 +7194,7 @@ return el;
 //! author : Jared Morse : https://github.com/jarcoal
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7402,7 +7259,7 @@ return enAu;
 
 
 /***/ }),
-/* 71 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7410,7 +7267,7 @@ return enAu;
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7471,7 +7328,7 @@ return enCa;
 
 
 /***/ }),
-/* 72 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7479,7 +7336,7 @@ return enCa;
 //! author : Chris Gedrim : https://github.com/chrisgedrim
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7544,7 +7401,7 @@ return enGb;
 
 
 /***/ }),
-/* 73 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7552,7 +7409,7 @@ return enGb;
 //! author : Chris Cartlidge : https://github.com/chriscartlidge
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7617,7 +7474,7 @@ return enIe;
 
 
 /***/ }),
-/* 74 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7625,7 +7482,7 @@ return enIe;
 //! author : Luke McGregor : https://github.com/lukemcgregor
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7690,7 +7547,7 @@ return enNz;
 
 
 /***/ }),
-/* 75 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7700,7 +7557,7 @@ return enNz;
 //! comment : miestasmia corrected the translation by colindean
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7769,7 +7626,7 @@ return eo;
 
 
 /***/ }),
-/* 76 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7777,7 +7634,7 @@ return eo;
 //! author : Julio Napurí : https://github.com/julionc
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7867,14 +7724,14 @@ return es;
 
 
 /***/ }),
-/* 77 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Spanish (Dominican Republic) [es-do]
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -7964,7 +7821,7 @@ return esDo;
 
 
 /***/ }),
-/* 78 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -7972,7 +7829,7 @@ return esDo;
 //! author : bustta : https://github.com/bustta
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8053,7 +7910,7 @@ return esUs;
 
 
 /***/ }),
-/* 79 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8062,7 +7919,7 @@ return esUs;
 //! improvements : Illimar Tambek : https://github.com/ragulka
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8140,7 +7997,7 @@ return et;
 
 
 /***/ }),
-/* 80 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8148,7 +8005,7 @@ return et;
 //! author : Eneko Illarramendi : https://github.com/eillarra
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8212,7 +8069,7 @@ return eu;
 
 
 /***/ }),
-/* 81 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8220,7 +8077,7 @@ return eu;
 //! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8325,7 +8182,7 @@ return fa;
 
 
 /***/ }),
-/* 82 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8333,7 +8190,7 @@ return fa;
 //! author : Tarmo Aidantausta : https://github.com/bleadof
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8440,7 +8297,7 @@ return fi;
 
 
 /***/ }),
-/* 83 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8448,7 +8305,7 @@ return fi;
 //! author : Ragnar Johannesen : https://github.com/ragnar123
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8506,7 +8363,7 @@ return fo;
 
 
 /***/ }),
-/* 84 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8514,7 +8371,7 @@ return fo;
 //! author : John Fischer : https://github.com/jfroffice
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8595,7 +8452,7 @@ return fr;
 
 
 /***/ }),
-/* 85 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8603,7 +8460,7 @@ return fr;
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8675,7 +8532,7 @@ return frCa;
 
 
 /***/ }),
-/* 86 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8683,7 +8540,7 @@ return frCa;
 //! author : Gaspard Bucher : https://github.com/gaspard
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8759,7 +8616,7 @@ return frCh;
 
 
 /***/ }),
-/* 87 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8767,7 +8624,7 @@ return frCh;
 //! author : Robin van der Vliet : https://github.com/robin0van0der0v
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8840,7 +8697,7 @@ return fy;
 
 
 /***/ }),
-/* 88 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8848,7 +8705,7 @@ return fy;
 //! author : Jon Ashdown : https://github.com/jonashdown
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -8922,7 +8779,7 @@ return gd;
 
 
 /***/ }),
-/* 89 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -8930,7 +8787,7 @@ return gd;
 //! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9005,7 +8862,7 @@ return gl;
 
 
 /***/ }),
-/* 90 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9013,7 +8870,7 @@ return gl;
 //! author : The Discoverer : https://github.com/WikiDiscoverer
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9134,7 +8991,7 @@ return gomLatn;
 
 
 /***/ }),
-/* 91 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9142,7 +8999,7 @@ return gomLatn;
 //! author : Kaushik Thanki : https://github.com/Kaushik1987
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9264,7 +9121,7 @@ return gu;
 
 
 /***/ }),
-/* 92 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9274,7 +9131,7 @@ return gu;
 //! author : Tal Ater : https://github.com/TalAter
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9369,7 +9226,7 @@ return he;
 
 
 /***/ }),
-/* 93 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9377,7 +9234,7 @@ return he;
 //! author : Mayank Singhal : https://github.com/mayanksinghal
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9499,7 +9356,7 @@ return hi;
 
 
 /***/ }),
-/* 94 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9507,7 +9364,7 @@ return hi;
 //! author : Bojan Marković : https://github.com/bmarkovic
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9659,7 +9516,7 @@ return hr;
 
 
 /***/ }),
-/* 95 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9667,7 +9524,7 @@ return hr;
 //! author : Adam Brunner : https://github.com/adambrunner
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9775,7 +9632,7 @@ return hu;
 
 
 /***/ }),
-/* 96 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9783,7 +9640,7 @@ return hu;
 //! author : Armendarabyan : https://github.com/armendarabyan
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9876,7 +9733,7 @@ return hyAm;
 
 
 /***/ }),
-/* 97 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9885,7 +9742,7 @@ return hyAm;
 //! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -9965,7 +9822,7 @@ return id;
 
 
 /***/ }),
-/* 98 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -9973,7 +9830,7 @@ return id;
 //! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10103,7 +9960,7 @@ return is;
 
 
 /***/ }),
-/* 99 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10112,7 +9969,7 @@ return is;
 //! author: Mattia Larentis: https://github.com/nostalgiaz
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10179,7 +10036,7 @@ return it;
 
 
 /***/ }),
-/* 100 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10187,7 +10044,7 @@ return it;
 //! author : LI Long : https://github.com/baryon
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10265,7 +10122,7 @@ return ja;
 
 
 /***/ }),
-/* 101 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10274,7 +10131,7 @@ return ja;
 //! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10354,7 +10211,7 @@ return jv;
 
 
 /***/ }),
-/* 102 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10362,7 +10219,7 @@ return jv;
 //! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10449,7 +10306,7 @@ return ka;
 
 
 /***/ }),
-/* 103 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10457,7 +10314,7 @@ return ka;
 //! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10542,7 +10399,7 @@ return kk;
 
 
 /***/ }),
-/* 104 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10550,7 +10407,7 @@ return kk;
 //! author : Kruy Vanna : https://github.com/kruyvanna
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10606,7 +10463,7 @@ return km;
 
 
 /***/ }),
-/* 105 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10614,7 +10471,7 @@ return km;
 //! author : Rajeev Naik : https://github.com/rajeevnaikte
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10738,7 +10595,7 @@ return kn;
 
 
 /***/ }),
-/* 106 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10747,7 +10604,7 @@ return kn;
 //! author : Jeeeyul Lee <jeeeyul@gmail.com>
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10826,7 +10683,7 @@ return ko;
 
 
 /***/ }),
-/* 107 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10834,7 +10691,7 @@ return ko;
 //! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -10920,7 +10777,7 @@ return ky;
 
 
 /***/ }),
-/* 108 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -10929,7 +10786,7 @@ return ky;
 //! author : David Raison : https://github.com/kwisatz
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11063,7 +10920,7 @@ return lb;
 
 
 /***/ }),
-/* 109 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11071,7 +10928,7 @@ return lb;
 //! author : Ryan Hart : https://github.com/ryanhart2
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11139,7 +10996,7 @@ return lo;
 
 
 /***/ }),
-/* 110 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11147,7 +11004,7 @@ return lo;
 //! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11263,7 +11120,7 @@ return lt;
 
 
 /***/ }),
-/* 111 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11272,7 +11129,7 @@ return lt;
 //! author : Jānis Elmeris : https://github.com/JanisE
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11367,7 +11224,7 @@ return lv;
 
 
 /***/ }),
-/* 112 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11375,7 +11232,7 @@ return lv;
 //! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11485,7 +11342,7 @@ return me;
 
 
 /***/ }),
-/* 113 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11493,7 +11350,7 @@ return me;
 //! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11555,7 +11412,7 @@ return mi;
 
 
 /***/ }),
-/* 114 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11563,7 +11420,7 @@ return mi;
 //! author : Borislav Mickov : https://github.com/B0k0
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11651,7 +11508,7 @@ return mk;
 
 
 /***/ }),
-/* 115 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11659,7 +11516,7 @@ return mk;
 //! author : Floyd Pink : https://github.com/floydpink
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11738,7 +11595,7 @@ return ml;
 
 
 /***/ }),
-/* 116 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11747,7 +11604,7 @@ return ml;
 //! author : Vivek Athalye : https://github.com/vnathalye
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11905,7 +11762,7 @@ return mr;
 
 
 /***/ }),
-/* 117 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -11913,7 +11770,7 @@ return mr;
 //! author : Weldan Jamili : https://github.com/weldan
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -11993,7 +11850,7 @@ return ms;
 
 
 /***/ }),
-/* 118 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12002,7 +11859,7 @@ return ms;
 //! author : Weldan Jamili : https://github.com/weldan
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12082,7 +11939,7 @@ return msMy;
 
 
 /***/ }),
-/* 119 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12090,7 +11947,7 @@ return msMy;
 //! author : Alessandro Maruccia : https://github.com/alesma
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12148,7 +12005,7 @@ return mt;
 
 
 /***/ }),
-/* 120 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12158,7 +12015,7 @@ return mt;
 //! author : Tin Aung Lin : https://github.com/thanyawzinmin
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12250,7 +12107,7 @@ return my;
 
 
 /***/ }),
-/* 121 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12259,7 +12116,7 @@ return my;
 //!           Sigurd Gartmann : https://github.com/sigurdga
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12319,7 +12176,7 @@ return nb;
 
 
 /***/ }),
-/* 122 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12327,7 +12184,7 @@ return nb;
 //! author : suvash : https://github.com/suvash
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12448,7 +12305,7 @@ return ne;
 
 
 /***/ }),
-/* 123 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12457,7 +12314,7 @@ return ne;
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12542,7 +12399,7 @@ return nl;
 
 
 /***/ }),
-/* 124 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12551,7 +12408,7 @@ return nl;
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12636,7 +12493,7 @@ return nlBe;
 
 
 /***/ }),
-/* 125 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12644,7 +12501,7 @@ return nlBe;
 //! author : https://github.com/mechuwind
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12702,7 +12559,7 @@ return nn;
 
 
 /***/ }),
-/* 126 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12710,7 +12567,7 @@ return nn;
 //! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12832,7 +12689,7 @@ return paIn;
 
 
 /***/ }),
-/* 127 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12840,7 +12697,7 @@ return paIn;
 //! author : Rafal Hirsz : https://github.com/evoL
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -12964,7 +12821,7 @@ return pl;
 
 
 /***/ }),
-/* 128 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -12972,7 +12829,7 @@ return pl;
 //! author : Jefferson : https://github.com/jalex79
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13035,7 +12892,7 @@ return pt;
 
 
 /***/ }),
-/* 129 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13043,7 +12900,7 @@ return pt;
 //! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13102,7 +12959,7 @@ return ptBr;
 
 
 /***/ }),
-/* 130 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13111,7 +12968,7 @@ return ptBr;
 //! author : Valentin Agachi : https://github.com/avaly
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13184,7 +13041,7 @@ return ro;
 
 
 /***/ }),
-/* 131 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13194,7 +13051,7 @@ return ro;
 //! author : Коренберг Марк : https://github.com/socketpair
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13374,7 +13231,7 @@ return ru;
 
 
 /***/ }),
-/* 132 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13382,7 +13239,7 @@ return ru;
 //! author : Narain Sagar : https://github.com/narainsagar
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13478,7 +13335,7 @@ return sd;
 
 
 /***/ }),
-/* 133 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13486,7 +13343,7 @@ return sd;
 //! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13545,7 +13402,7 @@ return se;
 
 
 /***/ }),
-/* 134 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13553,7 +13410,7 @@ return se;
 //! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13622,7 +13479,7 @@ return si;
 
 
 /***/ }),
-/* 135 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13631,7 +13488,7 @@ return si;
 //! based on work of petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13785,7 +13642,7 @@ return sk;
 
 
 /***/ }),
-/* 136 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13793,7 +13650,7 @@ return sk;
 //! author : Robert Sedovšek : https://github.com/sedovsek
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -13964,7 +13821,7 @@ return sl;
 
 
 /***/ }),
-/* 137 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -13974,7 +13831,7 @@ return sl;
 //! author : Oerd Cukalla : https://github.com/oerd
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14040,7 +13897,7 @@ return sq;
 
 
 /***/ }),
-/* 138 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14048,7 +13905,7 @@ return sq;
 //! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14157,7 +14014,7 @@ return sr;
 
 
 /***/ }),
-/* 139 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14165,7 +14022,7 @@ return sr;
 //! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14274,7 +14131,7 @@ return srCyrl;
 
 
 /***/ }),
-/* 140 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14282,7 +14139,7 @@ return srCyrl;
 //! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14369,7 +14226,7 @@ return ss;
 
 
 /***/ }),
-/* 141 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14377,7 +14234,7 @@ return ss;
 //! author : Jens Alm : https://github.com/ulmus
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14444,7 +14301,7 @@ return sv;
 
 
 /***/ }),
-/* 142 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14452,7 +14309,7 @@ return sv;
 //! author : Fahad Kassim : https://github.com/fadsel
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14509,7 +14366,7 @@ return sw;
 
 
 /***/ }),
-/* 143 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14517,7 +14374,7 @@ return sw;
 //! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14645,7 +14502,7 @@ return ta;
 
 
 /***/ }),
-/* 144 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14653,7 +14510,7 @@ return ta;
 //! author : Krishna Chaitanya Thota : https://github.com/kcthota
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14740,7 +14597,7 @@ return te;
 
 
 /***/ }),
-/* 145 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14749,7 +14606,7 @@ return te;
 //! author : Onorio De J. Afonso : https://github.com/marobo
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14814,7 +14671,7 @@ return tet;
 
 
 /***/ }),
-/* 146 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14822,7 +14679,7 @@ return tet;
 //! author : Kridsada Thanabulpong : https://github.com/sirn
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14887,7 +14744,7 @@ return th;
 
 
 /***/ }),
-/* 147 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14895,7 +14752,7 @@ return th;
 //! author : Dan Hagman : https://github.com/hagmandan
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -14955,7 +14812,7 @@ return tlPh;
 
 
 /***/ }),
-/* 148 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -14963,7 +14820,7 @@ return tlPh;
 //! author : Dominika Kruk : https://github.com/amaranthrose
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15083,7 +14940,7 @@ return tlh;
 
 
 /***/ }),
-/* 149 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15092,7 +14949,7 @@ return tlh;
 //!           Burak Yiğit Kaya: https://github.com/BYK
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15179,7 +15036,7 @@ return tr;
 
 
 /***/ }),
-/* 150 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15188,7 +15045,7 @@ return tr;
 //! author : Iustì Canun
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15277,7 +15134,7 @@ return tzl;
 
 
 /***/ }),
-/* 151 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15285,7 +15142,7 @@ return tzl;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15341,7 +15198,7 @@ return tzm;
 
 
 /***/ }),
-/* 152 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15349,7 +15206,7 @@ return tzm;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15405,7 +15262,7 @@ return tzmLatn;
 
 
 /***/ }),
-/* 153 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15414,7 +15271,7 @@ return tzmLatn;
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15563,7 +15420,7 @@ return uk;
 
 
 /***/ }),
-/* 154 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15572,7 +15429,7 @@ return uk;
 //! author : Zack : https://github.com/ZackVision
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15668,7 +15525,7 @@ return ur;
 
 
 /***/ }),
-/* 155 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15676,7 +15533,7 @@ return ur;
 //! author : Sardor Muminov : https://github.com/muminoff
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15732,7 +15589,7 @@ return uz;
 
 
 /***/ }),
-/* 156 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15740,7 +15597,7 @@ return uz;
 //! author : Rasulbek Mirzayev : github.com/Rasulbeeek
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15796,7 +15653,7 @@ return uzLatn;
 
 
 /***/ }),
-/* 157 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15804,7 +15661,7 @@ return uzLatn;
 //! author : Bang Nguyen : https://github.com/bangnk
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15881,7 +15738,7 @@ return vi;
 
 
 /***/ }),
-/* 158 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15889,7 +15746,7 @@ return vi;
 //! author : Andrew Hood : https://github.com/andrewhood125
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -15955,7 +15812,7 @@ return xPseudo;
 
 
 /***/ }),
-/* 159 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -15963,7 +15820,7 @@ return xPseudo;
 //! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -16021,7 +15878,7 @@ return yo;
 
 
 /***/ }),
-/* 160 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16030,7 +15887,7 @@ return yo;
 //! author : Zeno Zeng : https://github.com/zenozeng
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -16138,7 +15995,7 @@ return zhCn;
 
 
 /***/ }),
-/* 161 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16148,7 +16005,7 @@ return zhCn;
 //! author : Konstantin : https://github.com/skfd
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -16249,7 +16106,7 @@ return zhHk;
 
 
 /***/ }),
-/* 162 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -16258,7 +16115,7 @@ return zhHk;
 //! author : Chris Lam : https://github.com/hehachris
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(43)) :
+    true ? factory(__webpack_require__(0)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -16359,248 +16216,388 @@ return zhTw;
 
 
 /***/ }),
-/* 163 */
+/* 134 */
+/***/ (function(module, exports) {
+
+/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
+module.exports = __webpack_amd_options__;
+
+/* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(136);
+module.exports = __webpack_require__(164);
+
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__(137);
+__webpack_require__(0);
+__webpack_require__(158);
+__webpack_require__(159);
+__webpack_require__(160);
+__webpack_require__(161);
+__webpack_require__(162);
+__webpack_require__(163);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+// Vue.component('example', require('./components/Example.vue'));
+
+// const app = new Vue({
+//     el: '#app'
+// });
+
+
+// import React from "react";
+// import { render } from "react-dom";
+// import { provider } from "react-redux";
+// import store from "./store";
+// import Routes from "./routes";
+// import { authCheck } from "./modules/auth/store/actions";
+
+// store.dispatch(authCheck());
+
+// render((<Provider store={store} >
+// 		<Routes />
+// 	</Provider>), document.getElementById("app"));
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+window._ = __webpack_require__(6);
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+try {
+  window.$ = window.jQuery = __webpack_require__(2);
+  __webpack_require__(3);
+  __webpack_require__(4);
+} catch (e) {}
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
+
+window.axios = __webpack_require__(9);
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/**
+ * Next we will register the CSRF Token as a common header with Axios so that
+ * all outgoing HTTP requests automatically have it attached. This is just
+ * a simple convenience so we don't have to attach every token manually.
+ */
+
+var token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
+
+// import Echo from 'laravel-echo'
+
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     encrypted: true
+// });
+
+/***/ }),
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 44,
-	"./af.js": 44,
-	"./ar": 45,
-	"./ar-dz": 46,
-	"./ar-dz.js": 46,
-	"./ar-kw": 47,
-	"./ar-kw.js": 47,
-	"./ar-ly": 48,
-	"./ar-ly.js": 48,
-	"./ar-ma": 49,
-	"./ar-ma.js": 49,
-	"./ar-sa": 50,
-	"./ar-sa.js": 50,
-	"./ar-tn": 51,
-	"./ar-tn.js": 51,
-	"./ar.js": 45,
-	"./az": 52,
-	"./az.js": 52,
-	"./be": 53,
-	"./be.js": 53,
-	"./bg": 54,
-	"./bg.js": 54,
-	"./bm": 55,
-	"./bm.js": 55,
-	"./bn": 56,
-	"./bn.js": 56,
-	"./bo": 57,
-	"./bo.js": 57,
-	"./br": 58,
-	"./br.js": 58,
-	"./bs": 59,
-	"./bs.js": 59,
-	"./ca": 60,
-	"./ca.js": 60,
-	"./cs": 61,
-	"./cs.js": 61,
-	"./cv": 62,
-	"./cv.js": 62,
-	"./cy": 63,
-	"./cy.js": 63,
-	"./da": 64,
-	"./da.js": 64,
-	"./de": 65,
-	"./de-at": 66,
-	"./de-at.js": 66,
-	"./de-ch": 67,
-	"./de-ch.js": 67,
-	"./de.js": 65,
-	"./dv": 68,
-	"./dv.js": 68,
-	"./el": 69,
-	"./el.js": 69,
-	"./en-au": 70,
-	"./en-au.js": 70,
-	"./en-ca": 71,
-	"./en-ca.js": 71,
-	"./en-gb": 72,
-	"./en-gb.js": 72,
-	"./en-ie": 73,
-	"./en-ie.js": 73,
-	"./en-nz": 74,
-	"./en-nz.js": 74,
-	"./eo": 75,
-	"./eo.js": 75,
-	"./es": 76,
-	"./es-do": 77,
-	"./es-do.js": 77,
-	"./es-us": 78,
-	"./es-us.js": 78,
-	"./es.js": 76,
-	"./et": 79,
-	"./et.js": 79,
-	"./eu": 80,
-	"./eu.js": 80,
-	"./fa": 81,
-	"./fa.js": 81,
-	"./fi": 82,
-	"./fi.js": 82,
-	"./fo": 83,
-	"./fo.js": 83,
-	"./fr": 84,
-	"./fr-ca": 85,
-	"./fr-ca.js": 85,
-	"./fr-ch": 86,
-	"./fr-ch.js": 86,
-	"./fr.js": 84,
-	"./fy": 87,
-	"./fy.js": 87,
-	"./gd": 88,
-	"./gd.js": 88,
-	"./gl": 89,
-	"./gl.js": 89,
-	"./gom-latn": 90,
-	"./gom-latn.js": 90,
-	"./gu": 91,
-	"./gu.js": 91,
-	"./he": 92,
-	"./he.js": 92,
-	"./hi": 93,
-	"./hi.js": 93,
-	"./hr": 94,
-	"./hr.js": 94,
-	"./hu": 95,
-	"./hu.js": 95,
-	"./hy-am": 96,
-	"./hy-am.js": 96,
-	"./id": 97,
-	"./id.js": 97,
-	"./is": 98,
-	"./is.js": 98,
-	"./it": 99,
-	"./it.js": 99,
-	"./ja": 100,
-	"./ja.js": 100,
-	"./jv": 101,
-	"./jv.js": 101,
-	"./ka": 102,
-	"./ka.js": 102,
-	"./kk": 103,
-	"./kk.js": 103,
-	"./km": 104,
-	"./km.js": 104,
-	"./kn": 105,
-	"./kn.js": 105,
-	"./ko": 106,
-	"./ko.js": 106,
-	"./ky": 107,
-	"./ky.js": 107,
-	"./lb": 108,
-	"./lb.js": 108,
-	"./lo": 109,
-	"./lo.js": 109,
-	"./lt": 110,
-	"./lt.js": 110,
-	"./lv": 111,
-	"./lv.js": 111,
-	"./me": 112,
-	"./me.js": 112,
-	"./mi": 113,
-	"./mi.js": 113,
-	"./mk": 114,
-	"./mk.js": 114,
-	"./ml": 115,
-	"./ml.js": 115,
-	"./mr": 116,
-	"./mr.js": 116,
-	"./ms": 117,
-	"./ms-my": 118,
-	"./ms-my.js": 118,
-	"./ms.js": 117,
-	"./mt": 119,
-	"./mt.js": 119,
-	"./my": 120,
-	"./my.js": 120,
-	"./nb": 121,
-	"./nb.js": 121,
-	"./ne": 122,
-	"./ne.js": 122,
-	"./nl": 123,
-	"./nl-be": 124,
-	"./nl-be.js": 124,
-	"./nl.js": 123,
-	"./nn": 125,
-	"./nn.js": 125,
-	"./pa-in": 126,
-	"./pa-in.js": 126,
-	"./pl": 127,
-	"./pl.js": 127,
-	"./pt": 128,
-	"./pt-br": 129,
-	"./pt-br.js": 129,
-	"./pt.js": 128,
-	"./ro": 130,
-	"./ro.js": 130,
-	"./ru": 131,
-	"./ru.js": 131,
-	"./sd": 132,
-	"./sd.js": 132,
-	"./se": 133,
-	"./se.js": 133,
-	"./si": 134,
-	"./si.js": 134,
-	"./sk": 135,
-	"./sk.js": 135,
-	"./sl": 136,
-	"./sl.js": 136,
-	"./sq": 137,
-	"./sq.js": 137,
-	"./sr": 138,
-	"./sr-cyrl": 139,
-	"./sr-cyrl.js": 139,
-	"./sr.js": 138,
-	"./ss": 140,
-	"./ss.js": 140,
-	"./sv": 141,
-	"./sv.js": 141,
-	"./sw": 142,
-	"./sw.js": 142,
-	"./ta": 143,
-	"./ta.js": 143,
-	"./te": 144,
-	"./te.js": 144,
-	"./tet": 145,
-	"./tet.js": 145,
-	"./th": 146,
-	"./th.js": 146,
-	"./tl-ph": 147,
-	"./tl-ph.js": 147,
-	"./tlh": 148,
-	"./tlh.js": 148,
-	"./tr": 149,
-	"./tr.js": 149,
-	"./tzl": 150,
-	"./tzl.js": 150,
-	"./tzm": 151,
-	"./tzm-latn": 152,
-	"./tzm-latn.js": 152,
-	"./tzm.js": 151,
-	"./uk": 153,
-	"./uk.js": 153,
-	"./ur": 154,
-	"./ur.js": 154,
-	"./uz": 155,
-	"./uz-latn": 156,
-	"./uz-latn.js": 156,
-	"./uz.js": 155,
-	"./vi": 157,
-	"./vi.js": 157,
-	"./x-pseudo": 158,
-	"./x-pseudo.js": 158,
-	"./yo": 159,
-	"./yo.js": 159,
-	"./zh-cn": 160,
-	"./zh-cn.js": 160,
-	"./zh-hk": 161,
-	"./zh-hk.js": 161,
-	"./zh-tw": 162,
-	"./zh-tw.js": 162
+	"./af": 15,
+	"./af.js": 15,
+	"./ar": 16,
+	"./ar-dz": 17,
+	"./ar-dz.js": 17,
+	"./ar-kw": 18,
+	"./ar-kw.js": 18,
+	"./ar-ly": 19,
+	"./ar-ly.js": 19,
+	"./ar-ma": 20,
+	"./ar-ma.js": 20,
+	"./ar-sa": 21,
+	"./ar-sa.js": 21,
+	"./ar-tn": 22,
+	"./ar-tn.js": 22,
+	"./ar.js": 16,
+	"./az": 23,
+	"./az.js": 23,
+	"./be": 24,
+	"./be.js": 24,
+	"./bg": 25,
+	"./bg.js": 25,
+	"./bm": 26,
+	"./bm.js": 26,
+	"./bn": 27,
+	"./bn.js": 27,
+	"./bo": 28,
+	"./bo.js": 28,
+	"./br": 29,
+	"./br.js": 29,
+	"./bs": 30,
+	"./bs.js": 30,
+	"./ca": 31,
+	"./ca.js": 31,
+	"./cs": 32,
+	"./cs.js": 32,
+	"./cv": 33,
+	"./cv.js": 33,
+	"./cy": 34,
+	"./cy.js": 34,
+	"./da": 35,
+	"./da.js": 35,
+	"./de": 36,
+	"./de-at": 37,
+	"./de-at.js": 37,
+	"./de-ch": 38,
+	"./de-ch.js": 38,
+	"./de.js": 36,
+	"./dv": 39,
+	"./dv.js": 39,
+	"./el": 40,
+	"./el.js": 40,
+	"./en-au": 41,
+	"./en-au.js": 41,
+	"./en-ca": 42,
+	"./en-ca.js": 42,
+	"./en-gb": 43,
+	"./en-gb.js": 43,
+	"./en-ie": 44,
+	"./en-ie.js": 44,
+	"./en-nz": 45,
+	"./en-nz.js": 45,
+	"./eo": 46,
+	"./eo.js": 46,
+	"./es": 47,
+	"./es-do": 48,
+	"./es-do.js": 48,
+	"./es-us": 49,
+	"./es-us.js": 49,
+	"./es.js": 47,
+	"./et": 50,
+	"./et.js": 50,
+	"./eu": 51,
+	"./eu.js": 51,
+	"./fa": 52,
+	"./fa.js": 52,
+	"./fi": 53,
+	"./fi.js": 53,
+	"./fo": 54,
+	"./fo.js": 54,
+	"./fr": 55,
+	"./fr-ca": 56,
+	"./fr-ca.js": 56,
+	"./fr-ch": 57,
+	"./fr-ch.js": 57,
+	"./fr.js": 55,
+	"./fy": 58,
+	"./fy.js": 58,
+	"./gd": 59,
+	"./gd.js": 59,
+	"./gl": 60,
+	"./gl.js": 60,
+	"./gom-latn": 61,
+	"./gom-latn.js": 61,
+	"./gu": 62,
+	"./gu.js": 62,
+	"./he": 63,
+	"./he.js": 63,
+	"./hi": 64,
+	"./hi.js": 64,
+	"./hr": 65,
+	"./hr.js": 65,
+	"./hu": 66,
+	"./hu.js": 66,
+	"./hy-am": 67,
+	"./hy-am.js": 67,
+	"./id": 68,
+	"./id.js": 68,
+	"./is": 69,
+	"./is.js": 69,
+	"./it": 70,
+	"./it.js": 70,
+	"./ja": 71,
+	"./ja.js": 71,
+	"./jv": 72,
+	"./jv.js": 72,
+	"./ka": 73,
+	"./ka.js": 73,
+	"./kk": 74,
+	"./kk.js": 74,
+	"./km": 75,
+	"./km.js": 75,
+	"./kn": 76,
+	"./kn.js": 76,
+	"./ko": 77,
+	"./ko.js": 77,
+	"./ky": 78,
+	"./ky.js": 78,
+	"./lb": 79,
+	"./lb.js": 79,
+	"./lo": 80,
+	"./lo.js": 80,
+	"./lt": 81,
+	"./lt.js": 81,
+	"./lv": 82,
+	"./lv.js": 82,
+	"./me": 83,
+	"./me.js": 83,
+	"./mi": 84,
+	"./mi.js": 84,
+	"./mk": 85,
+	"./mk.js": 85,
+	"./ml": 86,
+	"./ml.js": 86,
+	"./mr": 87,
+	"./mr.js": 87,
+	"./ms": 88,
+	"./ms-my": 89,
+	"./ms-my.js": 89,
+	"./ms.js": 88,
+	"./mt": 90,
+	"./mt.js": 90,
+	"./my": 91,
+	"./my.js": 91,
+	"./nb": 92,
+	"./nb.js": 92,
+	"./ne": 93,
+	"./ne.js": 93,
+	"./nl": 94,
+	"./nl-be": 95,
+	"./nl-be.js": 95,
+	"./nl.js": 94,
+	"./nn": 96,
+	"./nn.js": 96,
+	"./pa-in": 97,
+	"./pa-in.js": 97,
+	"./pl": 98,
+	"./pl.js": 98,
+	"./pt": 99,
+	"./pt-br": 100,
+	"./pt-br.js": 100,
+	"./pt.js": 99,
+	"./ro": 101,
+	"./ro.js": 101,
+	"./ru": 102,
+	"./ru.js": 102,
+	"./sd": 103,
+	"./sd.js": 103,
+	"./se": 104,
+	"./se.js": 104,
+	"./si": 105,
+	"./si.js": 105,
+	"./sk": 106,
+	"./sk.js": 106,
+	"./sl": 107,
+	"./sl.js": 107,
+	"./sq": 108,
+	"./sq.js": 108,
+	"./sr": 109,
+	"./sr-cyrl": 110,
+	"./sr-cyrl.js": 110,
+	"./sr.js": 109,
+	"./ss": 111,
+	"./ss.js": 111,
+	"./sv": 112,
+	"./sv.js": 112,
+	"./sw": 113,
+	"./sw.js": 113,
+	"./ta": 114,
+	"./ta.js": 114,
+	"./te": 115,
+	"./te.js": 115,
+	"./tet": 116,
+	"./tet.js": 116,
+	"./th": 117,
+	"./th.js": 117,
+	"./tl-ph": 118,
+	"./tl-ph.js": 118,
+	"./tlh": 119,
+	"./tlh.js": 119,
+	"./tr": 120,
+	"./tr.js": 120,
+	"./tzl": 121,
+	"./tzl.js": 121,
+	"./tzm": 122,
+	"./tzm-latn": 123,
+	"./tzm-latn.js": 123,
+	"./tzm.js": 122,
+	"./uk": 124,
+	"./uk.js": 124,
+	"./ur": 125,
+	"./ur.js": 125,
+	"./uz": 126,
+	"./uz-latn": 127,
+	"./uz-latn.js": 127,
+	"./uz.js": 126,
+	"./vi": 128,
+	"./vi.js": 128,
+	"./x-pseudo": 129,
+	"./x-pseudo.js": 129,
+	"./yo": 130,
+	"./yo.js": 130,
+	"./zh-cn": 131,
+	"./zh-cn.js": 131,
+	"./zh-hk": 132,
+	"./zh-hk.js": 132,
+	"./zh-tw": 133,
+	"./zh-tw.js": 133
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -16616,1510 +16613,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 163;
+webpackContext.id = 157;
 
 /***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(6)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
-    /*!
-      =========================================================
-     * Now-ui-kit - v1.1.0
-     =========================================================
-      * Product Page: https://www.creative-tim.com/product/now-ui-kit
-     * Copyright 2017 Creative Tim (http://www.creative-tim.com)
-     * Licensed under MIT (https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md)
-      * Designed by www.invisionapp.com Coded by www.creative-tim.com
-      =========================================================
-      * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-      */
-
-    var transparent = true;
-
-    var transparentDemo = true;
-    var fixedTop = false;
-
-    var navbar_initialized,
-        backgroundOrange = false,
-        toggle_initialized = false;
-
-    $(document).ready(function () {
-        //  Activate the Tooltips
-        $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
-
-        // Activate Popovers and set color for popovers
-        $('[data-toggle="popover"]').each(function () {
-            color_class = $(this).data('color');
-            $(this).popover({
-                template: '<div class="popover popover-' + color_class + '" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
-            });
-        });
-
-        // Activate the image for the navbar-collapse
-        nowuiKit.initNavbarImage();
-
-        $navbar = $('.navbar[color-on-scroll]');
-        scroll_distance = $navbar.attr('color-on-scroll') || 500;
-
-        // Check if we have the class "navbar-color-on-scroll" then add the function to remove the class "navbar-transparent" so it will transform to a plain color.
-
-        if ($('.navbar[color-on-scroll]').length != 0) {
-            nowuiKit.checkScrollForTransparentNavbar();
-            $(window).on('scroll', nowuiKit.checkScrollForTransparentNavbar);
-        }
-
-        $('.form-control').on("focus", function () {
-            $(this).parent('.input-group').addClass("input-group-focus");
-        }).on("blur", function () {
-            $(this).parent(".input-group").removeClass("input-group-focus");
-        });
-
-        // Activate bootstrapSwitch
-        $('.bootstrap-switch').each(function () {
-            $this = $(this);
-            data_on_label = $this.data('on-label') || '';
-            data_off_label = $this.data('off-label') || '';
-
-            $this.bootstrapSwitch({
-                onText: data_on_label,
-                offText: data_off_label
-            });
-        });
-
-        if ($(window).width() >= 992) {
-            big_image = $('.page-header-image[data-parallax="true"]');
-
-            $(window).on('scroll', nowuiKitDemo.checkScrollForParallax);
-        }
-
-        // Activate Carousel
-        $('.carousel').carousel({
-            interval: 4000
-        });
-
-        $('.date-picker').each(function () {
-            $(this).datepicker({
-                templates: {
-                    leftArrow: '<i class="now-ui-icons arrows-1_minimal-left"></i>',
-                    rightArrow: '<i class="now-ui-icons arrows-1_minimal-right"></i>'
-                }
-            }).on('show', function () {
-                $('.datepicker').addClass('open');
-
-                datepicker_color = $(this).data('datepicker-color');
-                if (datepicker_color.length != 0) {
-                    $('.datepicker').addClass('datepicker-' + datepicker_color + '');
-                }
-            }).on('hide', function () {
-                $('.datepicker').removeClass('open');
-            });
-        });
-
-        $('.switch.switch-background input').on("switchChange.bootstrapSwitch", function () {
-            $input = $(this);
-
-            if (!$input.is(':checked')) {
-                $('.section:not(.section-notifications):not(.section-tabs):not(.section-download):not(.section-examples)').each(function () {
-                    $(this).fadeOut('fast', function () {
-                        $(this).attr('data-background-color', 'orange');
-                        $(this).fadeIn('fast');
-                    });
-                });
-
-                switch_orange = $('.navbar .collapse .navbar-nav.navbar-switch .nav-item .nav-link p.hidden');
-                switch_white = $('.navbar .collapse .navbar-nav.navbar-switch .nav-item .nav-link p.visible');
-                switch_white.removeClass('visible').addClass('hidden');
-                switch_orange.removeClass('hidden').addClass('visible');
-
-                $('.section.section-navbars > .container .navbar.bg-primary, .section.section-navbars > .container .navbar.bg-info').each(function () {
-                    $(this).addClass('bg-white');
-                });
-
-                $('.btn-primary,.btn-default,.btn-link').each(function () {
-                    $(this).addClass('btn-neutral');
-                });
-
-                $('button[data-toggle="popover"], button[data-toggle="tooltip"]').each(function () {
-                    $(this).removeClass('btn-default');
-                    $(this).addClass('btn-neutral');
-                });
-
-                $('.nav.nav-pills').each(function () {
-                    $(this).addClass('nav-pills-neutral');
-
-                    if ($('.nav.nav-pills.nav-pills-primary').length != 0) {
-                        $(this).removeClass('nav-pills-primary');
-                    }
-                });
-
-                $('.pagination').each(function () {
-                    $(this).addClass('pagination-neutral');
-                });
-
-                $('.progress-container').each(function () {
-                    $(this).addClass('progress-neutral');
-
-                    if ($('.progress-container.progress-neutral').length != 0) {
-                        $(this).removeClass('progress-primary');
-                    }
-                });
-
-                $('.badge').each(function () {
-                    $(this).addClass('badge-neutral');
-                });
-
-                $('.slider').each(function () {
-                    $(this).addClass('slider-neutral');
-
-                    if ($('.slider.slider-neutral').length != 0) {
-                        $(this).removeClass('slider-primary').removeClass('slider-default');
-                    }
-                });
-
-                $('.blockquote').each(function () {
-                    $(this).addClass('blockquote-white');
-
-                    if ($('.blockuote.blockquote-white').length != 0) {
-                        $(this).removeClass('blockquote-primary');
-                    }
-                });
-
-                backgroundOrange = true;
-            } else {
-                $('.section:not(.section-notifications):not(.section-tabs):not(.section-download):not(.section-examples)').each(function () {
-                    $(this).fadeOut('fast', function () {
-                        $(this).removeAttr('data-background-color', 'orange');
-                        $(this).fadeIn('fast');
-                    });
-                });
-
-                switch_white.removeClass('hidden').addClass('visible');
-                switch_orange.removeClass('visible').addClass('hidden');
-
-                $('.btn-primary,.btn-default,.btn-link').each(function () {
-                    $(this).removeClass('btn-neutral');
-                });
-
-                $('.section.section-navbars > .container .navbar.bg-primary, .section.section-navbars > .container .navbar.bg-info').each(function () {
-                    $(this).removeClass('bg-white');
-                });
-
-                $('button[data-toggle="popover"], button[data-toggle="tooltip"]').each(function () {
-                    $(this).removeClass('btn-neutral');
-                    $(this).addClass('btn-default');
-                });
-
-                $('.nav.nav-pills').each(function () {
-                    $(this).removeClass('nav-pills-neutral');
-
-                    if ($('.nav.nav-pills.nav-pills-neutral').length == 0) {
-                        $(this).addClass('nav-pills-primary');
-                    }
-                });
-
-                $('.pagination').each(function () {
-                    $(this).removeClass('pagination-neutral');
-                });
-
-                $('.progress-container').each(function () {
-                    $(this).removeClass('progress-neutral');
-
-                    if ($('.progress-container.progress-neutral').length == 0) {
-                        $(this).addClass('progress-primary');
-                    }
-                });
-
-                $('.badge').each(function () {
-                    $(this).removeClass('badge-neutral');
-                });
-
-                $('.slider').each(function () {
-                    $(this).removeClass('slider-neutral');
-
-                    if ($('.slider.slider-neutral').length == 0) {
-                        $(this).addClass('slider-primary');
-                    }
-                });
-
-                $('.blockquote').each(function () {
-                    $(this).removeClass('blockquote-white');
-
-                    if ($('.blockuote.blockquote-white').length == 0) {
-                        $(this).addClass('blockquote-primary');
-                    }
-                });
-
-                backgroundOrange = false;
-            }
-        });
-
-        if ($('.twitter-sharrre').length != 0) {
-            $('.twitter-sharrre').sharrre({
-                share: {
-                    twitter: true
-                },
-                enableHover: false,
-                enableTracking: true,
-                enableCounter: false,
-                buttons: {
-                    twitter: {
-                        via: 'CreativeTim'
-                    }
-                },
-                click: function click(api, options) {
-                    api.simulateClick();
-                    api.openPopup('twitter');
-                },
-                template: '<i class="fa fa-twitter"></i>',
-                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
-            });
-        }
-
-        if ($('.twitter-sharrre-nav').length != 0) {
-            $('.twitter-sharrre-nav').sharrre({
-                share: {
-                    twitter: true
-                },
-                enableHover: false,
-                enableTracking: true,
-                enableCounter: false,
-                buttons: {
-                    twitter: {
-                        via: 'CreativeTim'
-                    }
-                },
-                click: function click(api, options) {
-                    api.simulateClick();
-                    api.openPopup('twitter');
-                },
-                template: '<i class="fa fa-twitter"></i><p class="hidden-lg-up">Twitter</p>',
-                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
-            });
-        }
-
-        if ($('.facebook-sharrre').length != 0) {
-            $('.facebook-sharrre').sharrre({
-                share: {
-                    facebook: true
-                },
-                enableHover: false,
-                enableTracking: true,
-                enableCounter: false,
-                click: function click(api, options) {
-                    api.simulateClick();
-                    api.openPopup('facebook');
-                },
-                template: '<i class="fa fa-facebook-square"></i>',
-                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
-            });
-        }
-
-        if ($('.facebook-sharrre-nav').length != 0) {
-            $('.facebook-sharrre-nav').sharrre({
-                share: {
-                    facebook: true
-                },
-                enableHover: false,
-                enableTracking: true,
-                enableCounter: false,
-                click: function click(api, options) {
-                    api.simulateClick();
-                    api.openPopup('facebook');
-                },
-                template: '<i class="fa fa-facebook-square"></i><p class="hidden-lg-up">Facebook</p>',
-                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
-            });
-        }
-
-        if ($('.linkedin-sharrre').length != 0) {
-            $('.linkedin-sharrre').sharrre({
-                share: {
-                    linkedin: true
-                },
-                enableCounter: false,
-                enableHover: false,
-                enableTracking: true,
-                click: function click(api, options) {
-                    api.simulateClick();
-                    api.openPopup('linkedin');
-                },
-                template: '<i class="fa fa-linkedin"></i>',
-                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
-            });
-        }
-
-        if ($('.linkedin-sharrre-nav').length != 0) {
-            $('.linkedin-sharrre-nav').sharrre({
-                share: {
-                    linkedin: true
-                },
-                enableCounter: false,
-                enableHover: false,
-                enableTracking: true,
-                click: function click(api, options) {
-                    api.simulateClick();
-                    api.openPopup('linkedin');
-                },
-                template: '<i class="fa fa-linkedin"></i><p class="hidden-lg-up">LinkedIn</p>',
-                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
-            });
-        }
-    });
-
-    $(window).on('resize', function () {
-        nowuiKit.initNavbarImage();
-    });
-
-    $(document).on('click', '.navbar-toggler', function () {
-        $toggle = $(this);
-
-        if (nowuiKit.misc.navbar_menu_visible == 1) {
-            $('html').removeClass('nav-open');
-            nowuiKit.misc.navbar_menu_visible = 0;
-            $('#bodyClick').remove();
-            setTimeout(function () {
-                $toggle.removeClass('toggled');
-            }, 550);
-        } else {
-            setTimeout(function () {
-                $toggle.addClass('toggled');
-            }, 580);
-            div = '<div id="bodyClick"></div>';
-            $(div).appendTo('body').click(function () {
-                $('html').removeClass('nav-open');
-                nowuiKit.misc.navbar_menu_visible = 0;
-                setTimeout(function () {
-                    $toggle.removeClass('toggled');
-                    $('#bodyClick').remove();
-                }, 550);
-            });
-
-            $('html').addClass('nav-open');
-            nowuiKit.misc.navbar_menu_visible = 1;
-        }
-    });
-
-    nowuiKit = {
-        misc: {
-            navbar_menu_visible: 0
-        },
-
-        checkScrollForTransparentNavbar: debounce(function () {
-            if ($(document).scrollTop() > scroll_distance) {
-                if (transparent) {
-                    transparent = false;
-                    $('.navbar[color-on-scroll]').removeClass('navbar-transparent');
-                }
-            } else {
-                if (!transparent) {
-                    transparent = true;
-                    $('.navbar[color-on-scroll]').addClass('navbar-transparent');
-                }
-            }
-        }, 17),
-
-        initNavbarImage: function initNavbarImage() {
-            var $navbar = $('.navbar').find('.navbar-translate').siblings('.navbar-collapse');
-            var background_image = $navbar.data('nav-image');
-
-            if ($(window).width() < 991 || $('body').hasClass('burger-menu')) {
-                if (background_image != undefined) {
-                    $navbar.css('background', "url('" + background_image + "')").removeAttr('data-nav-image').css('background-size', "cover").addClass('has-image');
-                }
-            } else if (background_image != undefined) {
-                $navbar.css('background', "").attr('data-nav-image', '' + background_image + '').css('background-size', "").removeClass('has-image');
-            }
-        },
-
-        initSliders: function initSliders() {
-            // Sliders for demo purpose in refine cards section
-            var slider = document.getElementById('sliderRegular');
-
-            noUiSlider.create(slider, {
-                start: 40,
-                connect: [true, false],
-                range: {
-                    min: 0,
-                    max: 100
-                }
-            });
-
-            var slider2 = document.getElementById('sliderDouble');
-
-            noUiSlider.create(slider2, {
-                start: [20, 60],
-                connect: true,
-                range: {
-                    min: 0,
-                    max: 100
-                }
-            });
-        },
-
-        checkScrollForParallax: debounce(function () {
-
-            oVal = $(window).scrollTop() / 3;
-            big_image.css({
-                'transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
-            });
-        }, 6),
-
-        initContactUsMap: function initContactUsMap() {
-            var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-            var mapOptions = {
-                zoom: 13,
-                center: myLatlng,
-                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-                styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }]
-            };
-
-            var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
-
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                title: "Hello World!"
-            });
-
-            // To add the marker to the map, call setMap();
-            marker.setMap(map);
-        },
-
-        initContactUs2Map: function initContactUs2Map() {
-            var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-            var mapOptions = {
-                zoom: 13,
-                center: myLatlng,
-                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-                styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }]
-            };
-
-            var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
-
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                title: "Hello World!"
-            });
-
-            // To add the marker to the map, call setMap();
-            marker.setMap(map);
-        }
-    };
-
-    var big_image;
-
-    // Javascript just for Demo purpose, remove it from your project
-    nowuiKitDemo = {
-        checkScrollForParallax: debounce(function () {
-            var current_scroll = $(this).scrollTop();
-
-            oVal = $(window).scrollTop() / 3;
-            big_image.css({
-                'transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
-                '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
-            });
-        }, 6)
-
-        // Returns a function, that, as long as it continues to be invoked, will not
-        // be triggered. The function will be called after it stops being called for
-        // N milliseconds. If `immediate` is passed, trigger the function on the
-        // leading edge, instead of the trailing.
-
-    };function debounce(func, wait, immediate) {
-        var timeout;
-        return function () {
-            var context = this,
-                args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(function () {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            }, wait);
-            if (immediate && !timeout) func.apply(context, args);
-        };
-    };
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-114595865-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*! nouislider - 9.1.0 - 2016-12-10 16:00:32 */
-
-!function (a) {
-     true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = a() : window.noUiSlider = a();
-}(function () {
-    "use strict";
-
-    function a(a, b) {
-        var c = document.createElement("div");
-        return j(c, b), a.appendChild(c), c;
-    }
-
-    function b(a) {
-        return a.filter(function (a) {
-            return !this[a] && (this[a] = !0);
-        }, {});
-    }
-
-    function c(a, b) {
-        return Math.round(a / b) * b;
-    }
-
-    function d(a, b) {
-        var c = a.getBoundingClientRect(),
-            d = a.ownerDocument,
-            e = d.documentElement,
-            f = m();
-        return (/webkit.*Chrome.*Mobile/i.test(navigator.userAgent) && (f.x = 0), b ? c.top + f.y - e.clientTop : c.left + f.x - e.clientLeft
-        );
-    }
-
-    function e(a) {
-        return "number" == typeof a && !isNaN(a) && isFinite(a);
-    }
-
-    function f(a, b, c) {
-        c > 0 && (j(a, b), setTimeout(function () {
-            k(a, b);
-        }, c));
-    }
-
-    function g(a) {
-        return Math.max(Math.min(a, 100), 0);
-    }
-
-    function h(a) {
-        return Array.isArray(a) ? a : [a];
-    }
-
-    function i(a) {
-        a = String(a);
-        var b = a.split(".");
-        return b.length > 1 ? b[1].length : 0;
-    }
-
-    function j(a, b) {
-        a.classList ? a.classList.add(b) : a.className += " " + b;
-    }
-
-    function k(a, b) {
-        a.classList ? a.classList.remove(b) : a.className = a.className.replace(new RegExp("(^|\\b)" + b.split(" ").join("|") + "(\\b|$)", "gi"), " ");
-    }
-
-    function l(a, b) {
-        return a.classList ? a.classList.contains(b) : new RegExp("\\b" + b + "\\b").test(a.className);
-    }
-
-    function m() {
-        var a = void 0 !== window.pageXOffset,
-            b = "CSS1Compat" === (document.compatMode || ""),
-            c = a ? window.pageXOffset : b ? document.documentElement.scrollLeft : document.body.scrollLeft,
-            d = a ? window.pageYOffset : b ? document.documentElement.scrollTop : document.body.scrollTop;
-        return {
-            x: c,
-            y: d
-        };
-    }
-
-    function n() {
-        return window.navigator.pointerEnabled ? {
-            start: "pointerdown",
-            move: "pointermove",
-            end: "pointerup"
-        } : window.navigator.msPointerEnabled ? {
-            start: "MSPointerDown",
-            move: "MSPointerMove",
-            end: "MSPointerUp"
-        } : {
-            start: "mousedown touchstart",
-            move: "mousemove touchmove",
-            end: "mouseup touchend"
-        };
-    }
-
-    function o(a, b) {
-        return 100 / (b - a);
-    }
-
-    function p(a, b) {
-        return 100 * b / (a[1] - a[0]);
-    }
-
-    function q(a, b) {
-        return p(a, a[0] < 0 ? b + Math.abs(a[0]) : b - a[0]);
-    }
-
-    function r(a, b) {
-        return b * (a[1] - a[0]) / 100 + a[0];
-    }
-
-    function s(a, b) {
-        for (var c = 1; a >= b[c];) {
-            c += 1;
-        }return c;
-    }
-
-    function t(a, b, c) {
-        if (c >= a.slice(-1)[0]) return 100;
-        var d,
-            e,
-            f,
-            g,
-            h = s(c, a);
-        return d = a[h - 1], e = a[h], f = b[h - 1], g = b[h], f + q([d, e], c) / o(f, g);
-    }
-
-    function u(a, b, c) {
-        if (c >= 100) return a.slice(-1)[0];
-        var d,
-            e,
-            f,
-            g,
-            h = s(c, b);
-        return d = a[h - 1], e = a[h], f = b[h - 1], g = b[h], r([d, e], (c - f) * o(f, g));
-    }
-
-    function v(a, b, d, e) {
-        if (100 === e) return e;
-        var f,
-            g,
-            h = s(e, a);
-        return d ? (f = a[h - 1], g = a[h], e - f > (g - f) / 2 ? g : f) : b[h - 1] ? a[h - 1] + c(e - a[h - 1], b[h - 1]) : e;
-    }
-
-    function w(a, b, c) {
-        var d;
-        if ("number" == typeof b && (b = [b]), "[object Array]" !== Object.prototype.toString.call(b)) throw new Error("noUiSlider: 'range' contains invalid value.");
-        if (d = "min" === a ? 0 : "max" === a ? 100 : parseFloat(a), !e(d) || !e(b[0])) throw new Error("noUiSlider: 'range' value isn't numeric.");
-        c.xPct.push(d), c.xVal.push(b[0]), d ? c.xSteps.push(!isNaN(b[1]) && b[1]) : isNaN(b[1]) || (c.xSteps[0] = b[1]), c.xHighestCompleteStep.push(0);
-    }
-
-    function x(a, b, c) {
-        if (!b) return !0;
-        c.xSteps[a] = p([c.xVal[a], c.xVal[a + 1]], b) / o(c.xPct[a], c.xPct[a + 1]);
-        var d = (c.xVal[a + 1] - c.xVal[a]) / c.xNumSteps[a],
-            e = Math.ceil(Number(d.toFixed(3)) - 1),
-            f = c.xVal[a] + c.xNumSteps[a] * e;
-        c.xHighestCompleteStep[a] = f;
-    }
-
-    function y(a, b, c, d) {
-        this.xPct = [], this.xVal = [], this.xSteps = [d || !1], this.xNumSteps = [!1], this.xHighestCompleteStep = [], this.snap = b, this.direction = c;
-        var e,
-            f = [];
-        for (e in a) {
-            a.hasOwnProperty(e) && f.push([a[e], e]);
-        }for (f.length && "object" == _typeof(f[0][0]) ? f.sort(function (a, b) {
-            return a[0][0] - b[0][0];
-        }) : f.sort(function (a, b) {
-            return a[0] - b[0];
-        }), e = 0; e < f.length; e++) {
-            w(f[e][1], f[e][0], this);
-        }for (this.xNumSteps = this.xSteps.slice(0), e = 0; e < this.xNumSteps.length; e++) {
-            x(e, this.xNumSteps[e], this);
-        }
-    }
-
-    function z(a, b) {
-        if (!e(b)) throw new Error("noUiSlider: 'step' is not numeric.");
-        a.singleStep = b;
-    }
-
-    function A(a, b) {
-        if ("object" != (typeof b === "undefined" ? "undefined" : _typeof(b)) || Array.isArray(b)) throw new Error("noUiSlider: 'range' is not an object.");
-        if (void 0 === b.min || void 0 === b.max) throw new Error("noUiSlider: Missing 'min' or 'max' in 'range'.");
-        if (b.min === b.max) throw new Error("noUiSlider: 'range' 'min' and 'max' cannot be equal.");
-        a.spectrum = new y(b, a.snap, a.dir, a.singleStep);
-    }
-
-    function B(a, b) {
-        if (b = h(b), !Array.isArray(b) || !b.length) throw new Error("noUiSlider: 'start' option is incorrect.");
-        a.handles = b.length, a.start = b;
-    }
-
-    function C(a, b) {
-        if (a.snap = b, "boolean" != typeof b) throw new Error("noUiSlider: 'snap' option must be a boolean.");
-    }
-
-    function D(a, b) {
-        if (a.animate = b, "boolean" != typeof b) throw new Error("noUiSlider: 'animate' option must be a boolean.");
-    }
-
-    function E(a, b) {
-        if (a.animationDuration = b, "number" != typeof b) throw new Error("noUiSlider: 'animationDuration' option must be a number.");
-    }
-
-    function F(a, b) {
-        var c,
-            d = [!1];
-        if ("lower" === b ? b = [!0, !1] : "upper" === b && (b = [!1, !0]), b === !0 || b === !1) {
-            for (c = 1; c < a.handles; c++) {
-                d.push(b);
-            }d.push(!1);
-        } else {
-            if (!Array.isArray(b) || !b.length || b.length !== a.handles + 1) throw new Error("noUiSlider: 'connect' option doesn't match handle count.");
-            d = b;
-        }
-        a.connect = d;
-    }
-
-    function G(a, b) {
-        switch (b) {
-            case "horizontal":
-                a.ort = 0;
-                break;
-            case "vertical":
-                a.ort = 1;
-                break;
-            default:
-                throw new Error("noUiSlider: 'orientation' option is invalid.");
-        }
-    }
-
-    function H(a, b) {
-        if (!e(b)) throw new Error("noUiSlider: 'margin' option must be numeric.");
-        if (0 !== b && (a.margin = a.spectrum.getMargin(b), !a.margin)) throw new Error("noUiSlider: 'margin' option is only supported on linear sliders.");
-    }
-
-    function I(a, b) {
-        if (!e(b)) throw new Error("noUiSlider: 'limit' option must be numeric.");
-        if (a.limit = a.spectrum.getMargin(b), !a.limit || a.handles < 2) throw new Error("noUiSlider: 'limit' option is only supported on linear sliders with 2 or more handles.");
-    }
-
-    function J(a, b) {
-        if (!e(b)) throw new Error("noUiSlider: 'padding' option must be numeric.");
-        if (0 !== b) {
-            if (a.padding = a.spectrum.getMargin(b), !a.padding) throw new Error("noUiSlider: 'padding' option is only supported on linear sliders.");
-            if (a.padding < 0) throw new Error("noUiSlider: 'padding' option must be a positive number.");
-            if (a.padding >= 50) throw new Error("noUiSlider: 'padding' option must be less than half the range.");
-        }
-    }
-
-    function K(a, b) {
-        switch (b) {
-            case "ltr":
-                a.dir = 0;
-                break;
-            case "rtl":
-                a.dir = 1;
-                break;
-            default:
-                throw new Error("noUiSlider: 'direction' option was not recognized.");
-        }
-    }
-
-    function L(a, b) {
-        if ("string" != typeof b) throw new Error("noUiSlider: 'behaviour' must be a string containing options.");
-        var c = b.indexOf("tap") >= 0,
-            d = b.indexOf("drag") >= 0,
-            e = b.indexOf("fixed") >= 0,
-            f = b.indexOf("snap") >= 0,
-            g = b.indexOf("hover") >= 0;
-        if (e) {
-            if (2 !== a.handles) throw new Error("noUiSlider: 'fixed' behaviour must be used with 2 handles");
-            H(a, a.start[1] - a.start[0]);
-        }
-        a.events = {
-            tap: c || f,
-            drag: d,
-            fixed: e,
-            snap: f,
-            hover: g
-        };
-    }
-
-    function M(a, b) {
-        if (b !== !1) if (b === !0) {
-            a.tooltips = [];
-            for (var c = 0; c < a.handles; c++) {
-                a.tooltips.push(!0);
-            }
-        } else {
-            if (a.tooltips = h(b), a.tooltips.length !== a.handles) throw new Error("noUiSlider: must pass a formatter for all handles.");
-            a.tooltips.forEach(function (a) {
-                if ("boolean" != typeof a && ("object" != (typeof a === "undefined" ? "undefined" : _typeof(a)) || "function" != typeof a.to)) throw new Error("noUiSlider: 'tooltips' must be passed a formatter or 'false'.");
-            });
-        }
-    }
-
-    function N(a, b) {
-        if (a.format = b, "function" == typeof b.to && "function" == typeof b.from) return !0;
-        throw new Error("noUiSlider: 'format' requires 'to' and 'from' methods.");
-    }
-
-    function O(a, b) {
-        if (void 0 !== b && "string" != typeof b && b !== !1) throw new Error("noUiSlider: 'cssPrefix' must be a string or `false`.");
-        a.cssPrefix = b;
-    }
-
-    function P(a, b) {
-        if (void 0 !== b && "object" != (typeof b === "undefined" ? "undefined" : _typeof(b))) throw new Error("noUiSlider: 'cssClasses' must be an object.");
-        if ("string" == typeof a.cssPrefix) {
-            a.cssClasses = {};
-            for (var c in b) {
-                b.hasOwnProperty(c) && (a.cssClasses[c] = a.cssPrefix + b[c]);
-            }
-        } else a.cssClasses = b;
-    }
-
-    function Q(a, b) {
-        if (b !== !0 && b !== !1) throw new Error("noUiSlider: 'useRequestAnimationFrame' option should be true (default) or false.");
-        a.useRequestAnimationFrame = b;
-    }
-
-    function R(a) {
-        var b = {
-            margin: 0,
-            limit: 0,
-            padding: 0,
-            animate: !0,
-            animationDuration: 300,
-            format: U
-        },
-            c = {
-            step: {
-                r: !1,
-                t: z
-            },
-            start: {
-                r: !0,
-                t: B
-            },
-            connect: {
-                r: !0,
-                t: F
-            },
-            direction: {
-                r: !0,
-                t: K
-            },
-            snap: {
-                r: !1,
-                t: C
-            },
-            animate: {
-                r: !1,
-                t: D
-            },
-            animationDuration: {
-                r: !1,
-                t: E
-            },
-            range: {
-                r: !0,
-                t: A
-            },
-            orientation: {
-                r: !1,
-                t: G
-            },
-            margin: {
-                r: !1,
-                t: H
-            },
-            limit: {
-                r: !1,
-                t: I
-            },
-            padding: {
-                r: !1,
-                t: J
-            },
-            behaviour: {
-                r: !0,
-                t: L
-            },
-            format: {
-                r: !1,
-                t: N
-            },
-            tooltips: {
-                r: !1,
-                t: M
-            },
-            cssPrefix: {
-                r: !1,
-                t: O
-            },
-            cssClasses: {
-                r: !1,
-                t: P
-            },
-            useRequestAnimationFrame: {
-                r: !1,
-                t: Q
-            }
-        },
-            d = {
-            connect: !1,
-            direction: "ltr",
-            behaviour: "tap",
-            orientation: "horizontal",
-            cssPrefix: "noUi-",
-            cssClasses: {
-                target: "target",
-                base: "base",
-                origin: "origin",
-                handle: "handle",
-                handleLower: "handle-lower",
-                handleUpper: "handle-upper",
-                horizontal: "horizontal",
-                vertical: "vertical",
-                background: "background",
-                connect: "connect",
-                ltr: "ltr",
-                rtl: "rtl",
-                draggable: "draggable",
-                drag: "state-drag",
-                tap: "state-tap",
-                active: "active",
-                tooltip: "tooltip",
-                pips: "pips",
-                pipsHorizontal: "pips-horizontal",
-                pipsVertical: "pips-vertical",
-                marker: "marker",
-                markerHorizontal: "marker-horizontal",
-                markerVertical: "marker-vertical",
-                markerNormal: "marker-normal",
-                markerLarge: "marker-large",
-                markerSub: "marker-sub",
-                value: "value",
-                valueHorizontal: "value-horizontal",
-                valueVertical: "value-vertical",
-                valueNormal: "value-normal",
-                valueLarge: "value-large",
-                valueSub: "value-sub"
-            },
-            useRequestAnimationFrame: !0
-        };
-        Object.keys(c).forEach(function (e) {
-            if (void 0 === a[e] && void 0 === d[e]) {
-                if (c[e].r) throw new Error("noUiSlider: '" + e + "' is required.");
-                return !0;
-            }
-            c[e].t(b, void 0 === a[e] ? d[e] : a[e]);
-        }), b.pips = a.pips;
-        var e = [["left", "top"], ["right", "bottom"]];
-        return b.style = e[b.dir][b.ort], b.styleOposite = e[b.dir ? 0 : 1][b.ort], b;
-    }
-
-    function S(c, e, i) {
-        function o(b, c) {
-            var d = a(b, e.cssClasses.origin),
-                f = a(d, e.cssClasses.handle);
-            return f.setAttribute("data-handle", c), 0 === c ? j(f, e.cssClasses.handleLower) : c === e.handles - 1 && j(f, e.cssClasses.handleUpper), d;
-        }
-
-        function p(b, c) {
-            return !!c && a(b, e.cssClasses.connect);
-        }
-
-        function q(a, b) {
-            ba = [], ca = [], ca.push(p(b, a[0]));
-            for (var c = 0; c < e.handles; c++) {
-                ba.push(o(b, c)), ha[c] = c, ca.push(p(b, a[c + 1]));
-            }
-        }
-
-        function r(b) {
-            j(b, e.cssClasses.target), 0 === e.dir ? j(b, e.cssClasses.ltr) : j(b, e.cssClasses.rtl), 0 === e.ort ? j(b, e.cssClasses.horizontal) : j(b, e.cssClasses.vertical), aa = a(b, e.cssClasses.base);
-        }
-
-        function s(b, c) {
-            return !!e.tooltips[c] && a(b.firstChild, e.cssClasses.tooltip);
-        }
-
-        function t() {
-            var a = ba.map(s);
-            Z("update", function (b, c, d) {
-                if (a[c]) {
-                    var f = b[c];
-                    e.tooltips[c] !== !0 && (f = e.tooltips[c].to(d[c])), a[c].innerHTML = f;
-                }
-            });
-        }
-
-        function u(a, b, c) {
-            if ("range" === a || "steps" === a) return ja.xVal;
-            if ("count" === a) {
-                var d,
-                    e = 100 / (b - 1),
-                    f = 0;
-                for (b = []; (d = f++ * e) <= 100;) {
-                    b.push(d);
-                }a = "positions";
-            }
-            return "positions" === a ? b.map(function (a) {
-                return ja.fromStepping(c ? ja.getStep(a) : a);
-            }) : "values" === a ? c ? b.map(function (a) {
-                return ja.fromStepping(ja.getStep(ja.toStepping(a)));
-            }) : b : void 0;
-        }
-
-        function v(a, c, d) {
-            function e(a, b) {
-                return (a + b).toFixed(7) / 1;
-            }
-            var f = {},
-                g = ja.xVal[0],
-                h = ja.xVal[ja.xVal.length - 1],
-                i = !1,
-                j = !1,
-                k = 0;
-            return d = b(d.slice().sort(function (a, b) {
-                return a - b;
-            })), d[0] !== g && (d.unshift(g), i = !0), d[d.length - 1] !== h && (d.push(h), j = !0), d.forEach(function (b, g) {
-                var h,
-                    l,
-                    m,
-                    n,
-                    o,
-                    p,
-                    q,
-                    r,
-                    s,
-                    t,
-                    u = b,
-                    v = d[g + 1];
-                if ("steps" === c && (h = ja.xNumSteps[g]), h || (h = v - u), u !== !1 && void 0 !== v) for (h = Math.max(h, 1e-7), l = u; l <= v; l = e(l, h)) {
-                    for (n = ja.toStepping(l), o = n - k, r = o / a, s = Math.round(r), t = o / s, m = 1; m <= s; m += 1) {
-                        p = k + m * t, f[p.toFixed(5)] = ["x", 0];
-                    }q = d.indexOf(l) > -1 ? 1 : "steps" === c ? 2 : 0, !g && i && (q = 0), l === v && j || (f[n.toFixed(5)] = [l, q]), k = n;
-                }
-            }), f;
-        }
-
-        function w(a, b, c) {
-            function d(a, b) {
-                var c = b === e.cssClasses.value,
-                    d = c ? m : n,
-                    f = c ? k : l;
-                return b + " " + d[e.ort] + " " + f[a];
-            }
-
-            function f(a, b, c) {
-                return 'class="' + d(c[1], b) + '" style="' + e.style + ": " + a + '%"';
-            }
-
-            function g(a, d) {
-                d[1] = d[1] && b ? b(d[0], d[1]) : d[1], i += "<div " + f(a, e.cssClasses.marker, d) + "></div>", d[1] && (i += "<div " + f(a, e.cssClasses.value, d) + ">" + c.to(d[0]) + "</div>");
-            }
-            var h = document.createElement("div"),
-                i = "",
-                k = [e.cssClasses.valueNormal, e.cssClasses.valueLarge, e.cssClasses.valueSub],
-                l = [e.cssClasses.markerNormal, e.cssClasses.markerLarge, e.cssClasses.markerSub],
-                m = [e.cssClasses.valueHorizontal, e.cssClasses.valueVertical],
-                n = [e.cssClasses.markerHorizontal, e.cssClasses.markerVertical];
-            return j(h, e.cssClasses.pips), j(h, 0 === e.ort ? e.cssClasses.pipsHorizontal : e.cssClasses.pipsVertical), Object.keys(a).forEach(function (b) {
-                g(b, a[b]);
-            }), h.innerHTML = i, h;
-        }
-
-        function x(a) {
-            var b = a.mode,
-                c = a.density || 1,
-                d = a.filter || !1,
-                e = a.values || !1,
-                f = a.stepped || !1,
-                g = u(b, e, f),
-                h = v(c, b, g),
-                i = a.format || {
-                to: Math.round
-            };
-            return fa.appendChild(w(h, d, i));
-        }
-
-        function y() {
-            var a = aa.getBoundingClientRect(),
-                b = "offset" + ["Width", "Height"][e.ort];
-            return 0 === e.ort ? a.width || aa[b] : a.height || aa[b];
-        }
-
-        function z(a, b, c, d) {
-            var f = function f(b) {
-                return !fa.hasAttribute("disabled") && !l(fa, e.cssClasses.tap) && !!(b = A(b, d.pageOffset)) && !(a === ea.start && void 0 !== b.buttons && b.buttons > 1) && (!d.hover || !b.buttons) && (b.calcPoint = b.points[e.ort], void c(b, d));
-            },
-                g = [];
-            return a.split(" ").forEach(function (a) {
-                b.addEventListener(a, f, !1), g.push([a, f]);
-            }), g;
-        }
-
-        function A(a, b) {
-            a.preventDefault();
-            var c,
-                d,
-                e = 0 === a.type.indexOf("touch"),
-                f = 0 === a.type.indexOf("mouse"),
-                g = 0 === a.type.indexOf("pointer");
-            if (0 === a.type.indexOf("MSPointer") && (g = !0), e) {
-                if (a.touches.length > 1) return !1;
-                c = a.changedTouches[0].pageX, d = a.changedTouches[0].pageY;
-            }
-            return b = b || m(), (f || g) && (c = a.clientX + b.x, d = a.clientY + b.y), a.pageOffset = b, a.points = [c, d], a.cursor = f || g, a;
-        }
-
-        function B(a) {
-            var b = a - d(aa, e.ort),
-                c = 100 * b / y();
-            return e.dir ? 100 - c : c;
-        }
-
-        function C(a) {
-            var b = 100,
-                c = !1;
-            return ba.forEach(function (d, e) {
-                if (!d.hasAttribute("disabled")) {
-                    var f = Math.abs(ga[e] - a);
-                    f < b && (c = e, b = f);
-                }
-            }), c;
-        }
-
-        function D(a, b, c, d) {
-            var e = c.slice(),
-                f = [!a, a],
-                g = [a, !a];
-            d = d.slice(), a && d.reverse(), d.length > 1 ? d.forEach(function (a, c) {
-                var d = M(e, a, e[a] + b, f[c], g[c]);
-                d === !1 ? b = 0 : (b = d - e[a], e[a] = d);
-            }) : f = g = [!0];
-            var h = !1;
-            d.forEach(function (a, d) {
-                h = Q(a, c[a] + b, f[d], g[d]) || h;
-            }), h && d.forEach(function (a) {
-                E("update", a), E("slide", a);
-            });
-        }
-
-        function E(a, b, c) {
-            Object.keys(la).forEach(function (d) {
-                var f = d.split(".")[0];
-                a === f && la[d].forEach(function (a) {
-                    a.call(da, ka.map(e.format.to), b, ka.slice(), c || !1, ga.slice());
-                });
-            });
-        }
-
-        function F(a, b) {
-            "mouseout" === a.type && "HTML" === a.target.nodeName && null === a.relatedTarget && H(a, b);
-        }
-
-        function G(a, b) {
-            if (navigator.appVersion.indexOf("MSIE 9") === -1 && 0 === a.buttons && 0 !== b.buttonsProperty) return H(a, b);
-            var c = (e.dir ? -1 : 1) * (a.calcPoint - b.startCalcPoint),
-                d = 100 * c / b.baseSize;
-            D(c > 0, d, b.locations, b.handleNumbers);
-        }
-
-        function H(a, b) {
-            ia && (k(ia, e.cssClasses.active), ia = !1), a.cursor && (document.body.style.cursor = "", document.body.removeEventListener("selectstart", document.body.noUiListener)), document.documentElement.noUiListeners.forEach(function (a) {
-                document.documentElement.removeEventListener(a[0], a[1]);
-            }), k(fa, e.cssClasses.drag), P(), b.handleNumbers.forEach(function (a) {
-                E("set", a), E("change", a), E("end", a);
-            });
-        }
-
-        function I(a, b) {
-            if (1 === b.handleNumbers.length) {
-                var c = ba[b.handleNumbers[0]];
-                if (c.hasAttribute("disabled")) return !1;
-                ia = c.children[0], j(ia, e.cssClasses.active);
-            }
-            a.preventDefault(), a.stopPropagation();
-            var d = z(ea.move, document.documentElement, G, {
-                startCalcPoint: a.calcPoint,
-                baseSize: y(),
-                pageOffset: a.pageOffset,
-                handleNumbers: b.handleNumbers,
-                buttonsProperty: a.buttons,
-                locations: ga.slice()
-            }),
-                f = z(ea.end, document.documentElement, H, {
-                handleNumbers: b.handleNumbers
-            }),
-                g = z("mouseout", document.documentElement, F, {
-                handleNumbers: b.handleNumbers
-            });
-            if (document.documentElement.noUiListeners = d.concat(f, g), a.cursor) {
-                document.body.style.cursor = getComputedStyle(a.target).cursor, ba.length > 1 && j(fa, e.cssClasses.drag);
-                var h = function h() {
-                    return !1;
-                };
-                document.body.noUiListener = h, document.body.addEventListener("selectstart", h, !1);
-            }
-            b.handleNumbers.forEach(function (a) {
-                E("start", a);
-            });
-        }
-
-        function J(a) {
-            a.stopPropagation();
-            var b = B(a.calcPoint),
-                c = C(b);
-            return c !== !1 && (e.events.snap || f(fa, e.cssClasses.tap, e.animationDuration), Q(c, b, !0, !0), P(), E("slide", c, !0), E("set", c, !0), E("change", c, !0), E("update", c, !0), void (e.events.snap && I(a, {
-                handleNumbers: [c]
-            })));
-        }
-
-        function K(a) {
-            var b = B(a.calcPoint),
-                c = ja.getStep(b),
-                d = ja.fromStepping(c);
-            Object.keys(la).forEach(function (a) {
-                "hover" === a.split(".")[0] && la[a].forEach(function (a) {
-                    a.call(da, d);
-                });
-            });
-        }
-
-        function L(a) {
-            a.fixed || ba.forEach(function (a, b) {
-                z(ea.start, a.children[0], I, {
-                    handleNumbers: [b]
-                });
-            }), a.tap && z(ea.start, aa, J, {}), a.hover && z(ea.move, aa, K, {
-                hover: !0
-            }), a.drag && ca.forEach(function (b, c) {
-                if (b !== !1 && 0 !== c && c !== ca.length - 1) {
-                    var d = ba[c - 1],
-                        f = ba[c],
-                        g = [b];
-                    j(b, e.cssClasses.draggable), a.fixed && (g.push(d.children[0]), g.push(f.children[0])), g.forEach(function (a) {
-                        z(ea.start, a, I, {
-                            handles: [d, f],
-                            handleNumbers: [c - 1, c]
-                        });
-                    });
-                }
-            });
-        }
-
-        function M(a, b, c, d, f) {
-            return ba.length > 1 && (d && b > 0 && (c = Math.max(c, a[b - 1] + e.margin)), f && b < ba.length - 1 && (c = Math.min(c, a[b + 1] - e.margin))), ba.length > 1 && e.limit && (d && b > 0 && (c = Math.min(c, a[b - 1] + e.limit)), f && b < ba.length - 1 && (c = Math.max(c, a[b + 1] - e.limit))), e.padding && (0 === b && (c = Math.max(c, e.padding)), b === ba.length - 1 && (c = Math.min(c, 100 - e.padding))), c = ja.getStep(c), c = g(c), c !== a[b] && c;
-        }
-
-        function N(a) {
-            return a + "%";
-        }
-
-        function O(a, b) {
-            ga[a] = b, ka[a] = ja.fromStepping(b);
-            var c = function c() {
-                ba[a].style[e.style] = N(b), S(a), S(a + 1);
-            };
-            window.requestAnimationFrame && e.useRequestAnimationFrame ? window.requestAnimationFrame(c) : c();
-        }
-
-        function P() {
-            ha.forEach(function (a) {
-                var b = ga[a] > 50 ? -1 : 1,
-                    c = 3 + (ba.length + b * a);
-                ba[a].childNodes[0].style.zIndex = c;
-            });
-        }
-
-        function Q(a, b, c, d) {
-            return b = M(ga, a, b, c, d), b !== !1 && (O(a, b), !0);
-        }
-
-        function S(a) {
-            if (ca[a]) {
-                var b = 0,
-                    c = 100;
-                0 !== a && (b = ga[a - 1]), a !== ca.length - 1 && (c = ga[a]), ca[a].style[e.style] = N(b), ca[a].style[e.styleOposite] = N(100 - c);
-            }
-        }
-
-        function T(a, b) {
-            null !== a && a !== !1 && ("number" == typeof a && (a = String(a)), a = e.format.from(a), a === !1 || isNaN(a) || Q(b, ja.toStepping(a), !1, !1));
-        }
-
-        function U(a, b) {
-            var c = h(a),
-                d = void 0 === ga[0];
-            b = void 0 === b || !!b, c.forEach(T), e.animate && !d && f(fa, e.cssClasses.tap, e.animationDuration), ha.forEach(function (a) {
-                Q(a, ga[a], !0, !1);
-            }), P(), ha.forEach(function (a) {
-                E("update", a), null !== c[a] && b && E("set", a);
-            });
-        }
-
-        function V(a) {
-            U(e.start, a);
-        }
-
-        function W() {
-            var a = ka.map(e.format.to);
-            return 1 === a.length ? a[0] : a;
-        }
-
-        function X() {
-            for (var a in e.cssClasses) {
-                e.cssClasses.hasOwnProperty(a) && k(fa, e.cssClasses[a]);
-            }for (; fa.firstChild;) {
-                fa.removeChild(fa.firstChild);
-            }delete fa.noUiSlider;
-        }
-
-        function Y() {
-            return ga.map(function (a, b) {
-                var c = ja.getNearbySteps(a),
-                    d = ka[b],
-                    e = c.thisStep.step,
-                    f = null;
-                e !== !1 && d + e > c.stepAfter.startValue && (e = c.stepAfter.startValue - d), f = d > c.thisStep.startValue ? c.thisStep.step : c.stepBefore.step !== !1 && d - c.stepBefore.highestStep, 100 === a ? e = null : 0 === a && (f = null);
-                var g = ja.countStepDecimals();
-                return null !== e && e !== !1 && (e = Number(e.toFixed(g))), null !== f && f !== !1 && (f = Number(f.toFixed(g))), [f, e];
-            });
-        }
-
-        function Z(a, b) {
-            la[a] = la[a] || [], la[a].push(b), "update" === a.split(".")[0] && ba.forEach(function (a, b) {
-                E("update", b);
-            });
-        }
-
-        function $(a) {
-            var b = a && a.split(".")[0],
-                c = b && a.substring(b.length);
-            Object.keys(la).forEach(function (a) {
-                var d = a.split(".")[0],
-                    e = a.substring(d.length);
-                b && b !== d || c && c !== e || delete la[a];
-            });
-        }
-
-        function _(a, b) {
-            var c = W(),
-                d = ["margin", "limit", "padding", "range", "animate", "snap", "step", "format"];
-            d.forEach(function (b) {
-                void 0 !== a[b] && (i[b] = a[b]);
-            });
-            var f = R(i);
-            d.forEach(function (b) {
-                void 0 !== a[b] && (e[b] = f[b]);
-            }), f.spectrum.direction = ja.direction, ja = f.spectrum, e.margin = f.margin, e.limit = f.limit, e.padding = f.padding, ga = [], U(a.start || c, b);
-        }
-        var aa,
-            ba,
-            ca,
-            da,
-            ea = n(),
-            fa = c,
-            ga = [],
-            ha = [],
-            ia = !1,
-            ja = e.spectrum,
-            ka = [],
-            la = {};
-        if (fa.noUiSlider) throw new Error("Slider was already initialized.");
-        return r(fa), q(e.connect, aa), da = {
-            destroy: X,
-            steps: Y,
-            on: Z,
-            off: $,
-            get: W,
-            set: U,
-            reset: V,
-            __moveHandles: function __moveHandles(a, b, c) {
-                D(a, b, ga, c);
-            },
-            options: i,
-            updateOptions: _,
-            target: fa,
-            pips: x
-        }, L(e.events), U(e.start), e.pips && x(e.pips), e.tooltips && t(), da;
-    }
-
-    function T(a, b) {
-        if (!a.nodeName) throw new Error("noUiSlider.create requires a single element.");
-        var c = R(b, a),
-            d = S(a, c, b);
-        return a.noUiSlider = d, d;
-    }
-    y.prototype.getMargin = function (a) {
-        var b = this.xNumSteps[0];
-        if (b && a / b % 1 !== 0) throw new Error("noUiSlider: 'limit', 'margin' and 'padding' must be divisible by step.");
-        return 2 === this.xPct.length && p(this.xVal, a);
-    }, y.prototype.toStepping = function (a) {
-        return a = t(this.xVal, this.xPct, a);
-    }, y.prototype.fromStepping = function (a) {
-        return u(this.xVal, this.xPct, a);
-    }, y.prototype.getStep = function (a) {
-        return a = v(this.xPct, this.xSteps, this.snap, a);
-    }, y.prototype.getNearbySteps = function (a) {
-        var b = s(a, this.xPct);
-        return {
-            stepBefore: {
-                startValue: this.xVal[b - 2],
-                step: this.xNumSteps[b - 2],
-                highestStep: this.xHighestCompleteStep[b - 2]
-            },
-            thisStep: {
-                startValue: this.xVal[b - 1],
-                step: this.xNumSteps[b - 1],
-                highestStep: this.xHighestCompleteStep[b - 1]
-            },
-            stepAfter: {
-                startValue: this.xVal[b - 0],
-                step: this.xNumSteps[b - 0],
-                highestStep: this.xHighestCompleteStep[b - 0]
-            }
-        };
-    }, y.prototype.countStepDecimals = function () {
-        var a = this.xNumSteps.map(i);
-        return Math.max.apply(null, a);
-    }, y.prototype.convert = function (a) {
-        return this.getStep(this.toStepping(a));
-    };
-    var U = {
-        to: function to(a) {
-            return void 0 !== a && a.toFixed(2);
-        },
-        from: Number
-    };
-    return {
-        create: T
-    };
-});
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports) {
-
-/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
-module.exports = __webpack_amd_options__;
-
-/* WEBPACK VAR INJECTION */}.call(exports, {}))
-
-/***/ }),
-/* 167 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -18132,7 +16629,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 (function (factory) {
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -19955,7 +18452,957 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 168 */
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*! nouislider - 9.1.0 - 2016-12-10 16:00:32 */
+
+!function (a) {
+     true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = a() : window.noUiSlider = a();
+}(function () {
+    "use strict";
+
+    function a(a, b) {
+        var c = document.createElement("div");
+        return j(c, b), a.appendChild(c), c;
+    }
+
+    function b(a) {
+        return a.filter(function (a) {
+            return !this[a] && (this[a] = !0);
+        }, {});
+    }
+
+    function c(a, b) {
+        return Math.round(a / b) * b;
+    }
+
+    function d(a, b) {
+        var c = a.getBoundingClientRect(),
+            d = a.ownerDocument,
+            e = d.documentElement,
+            f = m();
+        return (/webkit.*Chrome.*Mobile/i.test(navigator.userAgent) && (f.x = 0), b ? c.top + f.y - e.clientTop : c.left + f.x - e.clientLeft
+        );
+    }
+
+    function e(a) {
+        return "number" == typeof a && !isNaN(a) && isFinite(a);
+    }
+
+    function f(a, b, c) {
+        c > 0 && (j(a, b), setTimeout(function () {
+            k(a, b);
+        }, c));
+    }
+
+    function g(a) {
+        return Math.max(Math.min(a, 100), 0);
+    }
+
+    function h(a) {
+        return Array.isArray(a) ? a : [a];
+    }
+
+    function i(a) {
+        a = String(a);
+        var b = a.split(".");
+        return b.length > 1 ? b[1].length : 0;
+    }
+
+    function j(a, b) {
+        a.classList ? a.classList.add(b) : a.className += " " + b;
+    }
+
+    function k(a, b) {
+        a.classList ? a.classList.remove(b) : a.className = a.className.replace(new RegExp("(^|\\b)" + b.split(" ").join("|") + "(\\b|$)", "gi"), " ");
+    }
+
+    function l(a, b) {
+        return a.classList ? a.classList.contains(b) : new RegExp("\\b" + b + "\\b").test(a.className);
+    }
+
+    function m() {
+        var a = void 0 !== window.pageXOffset,
+            b = "CSS1Compat" === (document.compatMode || ""),
+            c = a ? window.pageXOffset : b ? document.documentElement.scrollLeft : document.body.scrollLeft,
+            d = a ? window.pageYOffset : b ? document.documentElement.scrollTop : document.body.scrollTop;
+        return {
+            x: c,
+            y: d
+        };
+    }
+
+    function n() {
+        return window.navigator.pointerEnabled ? {
+            start: "pointerdown",
+            move: "pointermove",
+            end: "pointerup"
+        } : window.navigator.msPointerEnabled ? {
+            start: "MSPointerDown",
+            move: "MSPointerMove",
+            end: "MSPointerUp"
+        } : {
+            start: "mousedown touchstart",
+            move: "mousemove touchmove",
+            end: "mouseup touchend"
+        };
+    }
+
+    function o(a, b) {
+        return 100 / (b - a);
+    }
+
+    function p(a, b) {
+        return 100 * b / (a[1] - a[0]);
+    }
+
+    function q(a, b) {
+        return p(a, a[0] < 0 ? b + Math.abs(a[0]) : b - a[0]);
+    }
+
+    function r(a, b) {
+        return b * (a[1] - a[0]) / 100 + a[0];
+    }
+
+    function s(a, b) {
+        for (var c = 1; a >= b[c];) {
+            c += 1;
+        }return c;
+    }
+
+    function t(a, b, c) {
+        if (c >= a.slice(-1)[0]) return 100;
+        var d,
+            e,
+            f,
+            g,
+            h = s(c, a);
+        return d = a[h - 1], e = a[h], f = b[h - 1], g = b[h], f + q([d, e], c) / o(f, g);
+    }
+
+    function u(a, b, c) {
+        if (c >= 100) return a.slice(-1)[0];
+        var d,
+            e,
+            f,
+            g,
+            h = s(c, b);
+        return d = a[h - 1], e = a[h], f = b[h - 1], g = b[h], r([d, e], (c - f) * o(f, g));
+    }
+
+    function v(a, b, d, e) {
+        if (100 === e) return e;
+        var f,
+            g,
+            h = s(e, a);
+        return d ? (f = a[h - 1], g = a[h], e - f > (g - f) / 2 ? g : f) : b[h - 1] ? a[h - 1] + c(e - a[h - 1], b[h - 1]) : e;
+    }
+
+    function w(a, b, c) {
+        var d;
+        if ("number" == typeof b && (b = [b]), "[object Array]" !== Object.prototype.toString.call(b)) throw new Error("noUiSlider: 'range' contains invalid value.");
+        if (d = "min" === a ? 0 : "max" === a ? 100 : parseFloat(a), !e(d) || !e(b[0])) throw new Error("noUiSlider: 'range' value isn't numeric.");
+        c.xPct.push(d), c.xVal.push(b[0]), d ? c.xSteps.push(!isNaN(b[1]) && b[1]) : isNaN(b[1]) || (c.xSteps[0] = b[1]), c.xHighestCompleteStep.push(0);
+    }
+
+    function x(a, b, c) {
+        if (!b) return !0;
+        c.xSteps[a] = p([c.xVal[a], c.xVal[a + 1]], b) / o(c.xPct[a], c.xPct[a + 1]);
+        var d = (c.xVal[a + 1] - c.xVal[a]) / c.xNumSteps[a],
+            e = Math.ceil(Number(d.toFixed(3)) - 1),
+            f = c.xVal[a] + c.xNumSteps[a] * e;
+        c.xHighestCompleteStep[a] = f;
+    }
+
+    function y(a, b, c, d) {
+        this.xPct = [], this.xVal = [], this.xSteps = [d || !1], this.xNumSteps = [!1], this.xHighestCompleteStep = [], this.snap = b, this.direction = c;
+        var e,
+            f = [];
+        for (e in a) {
+            a.hasOwnProperty(e) && f.push([a[e], e]);
+        }for (f.length && "object" == _typeof(f[0][0]) ? f.sort(function (a, b) {
+            return a[0][0] - b[0][0];
+        }) : f.sort(function (a, b) {
+            return a[0] - b[0];
+        }), e = 0; e < f.length; e++) {
+            w(f[e][1], f[e][0], this);
+        }for (this.xNumSteps = this.xSteps.slice(0), e = 0; e < this.xNumSteps.length; e++) {
+            x(e, this.xNumSteps[e], this);
+        }
+    }
+
+    function z(a, b) {
+        if (!e(b)) throw new Error("noUiSlider: 'step' is not numeric.");
+        a.singleStep = b;
+    }
+
+    function A(a, b) {
+        if ("object" != (typeof b === "undefined" ? "undefined" : _typeof(b)) || Array.isArray(b)) throw new Error("noUiSlider: 'range' is not an object.");
+        if (void 0 === b.min || void 0 === b.max) throw new Error("noUiSlider: Missing 'min' or 'max' in 'range'.");
+        if (b.min === b.max) throw new Error("noUiSlider: 'range' 'min' and 'max' cannot be equal.");
+        a.spectrum = new y(b, a.snap, a.dir, a.singleStep);
+    }
+
+    function B(a, b) {
+        if (b = h(b), !Array.isArray(b) || !b.length) throw new Error("noUiSlider: 'start' option is incorrect.");
+        a.handles = b.length, a.start = b;
+    }
+
+    function C(a, b) {
+        if (a.snap = b, "boolean" != typeof b) throw new Error("noUiSlider: 'snap' option must be a boolean.");
+    }
+
+    function D(a, b) {
+        if (a.animate = b, "boolean" != typeof b) throw new Error("noUiSlider: 'animate' option must be a boolean.");
+    }
+
+    function E(a, b) {
+        if (a.animationDuration = b, "number" != typeof b) throw new Error("noUiSlider: 'animationDuration' option must be a number.");
+    }
+
+    function F(a, b) {
+        var c,
+            d = [!1];
+        if ("lower" === b ? b = [!0, !1] : "upper" === b && (b = [!1, !0]), b === !0 || b === !1) {
+            for (c = 1; c < a.handles; c++) {
+                d.push(b);
+            }d.push(!1);
+        } else {
+            if (!Array.isArray(b) || !b.length || b.length !== a.handles + 1) throw new Error("noUiSlider: 'connect' option doesn't match handle count.");
+            d = b;
+        }
+        a.connect = d;
+    }
+
+    function G(a, b) {
+        switch (b) {
+            case "horizontal":
+                a.ort = 0;
+                break;
+            case "vertical":
+                a.ort = 1;
+                break;
+            default:
+                throw new Error("noUiSlider: 'orientation' option is invalid.");
+        }
+    }
+
+    function H(a, b) {
+        if (!e(b)) throw new Error("noUiSlider: 'margin' option must be numeric.");
+        if (0 !== b && (a.margin = a.spectrum.getMargin(b), !a.margin)) throw new Error("noUiSlider: 'margin' option is only supported on linear sliders.");
+    }
+
+    function I(a, b) {
+        if (!e(b)) throw new Error("noUiSlider: 'limit' option must be numeric.");
+        if (a.limit = a.spectrum.getMargin(b), !a.limit || a.handles < 2) throw new Error("noUiSlider: 'limit' option is only supported on linear sliders with 2 or more handles.");
+    }
+
+    function J(a, b) {
+        if (!e(b)) throw new Error("noUiSlider: 'padding' option must be numeric.");
+        if (0 !== b) {
+            if (a.padding = a.spectrum.getMargin(b), !a.padding) throw new Error("noUiSlider: 'padding' option is only supported on linear sliders.");
+            if (a.padding < 0) throw new Error("noUiSlider: 'padding' option must be a positive number.");
+            if (a.padding >= 50) throw new Error("noUiSlider: 'padding' option must be less than half the range.");
+        }
+    }
+
+    function K(a, b) {
+        switch (b) {
+            case "ltr":
+                a.dir = 0;
+                break;
+            case "rtl":
+                a.dir = 1;
+                break;
+            default:
+                throw new Error("noUiSlider: 'direction' option was not recognized.");
+        }
+    }
+
+    function L(a, b) {
+        if ("string" != typeof b) throw new Error("noUiSlider: 'behaviour' must be a string containing options.");
+        var c = b.indexOf("tap") >= 0,
+            d = b.indexOf("drag") >= 0,
+            e = b.indexOf("fixed") >= 0,
+            f = b.indexOf("snap") >= 0,
+            g = b.indexOf("hover") >= 0;
+        if (e) {
+            if (2 !== a.handles) throw new Error("noUiSlider: 'fixed' behaviour must be used with 2 handles");
+            H(a, a.start[1] - a.start[0]);
+        }
+        a.events = {
+            tap: c || f,
+            drag: d,
+            fixed: e,
+            snap: f,
+            hover: g
+        };
+    }
+
+    function M(a, b) {
+        if (b !== !1) if (b === !0) {
+            a.tooltips = [];
+            for (var c = 0; c < a.handles; c++) {
+                a.tooltips.push(!0);
+            }
+        } else {
+            if (a.tooltips = h(b), a.tooltips.length !== a.handles) throw new Error("noUiSlider: must pass a formatter for all handles.");
+            a.tooltips.forEach(function (a) {
+                if ("boolean" != typeof a && ("object" != (typeof a === "undefined" ? "undefined" : _typeof(a)) || "function" != typeof a.to)) throw new Error("noUiSlider: 'tooltips' must be passed a formatter or 'false'.");
+            });
+        }
+    }
+
+    function N(a, b) {
+        if (a.format = b, "function" == typeof b.to && "function" == typeof b.from) return !0;
+        throw new Error("noUiSlider: 'format' requires 'to' and 'from' methods.");
+    }
+
+    function O(a, b) {
+        if (void 0 !== b && "string" != typeof b && b !== !1) throw new Error("noUiSlider: 'cssPrefix' must be a string or `false`.");
+        a.cssPrefix = b;
+    }
+
+    function P(a, b) {
+        if (void 0 !== b && "object" != (typeof b === "undefined" ? "undefined" : _typeof(b))) throw new Error("noUiSlider: 'cssClasses' must be an object.");
+        if ("string" == typeof a.cssPrefix) {
+            a.cssClasses = {};
+            for (var c in b) {
+                b.hasOwnProperty(c) && (a.cssClasses[c] = a.cssPrefix + b[c]);
+            }
+        } else a.cssClasses = b;
+    }
+
+    function Q(a, b) {
+        if (b !== !0 && b !== !1) throw new Error("noUiSlider: 'useRequestAnimationFrame' option should be true (default) or false.");
+        a.useRequestAnimationFrame = b;
+    }
+
+    function R(a) {
+        var b = {
+            margin: 0,
+            limit: 0,
+            padding: 0,
+            animate: !0,
+            animationDuration: 300,
+            format: U
+        },
+            c = {
+            step: {
+                r: !1,
+                t: z
+            },
+            start: {
+                r: !0,
+                t: B
+            },
+            connect: {
+                r: !0,
+                t: F
+            },
+            direction: {
+                r: !0,
+                t: K
+            },
+            snap: {
+                r: !1,
+                t: C
+            },
+            animate: {
+                r: !1,
+                t: D
+            },
+            animationDuration: {
+                r: !1,
+                t: E
+            },
+            range: {
+                r: !0,
+                t: A
+            },
+            orientation: {
+                r: !1,
+                t: G
+            },
+            margin: {
+                r: !1,
+                t: H
+            },
+            limit: {
+                r: !1,
+                t: I
+            },
+            padding: {
+                r: !1,
+                t: J
+            },
+            behaviour: {
+                r: !0,
+                t: L
+            },
+            format: {
+                r: !1,
+                t: N
+            },
+            tooltips: {
+                r: !1,
+                t: M
+            },
+            cssPrefix: {
+                r: !1,
+                t: O
+            },
+            cssClasses: {
+                r: !1,
+                t: P
+            },
+            useRequestAnimationFrame: {
+                r: !1,
+                t: Q
+            }
+        },
+            d = {
+            connect: !1,
+            direction: "ltr",
+            behaviour: "tap",
+            orientation: "horizontal",
+            cssPrefix: "noUi-",
+            cssClasses: {
+                target: "target",
+                base: "base",
+                origin: "origin",
+                handle: "handle",
+                handleLower: "handle-lower",
+                handleUpper: "handle-upper",
+                horizontal: "horizontal",
+                vertical: "vertical",
+                background: "background",
+                connect: "connect",
+                ltr: "ltr",
+                rtl: "rtl",
+                draggable: "draggable",
+                drag: "state-drag",
+                tap: "state-tap",
+                active: "active",
+                tooltip: "tooltip",
+                pips: "pips",
+                pipsHorizontal: "pips-horizontal",
+                pipsVertical: "pips-vertical",
+                marker: "marker",
+                markerHorizontal: "marker-horizontal",
+                markerVertical: "marker-vertical",
+                markerNormal: "marker-normal",
+                markerLarge: "marker-large",
+                markerSub: "marker-sub",
+                value: "value",
+                valueHorizontal: "value-horizontal",
+                valueVertical: "value-vertical",
+                valueNormal: "value-normal",
+                valueLarge: "value-large",
+                valueSub: "value-sub"
+            },
+            useRequestAnimationFrame: !0
+        };
+        Object.keys(c).forEach(function (e) {
+            if (void 0 === a[e] && void 0 === d[e]) {
+                if (c[e].r) throw new Error("noUiSlider: '" + e + "' is required.");
+                return !0;
+            }
+            c[e].t(b, void 0 === a[e] ? d[e] : a[e]);
+        }), b.pips = a.pips;
+        var e = [["left", "top"], ["right", "bottom"]];
+        return b.style = e[b.dir][b.ort], b.styleOposite = e[b.dir ? 0 : 1][b.ort], b;
+    }
+
+    function S(c, e, i) {
+        function o(b, c) {
+            var d = a(b, e.cssClasses.origin),
+                f = a(d, e.cssClasses.handle);
+            return f.setAttribute("data-handle", c), 0 === c ? j(f, e.cssClasses.handleLower) : c === e.handles - 1 && j(f, e.cssClasses.handleUpper), d;
+        }
+
+        function p(b, c) {
+            return !!c && a(b, e.cssClasses.connect);
+        }
+
+        function q(a, b) {
+            ba = [], ca = [], ca.push(p(b, a[0]));
+            for (var c = 0; c < e.handles; c++) {
+                ba.push(o(b, c)), ha[c] = c, ca.push(p(b, a[c + 1]));
+            }
+        }
+
+        function r(b) {
+            j(b, e.cssClasses.target), 0 === e.dir ? j(b, e.cssClasses.ltr) : j(b, e.cssClasses.rtl), 0 === e.ort ? j(b, e.cssClasses.horizontal) : j(b, e.cssClasses.vertical), aa = a(b, e.cssClasses.base);
+        }
+
+        function s(b, c) {
+            return !!e.tooltips[c] && a(b.firstChild, e.cssClasses.tooltip);
+        }
+
+        function t() {
+            var a = ba.map(s);
+            Z("update", function (b, c, d) {
+                if (a[c]) {
+                    var f = b[c];
+                    e.tooltips[c] !== !0 && (f = e.tooltips[c].to(d[c])), a[c].innerHTML = f;
+                }
+            });
+        }
+
+        function u(a, b, c) {
+            if ("range" === a || "steps" === a) return ja.xVal;
+            if ("count" === a) {
+                var d,
+                    e = 100 / (b - 1),
+                    f = 0;
+                for (b = []; (d = f++ * e) <= 100;) {
+                    b.push(d);
+                }a = "positions";
+            }
+            return "positions" === a ? b.map(function (a) {
+                return ja.fromStepping(c ? ja.getStep(a) : a);
+            }) : "values" === a ? c ? b.map(function (a) {
+                return ja.fromStepping(ja.getStep(ja.toStepping(a)));
+            }) : b : void 0;
+        }
+
+        function v(a, c, d) {
+            function e(a, b) {
+                return (a + b).toFixed(7) / 1;
+            }
+            var f = {},
+                g = ja.xVal[0],
+                h = ja.xVal[ja.xVal.length - 1],
+                i = !1,
+                j = !1,
+                k = 0;
+            return d = b(d.slice().sort(function (a, b) {
+                return a - b;
+            })), d[0] !== g && (d.unshift(g), i = !0), d[d.length - 1] !== h && (d.push(h), j = !0), d.forEach(function (b, g) {
+                var h,
+                    l,
+                    m,
+                    n,
+                    o,
+                    p,
+                    q,
+                    r,
+                    s,
+                    t,
+                    u = b,
+                    v = d[g + 1];
+                if ("steps" === c && (h = ja.xNumSteps[g]), h || (h = v - u), u !== !1 && void 0 !== v) for (h = Math.max(h, 1e-7), l = u; l <= v; l = e(l, h)) {
+                    for (n = ja.toStepping(l), o = n - k, r = o / a, s = Math.round(r), t = o / s, m = 1; m <= s; m += 1) {
+                        p = k + m * t, f[p.toFixed(5)] = ["x", 0];
+                    }q = d.indexOf(l) > -1 ? 1 : "steps" === c ? 2 : 0, !g && i && (q = 0), l === v && j || (f[n.toFixed(5)] = [l, q]), k = n;
+                }
+            }), f;
+        }
+
+        function w(a, b, c) {
+            function d(a, b) {
+                var c = b === e.cssClasses.value,
+                    d = c ? m : n,
+                    f = c ? k : l;
+                return b + " " + d[e.ort] + " " + f[a];
+            }
+
+            function f(a, b, c) {
+                return 'class="' + d(c[1], b) + '" style="' + e.style + ": " + a + '%"';
+            }
+
+            function g(a, d) {
+                d[1] = d[1] && b ? b(d[0], d[1]) : d[1], i += "<div " + f(a, e.cssClasses.marker, d) + "></div>", d[1] && (i += "<div " + f(a, e.cssClasses.value, d) + ">" + c.to(d[0]) + "</div>");
+            }
+            var h = document.createElement("div"),
+                i = "",
+                k = [e.cssClasses.valueNormal, e.cssClasses.valueLarge, e.cssClasses.valueSub],
+                l = [e.cssClasses.markerNormal, e.cssClasses.markerLarge, e.cssClasses.markerSub],
+                m = [e.cssClasses.valueHorizontal, e.cssClasses.valueVertical],
+                n = [e.cssClasses.markerHorizontal, e.cssClasses.markerVertical];
+            return j(h, e.cssClasses.pips), j(h, 0 === e.ort ? e.cssClasses.pipsHorizontal : e.cssClasses.pipsVertical), Object.keys(a).forEach(function (b) {
+                g(b, a[b]);
+            }), h.innerHTML = i, h;
+        }
+
+        function x(a) {
+            var b = a.mode,
+                c = a.density || 1,
+                d = a.filter || !1,
+                e = a.values || !1,
+                f = a.stepped || !1,
+                g = u(b, e, f),
+                h = v(c, b, g),
+                i = a.format || {
+                to: Math.round
+            };
+            return fa.appendChild(w(h, d, i));
+        }
+
+        function y() {
+            var a = aa.getBoundingClientRect(),
+                b = "offset" + ["Width", "Height"][e.ort];
+            return 0 === e.ort ? a.width || aa[b] : a.height || aa[b];
+        }
+
+        function z(a, b, c, d) {
+            var f = function f(b) {
+                return !fa.hasAttribute("disabled") && !l(fa, e.cssClasses.tap) && !!(b = A(b, d.pageOffset)) && !(a === ea.start && void 0 !== b.buttons && b.buttons > 1) && (!d.hover || !b.buttons) && (b.calcPoint = b.points[e.ort], void c(b, d));
+            },
+                g = [];
+            return a.split(" ").forEach(function (a) {
+                b.addEventListener(a, f, !1), g.push([a, f]);
+            }), g;
+        }
+
+        function A(a, b) {
+            a.preventDefault();
+            var c,
+                d,
+                e = 0 === a.type.indexOf("touch"),
+                f = 0 === a.type.indexOf("mouse"),
+                g = 0 === a.type.indexOf("pointer");
+            if (0 === a.type.indexOf("MSPointer") && (g = !0), e) {
+                if (a.touches.length > 1) return !1;
+                c = a.changedTouches[0].pageX, d = a.changedTouches[0].pageY;
+            }
+            return b = b || m(), (f || g) && (c = a.clientX + b.x, d = a.clientY + b.y), a.pageOffset = b, a.points = [c, d], a.cursor = f || g, a;
+        }
+
+        function B(a) {
+            var b = a - d(aa, e.ort),
+                c = 100 * b / y();
+            return e.dir ? 100 - c : c;
+        }
+
+        function C(a) {
+            var b = 100,
+                c = !1;
+            return ba.forEach(function (d, e) {
+                if (!d.hasAttribute("disabled")) {
+                    var f = Math.abs(ga[e] - a);
+                    f < b && (c = e, b = f);
+                }
+            }), c;
+        }
+
+        function D(a, b, c, d) {
+            var e = c.slice(),
+                f = [!a, a],
+                g = [a, !a];
+            d = d.slice(), a && d.reverse(), d.length > 1 ? d.forEach(function (a, c) {
+                var d = M(e, a, e[a] + b, f[c], g[c]);
+                d === !1 ? b = 0 : (b = d - e[a], e[a] = d);
+            }) : f = g = [!0];
+            var h = !1;
+            d.forEach(function (a, d) {
+                h = Q(a, c[a] + b, f[d], g[d]) || h;
+            }), h && d.forEach(function (a) {
+                E("update", a), E("slide", a);
+            });
+        }
+
+        function E(a, b, c) {
+            Object.keys(la).forEach(function (d) {
+                var f = d.split(".")[0];
+                a === f && la[d].forEach(function (a) {
+                    a.call(da, ka.map(e.format.to), b, ka.slice(), c || !1, ga.slice());
+                });
+            });
+        }
+
+        function F(a, b) {
+            "mouseout" === a.type && "HTML" === a.target.nodeName && null === a.relatedTarget && H(a, b);
+        }
+
+        function G(a, b) {
+            if (navigator.appVersion.indexOf("MSIE 9") === -1 && 0 === a.buttons && 0 !== b.buttonsProperty) return H(a, b);
+            var c = (e.dir ? -1 : 1) * (a.calcPoint - b.startCalcPoint),
+                d = 100 * c / b.baseSize;
+            D(c > 0, d, b.locations, b.handleNumbers);
+        }
+
+        function H(a, b) {
+            ia && (k(ia, e.cssClasses.active), ia = !1), a.cursor && (document.body.style.cursor = "", document.body.removeEventListener("selectstart", document.body.noUiListener)), document.documentElement.noUiListeners.forEach(function (a) {
+                document.documentElement.removeEventListener(a[0], a[1]);
+            }), k(fa, e.cssClasses.drag), P(), b.handleNumbers.forEach(function (a) {
+                E("set", a), E("change", a), E("end", a);
+            });
+        }
+
+        function I(a, b) {
+            if (1 === b.handleNumbers.length) {
+                var c = ba[b.handleNumbers[0]];
+                if (c.hasAttribute("disabled")) return !1;
+                ia = c.children[0], j(ia, e.cssClasses.active);
+            }
+            a.preventDefault(), a.stopPropagation();
+            var d = z(ea.move, document.documentElement, G, {
+                startCalcPoint: a.calcPoint,
+                baseSize: y(),
+                pageOffset: a.pageOffset,
+                handleNumbers: b.handleNumbers,
+                buttonsProperty: a.buttons,
+                locations: ga.slice()
+            }),
+                f = z(ea.end, document.documentElement, H, {
+                handleNumbers: b.handleNumbers
+            }),
+                g = z("mouseout", document.documentElement, F, {
+                handleNumbers: b.handleNumbers
+            });
+            if (document.documentElement.noUiListeners = d.concat(f, g), a.cursor) {
+                document.body.style.cursor = getComputedStyle(a.target).cursor, ba.length > 1 && j(fa, e.cssClasses.drag);
+                var h = function h() {
+                    return !1;
+                };
+                document.body.noUiListener = h, document.body.addEventListener("selectstart", h, !1);
+            }
+            b.handleNumbers.forEach(function (a) {
+                E("start", a);
+            });
+        }
+
+        function J(a) {
+            a.stopPropagation();
+            var b = B(a.calcPoint),
+                c = C(b);
+            return c !== !1 && (e.events.snap || f(fa, e.cssClasses.tap, e.animationDuration), Q(c, b, !0, !0), P(), E("slide", c, !0), E("set", c, !0), E("change", c, !0), E("update", c, !0), void (e.events.snap && I(a, {
+                handleNumbers: [c]
+            })));
+        }
+
+        function K(a) {
+            var b = B(a.calcPoint),
+                c = ja.getStep(b),
+                d = ja.fromStepping(c);
+            Object.keys(la).forEach(function (a) {
+                "hover" === a.split(".")[0] && la[a].forEach(function (a) {
+                    a.call(da, d);
+                });
+            });
+        }
+
+        function L(a) {
+            a.fixed || ba.forEach(function (a, b) {
+                z(ea.start, a.children[0], I, {
+                    handleNumbers: [b]
+                });
+            }), a.tap && z(ea.start, aa, J, {}), a.hover && z(ea.move, aa, K, {
+                hover: !0
+            }), a.drag && ca.forEach(function (b, c) {
+                if (b !== !1 && 0 !== c && c !== ca.length - 1) {
+                    var d = ba[c - 1],
+                        f = ba[c],
+                        g = [b];
+                    j(b, e.cssClasses.draggable), a.fixed && (g.push(d.children[0]), g.push(f.children[0])), g.forEach(function (a) {
+                        z(ea.start, a, I, {
+                            handles: [d, f],
+                            handleNumbers: [c - 1, c]
+                        });
+                    });
+                }
+            });
+        }
+
+        function M(a, b, c, d, f) {
+            return ba.length > 1 && (d && b > 0 && (c = Math.max(c, a[b - 1] + e.margin)), f && b < ba.length - 1 && (c = Math.min(c, a[b + 1] - e.margin))), ba.length > 1 && e.limit && (d && b > 0 && (c = Math.min(c, a[b - 1] + e.limit)), f && b < ba.length - 1 && (c = Math.max(c, a[b + 1] - e.limit))), e.padding && (0 === b && (c = Math.max(c, e.padding)), b === ba.length - 1 && (c = Math.min(c, 100 - e.padding))), c = ja.getStep(c), c = g(c), c !== a[b] && c;
+        }
+
+        function N(a) {
+            return a + "%";
+        }
+
+        function O(a, b) {
+            ga[a] = b, ka[a] = ja.fromStepping(b);
+            var c = function c() {
+                ba[a].style[e.style] = N(b), S(a), S(a + 1);
+            };
+            window.requestAnimationFrame && e.useRequestAnimationFrame ? window.requestAnimationFrame(c) : c();
+        }
+
+        function P() {
+            ha.forEach(function (a) {
+                var b = ga[a] > 50 ? -1 : 1,
+                    c = 3 + (ba.length + b * a);
+                ba[a].childNodes[0].style.zIndex = c;
+            });
+        }
+
+        function Q(a, b, c, d) {
+            return b = M(ga, a, b, c, d), b !== !1 && (O(a, b), !0);
+        }
+
+        function S(a) {
+            if (ca[a]) {
+                var b = 0,
+                    c = 100;
+                0 !== a && (b = ga[a - 1]), a !== ca.length - 1 && (c = ga[a]), ca[a].style[e.style] = N(b), ca[a].style[e.styleOposite] = N(100 - c);
+            }
+        }
+
+        function T(a, b) {
+            null !== a && a !== !1 && ("number" == typeof a && (a = String(a)), a = e.format.from(a), a === !1 || isNaN(a) || Q(b, ja.toStepping(a), !1, !1));
+        }
+
+        function U(a, b) {
+            var c = h(a),
+                d = void 0 === ga[0];
+            b = void 0 === b || !!b, c.forEach(T), e.animate && !d && f(fa, e.cssClasses.tap, e.animationDuration), ha.forEach(function (a) {
+                Q(a, ga[a], !0, !1);
+            }), P(), ha.forEach(function (a) {
+                E("update", a), null !== c[a] && b && E("set", a);
+            });
+        }
+
+        function V(a) {
+            U(e.start, a);
+        }
+
+        function W() {
+            var a = ka.map(e.format.to);
+            return 1 === a.length ? a[0] : a;
+        }
+
+        function X() {
+            for (var a in e.cssClasses) {
+                e.cssClasses.hasOwnProperty(a) && k(fa, e.cssClasses[a]);
+            }for (; fa.firstChild;) {
+                fa.removeChild(fa.firstChild);
+            }delete fa.noUiSlider;
+        }
+
+        function Y() {
+            return ga.map(function (a, b) {
+                var c = ja.getNearbySteps(a),
+                    d = ka[b],
+                    e = c.thisStep.step,
+                    f = null;
+                e !== !1 && d + e > c.stepAfter.startValue && (e = c.stepAfter.startValue - d), f = d > c.thisStep.startValue ? c.thisStep.step : c.stepBefore.step !== !1 && d - c.stepBefore.highestStep, 100 === a ? e = null : 0 === a && (f = null);
+                var g = ja.countStepDecimals();
+                return null !== e && e !== !1 && (e = Number(e.toFixed(g))), null !== f && f !== !1 && (f = Number(f.toFixed(g))), [f, e];
+            });
+        }
+
+        function Z(a, b) {
+            la[a] = la[a] || [], la[a].push(b), "update" === a.split(".")[0] && ba.forEach(function (a, b) {
+                E("update", b);
+            });
+        }
+
+        function $(a) {
+            var b = a && a.split(".")[0],
+                c = b && a.substring(b.length);
+            Object.keys(la).forEach(function (a) {
+                var d = a.split(".")[0],
+                    e = a.substring(d.length);
+                b && b !== d || c && c !== e || delete la[a];
+            });
+        }
+
+        function _(a, b) {
+            var c = W(),
+                d = ["margin", "limit", "padding", "range", "animate", "snap", "step", "format"];
+            d.forEach(function (b) {
+                void 0 !== a[b] && (i[b] = a[b]);
+            });
+            var f = R(i);
+            d.forEach(function (b) {
+                void 0 !== a[b] && (e[b] = f[b]);
+            }), f.spectrum.direction = ja.direction, ja = f.spectrum, e.margin = f.margin, e.limit = f.limit, e.padding = f.padding, ga = [], U(a.start || c, b);
+        }
+        var aa,
+            ba,
+            ca,
+            da,
+            ea = n(),
+            fa = c,
+            ga = [],
+            ha = [],
+            ia = !1,
+            ja = e.spectrum,
+            ka = [],
+            la = {};
+        if (fa.noUiSlider) throw new Error("Slider was already initialized.");
+        return r(fa), q(e.connect, aa), da = {
+            destroy: X,
+            steps: Y,
+            on: Z,
+            off: $,
+            get: W,
+            set: U,
+            reset: V,
+            __moveHandles: function __moveHandles(a, b, c) {
+                D(a, b, ga, c);
+            },
+            options: i,
+            updateOptions: _,
+            target: fa,
+            pips: x
+        }, L(e.events), U(e.start), e.pips && x(e.pips), e.tooltips && t(), da;
+    }
+
+    function T(a, b) {
+        if (!a.nodeName) throw new Error("noUiSlider.create requires a single element.");
+        var c = R(b, a),
+            d = S(a, c, b);
+        return a.noUiSlider = d, d;
+    }
+    y.prototype.getMargin = function (a) {
+        var b = this.xNumSteps[0];
+        if (b && a / b % 1 !== 0) throw new Error("noUiSlider: 'limit', 'margin' and 'padding' must be divisible by step.");
+        return 2 === this.xPct.length && p(this.xVal, a);
+    }, y.prototype.toStepping = function (a) {
+        return a = t(this.xVal, this.xPct, a);
+    }, y.prototype.fromStepping = function (a) {
+        return u(this.xVal, this.xPct, a);
+    }, y.prototype.getStep = function (a) {
+        return a = v(this.xPct, this.xSteps, this.snap, a);
+    }, y.prototype.getNearbySteps = function (a) {
+        var b = s(a, this.xPct);
+        return {
+            stepBefore: {
+                startValue: this.xVal[b - 2],
+                step: this.xNumSteps[b - 2],
+                highestStep: this.xHighestCompleteStep[b - 2]
+            },
+            thisStep: {
+                startValue: this.xVal[b - 1],
+                step: this.xNumSteps[b - 1],
+                highestStep: this.xHighestCompleteStep[b - 1]
+            },
+            stepAfter: {
+                startValue: this.xVal[b - 0],
+                step: this.xNumSteps[b - 0],
+                highestStep: this.xHighestCompleteStep[b - 0]
+            }
+        };
+    }, y.prototype.countStepDecimals = function () {
+        var a = this.xNumSteps.map(i);
+        return Math.max.apply(null, a);
+    }, y.prototype.convert = function (a) {
+        return this.getStep(this.toStepping(a));
+    };
+    var U = {
+        to: function to(a) {
+            return void 0 !== a && a.toFixed(2);
+        },
+        from: Number
+    };
+    return {
+        create: T
+    };
+});
+
+/***/ }),
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -20770,7 +20217,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && 
 		return new FastClick(layer, options);
 	};
 
-	if ("function" === 'function' && _typeof(__webpack_require__(166)) === 'object' && __webpack_require__(166)) {
+	if ("function" === 'function' && _typeof(__webpack_require__(134)) === 'object' && __webpack_require__(134)) {
 
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
@@ -20786,10 +20233,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && 
 })();
 
 /***/ }),
-/* 169 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
   /*  jQuery Nice Select - v1.1.0
       https://github.com/hernansartorio/jquery-nice-select
       Made by Hernán Sartorio  */
@@ -20969,7 +20416,548 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 170 */
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(4)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+    /*!
+      =========================================================
+     * Now-ui-kit - v1.1.0
+     =========================================================
+      * Product Page: https://www.creative-tim.com/product/now-ui-kit
+     * Copyright 2017 Creative Tim (http://www.creative-tim.com)
+     * Licensed under MIT (https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md)
+      * Designed by www.invisionapp.com Coded by www.creative-tim.com
+      =========================================================
+      * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+      */
+
+    var transparent = true;
+
+    var transparentDemo = true;
+    var fixedTop = false;
+
+    var navbar_initialized,
+        backgroundOrange = false,
+        toggle_initialized = false;
+
+    $(document).ready(function () {
+        //  Activate the Tooltips
+        $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
+
+        // Activate Popovers and set color for popovers
+        $('[data-toggle="popover"]').each(function () {
+            color_class = $(this).data('color');
+            $(this).popover({
+                template: '<div class="popover popover-' + color_class + '" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+            });
+        });
+
+        // Activate the image for the navbar-collapse
+        nowuiKit.initNavbarImage();
+
+        $navbar = $('.navbar[color-on-scroll]');
+        scroll_distance = $navbar.attr('color-on-scroll') || 500;
+
+        // Check if we have the class "navbar-color-on-scroll" then add the function to remove the class "navbar-transparent" so it will transform to a plain color.
+
+        if ($('.navbar[color-on-scroll]').length != 0) {
+            nowuiKit.checkScrollForTransparentNavbar();
+            $(window).on('scroll', nowuiKit.checkScrollForTransparentNavbar);
+        }
+
+        $('.form-control').on("focus", function () {
+            $(this).parent('.input-group').addClass("input-group-focus");
+        }).on("blur", function () {
+            $(this).parent(".input-group").removeClass("input-group-focus");
+        });
+
+        // Activate bootstrapSwitch
+        $('.bootstrap-switch').each(function () {
+            $this = $(this);
+            data_on_label = $this.data('on-label') || '';
+            data_off_label = $this.data('off-label') || '';
+
+            $this.bootstrapSwitch({
+                onText: data_on_label,
+                offText: data_off_label
+            });
+        });
+
+        if ($(window).width() >= 992) {
+            big_image = $('.page-header-image[data-parallax="true"]');
+
+            $(window).on('scroll', nowuiKitDemo.checkScrollForParallax);
+        }
+
+        // Activate Carousel
+        $('.carousel').carousel({
+            interval: 4000
+        });
+
+        $('.date-picker').each(function () {
+            $(this).datepicker({
+                templates: {
+                    leftArrow: '<i class="now-ui-icons arrows-1_minimal-left"></i>',
+                    rightArrow: '<i class="now-ui-icons arrows-1_minimal-right"></i>'
+                }
+            }).on('show', function () {
+                $('.datepicker').addClass('open');
+
+                datepicker_color = $(this).data('datepicker-color');
+                if (datepicker_color.length != 0) {
+                    $('.datepicker').addClass('datepicker-' + datepicker_color + '');
+                }
+            }).on('hide', function () {
+                $('.datepicker').removeClass('open');
+            });
+        });
+
+        $('.switch.switch-background input').on("switchChange.bootstrapSwitch", function () {
+            $input = $(this);
+
+            if (!$input.is(':checked')) {
+                $('.section:not(.section-notifications):not(.section-tabs):not(.section-download):not(.section-examples)').each(function () {
+                    $(this).fadeOut('fast', function () {
+                        $(this).attr('data-background-color', 'orange');
+                        $(this).fadeIn('fast');
+                    });
+                });
+
+                switch_orange = $('.navbar .collapse .navbar-nav.navbar-switch .nav-item .nav-link p.hidden');
+                switch_white = $('.navbar .collapse .navbar-nav.navbar-switch .nav-item .nav-link p.visible');
+                switch_white.removeClass('visible').addClass('hidden');
+                switch_orange.removeClass('hidden').addClass('visible');
+
+                $('.section.section-navbars > .container .navbar.bg-primary, .section.section-navbars > .container .navbar.bg-info').each(function () {
+                    $(this).addClass('bg-white');
+                });
+
+                $('.btn-primary,.btn-default,.btn-link').each(function () {
+                    $(this).addClass('btn-neutral');
+                });
+
+                $('button[data-toggle="popover"], button[data-toggle="tooltip"]').each(function () {
+                    $(this).removeClass('btn-default');
+                    $(this).addClass('btn-neutral');
+                });
+
+                $('.nav.nav-pills').each(function () {
+                    $(this).addClass('nav-pills-neutral');
+
+                    if ($('.nav.nav-pills.nav-pills-primary').length != 0) {
+                        $(this).removeClass('nav-pills-primary');
+                    }
+                });
+
+                $('.pagination').each(function () {
+                    $(this).addClass('pagination-neutral');
+                });
+
+                $('.progress-container').each(function () {
+                    $(this).addClass('progress-neutral');
+
+                    if ($('.progress-container.progress-neutral').length != 0) {
+                        $(this).removeClass('progress-primary');
+                    }
+                });
+
+                $('.badge').each(function () {
+                    $(this).addClass('badge-neutral');
+                });
+
+                $('.slider').each(function () {
+                    $(this).addClass('slider-neutral');
+
+                    if ($('.slider.slider-neutral').length != 0) {
+                        $(this).removeClass('slider-primary').removeClass('slider-default');
+                    }
+                });
+
+                $('.blockquote').each(function () {
+                    $(this).addClass('blockquote-white');
+
+                    if ($('.blockuote.blockquote-white').length != 0) {
+                        $(this).removeClass('blockquote-primary');
+                    }
+                });
+
+                backgroundOrange = true;
+            } else {
+                $('.section:not(.section-notifications):not(.section-tabs):not(.section-download):not(.section-examples)').each(function () {
+                    $(this).fadeOut('fast', function () {
+                        $(this).removeAttr('data-background-color', 'orange');
+                        $(this).fadeIn('fast');
+                    });
+                });
+
+                switch_white.removeClass('hidden').addClass('visible');
+                switch_orange.removeClass('visible').addClass('hidden');
+
+                $('.btn-primary,.btn-default,.btn-link').each(function () {
+                    $(this).removeClass('btn-neutral');
+                });
+
+                $('.section.section-navbars > .container .navbar.bg-primary, .section.section-navbars > .container .navbar.bg-info').each(function () {
+                    $(this).removeClass('bg-white');
+                });
+
+                $('button[data-toggle="popover"], button[data-toggle="tooltip"]').each(function () {
+                    $(this).removeClass('btn-neutral');
+                    $(this).addClass('btn-default');
+                });
+
+                $('.nav.nav-pills').each(function () {
+                    $(this).removeClass('nav-pills-neutral');
+
+                    if ($('.nav.nav-pills.nav-pills-neutral').length == 0) {
+                        $(this).addClass('nav-pills-primary');
+                    }
+                });
+
+                $('.pagination').each(function () {
+                    $(this).removeClass('pagination-neutral');
+                });
+
+                $('.progress-container').each(function () {
+                    $(this).removeClass('progress-neutral');
+
+                    if ($('.progress-container.progress-neutral').length == 0) {
+                        $(this).addClass('progress-primary');
+                    }
+                });
+
+                $('.badge').each(function () {
+                    $(this).removeClass('badge-neutral');
+                });
+
+                $('.slider').each(function () {
+                    $(this).removeClass('slider-neutral');
+
+                    if ($('.slider.slider-neutral').length == 0) {
+                        $(this).addClass('slider-primary');
+                    }
+                });
+
+                $('.blockquote').each(function () {
+                    $(this).removeClass('blockquote-white');
+
+                    if ($('.blockuote.blockquote-white').length == 0) {
+                        $(this).addClass('blockquote-primary');
+                    }
+                });
+
+                backgroundOrange = false;
+            }
+        });
+
+        if ($('.twitter-sharrre').length != 0) {
+            $('.twitter-sharrre').sharrre({
+                share: {
+                    twitter: true
+                },
+                enableHover: false,
+                enableTracking: true,
+                enableCounter: false,
+                buttons: {
+                    twitter: {
+                        via: 'CreativeTim'
+                    }
+                },
+                click: function click(api, options) {
+                    api.simulateClick();
+                    api.openPopup('twitter');
+                },
+                template: '<i class="fa fa-twitter"></i>',
+                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
+            });
+        }
+
+        if ($('.twitter-sharrre-nav').length != 0) {
+            $('.twitter-sharrre-nav').sharrre({
+                share: {
+                    twitter: true
+                },
+                enableHover: false,
+                enableTracking: true,
+                enableCounter: false,
+                buttons: {
+                    twitter: {
+                        via: 'CreativeTim'
+                    }
+                },
+                click: function click(api, options) {
+                    api.simulateClick();
+                    api.openPopup('twitter');
+                },
+                template: '<i class="fa fa-twitter"></i><p class="hidden-lg-up">Twitter</p>',
+                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
+            });
+        }
+
+        if ($('.facebook-sharrre').length != 0) {
+            $('.facebook-sharrre').sharrre({
+                share: {
+                    facebook: true
+                },
+                enableHover: false,
+                enableTracking: true,
+                enableCounter: false,
+                click: function click(api, options) {
+                    api.simulateClick();
+                    api.openPopup('facebook');
+                },
+                template: '<i class="fa fa-facebook-square"></i>',
+                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
+            });
+        }
+
+        if ($('.facebook-sharrre-nav').length != 0) {
+            $('.facebook-sharrre-nav').sharrre({
+                share: {
+                    facebook: true
+                },
+                enableHover: false,
+                enableTracking: true,
+                enableCounter: false,
+                click: function click(api, options) {
+                    api.simulateClick();
+                    api.openPopup('facebook');
+                },
+                template: '<i class="fa fa-facebook-square"></i><p class="hidden-lg-up">Facebook</p>',
+                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
+            });
+        }
+
+        if ($('.linkedin-sharrre').length != 0) {
+            $('.linkedin-sharrre').sharrre({
+                share: {
+                    linkedin: true
+                },
+                enableCounter: false,
+                enableHover: false,
+                enableTracking: true,
+                click: function click(api, options) {
+                    api.simulateClick();
+                    api.openPopup('linkedin');
+                },
+                template: '<i class="fa fa-linkedin"></i>',
+                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
+            });
+        }
+
+        if ($('.linkedin-sharrre-nav').length != 0) {
+            $('.linkedin-sharrre-nav').sharrre({
+                share: {
+                    linkedin: true
+                },
+                enableCounter: false,
+                enableHover: false,
+                enableTracking: true,
+                click: function click(api, options) {
+                    api.simulateClick();
+                    api.openPopup('linkedin');
+                },
+                template: '<i class="fa fa-linkedin"></i><p class="hidden-lg-up">LinkedIn</p>',
+                url: 'http://demos.creative-tim.com/now-ui-kit/index.html'
+            });
+        }
+    });
+
+    $(window).on('resize', function () {
+        nowuiKit.initNavbarImage();
+    });
+
+    $(document).on('click', '.navbar-toggler', function () {
+        $toggle = $(this);
+
+        if (nowuiKit.misc.navbar_menu_visible == 1) {
+            $('html').removeClass('nav-open');
+            nowuiKit.misc.navbar_menu_visible = 0;
+            $('#bodyClick').remove();
+            setTimeout(function () {
+                $toggle.removeClass('toggled');
+            }, 550);
+        } else {
+            setTimeout(function () {
+                $toggle.addClass('toggled');
+            }, 580);
+            div = '<div id="bodyClick"></div>';
+            $(div).appendTo('body').click(function () {
+                $('html').removeClass('nav-open');
+                nowuiKit.misc.navbar_menu_visible = 0;
+                setTimeout(function () {
+                    $toggle.removeClass('toggled');
+                    $('#bodyClick').remove();
+                }, 550);
+            });
+
+            $('html').addClass('nav-open');
+            nowuiKit.misc.navbar_menu_visible = 1;
+        }
+    });
+
+    nowuiKit = {
+        misc: {
+            navbar_menu_visible: 0
+        },
+
+        checkScrollForTransparentNavbar: debounce(function () {
+            if ($(document).scrollTop() > scroll_distance) {
+                if (transparent) {
+                    transparent = false;
+                    $('.navbar[color-on-scroll]').removeClass('navbar-transparent');
+                }
+            } else {
+                if (!transparent) {
+                    transparent = true;
+                    $('.navbar[color-on-scroll]').addClass('navbar-transparent');
+                }
+            }
+        }, 17),
+
+        initNavbarImage: function initNavbarImage() {
+            var $navbar = $('.navbar').find('.navbar-translate').siblings('.navbar-collapse');
+            var background_image = $navbar.data('nav-image');
+
+            if ($(window).width() < 991 || $('body').hasClass('burger-menu')) {
+                if (background_image != undefined) {
+                    $navbar.css('background', "url('" + background_image + "')").removeAttr('data-nav-image').css('background-size', "cover").addClass('has-image');
+                }
+            } else if (background_image != undefined) {
+                $navbar.css('background', "").attr('data-nav-image', '' + background_image + '').css('background-size', "").removeClass('has-image');
+            }
+        },
+
+        initSliders: function initSliders() {
+            // Sliders for demo purpose in refine cards section
+            var slider = document.getElementById('sliderRegular');
+
+            noUiSlider.create(slider, {
+                start: 40,
+                connect: [true, false],
+                range: {
+                    min: 0,
+                    max: 100
+                }
+            });
+
+            var slider2 = document.getElementById('sliderDouble');
+
+            noUiSlider.create(slider2, {
+                start: [20, 60],
+                connect: true,
+                range: {
+                    min: 0,
+                    max: 100
+                }
+            });
+        },
+
+        checkScrollForParallax: debounce(function () {
+
+            oVal = $(window).scrollTop() / 3;
+            big_image.css({
+                'transform': 'translate3d(0,' + oVal + 'px,0)',
+                '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
+                '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
+                '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
+            });
+        }, 6),
+
+        initContactUsMap: function initContactUsMap() {
+            var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+            var mapOptions = {
+                zoom: 13,
+                center: myLatlng,
+                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+                styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }]
+            };
+
+            var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title: "Hello World!"
+            });
+
+            // To add the marker to the map, call setMap();
+            marker.setMap(map);
+        },
+
+        initContactUs2Map: function initContactUs2Map() {
+            var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+            var mapOptions = {
+                zoom: 13,
+                center: myLatlng,
+                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+                styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }]
+            };
+
+            var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title: "Hello World!"
+            });
+
+            // To add the marker to the map, call setMap();
+            marker.setMap(map);
+        }
+    };
+
+    var big_image;
+
+    // Javascript just for Demo purpose, remove it from your project
+    nowuiKitDemo = {
+        checkScrollForParallax: debounce(function () {
+            var current_scroll = $(this).scrollTop();
+
+            oVal = $(window).scrollTop() / 3;
+            big_image.css({
+                'transform': 'translate3d(0,' + oVal + 'px,0)',
+                '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
+                '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
+                '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
+            });
+        }, 6)
+
+        // Returns a function, that, as long as it continues to be invoked, will not
+        // be triggered. The function will be called after it stops being called for
+        // N milliseconds. If `immediate` is passed, trigger the function on the
+        // leading edge, instead of the trailing.
+
+    };function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this,
+                args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            }, wait);
+            if (immediate && !timeout) func.apply(context, args);
+        };
+    };
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-114595865-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20998,11 +20986,33 @@ $(function () {
     // Register function
     $(document).on('submit', '#register_form', function (e) {
         e.preventDefault();
-        console.log(e);
+        var formData = $(this).serialize();
+        var name = $('#name-register-error').html("");
+        var email = $('#email-register-error').html("");
+        var password = $('#password-register-error').html();
+        $.ajax({
+            url: '/register',
+            method: 'POST',
+            data: formData,
+            success: function success(data) {
+                console.log(data);
+                if (data.errors) {
+                    data.errors.name ? $('#name-register-error').html(data.errors.name[0]) : name;
+                    data.errors.email ? $('#email-register-error').html(data.errors.email[0]) : email;
+                    data.errors.password ? $('#password-register-error').html(data.errors.password[0]) : password;
+                }
+            }
+        });
     });
 
     // Login function 
 });
 
+/***/ }),
+/* 164 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
 /***/ })
-],[13]);
+],[135]);

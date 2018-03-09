@@ -2630,6 +2630,15 @@ input.datetimepicker[data-color="yellow"] + .bootstrap-datetimepicker-widget tab
   border-left: 2px solid #007bff !important;
   border-top: 2px solid #007bff !important;
   border-bottom: 2px solid #007bff !important; 
+  border-right: transparent;
+}
+
+
+.input-group > .form-control:focus {
+  border-right: 2px solid #007bff !important;
+  border-top: 2px solid #007bff !important;
+  border-bottom: 2px solid #007bff !important; 
+  border-left: transparent;
 }
 .input-group.input-group-focus .input-group-append .input-group-text {
   border-right: 2px solid #007bff !important; }

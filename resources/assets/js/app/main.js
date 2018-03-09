@@ -22,7 +22,24 @@ $(function() {
     // Register function
     $(document).on('submit','#register_form', function(e){
         e.preventDefault();
-        console.log(e);
+        var formData = $(this).serialize();
+        var name = $('#name-register-error').html("");
+        var email = $('#email-register-error').html("");
+        var password = $('#password-register-error').html();
+        $.ajax({
+            url: '/register',
+            method: 'POST',
+            data: formData,
+            success: function(data){
+                console.log(data);
+                if(data.errors) {
+                    (data.errors.name) ? $('#name-register-error').html(data.errors.name[0]) : name;
+                    (data.errors.email) ? $('#email-register-error').html(data.errors.email[0]) : email;
+                    (data.errors.password) ? $('#password-register-error').html(data.errors.password[0]) : password;
+
+                }
+            }
+        });
     });
 
     // Login function 

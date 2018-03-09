@@ -1,6 +1,28 @@
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+.hide {
+    display: none;
+}
 
-// Variables
-@import "variables";
+.input-group >  .form-control {
+    background-color: transparent;
+    border-right: 1px solid #E3E3E3;
+    border-top: 1px solid #E3E3E3;
+    border-bottom: 1px solid #E3E3E3;
+    border-left: transparent;
+    border-radius: 30px;
+    color: #2c2c2c;
+    line-height: normal;
+    font-size: 0.8571em;
+    -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    -o-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    -ms-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+
+

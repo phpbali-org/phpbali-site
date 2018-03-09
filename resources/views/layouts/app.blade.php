@@ -17,6 +17,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/now-ui-kit.css?v=1.2.0" rel="stylesheet" />
     <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style-app.css" rel="stylesheet" />
     <link rel="canonical" href="{{ url('/') }}" />
     <!--  Social tags      -->
     <meta name="keywords" content="php, php bali, web development, web design, laravel, codeigniter, php bali community, php bali websites, bali php, programmer, bali">
@@ -162,28 +163,53 @@
                                 </li>
                             </ul>
                             <div class="tab-content tab-space">
+                                <div id="success-msg" class="hide">
+                                    <div class="alert alert-success" role="alert">
+                                        <div class="container">
+                                            <div class="alert-icon">
+                                                <i class="now-ui-icons ui-2_like"></i>
+                                            </div>
+                                            <strong>Well done!</strong> Please Confirm your email.!
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">
+                                                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="tab-pane" id="tab_register">
                                     {{--  Register Form  --}}
                                     <form class="form" method="post" action="" id="register_form">
                                         {{ csrf_field() }}
                                         <div class="card-body">
                                             <div class="input-group ">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
-                                              </div>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
+                                                </div>
                                                 <input type="email" value="{{ old('email') }}" name="email" id="register_email" class="form-control" placeholder="Your email...">
+                                                <span class="text-danger">
+                                                    <strong id="email-register-error"></strong>
+                                                </span>
                                             </div>
                                             <div class="input-group ">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
-                                              </div>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
+                                                </div>
                                                 <input type="text" value="{{ old('name') }}" name="name" id="register_name" class="form-control" placeholder="Name...">
+                                                <span class="text-danger">
+                                                    <strong id="name-register-error"></strong>
+                                                </span>
                                             </div>
                                             <div class="input-group ">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
-                                              </div>
-                                              <input type="password" name="password" id="register_password" class="form-control" placeholder="Password...">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                </div>
+                                                <input type="password" name="password" id="register_password" class="form-control" placeholder="Password...">
+                                                <span class="text-danger">
+                                                    <strong id="password-register-error"></strong>
+                                                </span>
                                             </div>
                                             <div class="input-group ">
                                                 <div class="input-group-prepend">
@@ -201,17 +227,23 @@
                                         {{ csrf_field() }}
                                         <div class="card-body">
                                             <div class="input-group ">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
-                                              </div>
-                                              <input type="email" name="email" id="login_email" class="form-control" placeholder="Your Email...">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
+                                                </div>
+                                                <input type="email" name="email" id="login_email" class="form-control" placeholder="Your Email...">
+                                                <span class="text-danger">
+                                                    <strong id="email-login-error"></strong>
+                                                </span>
                                             </div>
 
                                             <div class="input-group ">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
-                                              </div>
-                                              <input type="password" name="password" id="login_password" class="form-control" placeholder="Password...">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                </div>
+                                                <input type="password" name="password" id="login_password" class="form-control" placeholder="Password...">
+                                                <span class="text-danger">
+                                                    <strong id="password-login-error"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-info btn-block btn-round btn-lg">Login</button>
