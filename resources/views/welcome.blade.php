@@ -75,7 +75,7 @@
 
                         <div class="card card-product card-plain">
                             <div class="card-image">
-                                <img class="img rounded" src="../img/saint-laurent1.jpg"/>
+                                <img class="img rounded" src="/img/avatar.jpg"/>
                             </div>
 
                             <div class="card-body">
@@ -102,7 +102,7 @@
 
                         <div class="card card-product card-plain">
                             <div class="card-image">
-                                <img class="img rounded" src="../img/saint-laurent.jpg"/>
+                                <img class="img rounded" src="/img/avatar.jpg"/>
                             </div>
 
                             <div class="card-body">
@@ -130,7 +130,7 @@
 
                         <div class="card card-product card-plain">
                             <div class="card-image">
-                                <img class="img rounded" src="../img/gucci.jpg"/>
+                                <img class="img rounded" src="/img/avatar.jpg"/>
                             </div>
 
                             <div class="card-body">

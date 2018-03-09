@@ -18,6 +18,43 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-2 ml-auto mr-auto" id="reservation">
+            <div class="card card-contact card-raised">
+                <form role="form" id="contact-form" method="post">
+                    {{ csrf_field() }}
+                    <div class="card-header text-center">
+                        <button type="submit" class="btn btn-info btn-lg btn-round pull-right">RSVP NOW</button>
+                    </div>
+                    {{--  <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 pr-2">
+                                <label>Category</label>
+                                <select id="select_category" class="wide" style="display: none;">
+                                    <option data-display="Select">Nothing</option>
+                                    <option value="1">Some option</option>
+                                    <option value="2">Another option</option>
+                                    <option value="4">Potato</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 col-sm-5 pl-2">
+                                <div class="form-group">
+                                    <label>Vendor</label>
+                                    <input type="text" class="form-control" placeholder="Last Name..." aria-label="Last Name...">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 text-right">
+                                <div class="form-group mt-3">
+                                    <label></label>
+                                    <button type="submit" class="btn btn-info btn-round pull-right">Send Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  --}}
+                </form>
+            </div>
+        </div>
+    </div>
     {{-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <i class="now-ui-icons arrows-1_minimal-left"></i>
     </a>
