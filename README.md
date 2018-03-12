@@ -29,7 +29,7 @@ pass: phpbaliadmin002
 - [ ] Member List
 - [ ] Contact
 - [ ] Code of Conduct
-- [x] Meetups
+- [ ] Meetups
 - [ ] RSVP to Event
 
 Note: Silahkan edit file ini jika ada yang ingin ditambahkan di Dev progress atau ada list yang udah beres.
