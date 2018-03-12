@@ -2,5 +2,7 @@
     "/js/script.js": "/js/script.js",
     "/css/style-app.css": "/css/style-app.css",
     "/js/vendor.js": "/js/vendor.js",
-    "/js/manifest.js": "/js/manifest.js"
+    "/js/manifest.js": "/js/manifest.js",
+    "/css/app-dashboard.css": "/css/app-dashboard.css",
+    "/js/app-dashboard.js": "/js/app-dashboard.js"
 }
