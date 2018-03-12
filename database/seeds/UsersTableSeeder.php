@@ -12,15 +12,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
+        // User::truncate();
 
-        User::create([
-        	'name'	=> 'PHP',
-        	'email'			=> 'admin@phpbali.com',
-        	'website'		=> null,
-        	'is_admin'		=> 1,
-        	'password'		=> bcrypt('phpbaliadmin002'),
-        	'remember_token' => str_random(60),
-        ]);
+        // User::create([
+        // 	'name'	=> 'PHP',
+        // 	'email'			=> 'admin@phpbali.com',
+        // 	'website'		=> null,
+        // 	'is_admin'		=> 1,
+        // 	'password'		=> bcrypt('phpbaliadmin002'),
+        // 	'remember_token' => str_random(60),
+        // ]);
     }
 }
