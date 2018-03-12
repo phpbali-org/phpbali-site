@@ -28,8 +28,3 @@ Route::prefix('adminpage')->group(function() {
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::get('/', 'AdminController@index')->name('admin.home');
 });
-
-// dashboard view (admin or user)
-Route::get('dashboard', function(){
-	return view('dashboard');
-});
