@@ -1,1 +1,54 @@
-.input-group>.custom-select:not(:last-child),.input-group>.form-control:not(:last-child){border-top-right-radius:30px;border-bottom-right-radius:30px}.hide{display:none}.input-group>.form-control{background-color:transparent;border-right:1px solid #e3e3e3;border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;border-left:transparent;border-radius:30px;color:#2c2c2c;line-height:normal;font-size:.8571em;-webkit-transition:color .3s ease-in-out,border-color .3s ease-in-out,background-color .3s ease-in-out;transition:color .3s ease-in-out,border-color .3s ease-in-out,background-color .3s ease-in-out;-webkit-box-shadow:none;box-shadow:none}
+.input-group > .custom-select:not(:last-child),
+.input-group > .form-control:not(:last-child) {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.hide {
+  display: none;
+}
+
+.input-group > .form-control {
+  background-color: transparent;
+  border-right: 1px solid #E3E3E3;
+  border-top: 1px solid #E3E3E3;
+  border-bottom: 1px solid #E3E3E3;
+  border-left: transparent;
+  border-radius: 30px;
+  color: #2c2c2c;
+  line-height: normal;
+  font-size: 0.8571em;
+  -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.card-profile .card-avatar img,
+.card-testimonial .card-avatar img {
+  border-radius: 8px !important;
+}
+
+.card-profile .card-avatar,
+.card-testimonial .card-avatar {
+  max-width: 100px;
+  max-height: 100px;
+  margin: -10px 20px -20px;
+}
+
+.info {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 70px 0 30px;
+  text-align: center;
+}
+
+.card .card-title {
+  margin-top: 15px;
+  line-height: 1.25em;
+}
+
+.form-control {
+  border-radius: 5px;
+}
+

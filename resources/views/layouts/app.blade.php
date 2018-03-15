@@ -46,7 +46,7 @@
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="500">
+    <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="500">
         <div class="container">
             <div class="navbar-translate">
                 <a class="navbar-brand" href="{{ url('/') }}" rel="tooltip" data-placement="bottom" >
@@ -69,12 +69,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">CONTACT</a>
                     </li>
-                    <li class="nav-item">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">REGISTER</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">LOGIN</a>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                    {{--  <li class="nav-item">
                         <a class="nav-link modal-toggle" data-tab="tab_login" data-toggle="modal" data-target="#modalLogin" href="#link_login">SIGN IN</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link modal-toggle" data-tab="tab_register" data-toggle="modal" data-target="#modalLogin" href="#link_register">REGISTER</a>
-                    </li>
+                    </li>  --}}
                     <li class="nav-item">
                         <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
                             <i class="fa fa-twitter"></i>

@@ -1,11 +1,13 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-md-4">
-            <div class="card card-default">
-                <div class="card-header">Sign In</div>
+            <div class="card card-raised">
+                <div class="card-header text-center">
+                    <h4 class="card-title ">Register</h4>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -58,8 +60,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="offset-md-8 col-md-4 text-md-right">
-                                <button type="submit" class="btn btn-primary form-control">
+                            <div class="col-md-8">
+                                Have account? <a href="{{ route('login') }}">Login</a>
+                            </div>
+                            <div class="col-md-4 text-md-right">
+                                <button type="submit" class="btn btn-info btn-block">
                                     JOIN!
                                 </button>
                             </div>
@@ -68,6 +73,7 @@
                 </div>
             </div>
         </div>
+        @include('partials.authsection')
     </div>
 </div>
 @endsection

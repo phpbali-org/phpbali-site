@@ -25,4 +25,27 @@
     -webkit-box-shadow: none;
     box-shadow: none; }
 
+.card-profile .card-avatar img, .card-testimonial .card-avatar img {
+    border-radius: 8px !important;
+}
+
+.card-profile .card-avatar, .card-testimonial .card-avatar {
+    max-width: 100px;
+    max-height: 100px;
+    margin: -10px 20px -20px;
+}
+.info {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 70px 0 30px;
+    text-align: center;
+}
+.card .card-title {
+    margin-top: 15px;
+    line-height: 1.25em;
+}
+
+.form-control {
+    border-radius: 5px;
+}
 
