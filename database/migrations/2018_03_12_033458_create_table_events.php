@@ -25,6 +25,7 @@ class CreateTableEvents extends Migration
             $table->text('longitude');
             $table->tinyInteger('published')->default(0);
             $table->tinyInteger('deleted')->default(0);
+            $table->string('photos')->nullable();
             $table->timestamps();
         });
     }

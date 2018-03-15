@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('is_staff')->default(0);
             $table->string('password');
             $table->string('auth_token');
+            $table->string('photos')->default('default-avatar.png');
             $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
