@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','website','verified'
+        'name', 'email', 'password','website','verified','about','verify_token'
     ];
 
     /**
@@ -27,8 +27,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token','auth_token'
     ];
-
-    public function verify() {
-        return $this->hasOne("App\VerifyUser","user_id");
-    }
 }

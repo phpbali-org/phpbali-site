@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use App\User;
 use App\VerifyUser;
 use App\Http\Controllers\Controller;
@@ -70,14 +72,40 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'verify_token' => str_random(60)
         ]);
 
-        // $verify = VerifyUser::create([
-        //     'user_id'   => $user->id,
-        //     'verify_token' => str_random(60)
-        // ]);
-
-        // Mail::to($user->email)->send(new VerifyRegister($user));
+        Mail::to($user->email)->send(new VerifyRegister($user));
         return $user;
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return view('mails.verification');
+    }
+
+    public function verify($token)
+    {
+        if ( ! $token){
+            return  redirect('login')->with('flash-error','Email Verification Token not provided!');
+        }
+
+        $user = User::where('verify_token',$token)->first();
+
+        if ( ! $user){
+            return  redirect('login')->with('flash-error','Invalid Email Verification Token!');
+        }
+
+        $user->verified = 1;
+        $user->verify_token = null;
+
+        if ($user->save()) {
+            return redirect('login')->with('flash-error','Email confirmed!');;
+        }
+
     }
 }

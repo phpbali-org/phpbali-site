@@ -8,12 +8,12 @@
 {{-- Body --}}
     Dear {{ $user['name'] }}, thank you for register as PHP Bali Community member. But, before continue please confirm your email address. <br>
     Please click link bellow for activate your account. <br>
-    <a href="{{url('user/verify', $user->verify->verify_token)}}">Verify Email</a>
+    <a href="{{url('verifyemail', $user['verify_token'])}}">Verify Email</a>
 {{-- Subcopy --}}
     @isset($subcopy)
         @slot('subcopy')
             @component('mail::subcopy')
-                <a href="{{url('user/verify', $user->verify->verify_token)}}">Verify Email</a>
+                <a href="{{url('verifyemail', $user['verify_token'])}}">Verify Email</a>
             @endcomponent
         @endslot
     @endisset

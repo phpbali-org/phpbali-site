@@ -20,9 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('is_staff')->default(0);
             $table->string('password');
-            $table->string('auth_token');
             $table->string('photos')->default('default-avatar.png');
+            $table->text('about')->nullable();
             $table->boolean('verified')->default(false);
+            $table->string('auth_token')->nullable();
+            $table->string('verify_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

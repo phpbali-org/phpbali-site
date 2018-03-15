@@ -20,6 +20,8 @@ Route::get('/', function () {
 // })->where('any','.*');
 
 Auth::routes();
+//Email Verification
+Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
