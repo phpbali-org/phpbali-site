@@ -49,3 +49,42 @@
     border-radius: 5px;
 }
 
+.ecommerce-page .photo-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+    margin-top: 50px;
+    margin-bottom: -20px;
+}
+
+.ecommerce-page .content .social-description {
+    display: inline-block;
+    max-width: 150px;
+    width: 145px;
+    text-align: center;
+    margin: 15px 0 0px;
+}
+.ecommerce-page .content .social-description h2 {
+    margin-bottom: 5px;
+}
+.ecommerce-page .title {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.ecommerce-page h5.description {
+    max-width: 700px;
+    margin: 20px auto 75px;
+}
+
+.main-profile {
+    margin-top: 200px;
+}
+
+.text-black {
+    color: #2c2c2c;
+}

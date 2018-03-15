@@ -23,7 +23,11 @@ Auth::routes();
 //Email Verification
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Profile
+Route::get('/profile','ProfileController@index');
+Route::get('/update','ProfileController@edit');
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('adminpage')->group(function() {
 	// Route Member Dashboard
