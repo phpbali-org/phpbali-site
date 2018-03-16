@@ -1,0 +1,8 @@
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.sendgrid.net
+MAIL_PORT=587
+MAIL_USERNAME=muliarta
+MAIL_PASSWORD=k3l4p4mud4
+MAIL_ENCRYPTION=tls
+MAIL_FROM_NAME="PHP Bali Community"
+MAIL_FROM_ADDRESS=no-reply@phpbali.com
