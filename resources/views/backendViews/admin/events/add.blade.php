@@ -97,6 +97,14 @@
 <script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-clockpicker.min.js') }}"></script>
 <script>
+const $tempatAcara = document.getElementById('alamat_acara');
+const ENTER = 13;
+$tempatAcara.addEventListener('keydown', function(e) {
+  if (e.keyCode === ENTER) {
+    e.preventDefault();
+  }
+})
+
 $(document).ready(function() {
 	var startDate = new Pikaday({
     field: $('#tanggal_acara_start_date')[0],
@@ -121,8 +129,7 @@ $(document).ready(function() {
 });
 
 function init() {
-  var input = document.getElementById('alamat_acara');
-  var autocomplete = new google.maps.places.Autocomplete(input);
+  var autocomplete = new google.maps.places.Autocomplete($tempatAcara);
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
