@@ -9,6 +9,8 @@ use App\User;
 use App\Events;
 use DB;
 use Carbon\Carbon;
+use Image;
+use File;
 
 class EventController extends Controller
 {
@@ -55,6 +57,7 @@ class EventController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'desc' => 'required',
+            'img_event' => 'required',
             'tanggal_acara_start_date' => 'required',
             'waktu_acara_start_date' => 'required',
             'tanggal_acara_end_date' => 'required',
@@ -81,10 +84,30 @@ class EventController extends Controller
             } else {
                 $published = 0;
             }
+
+            //Process the image data
+            $validatorImg = Validator::make($request->all(), [
+                'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+            ]);
+            if ($validatorImg->fails()) {
+                return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+            }
+            $imgFile = Image::make($request->img_event);
+
+            // Check dulu apakah img sudah ada
+            if (File::exists(public_path().'/img/bg-event/'.$slug.'.jpg')) {
+                File::delete(public_path().'/img/bg-event/'.$slug.'.jpg');
+            }
+
+            //simpan img
+            $imgFile->save('img/bg-event/'.$slug.'.jpg', 90); //tidak lupa di compress jg
+
+            //kirim data ke database
             $data = [
                 'name' => $request->name,
                 'slug' => $slug,
                 'desc' => $request->desc,
+                'img_event' => $slug.'.jpg',
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                 'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                 'place' => $request->place,
@@ -156,33 +179,80 @@ class EventController extends Controller
             //gathering data
             $start_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_start_date.' '.$request->waktu_acara_start_date);
             $end_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_end_date.' '.$request->waktu_acara_end_date);
-            $slug = str_slug($request->name, '-');
+            $editedSlug = str_slug($request->name, '-');
             if ($request->has('published')) {
                 $published = $request->published;
             } else {
                 $published = 0;
             }
+
+            if($request->has('img_event')){
+                //Process the image data
+                $validatorImg = Validator::make($request->all(), [
+                    'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                ]);
+                if ($validatorImg->fails()) {
+                    return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                }
+                $imgFile = Image::make($request->img_event);
+
+                // Check dulu apakah img sudah ada
+                if (File::exists(public_path().'/img/bg-event/'.$slug.'.jpg')) {
+                    File::delete(public_path().'/img/bg-event/'.$slug.'.jpg');
+                }
+
+                //simpan img
+                $imgFile->save('img/bg-event/'.$slug.'.jpg', 90); //tidak lupa di compress jg
+            }
+
             if (isset($request->place) && isset($request->latitude) && isset($request->longitude)) {
-                $data = [
-                    'name' => $request->name,
-                    'slug' => $slug,
-                    'desc' => $request->desc,
-                    'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                    'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                    'place' => $request->place,
-                    'latitude' => $request->latitude,
-                    'longitude' => $request->longitude,
-                    'published' => $published
-                ];
+                if($request->has('img_event')){
+                    $data = [
+                        'name' => $request->name,
+                        'slug' => $editedSlug,
+                        'desc' => $request->desc,
+                        'img_event' => $editedSlug.'.jpg',
+                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
+                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                        'place' => $request->place,
+                        'latitude' => $request->latitude,
+                        'longitude' => $request->longitude,
+                        'published' => $published
+                    ];
+                }else{
+                    $data = [
+                        'name' => $request->name,
+                        'slug' => $editedSlug,
+                        'desc' => $request->desc,
+                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
+                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                        'place' => $request->place,
+                        'latitude' => $request->latitude,
+                        'longitude' => $request->longitude,
+                        'published' => $published
+                    ];
+                }
             } else {
-                $data = [
-                    'name' => $request->name,
-                    'slug' => $slug,
-                    'desc' => $request->desc,
-                    'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                    'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                    'published' => $published
-                ];
+                if($request->has('img_event')){
+                    $data = [
+                        'name' => $request->name,
+                        'slug' => $editedSlug,
+                        'desc' => $request->desc,
+                        'img_event' => $editedSlug.'.jpg',
+                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
+                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                        'published' => $published
+                    ];
+                }else{
+                    $data = [
+                        'name' => $request->name,
+                        'slug' => $editedSlug,
+                        'desc' => $request->desc,
+                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
+                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                        'published' => $published
+                    ];
+                }
             }
 
             //process data

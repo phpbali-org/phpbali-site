@@ -26,7 +26,7 @@
 <div class="row">
   <div class="col-xs-12" id="workshop-form">
   	<div class="white-box">
-  		<form class="form-horizontal form-material" method="POST" action="{{ route('admin.event.update', ['slug' => $event->slug]) }}">
+  		<form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="{{ route('admin.event.update', ['slug' => $event->slug]) }}">
         {{ csrf_field() }}
   			<div class="form-group">
   				<label class="col-xs-12">Title of Event</label>
@@ -38,6 +38,14 @@
           <label class="col-xs-12">Description of Event</label>
           <div class="col-xs-12">
             <textarea class="form-control form-control-line" name="desc" placeholder="Enter description for event" required>{!! $event->desc !!}</textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12">Image Background for Event</label>
+          <div class="col-xs-12">
+            <img class="bg-preview" src="{{ asset('img/bg-event/'.$event->img_event) }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+            <input id="img_event" name="img_event" type="file" accept="image/*"/>
+            <small>Lewatkan saja bagian ini, jika tidak ada perubahan pada gambar</small>
           </div>
         </div>
   			<div class="form-group">
@@ -146,4 +154,29 @@ function init() {
     });
   </script>
 @endif
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#bg-preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#img_event").change(function () {
+        var file = this.files[0], img;
+      if (Math.round(file.size / (1024 * 1024)) > 2) {
+         alert('Image yang di upload terlalu besar! (Max: 2MB)');
+         this.value = '';
+         return false;
+      }else{
+        readURL(this);
+      }
+    });
+</script>
 @endsection

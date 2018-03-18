@@ -2,6 +2,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/img/bg-event
 /storage/*.key
 /vendor
 /.idea

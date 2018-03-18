@@ -18,6 +18,7 @@ class CreateTableEvents extends Migration
             $table->text('slug');
             $table->string('name');
             $table->text('desc');
+            $table->text('img_event');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->text('place');
