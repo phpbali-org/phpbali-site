@@ -5,13 +5,21 @@
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <div class="page-header header-filter">
-                <div class="page-header-image" style="background-image: url('../img/bg-event/{{ $event->photos }}');"></div>
+                <div class="page-header-image" style="background-image: url('../img/bg-event/@if ($event)
+                    {{ $event->photos }}
+                @else
+                    {{'header.jpg'}}
+                @endif');"></div>
                 <div class="content-center">
                     <div class="row">
                         <div class="col-md-12 ml-auto mr-auto text-center">
-                            <h1 class="title">{{ $event->name }}</h1>
-                            <h4 class="description text-white">{{ Carbon\Carbon::parse($event->start_date)->format('D, d M Y') }} — {{ Carbon\Carbon::parse($event->start_date)->format('H:i a') }} - {{ Carbon\Carbon::parse($event->end_date)->format('H:i a') }}</h4>
-                            <h5 class="description text-white">{{ $event->place }}</h5>
+                            @if ($event)
+                                <h1 class="title">{{ $event->name }}</h1>
+                                <h4 class="description text-white">{{ Carbon\Carbon::parse($event->start_date)->format('D, d M Y') }} — {{ Carbon\Carbon::parse($event->start_date)->format('H:i a') }} - {{ Carbon\Carbon::parse($event->end_date)->format('H:i a') }}</h4>
+                                <h5 class="description text-white">{{ $event->place }}</h5>
+                            @else
+                                <h1 class="title">No Event Yet!</h1>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -19,17 +27,29 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2 ml-auto mr-auto" id="reservation">
-            <div class="card card-contact card-raised card-plain">
-                <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="id_events" value="{{ $event->id }}">
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
+        @if ($count < 1)
+            @foreach ($rsvp as $rsvp)
+                <div class="col-md-2 ml-auto mr-auto" id="reservation">
+                    <div class="card card-contact card-raised card-plain">
+                        <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id_events" value="{{ $event->id }}">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+            @endforeach
+        @else
+            <div class="col-md-2 ml-auto mr-auto" id="reservation">
+                <div class="card card-contact card-raised card-plain">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-info btn-lg btn-round ">Registered</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
     {{-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <i class="now-ui-icons arrows-1_minimal-left"></i>

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Events;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $event = Events::where('published',1)
+                ->orderBy('created_at','desc')
+                ->with('topic')
+                ->with('rsvp')
+                ->first();
+         View::share('event', $event);
     }
 
     /**

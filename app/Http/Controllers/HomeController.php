@@ -21,12 +21,18 @@ class HomeController extends Controller
                 ->with('topic')
                 ->with('rsvp')
                 ->first();
-        $topics = Topics::where('id_event',$event->id)
-                ->where('deleted',0)
-                ->get();
+        if ($event) {
+            $topics = Topics::where('id_event',$event->id)
+                    ->where('deleted',0)
+                    ->get();
 
-        $count = Reservation::where('id_events',$event->id)->count();
-        $rsvp = Reservation::with('user')->get();
+            $count = Reservation::where('id_events',$event->id)->count();
+            $rsvp = Reservation::with('user')->get();
+        }else {
+            $topics = [];
+            $count = 0;
+            $rsvp = [];
+        }
         return view('welcome',[
             'event'=>$event,
             'topics' => $topics,

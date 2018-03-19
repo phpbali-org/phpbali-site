@@ -37,7 +37,7 @@ class ProfileController extends Controller
             $user = User::where('id',$id)->first();
             return view('profile.edit',['user'=>$user]);
         }else {
-            return redirect()->back();
+            return abort(404);
         }
     }
 
@@ -48,9 +48,14 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function member(Request $request, $slug)
     {
-        //
+        if($request->has('slug')) {
+            $member = User::where('slug',$slug)->first();
+            return view('profile.edit',['user'=>$user]);
+        }else {
+            return abort(404);
+        }
     }
 
     /**

@@ -60,6 +60,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="about" class="col-md-8 control-label">About You</label>
+
+                            <div class="col-md-12">
+                                <textarea id="about" type="about" class="form-control{{ $errors->has('about') ? ' is-invalid' : '' }}" name="about" required></textarea>
+
+                                @if ($errors->has('about'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('about') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-md-8">
                                 Have account? <a href="{{ route('login') }}">Login</a>
                             </div>

@@ -24,7 +24,7 @@
                                         </p>
                                         <p class="author">
                                             @foreach ($topic->speakers as $speaker)
-                                                by <a href="#pablo"><b>{{ $speaker->name }}</b></a>
+                                                by <a href="{{ url('/member/'.str_slug($speaker->name)) }}"><b>{{ $speaker->name }}</b></a>
                                             @endforeach
                                         </a>
                                     </div>
@@ -78,7 +78,6 @@
         <div id="contactUs2Map" class="big-map"></div>
 
         <div class="section" id="teams">
-<!--     *********    TEAM 1     *********      -->
             <div class="team-1">
                 <div class="container">
                     <div class="row">
@@ -102,17 +101,19 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="col-md-2 ml-auto mr-auto" >
-                                <div class="card card-contact card-raised card-plain">
-                                    <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="id_events" value="{{ $event->id }}">
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
-                                        </div>
-                                    </form>
+                            @if ($event)
+                                <div class="col-md-2 ml-auto mr-auto" >
+                                    <div class="card card-contact card-raised card-plain">
+                                        <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="id_events" value="{{ $event->id }}">
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         @endif
                     </div>
 
