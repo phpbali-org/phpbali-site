@@ -21,6 +21,7 @@ class CreateTableEvents extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->text('place');
+            $table->text('place_name');
             $table->text('latitude');
             $table->text('longitude');
             $table->tinyInteger('published')->default(0);

@@ -63,6 +63,7 @@ class EventController extends Controller
             'tanggal_acara_end_date' => 'required',
             'waktu_acara_end_date' => 'required',
             'place' => 'required',
+            'place_name' => 'required',
             'latitude' => 'required',
             'longitude' => 'required'
         ]);
@@ -113,6 +114,7 @@ class EventController extends Controller
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                 'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                 'place' => $request->place,
+                'place_name' => $request->place_name,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'published' => $published
@@ -219,6 +221,7 @@ class EventController extends Controller
                         'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                         'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                         'place' => $request->place,
+                        'place_name' => $request->place_name,
                         'latitude' => $request->latitude,
                         'longitude' => $request->longitude,
                         'published' => $published
@@ -231,6 +234,7 @@ class EventController extends Controller
                         'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                         'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                         'place' => $request->place,
+                        'place_name' => $request->place_name,
                         'latitude' => $request->latitude,
                         'longitude' => $request->longitude,
                         'published' => $published

@@ -43,7 +43,7 @@
         <div class="form-group">
           <label class="col-xs-12">Image Background for Event</label>
           <div class="col-xs-12">
-            <img class="bg-preview" src="{{ asset('img/bg-event/'.$event->img_event) }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+            <img class="bg-preview" src="{{ asset('img/bg-event/'.$event->photos) }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
             <input id="img_event" name="img_event" type="file" accept="image/*"/>
             <small>Lewatkan saja bagian ini, jika tidak ada perubahan pada gambar</small>
           </div>
@@ -68,6 +68,7 @@
   				<label class="col-xs-12">Place</label>
   				<div class="col-xs-12">
   					<input type="text" class="form-control form-control-line" name="place" id="alamat_acara" value="{{ $event->place }}" />
+            <input type="hidden" id="nama_tempat" name="place_name" value="{{ $event->place_name }}" />
             <input type="hidden" id="latitude" name="latitude" value="{{ $event->latitude }}" />
             <input type="hidden" id="longitude" name="longitude" value="{{ $event->longitude }}" />
   				</div>
@@ -141,6 +142,7 @@ function init() {
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
+    document.getElementById('nama_tempat').value = place.name;
     document.getElementById('latitude').value = place.geometry.location.lat();
     document.getElementById('longitude').value = place.geometry.location.lng();
   });
