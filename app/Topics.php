@@ -16,7 +16,7 @@ class Topics extends Model
     	return $this->belongsToMany('App\User', 'topic_speaker', 'id_topic', 'id_user')->withTimestamps();
     }
 
-    public function namaEvent()
+    public function event()
     {
     	return $this->belongsTo('App\Events', 'id_event');
     }

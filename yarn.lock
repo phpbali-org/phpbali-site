@@ -7845,6 +7845,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweetalert2@^7.16.0:
+  version "7.16.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.16.0.tgz#6138887079cc487ed88567e441965667d98ef2cc"
+
 symbol-observable@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"

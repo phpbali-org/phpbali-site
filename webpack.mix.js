@@ -13,6 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js/script.js').extract(['lodash','jquery','popper.js','bootstrap','axios'])
    .sass('resources/assets/sass/app.scss', 'public/css/style-app.css');
+mix.copy('node_modules/sweetalert2/dist/sweetalert2.all.min.js', 'public/js/sweetalert2.js');
 
 mix.styles([
 	'resources/assets/dashboard-template/css/bootstrap.min.css',

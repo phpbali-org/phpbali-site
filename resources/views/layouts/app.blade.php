@@ -261,6 +261,8 @@
     <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/sweetalert2.js') }}" type="text/javascript"></script>
+    @include('partials.message')
     <script>
         function initMap(){
             var myLatlng = new google.maps.LatLng({{$event->latitude}}, {{$event->longitude}});

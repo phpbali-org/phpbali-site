@@ -63,7 +63,7 @@
                   @endif
                 @endforeach
               </td>
-              <td>{{ $topic->namaEvent->name }}</td>
+              <td>{{ $topic->event->name }}</td>
               <td><a href="{{ route('admin.topic.edit', ['slug' => $topic->slug]) }}">Edit</a> | <a href="#" data-href="{{ route('admin.topic.delete', ['slug' => $topic->slug]) }}" data-toggle="modal" data-target="#modal-action">Delete</a></td>
             </tr>
             @endforeach

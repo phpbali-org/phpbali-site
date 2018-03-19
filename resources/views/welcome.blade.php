@@ -5,62 +5,64 @@
 
     <div class="main">
         <div class="cd-section" id="blogs">
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 ml-auto mr-auto">
+                        <h2 class="title">What the topic?</h2>
+                        <hr>
+                        <div class="card card-plain card-blog">
+                            <div class="row">
+                                @foreach ($topics as $topic)
+                                    <div class="col-md-4">
+                                        <h3 class="card-title">
+                                            <span>{{  $topic->title}}</span>
+                                        </h3>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-description">
+                                            {{ $topic->desc }}
+                                        </p>
+                                        <p class="author">
+                                            @foreach ($topic->speakers as $speaker)
+                                                by <a href="#pablo"><b>{{ $speaker->name }}</b></a>
+                                            @endforeach
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="blogs-1" id="blogs-1">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 ml-auto mr-auto">
-                            <h2 class="title">Meet The Speekers</h2>
+                            <h2 class="title">Meet The Speakers</h2>
+                            <hr>
                             <br />
-                            <div class="card card-plain card-blog">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card-image">
-                                            <img class="img img-raised rounded
-                                            " src="/img/avatar.jpg" />
+                            @foreach ($topics as $topic)
+                                @foreach ($topic->speakers as $speaker)
+                                    <div class="card card-plain card-blog">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="card-image">
+                                                    <img class="img img-raised rounded
+                                                    " src="/img/avatar/{{ $speaker->photos }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h3 class="card-title">
+                                                    <span>{{ $speaker->name }}</span>
+                                                </h3>
+                                                <p class="card-description">
+                                                    {{ $speaker->about }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        {{-- <h6 class="category text-danger">
-                                            <i class="now-ui-icons now-ui-icons media-2_sound-wave"></i> Startup
-                                        </h6> --}}
-                                        <h3 class="card-title">
-                                            <span>Insticator raises $5.2M to help publishers</span>
-                                        </h3>
-                                        <p class="card-description">
-                                            Insticator is announcing that it has raised $5.2 million in Series A funding. The startup allows online publishers to add quizzes, polls and other interactive elements (either created by Insticator or by the publisher themselves) to their stories.
-                                        </p>
-                                        <p class="author">
-                                            by <a href="#pablo"><b>Anthony Ha</b></a>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card card-plain card-blog">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card-image">
-                                            <img class="img img-raised rounded
-                                            " src="/img/avatar.jpg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{-- <h6 class="category text-danger">
-                                            <i class="now-ui-icons now-ui-icons media-2_sound-wave"></i> Startup
-                                        </h6> --}}
-                                        <h3 class="card-title">
-                                            <span>Insticator raises $5.2M to help publishers</span>
-                                        </h3>
-                                        <p class="card-description">
-                                            Insticator is announcing that it has raised $5.2 million in Series A funding. The startup allows online publishers to add quizzes, polls and other interactive elements (either created by Insticator or by the publisher themselves) to their stories.
-                                        </p>
-                                        <p class="author">
-                                            by <a href="#pablo"><b>Anthony Ha</b></a>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -78,57 +80,40 @@
         <div class="section" id="teams">
 <!--     *********    TEAM 1     *********      -->
             <div class="team-1">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto text-center">
-                            <h2 class="title">X People Attending</h2>
+                            <h2 class="title">{{ $count }} People Attending</h2>
                             <hr>
                         </div>
                     </div>
 
                     <div class="row justify-content-center">
-                        @for ($i = 0; $i < 30 ; $i++)
-                            <div class="col-xs-2">
-                                <div class="card card-profile card-plain">
-                                    <div class="card-avatar">
-                                        <a href="#pablo">
-                                            <img class="img img-raised" src="/img/ryan.jpg" data-toggle="tooltip" data-placement="top" title="Emily Chloe" data-container="body" data-animation="true" />
-                                        </a>
+                        @if ($count > 0)
+                            @foreach ($rsvp as $rsvp)
+                                <div class="col-xs-2">
+                                    <div class="card card-profile card-plain">
+                                        <div class="card-avatar">
+                                            <a href="{{ url('/member/'.str_slug($rsvp->user->name)) }}">
+                                                <img class="img img-raised" src="/img/avatar/{{$rsvp->user->photos}}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endfor
-
-
-                        <div class="col-xs-2">
-                            <div class="card card-profile card-plain">
-                                <div class="card-avatar">
-                                    <a href="#pablo">
-                                        <img class="img img-raised" src="/img/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Emily Chloe" data-container="body" data-animation="true"/>
-                                    </a>
+                            @endforeach
+                        @else
+                            <div class="col-md-2 ml-auto mr-auto" >
+                                <div class="card card-contact card-raised card-plain">
+                                    <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="id_events" value="{{ $event->id }}">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-">
-                            <div class="card card-profile card-plain">
-                                <div class="card-avatar">
-                                    <a href="#pablo">
-                                        <img class="img img-raised" src="/img/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Emily Chloe" data-container="body" data-animation="true" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-2 ">
-                            <div class="card card-profile card-plain">
-                                <div class="card-avatar">
-                                    <a href="#pablo" >
-                                        <img class="img img-raised" src="/img/avatar.jpg" data-toggle="tooltip" data-placement="top" title="Emily Chloe" data-container="body" data-animation="true"/>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        @endif
                     </div>
 
                 </div>

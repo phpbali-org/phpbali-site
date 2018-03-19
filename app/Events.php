@@ -10,6 +10,16 @@ class Events extends Model
     protected $fillable = ['slug', 'name', 'desc', 'start_date', 'end_date', 'place', 'latitude', 'longitude', 'published', 'deleted','photos'];
 
     public function topic() {
-    	return $this->hasMany("App\Topics");
+    	return $this->hasMany("App\Topics","id_event");
     }
+
+    public function speakers() {
+    	return $this->topic->speakers();
+    }
+
+    public function rsvp() {
+    	return $this->hasMany("App\Reservation","id_events");
+    }
+
+    
 }
