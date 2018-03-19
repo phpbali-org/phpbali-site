@@ -20421,16 +20421,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(4)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
     /*!
-      =========================================================
+       =========================================================
      * Now-ui-kit - v1.1.0
      =========================================================
-      * Product Page: https://www.creative-tim.com/product/now-ui-kit
+       * Product Page: https://www.creative-tim.com/product/now-ui-kit
      * Copyright 2017 Creative Tim (http://www.creative-tim.com)
      * Licensed under MIT (https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md)
-      * Designed by www.invisionapp.com Coded by www.creative-tim.com
-      =========================================================
-      * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-      */
+       * Designed by www.invisionapp.com Coded by www.creative-tim.com
+       =========================================================
+       * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+       */
 
     var transparent = true;
 
@@ -20965,11 +20965,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 $(function () {
 
-    if (window.location.pathname === '/register' || window.location.pathname === '/login' || window.location.pathname === '/password/reset') {
-        $('#main-navbar').removeClass('fixed-top navbar-transparent');
-    } else {
-        $('#main-navbar').addClass('fixed-top navbar-transparent');
-    }
+    // if(window.location.pathname === '/register' || window.location.pathname === '/login' || window.location.pathname === '/password/reset' ) {
+    //     $('#main-navbar').removeClass('fixed-top navbar-transparent');
+    // }else {
+    //     $('#main-navbar').addClass('fixed-top navbar-transparent');
+    // }
 
     $('#select_category').niceSelect();
     // Load Form base on click

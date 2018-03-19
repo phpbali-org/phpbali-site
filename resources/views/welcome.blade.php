@@ -6,7 +6,6 @@
     <div class="main">
         <div class="cd-section" id="blogs">
 
-<!--     *********     BLOGS 1      *********      -->
             <div class="blogs-1" id="blogs-1">
                 <div class="container">
                     <div class="row">

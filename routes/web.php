@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 // Route::get('/{any}', function () {
 //     return view('index');
@@ -27,7 +25,6 @@ Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 Route::get('/profile','ProfileController@index');
 Route::get('/update','ProfileController@edit');
 
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('adminpage')->group(function() {
 	// Route Member Dashboard

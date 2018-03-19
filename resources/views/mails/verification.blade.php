@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.verifiedemail')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 88px;">
     <div class="section">
         <div class="row justify-content-center">
             <div class="col-md-8">

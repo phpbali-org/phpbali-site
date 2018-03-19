@@ -1,11 +1,11 @@
 'use strict';
 $(function() {
 
-    if(window.location.pathname === '/register' || window.location.pathname === '/login' || window.location.pathname === '/password/reset' ) {
-        $('#main-navbar').removeClass('fixed-top navbar-transparent');
-    }else {
-        $('#main-navbar').addClass('fixed-top navbar-transparent');
-    }
+    // if(window.location.pathname === '/register' || window.location.pathname === '/login' || window.location.pathname === '/password/reset' ) {
+    //     $('#main-navbar').removeClass('fixed-top navbar-transparent');
+    // }else {
+    //     $('#main-navbar').addClass('fixed-top navbar-transparent');
+    // }
 
     $('#select_category').niceSelect();
     // Load Form base on click

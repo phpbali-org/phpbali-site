@@ -46,7 +46,7 @@
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
-    <nav id="main-navbar" class="navbar navbar-expand-lg bg-white " color-on-scroll="500">
+    <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top ">
         <div class="container">
             <div class="navbar-translate">
                 <a class="navbar-brand" href="{{ url('/') }}" rel="tooltip" data-placement="bottom" >
@@ -82,6 +82,10 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('/profile' .'?'. http_build_query(['member' => strtolower(str_slug(Auth::user()->name)),'profile' => Auth::user()->id ])) }}">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                    Profile Page
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
@@ -119,111 +123,7 @@
     <div id="app" class="wrapper">
         @yield('content')
 
-        <footer class="footer footer-big"  data-background-color="black">
-            <div class="container">
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h5>About Us</h5>
-                            <ul class="links-vertical">
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                       How to book
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        Contact US
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        Help Center
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        Company Profile
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h5>Other</h5>
-                            <ul class="links-vertical">
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                       Term & Condition
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        How to Register
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                       Sell Goods
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        Receive Payment
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        Transactions Issues
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                        Affiliates Program
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-2">
-                            <h5>Products</h5>
-                            <ul class="links-vertical">
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                       ACTIVITIES
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                      RESTAURANT
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                      TRANSPORT
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                      GOLF
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="text-muted">
-                                      SPA
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="copyright">
-                    Copyright © <script>document.write(new Date().getFullYear())</script> {{ config('app.name') }}.
-                </div>
-            </div>
-        </footer>
+        @include('partials.footer')
     </div>
     
     <!-- Scripts -->
@@ -231,6 +131,27 @@
     <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
-    
+    {{-- <script>
+        function initMap(){
+            var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+            var mapOptions = {
+                zoom: 13,
+                center: myLatlng,
+                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+                styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+            };
+
+            var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title:"Hello World!"
+            });
+
+            // To add the marker to the map, call setMap();
+            marker.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuNtNC5mUcvdU0L2RnHlsqaXLe8Ht4Ddw&callback=initMap" async defer></script> --}}
 </body>
 </html>
