@@ -109,7 +109,6 @@ class EventController extends Controller
                 'name' => $request->name,
                 'slug' => $slug,
                 'desc' => $request->desc,
-                'img_event' => $file_name,
                 'photos' => $file_name,
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                 'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
@@ -197,15 +196,17 @@ class EventController extends Controller
                 if ($validatorImg->fails()) {
                     return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
                 }
-                $imgFile = Image::make($request->img_event);
+                $img = $request->file('img_event');
+                $file_name = $slug.'.'.$img->getClientOriginalExtension();
+                $imgFile = Image::make($img)->fit(1200, 900);
 
                 // Check dulu apakah img sudah ada
-                if (File::exists(public_path().'/img/bg-event/'.$slug.'.jpg')) {
-                    File::delete(public_path().'/img/bg-event/'.$slug.'.jpg');
+                if (File::exists(public_path().'/img/bg-event/'.$file_name)) {
+                    File::delete(public_path().'/img/bg-event/'.$file_name);
                 }
 
                 //simpan img
-                $imgFile->save('img/bg-event/'.$slug.'.jpg', 90); //tidak lupa di compress jg
+                $imgFile->save('img/bg-event/'.$file_name, 85); //tidak lupa di compress jg
             }
 
             if (isset($request->place) && isset($request->latitude) && isset($request->longitude)) {
@@ -214,7 +215,7 @@ class EventController extends Controller
                         'name' => $request->name,
                         'slug' => $editedSlug,
                         'desc' => $request->desc,
-                        'img_event' => $editedSlug.'.jpg',
+                        'photos' => $file_name,
                         'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                         'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                         'place' => $request->place,
@@ -241,7 +242,7 @@ class EventController extends Controller
                         'name' => $request->name,
                         'slug' => $editedSlug,
                         'desc' => $request->desc,
-                        'img_event' => $editedSlug.'.jpg',
+                        'photos' => $file_name,
                         'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                         'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                         'published' => $published

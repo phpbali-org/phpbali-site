@@ -46,7 +46,11 @@
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
+    @if(isset($event))
     <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+    @else
+    <nav class="navbar navbar-expand-lg bg-white fixed-top">
+    @endif
         <div class="container">
             <div class="navbar-translate">
                 <a class="navbar-brand" href="{{ url('/') }}" rel="tooltip" data-placement="bottom" >
@@ -261,6 +265,7 @@
     <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+    @if(isset($event))
     <script>
         function initMap(){
             var myLatlng = new google.maps.LatLng({{$event->latitude}}, {{$event->longitude}});
@@ -283,5 +288,6 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuNtNC5mUcvdU0L2RnHlsqaXLe8Ht4Ddw&callback=initMap" async defer></script>
+    @endif
 </body>
 </html>

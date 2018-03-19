@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(isset($event))
     @include('layouts.slider')
-
+    @endif
     <div class="main">
         <div class="cd-section" id="blogs">
 
@@ -66,7 +67,7 @@
                 </div>
             </div>
         </div>
-        
+        @if(isset($event))
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto text-center">
                 <h2 class="title">Maps</h2>
@@ -134,5 +135,6 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 @endsection

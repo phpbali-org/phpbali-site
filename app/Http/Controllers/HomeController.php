@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $event = Events::where('published',1)->orderBy('created_at','desc')->first();
-        return view('welcome',['event'=>$event]);
+        return view('welcome')
+        ->with('event', $event);
     }
 }
