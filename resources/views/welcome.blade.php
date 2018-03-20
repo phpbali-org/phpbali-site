@@ -11,24 +11,28 @@
                         <hr>
                         <div class="card card-plain card-blog">
                             <div class="row">
-                                @if(count($event->topic) > 0)
-                                    @foreach($event->topic as $topic)
-                                        <div class="col-md-4">
-                                            <h3 class="card-title">
-                                                <span>{{$topic->title}}</span>
-                                            </h3>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <p class="card-description">
-                                                {{ $topic->desc }}
-                                            </p>
-                                            <p class="author">
-                                                @foreach ($topic->speakers as $speaker)
-                                                    by <a href="{{ url('/member/'.str_slug($speaker->name)) }}"><b>{{ $speaker->name }}</b></a>
-                                                @endforeach
-                                            </a>
-                                        </div>
-                                    @endforeach
+                                @if(isset($event))
+                                    @if(count($event->topic) > 0)
+                                        @foreach($event->topic as $topic)
+                                            <div class="col-md-4">
+                                                <h3 class="card-title">
+                                                    <span>{{$topic->title}}</span>
+                                                </h3>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p class="card-description">
+                                                    {{ $topic->desc }}
+                                                </p>
+                                                <p class="author">
+                                                    @foreach ($topic->speakers as $speaker)
+                                                        by <a href="{{ url('/member/'.str_slug($speaker->name)) }}"><b>{{ $speaker->name }}</b></a>
+                                                    @endforeach
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <h3 class="ml-auto mr-auto">There's no topic yet</h3>
+                                    @endif
                                 @else
                                     <h3 class="ml-auto mr-auto">There's no topic yet</h3>
                                 @endif
@@ -44,27 +48,33 @@
                             <h2 class="title">Meet The Speakers</h2>
                             <hr>
                             <br />
-                            @if(count($event->topic) > 0)
-                                @foreach($event->topic->speakers as $speaker)
-                                    <div class="card card-plain card-blog">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="card-image">
-                                                    <img class="img img-raised rounded
-                                                    " src="/img/avatar/{{ $speaker->photos }}" />
+                            @if(isset($event))
+                                @if(count($event->topic) > 0)
+                                    @foreach($event->topic->speakers as $speaker)
+                                        <div class="card card-plain card-blog">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="card-image">
+                                                        <img class="img img-raised rounded
+                                                        " src="/img/avatar/{{ $speaker->photos }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h3 class="card-title">
+                                                        <span>{{ $speaker->name }}</span>
+                                                    </h3>
+                                                    <p class="card-description">
+                                                        {{ $speaker->about }}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
-                                                <h3 class="card-title">
-                                                    <span>{{ $speaker->name }}</span>
-                                                </h3>
-                                                <p class="card-description">
-                                                    {{ $speaker->about }}
-                                                </p>
-                                            </div>
                                         </div>
+                                    @endforeach
+                                @else
+                                    <div class="row">
+                                        <h3 class="ml-auto mr-auto">There's no topic speakers yet</h3>
                                     </div>
-                                @endforeach
+                                @endif
                             @else
                                 <div class="row">
                                     <h3 class="ml-auto mr-auto">There's no topic speakers yet</h3>
@@ -82,7 +92,13 @@
                 <hr>
             </div>
         </div>
+        @if(isset($event))
         <div id="contactUs2Map" class="big-map"></div>
+        @else
+        <div class="row">
+            <h3 class="mr-auto ml-auto">There's no event yet</h3>
+        </div>
+        @endif
 
         <div class="section" id="teams">
             <div class="team-1">

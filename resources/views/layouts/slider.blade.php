@@ -30,26 +30,28 @@
         </div>
     </div>
     <div class="row">
-        @if($rsvpChecker < 1)
-            <div class="col-md-2 ml-auto mr-auto" id="reservation">
-                <div class="card card-contact card-raised card-plain">
-                    <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="slug" value="{{ $event->slug }}">
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        @else
-            <div class="col-md-2 ml-auto mr-auto" id="reservation">
-                <div class="card card-contact card-raised card-plain">
-                    <div class="text-center">
-                        <button type="button" class="btn btn-info btn-lg btn-round ">Registered</button>
+        @if(isset($event))
+            @if($rsvpChecker < 1)
+                <div class="col-md-2 ml-auto mr-auto" id="reservation">
+                    <div class="card card-contact card-raised card-plain">
+                        <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="slug" value="{{ $event->slug }}">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="col-md-2 ml-auto mr-auto" id="reservation">
+                    <div class="card card-contact card-raised card-plain">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-info btn-lg btn-round ">Registered</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
         @endif
     </div>
 </a>
