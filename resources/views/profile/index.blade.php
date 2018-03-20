@@ -22,7 +22,7 @@
     <div class="section">
         <div class="container">
             <h3 class="title">About me</h3>
-            <h5 class="description text-center">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</h5>
+            <h5 class="description text-center">{{ $user->about }}.</h5>
         </div>
     </div>
 @endsection

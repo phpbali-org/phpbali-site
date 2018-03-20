@@ -50,25 +50,27 @@
                             <br />
                             @if(isset($event))
                                 @if(count($event->topic) > 0)
-                                    @foreach($event->topic->speakers as $speaker)
-                                        <div class="card card-plain card-blog">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="card-image">
-                                                        <img class="img img-raised rounded
-                                                        " src="/img/avatar/{{ $speaker->photos }}" />
+                                    @foreach ($event->topic as $topic)
+                                        @foreach($topic->speakers as $speaker)
+                                            <div class="card card-plain card-blog">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="card-image">
+                                                            <img class="img img-raised rounded
+                                                            " src="/img/avatar/{{ $speaker->photos }}" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <h3 class="card-title">
+                                                            <span>{{ $speaker->name }}</span>
+                                                        </h3>
+                                                        <p class="card-description">
+                                                            {{ $speaker->about }}
+                                                        </p>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8">
-                                                    <h3 class="card-title">
-                                                        <span>{{ $speaker->name }}</span>
-                                                    </h3>
-                                                    <p class="card-description">
-                                                        {{ $speaker->about }}
-                                                    </p>
-                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     @endforeach
                                 @else
                                     <div class="row">

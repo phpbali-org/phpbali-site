@@ -47,7 +47,7 @@
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
     @if(isset($event))
-    <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+    <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="300">
     @else
     <nav class="navbar navbar-expand-lg bg-white fixed-top">
     @endif
