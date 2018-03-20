@@ -1,5 +1,5 @@
 <?php
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 //Email Verification
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
