@@ -20,7 +20,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="name" class="text-black col-form-label ">Name</label>
-                                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required autofocus>
                 
                                             @if ($errors->has('name'))
                                                 <span class="invalid-feedback">
@@ -33,7 +33,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                         <label for="email" class=" text-black col-form-label">E-Mail Address</label>
-                                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email }}" required>
                 
                                             @if ($errors->has('email'))
                                                 <span class="invalid-feedback">
@@ -46,8 +46,21 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="password" class="text-black col-form-label">Website</label>
-                                            <input id="about" type="about" class="form-control{{ $errors->has('about') ? ' is-invalid' : '' }}" name="about" >
+                                            <input id="website" type="website" class="form-control{{ $errors->has('website') ? ' is-invalid' : '' }}"  value="{{ $user->website }}" name="website" >
                 
+                                            @if ($errors->has('website'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('website') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="password-confirm" class="text-black col-form-label">About</label>
+                                            <textarea name="about" class="form-control{{ $errors->has('website') ? ' is-invalid' : '' }}" id="" cols="30" rows="10">{{ $user->about }}</textarea>
+
                                             @if ($errors->has('about'))
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('about') }}</strong>
@@ -57,19 +70,12 @@
                                     </div>
                 
                                     <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label for="password-confirm" class="text-black col-form-label">About</label>
-                                            <textarea name="about" class="form-control" id="" cols="30" rows="10"></textarea>
-                                        </div>
-                                    </div>
-                
-                                    <div class="form-group row">
                                         <div class="col-md-8">
                                             <span></span>
                                         </div>
-                                        <div class="col-md-4 text-md-right">
+                                        <div class="col-md-4 text-center">
                                             <button type="submit" class="btn btn-info btn-block">
-                                                JOIN!
+                                                Update!
                                             </button>
                                         </div>
                                     </div>
@@ -80,16 +86,13 @@
                     <div class="col-md-5 col-sm-8">
                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail img-raised">
-                                <img src="/img/avatar/default-avatar.png" alt="...">
+                                <img src="/img/avatar/{{$user->photos}}" alt="...">
                             </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
-                            <div>
-                                <span class="btn btn-raised btn-round btn-default btn-file">
-                                    <span class="fileinput-new">Select image</span>
-                                    <span class="fileinput-exists">Change</span>
-                                    <input type="file" name="...">
-                                </span>
-                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="now-ui-icons ui-1_simple-remove"></i> Remove</a>
+                            <div class="row">
+                                <form method="post" action="" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="file" name="photos" class="col-md-12" required accept="image/*">
+                                </form>
                             </div>
                         </div>
                     </div>

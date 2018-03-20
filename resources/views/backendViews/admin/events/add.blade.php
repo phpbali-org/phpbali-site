@@ -70,6 +70,7 @@
   				<label class="col-xs-12">Place</label>
   				<div class="col-xs-12">
   					<input type="text" class="form-control form-control-line" id="alamat_acara" name="place" required />
+            <input type="hidden" id="nama_tempat" name="place_name" />
             <input type="hidden" id="latitude" name="latitude" />
             <input type="hidden" id="longitude" name="longitude" />
   				</div>
@@ -143,6 +144,7 @@ function init() {
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
+    document.getElementById('nama_tempat').value = place.name;
     document.getElementById('latitude').value = place.geometry.location.lat();
     document.getElementById('longitude').value = place.geometry.location.lng();
   });
