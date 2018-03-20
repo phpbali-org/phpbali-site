@@ -18,7 +18,11 @@ class HomeController extends Controller
     public function index()
     {
         $event = Events::where('published', 1)->orderBy('created_at', 'desc')->first();
-        $rsvpChecker = Reservation::where('id_events', $event->id)->where('id_user', Auth::id())->count();
+        if(isset($event)){
+            $rsvpChecker = Reservation::where('id_events', $event->id)->where('id_user', Auth::id())->count();
+        }else{
+            $rsvpChecker = 0;
+        }
         return view('welcome')
         ->with('event', $event)
         ->with('rsvpChecker', $rsvpChecker);
