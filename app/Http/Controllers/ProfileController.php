@@ -114,12 +114,17 @@ class ProfileController extends Controller
      */
     public function member(Request $request, $slug)
     {
-        if($request->has('slug')) {
+        if($slug) {
             $member = User::where('slug',$slug)->first();
-            return view('profile.edit',['user'=>$user]);
+            return view('profile.index',['user'=>$member]);
         }else {
             return abort(404);
         }
+    }
+
+    public function allmember() {
+        $member = User::orderBy('name','asc')->get();
+        return view('member',['member'=>$member]);
     }
 
     /**

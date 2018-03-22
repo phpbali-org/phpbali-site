@@ -10,6 +10,7 @@ Route::get('/update','ProfileController@edit');
 Route::post('/update','ProfileController@update');
 Route::post('/updateavatar','ProfileController@updateavatar');
 Route::get('/member/{slug}','ProfileController@member');
+Route::get('/member','ProfileController@allmember');
 
 // Reservation
 Route::post('/rsvp','ReservationController@rsvp');

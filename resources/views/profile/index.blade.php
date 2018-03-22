@@ -6,7 +6,7 @@
         </div>
         <div class="content-center">
             <div class="photo-container">
-                <img src="/img/avatar/default-avatar.png" alt="">
+                <img src="/img/avatar/{{ $user->photos }}" alt="">
             </div>
             <h3 class="title">{{ $user->name }}</h3>
             @if(Auth::check())
@@ -21,6 +21,11 @@
 
     <div class="section">
         <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <a href="{{ url('member') }}" class="btn btn-sm btn-primary">All Member</a>
+                </div>
+            </div>
             <h3 class="title">About me</h3>
             <h5 class="description text-center">{{ $user->about }}.</h5>
         </div>
