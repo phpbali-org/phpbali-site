@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
 use App\User;
+use Auth;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -39,6 +43,66 @@ class ProfileController extends Controller
         }else {
             return abort(404);
         }
+    }
+
+    public function update(Request $request) {
+        $this->validateUpdate($request->all())->validate();
+
+        event(new Registered($user = $this->processUpdate($request->all())));
+
+        return redirect()->back()->with('status','Data Updated!');
+    }
+
+    protected function validateUpdate(array $data) {
+        return Validator::make($data, [
+            'name'  => 'required|string',
+            'email' => 'required|unique:users,email,'.Auth::user()->id,
+            'about' => 'required'
+        ]);
+    }
+
+    protected function processUpdate(array $data) {
+        $user = User::where('id',Auth::user()->id)
+                ->update([
+                    'name'  => $data['name'],
+                    'email' => $data['email'],
+                    'website'   => $data['website'],
+                    'about'     => $data['about']
+                ]);
+        return $user;
+    }
+
+    // update avatar
+    public function updateavatar(Request $request) {
+        $this->validateImage($request->all())->validate();
+        $photos = $this->uploadImage($request->file('photos'));
+
+        $user = User::findOrFail(Auth::user()->id);
+        $user->photos = $photos;
+        $user->save();
+
+        return redirect()->back()->with('status','Avatar Updates');
+    }
+
+    protected function validateImage(array $data) {
+        return Validator::make($data, [
+            'photos'    => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+    }
+
+    protected function uploadImage($file) {
+        $image = $file;
+        $fileName = str_slug(Auth::user()->name).time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/thumb');
+        $img = Image::make($image->getRealPath());
+        $img->resize(200,200, function($constrait) {
+            $constrait->aspectRatio();
+        })->save($destinationPath.'/'.$fileName);
+
+        $destinationPath =  public_path('/img/avatar');
+        $image->move($destinationPath,$fileName);
+
+        return $fileName;
     }
 
     /**

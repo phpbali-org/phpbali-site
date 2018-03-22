@@ -7,6 +7,8 @@ Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 // Profile
 Route::get('/profile','ProfileController@index');
 Route::get('/update','ProfileController@edit');
+Route::post('/update','ProfileController@update');
+Route::post('/updateavatar','ProfileController@updateavatar');
 Route::get('/member/{slug}','ProfileController@member');
 
 // Reservation
