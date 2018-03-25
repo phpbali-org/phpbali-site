@@ -2,7 +2,7 @@
     <script type="text/javascript">
     	$(function(){
     		swal(
-			  'Good job!',
+			  '{{ session('header') }}',
 			  '{{ session('status') }}',
 			  'success'
 			)

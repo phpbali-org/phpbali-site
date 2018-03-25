@@ -13,7 +13,7 @@ Route::get('/member/{slug}','ProfileController@member');
 Route::get('/member','ProfileController@allmember');
 
 // Reservation
-Route::post('/rsvp','ReservationController@rsvp');
+Route::post('/rsvp/{slug}','ReservationController@rsvp');
 
 
 Route::prefix('adminpage')->group(function() {

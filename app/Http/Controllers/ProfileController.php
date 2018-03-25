@@ -50,7 +50,7 @@ class ProfileController extends Controller
 
         event(new Registered($user = $this->processUpdate($request->all())));
 
-        return redirect()->back()->with('status','Data Updated!');
+        return redirect()->back()->with(['status'=>'Data Updated!','header'=>'Good Job!']);
     }
 
     protected function validateUpdate(array $data) {
@@ -81,7 +81,7 @@ class ProfileController extends Controller
         $user->photos = $photos;
         $user->save();
 
-        return redirect()->back()->with('status','Avatar Updates');
+        return redirect()->back()->with(['status'=>'Avatar Updates','header'=>'Good Job!']);
     }
 
     protected function validateImage(array $data) {

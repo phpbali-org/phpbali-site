@@ -34,7 +34,7 @@
             @if($rsvpChecker < 1)
                 <div class="col-md-2 ml-auto mr-auto" id="reservation">
                     <div class="card card-contact card-raised card-plain">
-                        <form role="form" action="{{ url('/rsvp') }}" id="contact-form" method="post">
+                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
                             {{ csrf_field() }}
                             <input type="hidden" name="slug" value="{{ $event->slug }}">
                             <div class="text-center">
