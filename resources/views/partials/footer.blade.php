@@ -2,96 +2,54 @@
     <div class="container">
         <div class="content">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h5>About Us</h5>
-                    <ul class="links-vertical">
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                               How to book
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                                Contact US
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                                Help Center
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                                Company Profile
-                            </a>
-                        </li>
-                    </ul>
+                    <p>PHP Bali is community for PHP Programmer located in Bali.</p>
                 </div>
-                <div class="col-md-4">
-                    <h5>Other</h5>
+                <div class="col-md-3">
+                    <h5>Member</h5>
                     <ul class="links-vertical">
                         <li>
-                            <a href="#pablo" class="text-muted">
-                               Term & Condition
+                            <a href="{{ url('/member') }}" class="text-muted">
+                               Member
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('register') }}" class="text-muted">
+                                Become Member
                             </a>
                         </li>
                         <li>
                             <a href="#pablo" class="text-muted">
-                                How to Register
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                               Sell Goods
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                                Receive Payment
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                                Transactions Issues
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                                Affiliates Program
+                               Become Speaker
                             </a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="col-md-2">
-                    <h5>Products</h5>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
                     <ul class="links-vertical">
                         <li>
                             <a href="#pablo" class="text-muted">
-                               ACTIVITIES
+                               Become Sponsor
                             </a>
                         </li>
                         <li>
                             <a href="#pablo" class="text-muted">
-                              RESTAURANT
+                              Organisations
                             </a>
                         </li>
                         <li>
                             <a href="#pablo" class="text-muted">
-                              TRANSPORT
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                              GOLF
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pablo" class="text-muted">
-                              SPA
+                              Links
                             </a>
                         </li>
                     </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h5>Sponsor</h5>
                 </div>
             </div>
         </div>

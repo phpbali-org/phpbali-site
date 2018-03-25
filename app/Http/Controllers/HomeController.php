@@ -26,29 +26,18 @@ class HomeController extends Controller
         return view('welcome')
         ->with('event', $event)
         ->with('rsvpChecker', $rsvpChecker);
+    }
 
-        // $event = Events::where('published',1)
-        //         ->orderBy('created_at','desc')
-        //         ->with('topic')
-        //         ->with('rsvp')
-        //         ->first();
-        // if ($event) {
-        //     $topics = Topics::where('id_event',$event->id)
-        //             ->where('deleted',0)
-        //             ->get();
-
-        //     $count = Reservation::where('id_events',$event->id)->where('id_user', Auth::id())->count();
-        //     $rsvp = Reservation::with('user')->get();
-        // }else {
-        //     $topics = [];
-        //     $count = 0;
-        //     $rsvp = [];
-        // }
-        // return view('welcome',[
-        //     'event'=>$event,
-        //     'topics' => $topics,
-        //     'count' => $count,
-        //     'rsvp' => $rsvp
-        // ]);
+    public function meetups() {
+        $event = Events::where('published', 1)->orderBy('created_at', 'desc')->get();
+        if(isset($event)){
+            $events = $event;
+            $is_register = 0;
+        }else{
+            $rsvpChecker = 0;
+        }
+        return view('pages.meetups')
+        ->with('events', $events)
+        ->with('rsvpChecker', $is_register);
     }
 }

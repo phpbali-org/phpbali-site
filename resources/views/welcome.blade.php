@@ -108,9 +108,9 @@
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto text-center">
                             @if(isset($event))
-                            <h2 class="title">{{ count($event->rsvp) }} People Attending</h2>
+                                <h2 class="title">{{ count($event->rsvp) }} People Attending</h2>
                             @else
-                            <h2 class="title">0 People Attending</h2>
+                                <h2 class="title">0 People Attending</h2>
                             @endif
                             <hr>
                         </div>

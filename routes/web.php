@@ -14,6 +14,8 @@ Route::get('/member','ProfileController@allmember');
 
 // Reservation
 Route::post('/rsvp/{slug}','ReservationController@rsvp');
+// meetups
+Route::get('meetups','HomeController@meetups');
 
 
 Route::prefix('adminpage')->group(function() {
