@@ -15,12 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $event = Events::where('published',1)
-                ->orderBy('created_at','desc')
-                ->with('topic')
-                ->with('rsvp')
-                ->first();
-         View::share('event', $event);
+        // $event = Events::where('published',1)
+        //         ->orderBy('created_at','desc')
+        //         ->with('topic')
+        //         ->with('rsvp')
+        //         ->first();
+        // View::share('event', $event);
     }
 
     /**
