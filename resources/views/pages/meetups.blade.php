@@ -55,42 +55,21 @@
 	                                @endif
 	                            </div>
 	                        </div>
-	                        	@if(Auth::guard('web')->check())
-			                        @php
-			                        	$value['exists'] = false;
-			                        	if($event->rsvp != []) {
-				                        	foreach ($event->rsvp as $rsvp) {
-				                        		$is_rsvp = false;
-				                        		if($rsvp->id_user == Auth::user()->id) {
-				                        			$is_rsvp = true;
-				                        			$value['exists'] = true;
-				                        		}
-				                        	}
+                        	@if(Auth::guard('web')->check())
+		                        @php
+		                        	$value['exists'] = false;
+		                        	if($event->rsvp != []) {
+			                        	foreach ($event->rsvp as $rsvp) {
+			                        		$is_rsvp = false;
+			                        		if($rsvp->id_user == Auth::user()->id) {
+			                        			$is_rsvp = true;
+			                        			$value['exists'] = true;
+			                        		}
 			                        	}
-			                        @endphp
-			                        @if(!$value['exists'])
-						                <div class="col-md-12" >
-						                    <div class="card card-contact card-raised card-plain">
-						                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
-						                            {{ csrf_field() }}
-						                            <input type="hidden" name="slug" value="{{ $event->slug }}">
-						                            <div class="text-center">
-						                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
-						                            </div>
-						                        </form>
-						                    </div>
-						                </div>
-						            @else
-						                <div class="col-md-12" >
-						                    <div class="card card-contact card-raised card-plain">
-						                        <div class="text-center">
-						                            <button type="button" class="btn btn-info btn-lg btn-round ">Registered</button>
-						                        </div>
-						                    </div>
-						                </div>
-						            @endif
-						        @else
-						        	<div class="col-md-12" >
+		                        	}
+		                        @endphp
+		                        @if(!$value['exists'])
+					                <div class="col-md-12" >
 					                    <div class="card card-contact card-raised card-plain">
 					                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
 					                            {{ csrf_field() }}
@@ -101,10 +80,31 @@
 					                        </form>
 					                    </div>
 					                </div>
-						        @endif
-		                    @else
-		                        <h1 class="title">No Event Yet!</h1>
-		                    @endif
+					            @else
+					                <div class="col-md-12" >
+					                    <div class="card card-contact card-raised card-plain">
+					                        <div class="text-center">
+					                            <button type="button" class="btn btn-info btn-lg btn-round ">Registered</button>
+					                        </div>
+					                    </div>
+					                </div>
+					            @endif
+					        @else
+					        	<div class="col-md-12" >
+				                    <div class="card card-contact card-raised card-plain">
+				                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
+				                            {{ csrf_field() }}
+				                            <input type="hidden" name="slug" value="{{ $event->slug }}">
+				                            <div class="text-center">
+				                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
+				                            </div>
+				                        </form>
+				                    </div>
+				                </div>
+					        @endif
+	                    @else
+	                        <h1 class="title">No Event Yet!</h1>
+	                    @endif
 					</div>
 				@endforeach
 			</div>

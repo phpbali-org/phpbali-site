@@ -18,7 +18,7 @@
                             <div class="card card-profile card-plain">
                                 <div class="card-avatar">
                                     <a href="{{ url('/member/'.$member->slug) }}">
-                                        <img class="img img-raised" src="{{ Auth::user()->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $member->name }}" data-container="body" data-animation="true" />
+                                        <img class="img img-raised" src="{{ $member->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $member->name }}" data-container="body" data-animation="true" />
                                     </a>
                                 </div>
                             </div>
