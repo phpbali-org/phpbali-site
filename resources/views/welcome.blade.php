@@ -122,7 +122,7 @@
                                 <div class="card card-profile card-plain">
                                     <div class="card-avatar">
                                         <a href="{{ url('/member/'.str_slug($rsvp->user->name)) }}">
-                                            <img class="img img-raised" src="/img/avatar/{{$rsvp->user->photos}}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                            <img class="img img-raised" src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
                                         </a>
                                     </div>
                                 </div>
