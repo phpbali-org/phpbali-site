@@ -57,7 +57,7 @@
                                                     <div class="col-md-4">
                                                         <div class="card-image">
                                                             <img class="img img-raised rounded
-                                                            " src="/img/avatar/{{ $speaker->photos }}" />
+                                                            " src="{{ $speaker->avatar() }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">

@@ -56,16 +56,33 @@
                             </div>
                         </div>
 
-                        <div class="form-group row ">
+                        <div class="form-group row">
                             <div class="col-md-8">
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
                             </div>
                             <div class="col-md-4">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-info btn-block">
                                     Login
                                 </button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 text-center">
+                                OR
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <a href="{{ route('oauth.github.provider') }}" class="btn btn-info btn-block">
+                                    Login with Github
+                                </a>
                             </div>
                         </div>
                     </form>

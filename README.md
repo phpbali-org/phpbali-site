@@ -20,16 +20,16 @@ pass: phpbaliadmin002
 * BACKEND
 - [x] Manage Events (Add, Edit, Delete)
 - [x] Manage Topic (Add, Edit, Delete)
-- [ ] Manage Users
-- [ ] Manage RSVP
-- [ ] Register with Github
+- [x] Manage Users
+- [x] Manage RSVP
+- [x] Register with Github
 
 * FRONT END
 - [x] Homepage
 - [x] Member List
 - [ ] Contact
 - [ ] Code of Conduct
-- [ ] Meetups
-- [ ] RSVP to Event
+- [x] Meetups
+- [x] RSVP to Event
 
 Note: Silahkan edit file ini jika ada yang ingin ditambahkan di Dev progress atau ada list yang udah beres.

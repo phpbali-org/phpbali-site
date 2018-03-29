@@ -1,8 +1,13 @@
 <?php
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
+
 //Email Verification
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
+
+// Oauth Github
+Route::get('auth/github', 'Auth\OauthGithubController@redirectToProvider')->name('oauth.github.provider');
+Route::get('auth/github/callback', 'Auth\OauthGithubController@handleProviderCallback')->name('oauth.github.callback');
 
 // Profile
 Route::get('/profile','ProfileController@index');

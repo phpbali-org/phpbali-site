@@ -196,7 +196,7 @@
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetalert2.js') }}" type="text/javascript"></script>
     @include('partials.message')
-    @if ($event)
+    @if($event)
         <script>
             function initMap(){
                 var myLatlng = new google.maps.LatLng({{$event->latitude}}, {{$event->longitude}});

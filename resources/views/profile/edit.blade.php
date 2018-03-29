@@ -105,7 +105,7 @@
                                         <div class="col-md-12">
                                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail img-raised">
-                                                    <img src="/img/avatar/{{$user->photos}}" alt="...">
+                                                    <img src="{{ Auth::user()->avatar() }}" alt="...">
                                                 </div>
                                                 <div class="row">
                                                     <form method="post" action="{{ url('/updateavatar') }}" enctype="multipart/form-data">

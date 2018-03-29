@@ -19,12 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->unique();
             $table->integer('is_staff')->default(0);
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('photos')->default('default-avatar.png');
             $table->text('about')->nullable();
             $table->boolean('verified')->default(false);
             $table->string('auth_token')->nullable();
             $table->string('verify_token')->nullable();
+            $table->string('github_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

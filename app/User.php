@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','website','verified','about','verify_token','slug'
+        'name', 'email', 'password', 'github_id', 'website','verified','about','verify_token','slug'
     ];
 
     /**
@@ -30,5 +30,14 @@ class User extends Authenticatable
 
     public function rsvp() {
         return $this->hasMany("App\Reservation","id_user");
+    }
+
+    public function avatar(){
+        if($this->github_id)
+        {
+            return 'https://avatars2.githubusercontent.com/u/'.$this->github_id.'?v=4';
+        }else{
+            return '/img/avatar/'.$this->photos;
+        }
     }
 }

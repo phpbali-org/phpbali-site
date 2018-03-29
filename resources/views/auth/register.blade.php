@@ -74,13 +74,28 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 Have account? <a href="{{ route('login') }}">Login</a>
                             </div>
-                            <div class="col-md-4 text-md-right">
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-info btn-block">
-                                    JOIN!
+                                    Sign in
                                 </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12 text-center">
+                                OR
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12 text-center">
+                                <a href="{{ route('oauth.github.provider') }}" class="btn btn-info btn-block">Login with Github</a>
                             </div>
                         </div>
                     </form>

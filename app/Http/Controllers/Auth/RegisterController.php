@@ -107,7 +107,7 @@ class RegisterController extends Controller
         $user->verify_token = null;
 
         if ($user->save()) {
-            return redirect('login')->with('flash-error','Email confirmed!');;
+            return redirect('login')->with('flash-error','Email confirmed!');
         }
 
     }
