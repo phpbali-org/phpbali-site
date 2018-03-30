@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use App\User;
+use DB;
 
 class MemberController extends Controller
 {
+    const VERIFIED = '1';
+
     /**
      * Create a new controller instance.
      *
@@ -23,7 +28,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('backendViews.admin.members.index');
+        $members = User::where('verified', '1')->paginate(15);
+        return view('backendViews.admin.members.index')
+        ->with('members', $members);
     }
 
     /**
@@ -33,7 +40,13 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        $generalOptions = array(
+            '0' => 'No',
+            '1' => 'Yes'
+        );
+
+        return view('backendViews.admin.members.add')
+        ->with('general_options', $generalOptions);
     }
 
     /**
@@ -44,7 +57,27 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+        }
+
+        $store = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'is_staff' => $request->is_staff,
+            'verified' => self::VERIFIED
+        ]);
+
+        if ($store) {
+            return redirect()->route('admin.members')->with('Success', 'Member berhasil dibuat!');
+        } else {
+            return redirect()->back()->with('Error', 'Telah terjadi kesalahan, silahkan hubungi administrator!');
+        }
     }
 
     /**
@@ -66,7 +99,16 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+        $generalOptions = array(
+            '0' => 'No',
+            '1' => 'Yes'
+        );
+
+        $member = User::where('id', $id)->first();
+
+        return view('backendViews.admin.members.edit')
+        ->with('member', $member)
+        ->with('general_options', $generalOptions);
     }
 
     /**
@@ -78,7 +120,26 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+        }
+
+        $update = User::where('id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'is_staff' => $request->is_staff,
+        ]);
+
+        if ($update) {
+            return redirect()->route('admin.members')->with('Success', 'Member berhasil diperbaharui!');
+        } else {
+            return redirect()->back()->with('Error', 'Telah terjadi kesalahan, silahkan hubungi administrator!');
+        }
     }
 
     /**
@@ -89,6 +150,8 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+
+        return redirect()->route('admin.members')->with('Success', 'Member berhasil dihapus!');
     }
 }
