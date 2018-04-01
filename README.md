@@ -27,7 +27,7 @@ pass: phpbaliadmin002
 * FRONT END
 - [x] Homepage
 - [x] Member List
-- [ ] Contact
+- [x] Contact
 - [ ] Code of Conduct
 - [x] Meetups
 - [x] RSVP to Event

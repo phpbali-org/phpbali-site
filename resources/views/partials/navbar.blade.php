@@ -18,7 +18,7 @@
                 <a class="nav-link" href="{{ url('meetups') }}">MEETUPS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">CONTACT</a>
+                <a class="nav-link" href="mailto:satyakresna6295@gmail.com">CONTACT</a>
             </li>
             @guest
                 <li class="nav-item">
