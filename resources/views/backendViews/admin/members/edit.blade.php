@@ -46,36 +46,76 @@
 @section('content')
 <div class="row bg-title">
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Adding Member</h4>
+        <h4 class="page-title">Editing Member</h4>
     </div>
     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
         <ol class="breadcrumb">
             <li><a href="{{ route('admin.members') }}">Topics</a></li>
-            <li class="active">Add Member</li>
+            <li class="active">Edit Member</li>
         </ol>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
       	<div class="white-box">
-      		<form class="form-material" method="POST" action="{{ route('admin.members.edit', ['member' => $member->id]) }}">
+            @if($editable)
+      		<form class="form-material" method="POST" action="{{ route('admin.members.update', ['member' => $member->id]) }}" enctype="multipart/form-data">
             {{ csrf_field() }}
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <img class="bg-preview" src="{{ $member->avatar() }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="name">Foto Profil</label>
+                            <input id="img_event" name="photos" type="file" accept="image/*"/>
+                            <small><b>Note: </b>Lewatkan saja jika tidak ada perubahan pada foto profil</small>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input type="text" class="form-control" name="name" id="name"
-                            value="{{ $member->name }}" required>
+                            <input type="text" class="form-control" name="name" value="{{ $member->name }}" id="name" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email"
-                            value="{{ $member->email }}" required>
+                            <input type="email" class="form-control" name="email" value="{{ $member->email }}" id="email" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email">Password</label>
+                            <input type="password" class="form-control" name="password">
+                            <small><b>Note:</b> Lewatkan saja bagian ini jika tidak ada perubahan</small>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="staff">Staff?</label>
+                            <select name="is_staff" id="staff" class="form-control form-control-line select2" required>
+                                @foreach ($general_options as $key => $value)
+                                    <option value="{{ $key }}" {{ ($member->is_staff == 1) ? 'checked' : '' }}>{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label></label><br>
+                            <input type="submit" value="Ubah Member" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            @else
+            <form class="form-material" method="POST" action="{{ route('admin.members.update', ['member' => $member->id]) }}">
+            {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="staff">Staff?</label>
                             <select name="is_staff" id="staff" class="form-control form-control-line select2" required>
@@ -86,14 +126,15 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label></label><br>
                             <input type="submit" value="Ubah Member" class="btn btn-success">
                         </div>
                     </div>
                 </div>
-      		</form>
+            </form>
+            @endif
       	</div>
     </div>
 </div>
@@ -125,6 +166,37 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#modal-dialog').modal('show');
 });
+</script>
+@endif
+
+@if($editable)
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#bg-preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        if($('#bg-preview').css('display') == 'none'){
+          $('#bg-preview').slideToggle();
+        }
+    }
+
+    $("#img_event").change(function () {
+        var file = this.files[0], img;
+      if (Math.round(file.size / (1024 * 1024)) > 2) {
+         alert('Image yang di upload terlalu besar! (Max: 2MB)');
+         this.value = '';
+         return false;
+      }else{
+        readURL(this);
+      }
+    });
 </script>
 @endif
 @endsection

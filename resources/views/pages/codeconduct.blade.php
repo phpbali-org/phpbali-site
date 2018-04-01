@@ -84,39 +84,25 @@
 	<div class="section organizers">
 		<div class="container">
 			<div class="row about-organizers ml-auto">
-				<div class="col-sm-4">
-					<div class="organizer">
-						<a href="#">
-							<div class="img-wrapper">
-								<img src="https://avatars3.githubusercontent.com/u/73311?v=4&s=400" alt="adi-setiawan" class="rounded-circle">
-							</div>
-						</a>
-						<h4 class="name">Adi Setiawan</h4>
-						<p class="name">Coordinator</p>
+				@if(count($organiser) > 0)
+					@foreach($organiser as $user)
+					<div class="col-sm-4">
+						<div class="organizer">
+							<a href="#">
+								<div class="img-wrapper">
+									<img src="{{ $user->avatar() }}" alt="{{ $user->slug }}" class="rounded-circle">
+								</div>
+							</a>
+							<h4 class="name">{{ $user->name }}</h4>
+							<p class="name">Coordinator</p>
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="organizer">
-						<a href="#">
-							<div class="img-wrapper">
-								<img src="https://avatars3.githubusercontent.com/u/73311?v=4&s=400" alt="adi-setiawan" class="rounded-circle">
-							</div>
-						</a>
-						<h4 class="name">Adi Setiawan</h4>
-						<p class="name">Coordinator</p>
+					@endforeach
+				@else
+					<div class="col-md-12 text-center">
+						<p>No organisers yet</p>
 					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="organizer">
-						<a href="#">
-							<div class="img-wrapper">
-								<img src="https://avatars3.githubusercontent.com/u/73311?v=4&s=400" alt="adi-setiawan" class="rounded-circle">
-							</div>
-						</a>
-						<h4 class="name">Adi Setiawan</h4>
-						<p class="name">Coordinator</p>
-					</div>
-				</div>
+				@endif
 			</div>
 		</div>
 	</div>
