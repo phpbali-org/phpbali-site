@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Events;
 use App\Topics;
 use App\Reservation;
+use App\Conduct;
 use Auth;
 
 class HomeController extends Controller
@@ -44,6 +45,8 @@ class HomeController extends Controller
 
     public function codeofconduct()
     {
-        return view('pages.codeconduct');
+        $conduct = Conduct::first();
+        return view('pages.codeconduct')
+        ->with('conduct', $conduct);
     }
 }

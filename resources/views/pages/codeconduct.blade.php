@@ -125,20 +125,11 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Code of Conduct</h2>
-					<h5><b>We choose to share PHP's good parts; and we choose to share our own.</b></h5>
-					<p>The PHP Bali community is full of wonderful people from a diverse range of backgrounds, and we want to ensure it remains a welcoming and safe environment to all who wish to be a part of it.</p>
-					<p>Whenever we come together as a community, our shared spaces are opportunities to showcase the best of what we can be. We are there to support our peers - to build each other up, to accept each other for who they are, and to encourage each other to become the people they want to be.</p>
-					<p>With that in mind, if you are present at any PHPBali event, whether as an attendee, organiser, sponsor, or speaker, we take it as given that you agree to follow this code of conduct:</p>
-					<p>The PHPBali community is dedicated to providing harassment-free experiences at events and conferences for everyone regardless of who they are or what they believe. We do not tolerate harassment in any form.</p>
-					<p>All communication should be appropriate for a professional audience including people of many different backgrounds.</p>
-					<p>Be kind and respectful towards others. Remember that harassment and exclusionary jokes are not appropriate for events supported by PHPBali.</p>
-					<p>Anyone violating these rules at events may be asked to leave the event without a refund at the sole discretion of the organisers.</p>
-					<p>If you or someone else is subject to harassment, or you have a concern, please contact the event organisers (who will introduce themselves at the beginning of the event).</p>
-					<p>The PHPBali community is a welcoming and friendly place – thank you for being a part of it.</p>
-					<p>If you believe in building people, communities, and software, then you are a part of us.</p>
-					<hr style="margin-top: 3em; margin-bottom: 3em;">
-					<h5><b>Thank you</b></h5>
-					<p>This Code of Conduct has learned and borrowed much from others - especially <a href="http://ruby.org.au/code-of-conduct.html">rubyaustralia</a>, <a href="http://jsconf.com/codeofconduct.html">JSConf</a>, and <a href="https://gist.github.com/jcasimir/6992184">Jeff Casimir</a>. Thank you to all who provided inspiration and feedback.</p>
+					@if(isset($conduct))
+					{!! $conduct->desc !!}
+					@else
+					<p>No Description</p>
+					@endif
 				</div>
 			</div>
 		</div>

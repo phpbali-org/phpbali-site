@@ -104,12 +104,6 @@
                                         <span class="hide-menu">Topics</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="waves-effect">
-                                        <i class="fa fa-pencil-square-o fa-fw"></i>
-                                        <span class="hide-menu">RSVPs</span>
-                                    </a>
-                                </li>
                             </ul>
                         </span>
                     </li>
@@ -120,8 +114,9 @@
                         </a>
                     </li>
                     <li style="padding: 10px 0 0">
-                        <a href="#" class="waves-effect">
-                            
+                        <a href="{{ route('admin.about') }}" class="waves-effect">
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i>
+                            <span class="hide-menu">Code of Conduct</span>
                         </a>
                     </li>
                 </ul>

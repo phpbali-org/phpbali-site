@@ -53,6 +53,10 @@ Route::prefix('adminpage')->group(function() {
 	Route::get('/events/add', 'EventController@create')->name('admin.event.create');
 	Route::get('/events', 'EventController@index')->name("admin.event");
 
+	// Route Code of Conduct Dashboard
+	Route::get('/about', 'CodeOfConductController@index')->name('admin.about');
+	Route::post('/about', 'CodeOfConductController@saveChanges')->name('admin.about.store');
+
 	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::get('/', 'AdminController@index')->name('admin.home');
