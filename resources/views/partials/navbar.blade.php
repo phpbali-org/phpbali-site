@@ -18,7 +18,7 @@
                 <a class="nav-link" href="{{ url('meetups') }}">MEETUPS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="mailto:satyakresna6295@gmail.com">CONTACT</a>
+                <a class="nav-link" href="mailto:phpbali@gmail.com?subject=Hi,%20I%20saw%20your%20site">CONTACT</a>
             </li>
             @guest
                 <li class="nav-item">
@@ -59,7 +59,7 @@
                 <a class="nav-link modal-toggle" data-tab="tab_register" data-toggle="modal" data-target="#modalLogin" href="#link_register">REGISTER</a>
             </li>  --}}
             {{-- <li class="nav-item">
-                <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/balihypertext" target="_blank">
+                <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/phpbali" target="_blank">
                     <i class="fa fa-twitter"></i>
                     <p class="d-lg-none d-xl-none">Twitter</p>
                 </a>
