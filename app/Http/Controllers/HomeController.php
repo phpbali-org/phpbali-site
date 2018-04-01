@@ -28,7 +28,8 @@ class HomeController extends Controller
         ->with('rsvpChecker', $rsvpChecker);
     }
 
-    public function meetups() {
+    public function meetups() 
+    {
         $event = Events::where('published', 1)->orderBy('created_at', 'desc')->get();
         if(isset($event)){
             $events = $event;
@@ -39,5 +40,10 @@ class HomeController extends Controller
         return view('pages.meetups')
         ->with('events', $events)
         ->with('rsvpChecker', $is_register);
+    }
+
+    public function codeofconduct()
+    {
+        return view('pages.codeconduct');
     }
 }

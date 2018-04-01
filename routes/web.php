@@ -19,8 +19,12 @@ Route::get('/member','ProfileController@allmember');
 
 // Reservation
 Route::post('/rsvp/{slug}','ReservationController@rsvp');
+
 // meetups
 Route::get('meetups','HomeController@meetups');
+
+// Code of Conduct
+ROute::get('about', 'HomeController@codeofconduct')->name('home.about');
 
 
 Route::prefix('adminpage')->group(function() {

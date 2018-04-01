@@ -43,6 +43,7 @@
     <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/56/original/opt_nuk_thumbnail.jpg" />
     <meta property="og:description" content="PHP Bali community websites." />
     <meta property="og:site_name" content="PHP Bali" />
+    @yield('additional-styles')
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
