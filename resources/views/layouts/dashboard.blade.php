@@ -119,6 +119,11 @@
                             <span class="hide-menu">Members</span>
                         </a>
                     </li>
+                    <li style="padding: 10px 0 0">
+                        <a href="#" class="waves-effect">
+                            
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
