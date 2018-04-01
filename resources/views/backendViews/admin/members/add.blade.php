@@ -36,6 +36,10 @@
     border: none;
 }
 
+.bg-preview{
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
     .select2 {
         width: 100% !important;
@@ -58,22 +62,40 @@
 <div class="row">
     <div class="col-xs-12">
       	<div class="white-box">
-      		<form class="form-material" method="POST" action="{{ route('admin.members.store') }}">
+      		<form class="form-material" method="POST" action="{{ route('admin.members.store') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <img class="bg-preview" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="name">Foto Profil</label>
+                            <input id="img_event" name="photos" type="file" accept="image/*"/>
+                            <small><b>Note: </b>Lewatkan saja jika tidak ada foto profil</small>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="name">Nama</label>
                             <input type="text" class="form-control" name="name" id="name" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" id="email" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="staff">Staff?</label>
                             <select name="is_staff" id="staff" class="form-control form-control-line select2" required>
@@ -83,7 +105,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label></label><br>
                             <input type="submit" value="Tambah Member" class="btn btn-success">
@@ -124,4 +146,32 @@ $(document).ready(function() {
 });
 </script>
 @endif
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#bg-preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        if($('#bg-preview').css('display') == 'none'){
+          $('#bg-preview').slideToggle();
+        }
+    }
+
+    $("#img_event").change(function () {
+        var file = this.files[0], img;
+      if (Math.round(file.size / (1024 * 1024)) > 2) {
+         alert('Image yang di upload terlalu besar! (Max: 2MB)');
+         this.value = '';
+         return false;
+      }else{
+        readURL(this);
+      }
+    });
+</script>
 @endsection

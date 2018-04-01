@@ -28,7 +28,7 @@ pass: phpbaliadmin002
 - [x] Homepage
 - [x] Member List
 - [x] Contact
-- [ ] Code of Conduct
+- [x] Code of Conduct
 - [x] Meetups
 - [x] RSVP to Event
 

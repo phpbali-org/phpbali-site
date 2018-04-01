@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Events;
 use App\Topics;
 use App\Reservation;
+use App\Conduct;
+use App\User;
 use Auth;
 
 class HomeController extends Controller
@@ -44,6 +46,10 @@ class HomeController extends Controller
 
     public function codeofconduct()
     {
-        return view('pages.codeconduct');
+        $conduct = Conduct::first();
+        $organiser = User::where('is_staff', 1)->get();
+        return view('pages.codeconduct')
+        ->with('conduct', $conduct)
+        ->with('organiser', $organiser);
     }
 }

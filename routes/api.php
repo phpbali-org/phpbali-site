@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$api_version = config('api.api_version');
-Route::group(['prefix' => "{$api_version}"], function() {
-	Route::prefix('auth')->group(base_path('routes/api/auth.php'));
-	Route::prefix('users')->group(base_path('routes/api/users.php'));
-	Route::prefix('articles')->group(base_path('routes/api/articles.php'));
-});
+// $api_version = config('api.api_version');
+// Route::group(['prefix' => "{$api_version}"], function() {
+// 	Route::prefix('auth')->group(base_path('routes/api/auth.php'));
+// 	Route::prefix('users')->group(base_path('routes/api/users.php'));
+// 	Route::prefix('articles')->group(base_path('routes/api/articles.php'));
+// });

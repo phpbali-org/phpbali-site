@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use DB;
+use Image;
+use File;
+use Hash;
 
 class MemberController extends Controller
 {
@@ -59,19 +62,53 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email'
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
         }
 
-        $store = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'is_staff' => $request->is_staff,
-            'verified' => self::VERIFIED
-        ]);
+        if($request->has('photos'))
+        {
+            //Process the image data
+            $validatorImg = Validator::make($request->all(), [
+                'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+            ]);
+            if ($validatorImg->fails()) {
+                return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+            }
+            $img = $request->file('photos');
+            $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
+            $imgFile = Image::make($img);
+
+            // Check dulu apakah img sudah ada
+            if (File::exists(public_path().'/img/avatar/'.$photos)) {
+                File::delete(public_path().'/img/avatar/'.$photos);
+            }
+
+            //simpan img
+            $imgFile->save('img/avatar/'.$photos, 85); //tidak lupa di compress jg
+        }else{
+            $photos = 'default-avatar.png';
+        }
+
+        $checker = User::where('email', $request->email)->count();
+        if($checker < 1)
+        {
+            $store = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'slug' => str_slug($request->name),
+                'photos' => $photos,
+                'password' => Hash::make($request->password),
+                'is_staff' => $request->is_staff,
+                'verified' => self::VERIFIED
+            ]);
+        }else{
+            return redirect()->back()->with('Error', 'User tersebut telah terdaftar!');
+        }
 
         if ($store) {
             return redirect()->route('admin.members')->with('Success', 'Member berhasil dibuat!');
@@ -105,10 +142,17 @@ class MemberController extends Controller
         );
 
         $member = User::where('id', $id)->first();
+        if(isset($member->verify_token))
+        {
+            $editable = false;
+        }else{
+            $editable = true;
+        }
 
         return view('backendViews.admin.members.edit')
         ->with('member', $member)
-        ->with('general_options', $generalOptions);
+        ->with('general_options', $generalOptions)
+        ->with('editable', $editable);
     }
 
     /**
@@ -120,20 +164,74 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email'
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+        $user = User::where('id', $id)->first();
+
+        if(!isset($user->verify_token))
+        {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            }
+
+            if($request->has('photos'))
+            {
+                //Process the image data
+                $validatorImg = Validator::make($request->all(), [
+                    'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                ]);
+                if ($validatorImg->fails()) {
+                    return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                }
+                $img = $request->file('photos');
+                $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
+                $imgFile = Image::make($img);
+
+                // Check dulu apakah img sudah ada
+                if (File::exists(public_path().'/img/avatar/'.$photos)) {
+                    File::delete(public_path().'/img/avatar/'.$photos);
+                }
+
+                //simpan img
+                $imgFile->save('img/avatar/'.$photos, 85); //tidak lupa di compress jg
+            }else{
+                $photos = $user->photos; // ambil gambar yg terpasang saat ini
+            }
+
+            $checker = User::where('email', $request->email)->where('id', '<>', $id)->count();
+            if($checker < 1)
+            {
+                if($request->has('password'))
+                {
+                    $update = User::where('id', $id)->update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'slug' => str_slug($request->name),
+                        'photos' => $photos,
+                        'password' => Hash::make($request->password),
+                        'is_staff' => $request->is_staff,
+                        'verified' => self::VERIFIED
+                    ]);
+                }else{
+                    $update = User::where('id', $id)->update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'slug' => str_slug($request->name),
+                        'photos' => $photos,
+                        'is_staff' => $request->is_staff,
+                        'verified' => self::VERIFIED
+                    ]);
+                }
+            }else{
+                return redirect()->back()->with('Error', 'User dengan email tersebut telah terdaftar!');
+            }
+        }else{
+            $update = $user->update(['is_staff' => $request->is_staff]);
         }
-
-        $update = User::where('id', $id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'is_staff' => $request->is_staff,
-        ]);
 
         if ($update) {
             return redirect()->route('admin.members')->with('Success', 'Member berhasil diperbaharui!');
