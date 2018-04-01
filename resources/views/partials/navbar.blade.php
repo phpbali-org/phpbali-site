@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse " data-color="blue" data-nav-image="/img/blurred-image-1.jpg">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="">CODE OF CONDUCT</a>
+                <a class="nav-link" href="{{ url('about') }}">CODE OF CONDUCT</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('meetups') }}">MEETUPS</a>
