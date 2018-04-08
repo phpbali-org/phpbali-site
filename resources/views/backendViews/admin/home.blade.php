@@ -7,16 +7,21 @@
   </div>
   <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
     <ol class="breadcrumb">
-      <li class="active">Welcome Page</li>
+    <li class="active">Welcome Page</li>
     </ol>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <div class="white-box">
-      <h3 class="box-title">Welcome</h3>
-      Selamat datang admin!
+    @if(session()->has('success'))
+      <div class="col-xs-12">
+        <div class="alert alert-success" role="alert">{{ session()->get('success') }}</div>
+      </div>
+    @endif
+    <div class="col-xs-12">
+      <div class="white-box">
+        <h3 class="box-title">Welcome</h3>
+        Selamat datang admin!
+      </div>
     </div>
-  </div>
 </div>
 @endsection
