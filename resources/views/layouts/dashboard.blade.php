@@ -63,6 +63,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
+                                <a href="{{ route('admin.profile', Auth::guard('admin')->user()->id) }}" class="btn btn-link">My Profile</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();" class="btn btn-link">
