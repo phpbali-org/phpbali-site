@@ -33,7 +33,7 @@ class AdminLoginController extends Controller
     	if (Auth::guard('admin')->attempt($fields, $request->remember)) {
     		return redirect()->intended(route('admin.home'));
     	}else{
-             return redirect()->back()->with('Error', 'Password atau Email yang kamu masukkan salah! Silahkan di cek kembali');
+             return redirect()->back()->with('Error', 'Password atau Email yang dimasukkan salah!');
         }
 
     	return redirect()->back()->withInput($request->only('email', 'remember'));
