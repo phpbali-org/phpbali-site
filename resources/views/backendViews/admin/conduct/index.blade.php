@@ -24,8 +24,8 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-  	<div class="white-box">
-  		<form class="form-horizontal form-material" method="POST" action="{{ route('admin.about.store') }}">
+    <div class="white-box">
+      <form class="form-horizontal form-material" method="POST" action="{{ route('admin.about.store') }}">
         {{ csrf_field() }}
         <div class="form-group">
           <label class="col-xs-12">Code of Conduct</label>
@@ -38,14 +38,11 @@
             <input type="hidden" id="desc" name="desc" />
             @endif
           </div>
+          <br />
+          <input type="submit" value="Save" class="btn btn-success pull-right">
         </div>
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input type="submit" value="Save" class="btn btn-success pull-right">
-          </div>
-        </div>
-  		</form>
-  	</div>
+      </form>
+    </div>
   </div>
 </div>
 @endsection
