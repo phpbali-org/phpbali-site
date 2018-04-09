@@ -10,11 +10,13 @@
             </div>
             <h3 class="title">{{ $user->name }}</h3>
             @if(Auth::guard('web')->check())
-                <div class="content">
-                    <div class="social-description">
-                        <a href="{{ url('/update' .'?'. http_build_query(['member' => strtolower(str_slug(Auth::user()->name)),'profile' => Auth::user()->id ])) }}" class="btn btn-info">Update</a>
+                @if (Auth::user()->id == $user->id)
+                    <div class="content">
+                        <div class="social-description">
+                            <a href="{{ url('/update' .'?'. http_build_query(['member' => strtolower(str_slug(Auth::user()->name)),'profile' => Auth::user()->id ])) }}" class="btn btn-info">Update</a>
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
         </div>
     </div>
