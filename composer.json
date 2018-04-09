@@ -12,6 +12,7 @@
         "laravel/passport": "^5.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "renatomarinho/laravel-page-speed": "^1.8",
         "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {

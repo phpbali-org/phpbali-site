@@ -10,7 +10,7 @@
                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                          {{ Session::get('flash-error') }}
                      </div>
-               @endif
+                @endif
                 <div class="card-header text-center">
                     <h4 class="card-title">Login</h4>
                 </div>

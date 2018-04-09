@@ -60,4 +60,7 @@ Route::prefix('adminpage')->group(function() {
 	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::get('/', 'AdminController@index')->name('admin.home');
+	Route::get('/{id}', 'AdminController@show')->name('admin.profile');
+	Route::get('/{id}/edit', 'AdminController@edit')->name('admin.profile.edit');
+	Route::put('/{id}/edit', 'AdminController@update')->name('admin.profile.update');
 });
