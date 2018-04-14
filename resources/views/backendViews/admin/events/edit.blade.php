@@ -112,7 +112,7 @@ $tempatAcara.addEventListener('keydown', function(e) {
   if (e.keyCode === ENTER) {
     e.preventDefault();
   }
-})
+});
 
 $(document).ready(function() {
 	var startDate = new Pikaday({
