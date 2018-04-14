@@ -2,6 +2,58 @@
 
 @section('additional-styles')
 <style>
+    .card-description{
+        font-size: 16.2px;
+        text-align: justify;
+    }
+
+    .topic-style .speaker-avatar-wrapper{
+        width: 90px;
+        height: 90px;
+        float: left;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        margin-right: .625rem;
+    }
+
+    .topic-style .speaker-avatar-wrapper img{
+        display: block;
+        max-width: 100%;
+        height: auto;
+        border: .1rem solid #2e99e5;
+        border-radius: 50%;
+        padding: .125rem;
+    }
+
+    .desc-topic-style .topic-title{
+        font-weight: 700;
+        margin-bottom: .25em;
+    }
+
+    .desc-topic-style .topic-desc{
+        text-align: justify;
+        color: #9A9A9A;
+        font-weight: 300;
+    }
+
+    .img-attendance{
+        width: 100px;
+        height: 100px;
+        float: left;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        margin-right: .625rem;
+    }
+
+    .img-attendance img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        border: .1rem solid #2e99e5;
+        border-radius: 50%;
+        padding: .125rem;
+    }
+
     @media(max-width: 640px)
     {
         .ecommerce-page .title{
@@ -18,138 +70,112 @@
 @section('content')
     @include('layouts.slider')
     <div class="main">
-        <div class="cd-section" id="blogs">
+        <div class="cd-section" style="margin-bottom: 20px;">
             <div class="container">
+            @if(isset($event))
                 <div class="row">
-                    <div class="col-md-10 ml-auto mr-auto">
+                    <div class="col-md-12 ml-auto mr-auto">
                         <h2 class="title">What the topic?</h2>
                         <hr>
-                        <div class="card card-plain card-blog">
-                            <div class="row">
-                                @if(isset($event))
-                                    @if(count($event->topic) > 0)
-                                        @foreach($event->topic as $topic)
-                                            <div class="col-md-4">
-                                                <h3 class="card-title">
-                                                    <span>{{$topic->title}}</span>
-                                                </h3>
+                        <br />                        
+                        <p class="card-description">{!! $event->desc !!}</p>
+                        <br />
+                    </div>
+                </div>
+                @if(count($event->topic) > 0)
+                    @foreach($event->topic as $topic)
+                        @if($loop->first)
+                            <div class="row" style="margin-bottom: 20px;">
+                        @endif
+                                <div class="col-md-6">
+                                    <div class="topic-style">
+                                        <div class="col-xs-3">
+                                            <div class="speaker-avatar-wrapper">
+                                                @foreach($topic->speakers as $speaker)
+                                                <img src="{{ $speaker->avatar() }}" alt="{{ $speaker->name }}">
+                                                @endforeach
                                             </div>
-                                            <div class="col-md-8">
-                                                <p class="card-description">
-                                                    {{ $topic->desc }}
-                                                </p>
-                                                <p class="author">
-                                                    @foreach ($topic->speakers as $speaker)
-                                                        by <a href="{{ url('/member/'.str_slug($speaker->name)) }}"><b>{{ $speaker->name }}</b></a>
+                                        </div>
+                                        <div class="col-xs-9">
+                                             <div class="desc-topic-style">
+                                                 <h5 class="topic-title">{{ $topic->title }}</h5>
+                                                 <p class="topic-sub-title">
+                                                    By 
+                                                    @foreach($topic->speakers as $speaker)
+                                                        {{ $speaker->name }}
                                                     @endforeach
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <h3 class="ml-auto mr-auto">There's no topic yet</h3>
-                                    @endif
-                                @else
-                                    <h3 class="ml-auto mr-auto">There's no topic yet</h3>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="blogs-1" id="blogs-1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 ml-auto mr-auto">
-                            <h2 class="title">Meet The Speakers</h2>
-                            <hr>
-                            <br />
-                            @if(isset($event))
-                                @if(count($event->topic) > 0)
-                                    @foreach ($event->topic as $topic)
-                                        @foreach($topic->speakers as $speaker)
-                                            <div class="card card-plain card-blog">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="card-image">
-                                                            <img class="img img-raised rounded
-                                                            " src="{{ $speaker->avatar() }}" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h3 class="card-title">
-                                                            <span>{{ $speaker->name }}</span>
-                                                        </h3>
-                                                        <p class="card-description">
-                                                            {{ $speaker->about }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endforeach
-                                @else
-                                    <div class="row">
-                                        <h3 class="ml-auto mr-auto">There's no topic speakers yet</h3>
+                                                 </p>
+                                                 <div class="topic-desc">
+                                                    {!! $topic->desc !!}
+                                                 </div>
+                                             </div>
+                                        </div>
                                     </div>
-                                @endif
-                            @else
-                                <div class="row">
-                                    <h3 class="ml-auto mr-auto">There's no topic speakers yet</h3>
                                 </div>
-                            @endif
-                        </div>
+                        @if($loop->iteration == 2 && !$loop->last)
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                        @endif
+
+                        @if($loop->last)
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
+            @else
+                <div class="row">
+                    <div class="col-md-12 ml-auto mr-auto">
+                        <h2 class="title">What the topic?</h2>
+                        <hr>
+                        <br />                        
+                        <h3 class="text-center">There's no topic yet</h3>
+                        <br />
                     </div>
                 </div>
+            @endif
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-8 ml-auto mr-auto text-center">
-                <h2 class="title">Maps</h2>
-                <hr>
+        <div class="cd-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ml-auto mr-auto text-center">
+                        <h2 class="title">Maps</h2>
+                        <hr>
+                        @if(isset($event))
+                        <div id="contactUs2Map" class="big-map"></div>
+                        @else
+                        <h3 class="text-center">There's no event yet</h3>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
-        @if(isset($event))
-        <div id="contactUs2Map" class="big-map"></div>
-        @else
-        <div class="row">
-            <h3 class="mr-auto ml-auto">There's no event yet</h3>
-        </div>
-        @endif
 
-        <div class="section" id="teams">
-            <div class="team-1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 ml-auto mr-auto text-center">
-                            @if(isset($event))
-                                <h2 class="title">{{ count($event->rsvp) }} People Attending</h2>
-                            @else
-                                <h2 class="title">0 People Attending</h2>
-                            @endif
-                            <hr>
-                        </div>
-                    </div>
-                    @if(isset($event))
-                        <div class="row justify-content-center">
+        <div class="cd-section" style="margin-bottom: 20px;">
+            <div class="container">
+                @if(isset($event))
+                <div class="row">
+                    <div class="col-md-12 ml-auto mr-auto">
+                        <h2 class="title">{{ count($event->rsvp) }} People are Attending</h2>
+                        <hr>
+                        <br />
+                        @if(count($event->rsvp) > 0)
+                        <ul class="list-unstyled list-inline text-center attendees-list">
                             @foreach($event->rsvp as $rsvp)
-                            <div class="col-xs-2">
-                                <div class="card card-profile card-plain">
-                                    <div class="card-avatar">
-                                        <a href="{{ url('/member/'.str_slug($rsvp->user->name)) }}">
-                                            <img class="img img-raised" src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            <li>
+                                <a href="{{ url('/member/'.str_slug($rsvp->user->name)) }}" class="img-attendance">
+                                    <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                </a>
+                            </li>
                             @endforeach
-                        </div>
-                    @else
-                        <div class="row justify-content-center">
-                            <h3 class="ml-auto mr-auto">There's no people attending yet</h3>
-                        </div>
-                    @endif
+                        </ul>
+                        @else
+                        <h3 class="text-center">There's no people attending yet</h3>
+                        @endif                        
+                    </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

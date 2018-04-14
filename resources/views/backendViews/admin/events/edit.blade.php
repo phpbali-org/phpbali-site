@@ -76,7 +76,7 @@
         <div class="form-group">
           <label class="col-xs-12">Publish Event</label>
           <div class="col-xs-12">
-            <input type="checkbox" name="published" value="1" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" {{ ($event->published == 1) ? 'checked' : '' }}>
+            <input type="checkbox" name="published" value="1" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" {{ ($event->published == 1) ? 'checked="true"' : '' }}>
           </div>
         </div>
         <div class="form-group">
