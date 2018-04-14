@@ -152,6 +152,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

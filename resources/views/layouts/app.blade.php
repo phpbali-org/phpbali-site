@@ -2,8 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
@@ -43,6 +42,15 @@
     <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/56/original/opt_nuk_thumbnail.jpg" />
     <meta property="og:description" content="PHP Bali community websites." />
     <meta property="og:site_name" content="PHP Bali" />
+    <style>
+        @media(max-width: 860px)
+        {
+            .navbar{
+                padding: 18px;
+            }
+        }
+    </style>
+    @yield('additional-styles')
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
@@ -182,13 +190,13 @@
                         </div>
                     </div>
                     <div class="modal-footer text-center">
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Scripts -->
     <!--   Core JS Files   -->
     <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
@@ -203,7 +211,7 @@
                 var mapOptions = {
                     zoom: 13,
                     center: myLatlng,
-                    scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+                    scrollwheel: false,
                     styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
                 };
 
@@ -213,9 +221,8 @@
                     position: myLatlng,
                     title:"<?php echo $event->place; ?>"
                 });
-                // To add the marker to the map, call setMap();
                 marker.setMap(map);
-            }
+            };
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuNtNC5mUcvdU0L2RnHlsqaXLe8Ht4Ddw&callback=initMap" async defer></script>
     @endif

@@ -1,5 +1,20 @@
 @extends('layouts.app')
 
+@section('additional-styles')
+<style>
+    @media(max-width: 640px)
+    {
+        .ecommerce-page .title{
+            font-size: 36px;
+        }
+        
+        .ml-auto.mr-auto {
+            font-size: 16px;
+        }
+    }
+</style>
+@endsection
+
 @section('content')
     @include('layouts.slider')
     <div class="main">

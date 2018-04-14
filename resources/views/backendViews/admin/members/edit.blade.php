@@ -125,6 +125,25 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Foto Profil</label>
+                                <br>
+                                <img class="bg-preview" src="{{ $member->avatar() }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" class="form-control" name="name" value="{{ $member->name }}" id="name" required readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" value="{{ $member->email }}" id="email" required readonly>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
