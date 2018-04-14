@@ -82,7 +82,7 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-info btn-block">
-                                    Sign in
+                                    Sign UP
                                 </button>
                             </div>
                         </div>
