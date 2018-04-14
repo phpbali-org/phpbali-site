@@ -43,6 +43,14 @@
     <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/56/original/opt_nuk_thumbnail.jpg" />
     <meta property="og:description" content="PHP Bali community websites." />
     <meta property="og:site_name" content="PHP Bali" />
+    <style>
+        @media(max-width: 860px)
+        {
+            .navbar{
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
