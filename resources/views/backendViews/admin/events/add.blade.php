@@ -148,7 +148,7 @@ function init() {
     document.getElementById('latitude').value = place.geometry.location.lat();
     document.getElementById('longitude').value = place.geometry.location.lng();
   });
-}
+};
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBczq4IbQDIhumdo6aUyb0V87HQoLwl75I&libraries=places&callback=init"></script>
 @if(Session::get('Error'))
@@ -173,7 +173,7 @@ function init() {
         if($('#bg-preview').css('display') == 'none'){
           $('#bg-preview').slideToggle();
         }
-    }
+    };
 
     $("#img_event").change(function () {
         var file = this.files[0], img;
