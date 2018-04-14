@@ -44,6 +44,14 @@
     <meta property="og:description" content="PHP Bali community websites." />
     <meta property="og:site_name" content="PHP Bali" />
     @yield('additional-styles')
+    <style>
+        @media(max-width: 860px)
+        {
+            .navbar{
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 <body class="ecommerce-page contact-page">
     <!-- Navbar -->
