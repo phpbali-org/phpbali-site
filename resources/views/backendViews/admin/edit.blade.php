@@ -1,16 +1,10 @@
 @extends('layouts.dashboard')
 @section('additional-style')
-<link rel="stylesheet" href="{{ asset('css/pikaday.css') }}">
-<link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/bootstrap-clockpicker.min.css') }}">
 <style>
 .no-block {
   display: inline-block !important;
   width: unset !important;
   margin-right: 14px;
-}
-.bg-preview{
-  display: none;
 }
 </style>
 @endsection
