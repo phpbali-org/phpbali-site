@@ -1,127 +1,88 @@
-@extends('layouts.verifiedemail')
-
-@section('additional-styles')
+@extends('layouts.dashboard')
+@section('additional-style')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/medium-editor.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/tim.min.css') }}" />
 <style type="text/css">
-  body{
-    background-color: #f7f7f7;
-  }
-
-  .lead
+  #editor
   {
-    margin-bottom: .75em;
-      font-size: 1.2em;
-      font-weight: 300;
-      line-height: 1.4;
-  }
-
-  .title
-  {
-    margin-bottom: 15px;
-  }
-
-  .section.organizers
-  {
-    background-color: white;
-      border-bottom: 1px solid #eee;
-      border-top: 1px solid #eee;
-      margin-bottom: -1px;
-      margin-top: -1px;
-      padding-top: 2em;
-      padding-bottom: 1em;
-  }
-
-  .section
-  {
-    background: none;
-  }
-
-  .about-organizers .img-wrapper
-  {
-    width: 50px;
-      height: 50px;
-      float: left;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      margin-right: .625rem;
-  }
-
-  .about-organizers .img-wrapper img
-  {
-    display: block;
-      max-width: 100%;
-      height: auto;
-      border: .1rem solid #2e99e5;
-      padding: .125rem;
-  }
-
-  .about-organizers .name, .about-organizers .title
-  {
-    margin: 0;
-  }
-  
-  .about-organizers .col-sm-4{
-      margin-bottom: 20px;
-  }
-
-  @media(min-width: 768px)
-  {
-    .lead
-    {
-      font-size: 1.5em;
-    }
+    max-height: 100px;
+    overflow-y: scroll;
+    height: 100px;
   }
 </style>
 @endsection
-
 @section('content')
-  <div class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1 class="title">About</h1>
-          <p class="lead">Every 3rd Thursday of the month you'll find us talking about what we're doing and what's happening around us in the world of PHP.</p>
-          <p class="lead">PHPBali wouldn't be possible without our organisers:</p>
-        </div>
-      </div>
-    </div>
+<div class="row bg-title">
+  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+    <h4 class="page-title">Code of Conduct Page</h4>
   </div>
-  <div class="section organizers">
-    <div class="container">
-      <div class="row about-organizers ml-auto">
-        @if(count($organiser) > 0)
-          @foreach($organiser as $user)
-          <div class="col-sm-4">
-            <div class="organizer">
-              <a href="#">
-                <div class="img-wrapper">
-                  <img src="{{ $user->avatar() }}" alt="{{ $user->slug }}" class="rounded-circle">
-                </div>
-              </a>
-              <h4 class="name">{{ $user->name }}</h4>
-              <p class="name">Coordinator</p>
-            </div>
+  <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+    <ol class="breadcrumb">
+      <li class="active">Code of Conduct</li>
+    </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="white-box">
+      <form class="form-horizontal form-material" method="POST" action="{{ route('admin.about.store') }}">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <label class="col-xs-12">Code of Conduct</label>
+          <div class="col-xs-12" style="margin-top: 20px">
+            @if(isset($conduct->desc))
+            <div id="editor" class="form-control form-control-line">{!! $conduct->desc !!}</div>
+            <input type="hidden" id="desc" name="desc" value="{!! $conduct->desc !!}" />
+            @else
+            <div id="editor" class="form-control form-control-line"></div>
+            <input type="hidden" id="desc" name="desc" />
+            @endif
           </div>
-          @endforeach
-        @else
-          <div class="col-md-12 text-center">
-            <p>No organisers yet</p>
-          </div>
-        @endif
-      </div>
-    </div>
-  </div>
-  <div class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Code of Conduct</h2>
-          @if(isset($conduct))
-          {!! $conduct->desc !!}
-          @else
-          <p>No Description</p>
-          @endif
+          <br />
+          <input type="submit" value="Save" class="btn btn-success pull-right">
         </div>
-      </div>
+      </form>
     </div>
   </div>
+</div>
+@endsection
+
+@if(Session::get('Success') || Session::get('Error'))
+  @component('components.alerts.modal')
+    @if(Session::get('Success'))
+      @slot('title')
+        Operasi Sukses!
+      @endslot
+
+      <h3>{{ Session::get('Success') }}</h3>
+    @endif
+
+    @if(Session::get('Error'))
+      @slot('title')
+        Operasi Gagal!
+      @endslot
+
+      <h3>{{ Session::get('Error') }}</h3>
+    @endif
+  @endcomponent
+@endif
+
+@section('additional-scripts')
+<script src="{{ asset('js/medium-editor.min.js') }}"></script>
+<script type="text/javascript">
+  var desc = new MediumEditor('#editor', {
+    buttonLabels: 'fontawesome'
+  });
+
+  desc.subscribe('editableInput', function(eventObj, editable) {
+    $('#desc').val(desc.getContent());
+  });
+</script>
+@if(Session::get('Success') || Session::get('Error'))
+<script>
+  $(document).ready(function() {
+    $('#modal-dialog').modal('show');
+  });
+</script>
+@endif
 @endsection
