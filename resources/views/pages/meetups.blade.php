@@ -22,7 +22,7 @@
 							</div>
 						@endif
 					</div>
-					<div class="col-md-10">
+					<div style="margin-bottom: 20px;" class="col-md-10">
 						@if(isset($event))
 	                        <div class="col-md-12">
 	                        	<h3 class="title-event">{{ $event->name }}</h3>
@@ -32,7 +32,7 @@
 		                        <div class="row">
                                 	<div class="col-md-12"><p class="description">{{ $event->desc}}</p></div>
 	                                @if(count($event->topic) > 0)
-	                                	<div class="col-md-12"><h3>What the topics?</h3></div>
+	                                	<div style="margin-top: 20px;" class="col-md-12 text-center"><h3>What the topics?</h3></div>
 	                                    @foreach($event->topic as $topic)
 	                                        <div class="col-md-5">
 	                                            <h3 class="card-title">
@@ -45,7 +45,7 @@
 	                                            </p>
 	                                            <p class="author">
 	                                                @foreach ($topic->speakers as $speaker)
-	                                                    by  <img style="width: 50px;" class="img img-raised rounded" src="{{ $speaker->avatar() }}"> <a href="{{ url('/member/'.str_slug($speaker->name)) }}"><b>{{ $speaker->name }}</b></a>
+	                                                    by <a href="{{ url('/member/'.str_slug($speaker->name)) }}"><b>{{ $speaker->name }}</b></a>
 	                                                @endforeach
 	                                            </a>
 	                                        </div>

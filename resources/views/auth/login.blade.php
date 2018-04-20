@@ -57,19 +57,21 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-8">
+                            <div class="col-md-6 text-center">
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
+                                    Reset Password 
                                 </a>
                             </div>
-                            <div class="col-md-4">
-                                &nbsp;
+                            <div class="col-md-6 text-center">
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    Register
+                                </a>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-info btn-block">
-                                    Login
+                                    Sign In
                                 </button>
                             </div>
                         </div>
@@ -81,7 +83,7 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <a href="{{ route('oauth.github.provider') }}" class="btn btn-info btn-block">
-                                    Login with Github
+                                    Github
                                 </a>
                             </div>
                         </div>

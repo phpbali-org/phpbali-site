@@ -37,21 +37,25 @@
     }
 
     .img-attendance{
-        width: 100px;
-        height: 100px;
         float: left;
         overflow: hidden;
         margin-bottom: 1rem;
         margin-right: .625rem;
     }
+    
+    .img-attendance .img-wrapper{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        border: .1rem solid #2e99e5;
+    }
 
     .img-attendance img {
-        display: block;
+        border-radius: 1px;
         max-width: 100%;
-        height: auto;
-        border: .1rem solid #2e99e5;
-        border-radius: 50%;
-        padding: .125rem;
+        min-height: 100px;
     }
 
     @media(max-width: 640px)
@@ -165,7 +169,9 @@
                             @foreach($event->rsvp as $rsvp)
                             <li>
                                 <a href="{{ url('/member/'.str_slug($rsvp->user->name)) }}" class="img-attendance">
-                                    <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                    <div class="img-wrapper">
+                                        <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                    </div>
                                 </a>
                             </li>
                             @endforeach

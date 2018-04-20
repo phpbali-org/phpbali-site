@@ -6,7 +6,7 @@
         </div>
         <div class="content-center">
             <div class="photo-container">
-                <img src="{{ $user->avatar() }}" alt="{{ $user->name }}">
+                <img style="min-height: 100px;" src="{{ $user->avatar() }}" alt="{{ $user->name }}">
             </div>
             <h3 class="title">{{ $user->name }}</h3>
             @if(Auth::guard('web')->check())
