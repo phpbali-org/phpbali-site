@@ -36,13 +36,16 @@
         font-weight: 300;
     }
 
-    .img-attendance{
-        float: left;
-        overflow: hidden;
+    .list-unstyled li{
+        display: inline-block;
         margin-bottom: 1rem;
-        margin-right: .625rem;
+        margin-right: 7px;
     }
-    
+
+    .img-attendance{
+        overflow: hidden;
+    }
+
     .img-attendance .img-wrapper{
         width: 100px;
         height: 100px;
@@ -63,7 +66,7 @@
         .ecommerce-page .title{
             font-size: 36px;
         }
-        
+
         .ml-auto.mr-auto {
             font-size: 16px;
         }
@@ -81,7 +84,7 @@
                     <div class="col-md-12 ml-auto mr-auto">
                         <h2 class="title">What the topic?</h2>
                         <hr>
-                        <br />                        
+                        <br />
                         <p class="card-description">{!! $event->desc !!}</p>
                         <br />
                     </div>
@@ -104,7 +107,7 @@
                                              <div class="desc-topic-style">
                                                  <h5 class="topic-title">{{ $topic->title }}</h5>
                                                  <p class="topic-sub-title">
-                                                    By 
+                                                    By
                                                     @foreach($topic->speakers as $speaker)
                                                         {{ $speaker->name }}
                                                     @endforeach
@@ -131,7 +134,7 @@
                     <div class="col-md-12 ml-auto mr-auto">
                         <h2 class="title">What the topic?</h2>
                         <hr>
-                        <br />                        
+                        <br />
                         <h3 class="text-center">There's no topic yet</h3>
                         <br />
                     </div>
@@ -139,7 +142,7 @@
             @endif
             </div>
         </div>
-        
+
         <div class="cd-section">
             <div class="container">
                 <div class="row">
@@ -168,7 +171,7 @@
                         <ul class="list-unstyled list-inline text-center attendees-list">
                             @foreach($event->rsvp as $rsvp)
                             <li>
-                                <a href="{{ url('/member/'.str_slug($rsvp->user->name)) }}" class="img-attendance">
+                                <a href="{{ url('/member/'.$rsvp->user->slug) }}" class="img-attendance">
                                     <div class="img-wrapper">
                                         <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
                                     </div>
@@ -178,7 +181,7 @@
                         </ul>
                         @else
                         <h3 class="text-center">There's no people attending yet</h3>
-                        @endif                        
+                        @endif
                     </div>
                 </div>
                 @endif

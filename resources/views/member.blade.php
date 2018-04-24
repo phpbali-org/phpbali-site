@@ -2,13 +2,16 @@
 
 @section('additional-styles')
 <style>
-    .img-attendance{
-        float: left;
-        overflow: hidden;
+    .list-unstyled li{
+        display: inline-block;
         margin-bottom: 1rem;
-        margin-right: .625rem;
+        margin-right: 7px;
     }
-    
+
+    .img-attendance{
+        overflow: hidden;
+    }
+
     .img-attendance .img-wrapper{
         width: 100px;
         height: 100px;
@@ -27,7 +30,7 @@
 @endsection
 
 @section('content')
-    <div class="page-header page-header-small" filter-color="orange">
+	<div class="page-header page-header-small" filter-color="orange">
         <div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../img/bg3.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
         </div>
         <div class="content-center">
@@ -35,21 +38,25 @@
             <hr class="text-white">
         </div>
     </div>
-    <div class="main">
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    @foreach ($member as $member)
-                        <div class="col-xs-2">
-                            <a href="{{ url('/member/'.$member->slug) }}" class="img-attendance">
-                                <div class="img-wrapper">
-                                    <img src="{{ $member->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $member->name }}" data-container="body" data-animation="true" />
-                                </div>
-                            </a>
-                        </div>
+	<div class="main">
+		<div class="section">
+			<div class="container">
+				<div class="row">
+				    <div class="col-xs-12 text-center">
+				        <ul class="list-unstyled list-inline text-center attendees-list">
+                    @foreach($member as $member)
+                    <li>
+                        <a href="{{ url('/member/'.$member->slug) }}" class="img-attendance">
+                            <div class="img-wrapper">
+                                <img src="{{ $member->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $member->name }}" data-container="body" data-animation="true" />
+                            </div>
+                        </a>
+                    </li>
                     @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
+                </ul>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection

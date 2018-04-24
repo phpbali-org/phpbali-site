@@ -123,7 +123,7 @@ class ProfileController extends Controller
     }
 
     public function allmember() {
-        $member = User::orderBy('name','asc')->get();
+        $member = User::where('verified', 1)->orderBy('name','asc')->get();
         return view('member',['member'=>$member]);
     }
 
