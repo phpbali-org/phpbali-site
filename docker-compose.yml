@@ -1,5 +1,12 @@
 version: "3"
 services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - dbpersistent:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=phpbali
+      - MYSQL_ROOT_PASSWORD=root
   web:
     image: nginx:latest
     ports:
@@ -17,20 +24,13 @@ services:
       - db
     ports:
       - "8080:8080"
-  db:
-    image: mysql:5.7
-    volumes:
-      - dbpersistent:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=phpbali-site
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_ROOT_PASSWORD=
   app:
     build:
       context: .
     volumes:
         - .:/usr/web/
-        - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     restart: unless-stopped
+    links:
+      - db
 volumes:
   dbpersistent:
