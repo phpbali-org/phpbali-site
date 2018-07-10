@@ -1,0 +1,36 @@
+version: "3"
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/usr/web/
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - app
+    restart: unless-stopped
+  adminer:
+    image: adminer
+    restart: always
+    links:
+      - db
+    ports:
+      - "8080:8080"
+  db:
+    image: mysql:5.7
+    volumes:
+      - dbpersistent:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=phpbali-site
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=
+  app:
+    build:
+      context: .
+    volumes:
+        - .:/usr/web/
+        - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    restart: unless-stopped
+volumes:
+  dbpersistent:
