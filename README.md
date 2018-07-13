@@ -16,6 +16,12 @@ pass: phpbaliadmin002
 * Jalankan command ```php artisan migrate --seed```
 * App siap untuk digunakan (```php artisan serve```)
 
+# Installation (Docker)
+1. Fork dan Clone
+1. `cp .env.example .env` Edit konfigurasi database `DB_DATABASE=phpbali` dan `DB_PASSWORD=root` 
+1. `docker-compose up`
+1. `docker-compose exec app php artisan migrate --seed`
+
 # Development Progress
 * BACKEND
 - [x] Manage Events (Add, Edit, Delete)
