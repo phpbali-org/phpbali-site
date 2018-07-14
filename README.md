@@ -1,13 +1,6 @@
 # phpbali-site
 Site of PHPBali
 
-Halaman admin:
-localhost:8000/adminpage/login atau yoursite.domain/adminpage/login
-
-akun admin:
-email: admin@phpbali.com
-pass: phpbaliadmin002
-
 # Installation
 * buka terminal, clone repo https://github.com/BaliPHP/phpbali-site.git dan pindah ke direktori phpbali-site
 * Jalankan command ```composer install```
