@@ -30,7 +30,7 @@ class CodeOfConductController extends Controller
 
     	if($validator->fails())
     	{
-    		return redirect()->back()->with('Error', 'Pastikan anda telah mengisi semua form yang diminta!');
+    		return redirect()->back()->with('Error', $validator->errors()->first());
     	}
 
     	$checker = Conduct::count();

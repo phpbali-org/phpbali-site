@@ -57,7 +57,7 @@ class ProfileController extends Controller
         return Validator::make($data, [
             'name'  => 'required|string',
             'email' => 'required|unique:users,email,'.Auth::user()->id,
-            'about' => 'required'
+            'about' => 'required|string'
         ]);
     }
 
@@ -95,7 +95,7 @@ class ProfileController extends Controller
         $fileName = str_slug(Auth::user()->name).time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/thumb');
         $img = Image::make($image->getRealPath());
-        $img->resize(200,200, function($constrait) {
+        $img->resize(460,460, function($constrait) {
             $constrait->aspectRatio();
         })->save($destinationPath.'/'.$fileName);
 

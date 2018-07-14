@@ -65,7 +65,7 @@ class TopicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         $checker = Topics::where('title', $request->title)->where('deleted',  0)->count();
@@ -83,7 +83,7 @@ class TopicController extends Controller
 
             if ($execute) {
                 $id_topic = Topics::find($execute->id);
-                $id_topic->speakers()->sync($request->get('id_user'));
+                $id_topic->speakers()->sync($request->get('id_user'), false);
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil dibuat!');
             }
@@ -134,7 +134,7 @@ class TopicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         $checker = Topics::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted',  0)->count();
@@ -152,7 +152,7 @@ class TopicController extends Controller
 
             if ($execute) {
                 $id_topic = Topics::where('slug', str_slug($request->title, '-'))->first();
-                $id_topic->speakers()->sync($request->get('id_user'));
+                $id_topic->speakers()->sync($request->get('id_user'), false);
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil diedit!');
             }

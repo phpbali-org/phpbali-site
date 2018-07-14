@@ -67,7 +67,7 @@ class MemberController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         if($request->has('photos'))
@@ -77,7 +77,7 @@ class MemberController extends Controller
                 'img_event' => 'mimes:jpg,png,jpeg|max:2048'
             ]);
             if ($validatorImg->fails()) {
-                return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                return redirect()->back()->with('Error', $validatorImg->errors()->first());
             }
             $img = $request->file('photos');
             $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
@@ -175,7 +175,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+                return redirect()->back()->with('Error', $validator->errors()->first());
             }
 
             if($request->has('photos'))
@@ -185,7 +185,7 @@ class MemberController extends Controller
                     'img_event' => 'mimes:jpg,png,jpeg|max:2048'
                 ]);
                 if ($validatorImg->fails()) {
-                    return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                    return redirect()->back()->with('Error', $validator->errors()->first());
                 }
                 $img = $request->file('photos');
                 $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
