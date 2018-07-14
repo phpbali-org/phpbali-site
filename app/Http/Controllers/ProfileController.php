@@ -95,7 +95,7 @@ class ProfileController extends Controller
         $fileName = str_slug(Auth::user()->name).time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/thumb');
         $img = Image::make($image->getRealPath());
-        $img->resize(460,460, function($constrait) {
+        $img->resize(460, null, function($constrait) {
             $constrait->aspectRatio();
         })->save($destinationPath.'/'.$fileName);
 
