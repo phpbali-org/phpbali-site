@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
+use Validator;
 
 class LoginController extends Controller
 {
@@ -19,33 +21,74 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-    
-    /**
-     * Get the needed authorization credentials from the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    protected function credentials(Request $request)
+
+    protected function respondFailedLogin($email_count, $verified_status)
     {
-        return ['email' => $request->{$this->username()}, 'password' => $request->password, 'verified' => 1];
+        $message = "";
+        if ($email_count  == 0) {
+            $message = "Email tidak terdaftar!";
+        } else {
+            if($verified_status == 0) {
+                $message = "Akun belum diverifikasi! Silahkan verifikasi terlebih dahulu!";
+            } else {
+                $message = "Password anda salah!";
+            }
+        }
+
+        return redirect()->back()->with([
+          'msg' => $message,
+          'header' => 'Oops! Something went wrong!',
+          'status' => 'error'
+        ]);
+    }
+
+    public function showLoginForm() 
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->with([
+              'msg' => $validator->errors()->first(),
+              'header' => 'Oops! Something went wrong!',
+              'status' => 'error'
+            ]);
+        }
+
+        $fields = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'verified' => 1,
+        ];
+
+        if(Auth::attempt($fields, $request->remember)){
+            return redirect()->intended(route('index'));
+        }else{
+            $user = User::where('email', $request->email)->count();
+            if($user > 0){
+                return $this->respondFailedLogin($user, $user->verified);
+            }else{
+                return $this->respondFailedLogin($user, 0);
+            }
+        }
+    }
+
+    public function logout()
+    {
+      if(Auth::check()){
+        Auth::logout();
+      }
+      return redirect()->to(route('index'));
     }
 }
