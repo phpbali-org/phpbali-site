@@ -26,16 +26,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function respondFailedLogin($email_count, $verified_status)
+    protected function respondFailedLogin($user, $verified_status)
     {
         $message = "";
-        if ($email_count  == 0) {
-            $message = "Email tidak terdaftar!";
+        if (!isset($user)) {
+            $message = "Your email is invalid! Please enter a valid email";
         } else {
             if($verified_status == 0) {
-                $message = "Akun belum diverifikasi! Silahkan verifikasi terlebih dahulu!";
+                $message = "Sorry, your account is not verified. Please verify your account first";
             } else {
-                $message = "Password anda salah!";
+                $message = "Your password does not match our credentials!";
             }
         }
 
@@ -75,12 +75,9 @@ class LoginController extends Controller
         if(Auth::attempt($fields, $request->remember)){
             return redirect()->intended(route('index'));
         }else{
-            $user = User::where('email', $request->email)->count();
-            if($user > 0){
-                return $this->respondFailedLogin($user, $user->verified);
-            }else{
-                return $this->respondFailedLogin($user, 0);
-            }
+            $user = User::where('email', $request->email)->first();
+
+            return $this->respondFailedLogin($user, $user->verified);
         }
     }
 

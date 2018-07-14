@@ -54,7 +54,7 @@ class RegisterController extends Controller
         $createUser = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'about' => $request->password,
+            'about' => $request->about,
             'slug' => str_slug($request->name),
             'password' => Hash::make($request->password),
             'verify_token' => str_random(60)
@@ -63,13 +63,13 @@ class RegisterController extends Controller
         if($createUser) {
             $sendMail = Mail::to($createUser->email)->send(new VerifyRegister($createUser));
             return redirect()->back()->with([
-              'msg' => 'Akun berhasil di registrasi! Silahkan cek email anda untuk verifikasi akun!',
+              'msg' => 'Account successfully registered! Please check your email address for verification',
               'header' => 'Operation Success!',
               'status' => 'success'
             ]);
         }else{
             return redirect()->back()->with([
-              'msg' => 'Registrasi Gagal! Error code 500',
+              'msg' => 'Registration Failed! Error code 500',
               'header' => 'Oops! Something went wrong!',
               'status' => 'error'
             ]);
@@ -101,7 +101,7 @@ class RegisterController extends Controller
 
         if ($user->save()) {
             return redirect('login')->with([
-              'msg' => 'Selamat akun anda sudah dapat digunakan! Welcome to PHPBali!',
+              'msg' => 'Congratulations you can use this account now! Welcome to PHPBali!',
               'header' => 'Operation Success!',
               'status' => 'success'
             ]);

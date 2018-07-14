@@ -18,9 +18,9 @@ class AdminLoginController extends Controller
     {
         $message = "";
         if ($email_count  == 0) {
-          $message = "Email tidak terdaftar!";
+          $message = "Your email is invalid! Please enter a valid email";
         } else {
-          $message = "Password anda salah!";
+          $message = "Your password does not match our credentials!";
         }
 
         return redirect()->back()->with([
