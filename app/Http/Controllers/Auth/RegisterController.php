@@ -62,19 +62,11 @@ class RegisterController extends Controller
 
         if($createUser) {
             $sendMail = Mail::to($createUser->email)->send(new VerifyRegister($createUser));
-            if($sendMail) {
-                return redirect()->back()->with([
-                  'msg' => 'Akun berhasil di registrasi! Silahkan cek email anda untuk verifikasi akun!',
-                  'header' => 'Operation Success!',
-                  'status' => 'success'
-                ]);
-            }else{
-                return redirect()->back()->with([
-                  'msg' => 'Email verifikasi gagal terkirim! Internal server error',
-                  'header' => 'Oops! Something went wrong!',
-                  'status' => 'error'
-                ]);
-            }
+            return redirect()->back()->with([
+              'msg' => 'Akun berhasil di registrasi! Silahkan cek email anda untuk verifikasi akun!',
+              'header' => 'Operation Success!',
+              'status' => 'success'
+            ]);
         }else{
             return redirect()->back()->with([
               'msg' => 'Registrasi Gagal! Error code 500',
