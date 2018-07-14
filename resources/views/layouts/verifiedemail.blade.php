@@ -19,30 +19,7 @@
     <link href="/css/style.css" rel="stylesheet" />
     <link href="/css/style-app.css" rel="stylesheet" />
     <link rel="canonical" href="{{ url('/') }}" />
-    <!--  Social tags      -->
-    <meta name="keywords" content="php, php bali, web development, web design, laravel, codeigniter, php bali community, php bali websites, bali php, programmer, bali">
-    <meta name="description" content="PHP Bali community websites.">
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="PHP Bali">
-    <meta itemprop="description" content="PHP Bali community websites.">
-    <meta itemprop="image" content="http://s3.amazonaws.com/creativetim_bucket/products/56/original/opt_nuk_thumbnail.jpg">
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="product">
-    <meta name="twitter:site" content="{{ url('/') }}">
-    <meta name="twitter:title" content="PHP Bali">
-    <meta name="twitter:description" content="PHP Bali community websites.">
-    <meta name="twitter:creator" content="{{ url('/') }}">
-    <meta name="twitter:image" content="http://s3.amazonaws.com/creativetim_bucket/products/56/original/opt_nuk_thumbnail.jpg">
-    <meta name="twitter:data1" content="PHP Bali community websites.">
-    <meta name="twitter:label1" content="About">
-    <!-- Open Graph data -->
-    <meta property="fb:app_id" content="">
-    <meta property="og:title" content="PHP Bali community websites." />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{ url('/') }}" />
-    <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/56/original/opt_nuk_thumbnail.jpg" />
-    <meta property="og:description" content="PHP Bali community websites." />
-    <meta property="og:site_name" content="PHP Bali" />
+    @include('partials.meta')
     @yield('additional-styles')
     <style>
         @media(max-width: 860px)

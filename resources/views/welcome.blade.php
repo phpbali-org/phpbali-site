@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+@section('image-meta')
+    @if(isset($event))
+        asset('img/bg-event/'.$event->photos)
+    @else
+        asset('img/bg-event/header.jpg')
+    @endif
+@endsection
 @section('additional-styles')
 <style>
     .card-description{
@@ -75,7 +81,7 @@
 @endsection
 
 @section('content')
-    @include('layouts.slider')
+    @include('partials.slider')
     <div class="main">
         <div class="cd-section" style="margin-bottom: 20px;">
             <div class="container">
