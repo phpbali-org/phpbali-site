@@ -93,9 +93,9 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'name'  => 'required|string',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
@@ -113,7 +113,9 @@ class MemberController extends Controller
             }
             $img = $request->file('photos');
             $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
-            $imgFile = Image::make($img);
+            $imgFile = Image::make($img)->resize(150, null, function($constrait) {
+                $constrait->aspectRatio();
+            });
 
             // Check dulu apakah img sudah ada
             if (File::exists(public_path().'/img/avatar/'.$photos)) {
@@ -202,8 +204,8 @@ class MemberController extends Controller
         if(!isset($user->verify_token))
         {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required|email',
+                'name'  => 'required|string',
+                'email' => 'required|unique:users,email',
             ]);
 
             if ($validator->fails()) {
@@ -221,7 +223,9 @@ class MemberController extends Controller
                 }
                 $img = $request->file('photos');
                 $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
-                $imgFile = Image::make($img);
+                $imgFile = Image::make($img)->resize(150, null, function($constrait) {
+                    $constrait->aspectRatio();
+                });;
 
                 // Check dulu apakah img sudah ada
                 if (File::exists(public_path().'/img/avatar/'.$photos)) {

@@ -97,7 +97,6 @@ class RegisterController extends Controller
         }
 
         $user->verified = 1;
-        $user->verify_token = null; //hapus tokennya
 
         if ($user->save()) {
             return redirect('login')->with([
