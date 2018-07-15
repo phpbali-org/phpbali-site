@@ -1,5 +1,25 @@
 @extends('layouts.app')
+@section('additional-styles')
+<style type="text/css">
+    
+    .fileinput-new.thumbnail{
+        margin-bottom: 50px;
+    }
 
+    .fileinput-new.thumbnail img {
+        width: 200px;
+        height: auto;
+    }
+
+    @media(max-width: 860px)
+    {
+        .fileinput-new.thumbnail img {
+            width: 100%;
+            height: auto;
+        }
+    }
+</style>
+@endsection
 @section('content')
     <div class="page-header " filter-color="orange">
         <div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../img/bg3.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
@@ -26,9 +46,7 @@
                                   </li>
                                 </ul>
                             </div>
-
                             <div class="card-body">
-                                <!-- Tab panes -->
                                 <div class="tab-content ">
                                     <div class="tab-pane active show" id="profile" role="tabpanel">
                                         <div class="col-md-12">
@@ -38,7 +56,7 @@
                                                 </div>
 
                                                 <div class="card-body">
-                                                    <form method="POST" action="{{ url('/update') }} ">
+                                                    <form method="POST" action="{{ route('myprofile.update.submit') }} ">
                                                         @csrf
                                                         <div class="form-group row">
                                                             <label for="name" class="text-black col-md-4 col-form-label ">Name</label>
@@ -104,13 +122,13 @@
                                     <div class="tab-pane " id="avatar" role="tabpanel">
                                         <div class="col-md-12">
                                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                                <div class="fileinput-new thumbnail img-raised">
-                                                    <img src="{{ Auth::user()->avatar() }}" alt="...">
+                                                <div class="fileinput-new thumbnail">
+                                                    <img id="avatar-preview" src="{{ Auth::guard('web')->user()->avatar() }}" alt="{{ Auth::guard('web')->user()->name }}">
                                                 </div>
                                                 <div class="row">
-                                                    <form method="post" action="{{ url('/updateavatar') }}" enctype="multipart/form-data">
+                                                    <form method="post" action="{{ route('myprofile.update.avatar.submit') }}" enctype="multipart/form-data">
                                                         {{ csrf_field() }}
-                                                        <input type="file" name="photos" class="col-md-12 text-black" required accept="image/*">
+                                                        <input id="avatar-user" type="file" name="photos" class="col-md-12 text-black" required accept="image/*">
                                                         <button type="submit" class="btn btn-info">Update Avatar</button>
                                                     </form>
                                                 </div>
@@ -121,9 +139,34 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('additional-scripts')
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#avatar-preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+
+    $("#avatar-user").change(function () {
+        var file = this.files[0], img;
+      if (Math.round(file.size / (1024 * 1024)) > 2) {
+         alert('Image yang di upload terlalu besar! (Max: 2MB)');
+         this.value = '';
+         return false;
+      }else{
+        readURL(this);
+      }
+    });
+</script>
 @endsection

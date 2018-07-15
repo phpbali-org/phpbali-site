@@ -19,6 +19,7 @@
     <link href="{{ asset('css/style-app.css') }}" rel="stylesheet" />
     <link rel="canonical" href="{{ url()->current() }}" />
     @include('partials.meta')
+    @yield('additional-styles')
     <style>
         @media(max-width: 860px)
         {
@@ -48,6 +49,7 @@
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetalert2.js') }}" type="text/javascript"></script>
     @include('components.alerts.message')
+    @yield('additional-scripts')
     @if($event)
         <script>
             function initMap(){

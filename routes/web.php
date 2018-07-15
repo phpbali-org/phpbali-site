@@ -11,18 +11,18 @@ Route::get('auth/github', 'Auth\OauthGithubController@redirectToProvider')->name
 Route::get('auth/github/callback', 'Auth\OauthGithubController@handleProviderCallback')->name('oauth.github.callback');
 
 // Profile
-Route::get('/profile','ProfileController@index');
-Route::get('/update','ProfileController@edit');
-Route::post('/update','ProfileController@update');
-Route::post('/updateavatar','ProfileController@updateavatar');
-Route::get('/member/{slug}','ProfileController@member');
-Route::get('/member','ProfileController@allmember');
+Route::get('/myprofile','ProfileController@index')->name('myprofile.index')->middleware('web');
+Route::get('/myprofile/update/','ProfileController@edit')->name('myprofile.update')->middleware('web');
+Route::post('/myprofile/update/','ProfileController@update')->name('myprofile.update.submit')->middleware('web');
+Route::post('/myprofile/update/avatar','ProfileController@updateavatar')->name('myprofile.update.avatar.submit')->middleware('web');
+Route::get('/profile/{slug}','ProfileController@member')->name('member.index');
+Route::get('/members','ProfileController@allmember')->name('member.list');
 
 // Reservation
 Route::post('/rsvp/{slug}','ReservationController@rsvp');
 
 // meetups
-Route::get('meetups','HomeController@meetups');
+Route::get('meetups','HomeController@meetups')->name('home.meetups');
 
 // Code of Conduct
 Route::get('about', 'HomeController@codeofconduct')->name('home.about');
