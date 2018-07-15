@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 @section('additional-style')
+@if($topics > 0)
+<link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}" />
+
 <style>
 .table .short-text td {
   white-space: nowrap;
@@ -11,7 +14,18 @@
 .table th, .table td {
   text-align: center;
 }
+
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    font-family: FontAwesome;
+}
 </style>
+@endif
 @endsection
 
 @section('content')
@@ -33,9 +47,9 @@
     </div>
     <div style="clear:both;"></div>
     <div class="white-box">
-      @if(count($topics) > 0)
+      @if($topics > 0)
       <div class="table-responsive">
-      	<table class="table">
+      	<table id="tableTopics" class="table">
       		<thead>
       			<tr>
       				<th>#</th>
@@ -45,7 +59,7 @@
               <th>Action</th>
       			</tr>
       		</thead>
-      		<tbody>
+      		{{-- <tbody>
       			@foreach($topics as $topic)
             <tr class="short-text">
               <td>{{ $loop->iteration }}</td>
@@ -67,11 +81,8 @@
               <td><a href="{{ route('admin.topic.edit', ['slug' => $topic->slug]) }}">Edit</a> | <a href="#" data-href="{{ route('admin.topic.delete', ['slug' => $topic->slug]) }}" data-toggle="modal" data-target="#modal-action">Delete</a></td>
             </tr>
             @endforeach
-      		</tbody>
+      		</tbody> --}}
       	</table>
-      </div>
-      <div class="col-xs-12 text-center">
-        {{ $topics->links() }}
       </div>
       @else
       <div class="text-center">

@@ -78,7 +78,11 @@ class LoginController extends Controller
         }else{
             $user = User::where('email', $request->email)->first();
 
-            return $this->respondFailedLogin($user, $user->verified);
+            if(isset($user)){
+                return $this->respondFailedLogin($user, $user->verified);
+            }else{
+                return $this->respondFailedLogin($user, 0);
+            }
         }
     }
 

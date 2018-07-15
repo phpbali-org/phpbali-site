@@ -24,15 +24,36 @@ class TopicController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a view page of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $topics = Topics::where('deleted', 0)->paginate(15);
+        $topics = Topics::where('deleted', 0)->count();
         return view('backendViews.admin.topics.index')
         ->with('topics', $topics);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jsonIndex()
+    {
+        $topics = Topics::query();
+        $data = DataTables::eloquent($events)
+            ->filter(function($query) {
+                $query->where('deleted', 0);
+            })
+            ->addColumn('action', function(Events $event) {
+                return '
+                    <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                ';
+            })
+            ->toJson();
+        return $data;
     }
 
     /**

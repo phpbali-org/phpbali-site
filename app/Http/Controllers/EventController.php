@@ -11,6 +11,7 @@ use DB;
 use Carbon\Carbon;
 use Image;
 use File;
+use DataTables;
 
 class EventController extends Controller
 {
@@ -25,15 +26,42 @@ class EventController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Show the index page of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $events = Events::where('deleted', 0)->paginate(15);
-        return view('backendViews.admin.events.index')
-        ->with('events', $events);
+        return view('backendViews.admin.events.index');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return toJson
+     */
+    public function jsonIndex()
+    {
+        $events = Events::query();
+        $data = DataTables::eloquent($events)
+            ->filter(function($query) {
+                $query->where('deleted', 0);
+            })
+            ->addColumn('status', function(Events $event) {
+                if($event->published == 1){
+                    return 'Published';
+                }else{
+                    return 'Not Published';
+                }
+            })
+            ->addColumn('action', function(Events $event) {
+                return '
+                    <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                ';
+            })
+            ->addIndexColumn()
+            ->toJson();
+        return $data;
     }
 
     /**

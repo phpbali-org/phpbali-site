@@ -51,6 +51,7 @@ Route::prefix('adminpage')->group(function() {
 	Route::get('/events/edit/{slug}', 'EventController@edit')->name('admin.event.edit');
 	Route::post('/events/add', 'EventController@store')->name('admin.event.store');
 	Route::get('/events/add', 'EventController@create')->name('admin.event.create');
+	Route::get('/events/ajaxEvents', 'EventController@jsonIndex')->name('admin.event.ajax');
 	Route::get('/events', 'EventController@index')->name("admin.event");
 
 	// Route Code of Conduct Dashboard
