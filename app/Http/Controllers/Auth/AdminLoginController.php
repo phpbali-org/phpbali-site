@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
+use Session;
 
 class AdminLoginController extends Controller
 {
 	public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:admin')->except('adminLogout');
     }
 
     protected function respondFailedLogin($email_count)
@@ -61,5 +62,14 @@ class AdminLoginController extends Controller
             $email_count = Admin::where('email', $request->email)->count();
             return $this->respondFailedLogin($email_count);
         }
+    }
+
+    public function adminLogout()
+    {
+        if(Auth::guard('admin')->check()){
+            Auth::guard('admin')->logout();
+            Session::flush();
+        }
+        return redirect()->to(route('index'));
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Validator;
+use Session;
 
 class LoginController extends Controller
 {
@@ -83,8 +84,9 @@ class LoginController extends Controller
 
     public function logout()
     {
-      if(Auth::check()){
-        Auth::logout();
+      if(Auth::guard('web')->check()){
+        Auth::guard('web')->logout();
+        Session::flush();
       }
       return redirect()->to(route('index'));
     }
