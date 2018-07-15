@@ -63,7 +63,7 @@ class RegisterController extends Controller
         if($createUser) {
             $sendMail = Mail::to($createUser->email)->send(new VerifyRegister($createUser));
             return redirect()->back()->with([
-              'msg' => 'Account successfully registered! Please check your email address for verification',
+              'msg' => 'You have successfully registered. An email is sent to you for verification',
               'header' => 'Operation Success!',
               'status' => 'success'
             ]);

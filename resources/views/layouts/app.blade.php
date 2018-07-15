@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <!-- CSRF Token -->
+    {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/now-ui-kit.css?v=1.2.0" rel="stylesheet" />
-    <link href="/css/style.css" rel="stylesheet" />
-    <link href="/css/style-app.css" rel="stylesheet" />
-    <link rel="canonical" href="{{ url('/') }}" />
+    {{-- Styles --}}
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/now-ui-kit.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/style-app.css') }}" rel="stylesheet" />
+    <link rel="canonical" href="{{ url()->current() }}" />
     @include('partials.meta')
     <style>
         @media(max-width: 860px)
@@ -30,6 +30,9 @@
     @yield('additional-styles')
 </head>
 <body class="ecommerce-page contact-page">
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
     <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="300">
         @include('partials.navbar')
     </nav>
@@ -39,8 +42,7 @@
         @include('partials.footer')
     </div>
 
-    <!-- Scripts -->
-    <!--   Core JS Files   -->
+    {{-- Scripts --}}
     <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
