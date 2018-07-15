@@ -63,8 +63,8 @@ Route::prefix('adminpage')->group(function() {
 	Route::post('/logout', 'Auth\AdminLoginController@adminLogout')->name('admin.logout');
 	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-	Route::get('/profile/{id}', 'AdminController@show')->name('admin.profile');
-	Route::get('/profile/{id}/edit', 'AdminController@edit')->name('admin.profile.edit');
-	Route::put('/profile/{id}/edit', 'AdminController@update')->name('admin.profile.update');
+	Route::get('/profile/', 'AdminController@show')->name('admin.profile');
+	Route::get('/profile/edit', 'AdminController@edit')->name('admin.profile.edit');
+	Route::put('/profile/edit', 'AdminController@update')->name('admin.profile.update');
 	Route::get('/', 'AdminController@index')->name('admin.home');
 });

@@ -20,7 +20,7 @@
                 <h3 class="box-title">Profil</h3>
             </div>
             <div class="col-xs-6 text-right">
-                <a href="{{ route('admin.profile.edit', Auth::guard('admin')->user()->id) }}" class="btn btn-primary">Edit Profil</a>
+                <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
             </div>
         </div>
         <div class="col-xs-12">
@@ -35,4 +35,34 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('additional-scripts')
+ @if(Session::get('Success') || Session::get('Error'))
+    @component('components.alerts.modal')
+      @if(Session::get('Success'))
+        @slot('title')
+          Operasi Sukses!
+        @endslot
+
+        <h3>{{ Session::get('Success') }}</h3>
+      @endif
+
+      @if(Session::get('Error'))
+        @slot('title')
+          Operasi Gagal!
+        @endslot
+
+        <h3>{{ Session::get('Error') }}</h3>
+      @endif
+    @endcomponent
+  @endif
+
+  @if(Session::get('Success') || Session::get('Error'))
+  <script>
+    $(document).ready(function() {
+      $('#modal-dialog').modal('show');
+    });
+  </script>
+  @endif
 @endsection
