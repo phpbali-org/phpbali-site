@@ -93,14 +93,11 @@ class ProfileController extends Controller
     protected function uploadImage($file) {
         $image = $file;
         $fileName = str_slug(Auth::user()->name).time().'.'.$image->getClientOriginalExtension();
-        $destinationPath = public_path('/thumb');
+        $destinationPath = public_path('/img/avatar');;
         $img = Image::make($image->getRealPath());
-        $img->resize(460, null, function($constrait) {
+        $img->resize(150, null, function($constrait) {
             $constrait->aspectRatio();
-        })->save($destinationPath.'/'.$fileName);
-
-        $destinationPath =  public_path('/img/avatar');
-        $image->move($destinationPath,$fileName);
+        })->save($destinationPath.'/'.$fileName, 85);
 
         return $fileName;
     }
