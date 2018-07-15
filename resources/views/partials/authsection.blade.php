@@ -6,7 +6,7 @@
             </div>
             <div class="description">
                 <h5 class="info-title">For Web Developers</h5>
-                <p class="description">The moment you can join our community so you can meet and colaborate with another developrt. </p>
+                <p class="description">The moment you can join our community so you can meet and colaborate with another developer. </p>
             </div>
         </div>
         <div class="info info-horizontal">

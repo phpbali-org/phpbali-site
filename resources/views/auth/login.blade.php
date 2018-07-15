@@ -4,13 +4,7 @@
 <div class="container " style="margin-top: 88px;">
     <div class="row">
         <div class="col-md-4">
-            <div class="card raised ">
-                @if(Session::has('flash-error'))
-                    <div class="alert alert-info alert-dismissible">
-                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                         {{ Session::get('flash-error') }}
-                     </div>
-                @endif
+            <div class="card raised">
                 <div class="card-header text-center">
                     <h4 class="card-title">Login</h4>
                 </div>
