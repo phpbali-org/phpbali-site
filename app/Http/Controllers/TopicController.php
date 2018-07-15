@@ -10,6 +10,7 @@ use App\User;
 use App\Events;
 use DB;
 use Carbon\Carbon;
+use DataTables;
 
 class TopicController extends Controller
 {
@@ -43,15 +44,26 @@ class TopicController extends Controller
     public function jsonIndex()
     {
         $topics = Topics::query();
-        $data = DataTables::eloquent($events)
+        $data = DataTables::eloquent($topics)
             ->filter(function($query) {
                 $query->where('deleted', 0);
             })
-            ->addColumn('action', function(Events $event) {
+            ->addColumn('speakers', function(Topics $topic) {
+                $speakers = [];
+                foreach ($topic->speakers as $speaker) {
+                    $speakers[] = $speaker->name;
+                }
+                return implode(',', $speakers);
+            })
+            ->addColumn('event', function(Topics $topic) {
+                return $topic->event->name;
+            })
+            ->addColumn('action', function(Topics $topic) {
                 return '
-                    <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                    <a href="'.route("admin.topic.edit", ["slug" => $topic->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.topic.delete", ["slug" => $topic->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
             })
+            ->addIndexColumn()
             ->toJson();
         return $data;
     }

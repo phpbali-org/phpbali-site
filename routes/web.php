@@ -30,12 +30,13 @@ Route::get('about', 'HomeController@codeofconduct')->name('home.about');
 
 Route::prefix('adminpage')->group(function() {
 	// Route Member Dashboard
-	Route::get('/members', 'MemberController@index')->name('admin.members');
-	Route::get('/members/add', 'MemberController@create')->name('admin.members.create');
-	Route::post('/members/add', 'MemberController@store')->name('admin.members.store');
 	Route::get('/members/{member}/edit/', 'MemberController@edit')->name('admin.members.edit');
 	Route::post('/members/{member}/edit', 'MemberController@update')->name('admin.members.update');
 	Route::get('/members/{member}/delete', 'MemberController@destroy')->name('admin.members.delete');
+	Route::get('/members/add', 'MemberController@create')->name('admin.members.create');
+	Route::post('/members/add', 'MemberController@store')->name('admin.members.store');
+	Route::get('/members/ajaxMembers', 'MemberController@jsonIndex')->name('admin.members.ajax');
+	Route::get('/members', 'MemberController@index')->name('admin.members');
 
 	// Route Topic Dashboard
 	Route::get('/topics/delete/{slug}', 'TopicController@destroy')->name('admin.topic.delete');
@@ -43,6 +44,7 @@ Route::prefix('adminpage')->group(function() {
 	Route::get('/topics/edit/{slug}', 'TopicController@edit')->name('admin.topic.edit');
 	Route::post('/topics/add', 'TopicController@store')->name('admin.topic.store');
 	Route::get('/topics/add', 'TopicController@create')->name('admin.topic.create');
+	Route::get('/topics/ajaxTopics', 'TopicController@jsonIndex')->name('admin.topic.ajax');
 	Route::get('/topics', 'TopicController@index')->name('admin.topic');
 
 	// Route Events Dashboard

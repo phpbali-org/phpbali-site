@@ -9,6 +9,7 @@ use DB;
 use Image;
 use File;
 use Hash;
+use DataTables;
 
 class MemberController extends Controller
 {
@@ -25,16 +26,47 @@ class MemberController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a view page of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $members = User::where('verified', '1')->paginate(15);
+        $members = User::where('verified', '1')->count();
         return view('backendViews.admin.members.index')
+
         ->with('members', $members);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jsonIndex()
+    {
+        $members = User::query();
+        $data = DataTables::eloquent($members)
+            ->filter(function($query) {
+                $query->where('verified', 1);
+            })
+            ->addColumn('status', function(User $member) {
+                if($member->is_staff == 1){
+                    return 'Yes';
+                }else{
+                    return 'No';
+                }
+            })
+            ->addColumn('action', function(User $member) {
+                return '
+                    <a href="'.route("admin.members.edit", ["slug" => $member->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.members.delete", ["slug" => $member->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                ';
+            })
+            ->addIndexColumn()
+            ->toJson();
+        return $data;
+    }
+
 
     /**
      * Show the form for creating a new resource.

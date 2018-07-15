@@ -59,29 +59,6 @@ table.dataTable thead th.sorting_desc:after {
               <th>Action</th>
       			</tr>
       		</thead>
-      		{{-- <tbody>
-      			@foreach($topics as $topic)
-            <tr class="short-text">
-              <td>{{ $loop->iteration }}</td>
-              <td>{{ $topic->title }}</td>
-              <td>
-                @foreach($topic->speakers as $speaker)
-                  @if($loop->count > 1)
-                    @if(!$loop->last)
-                      {{ $speaker->name }},
-                    @else
-                      {{ $speaker->name }}
-                    @endif
-                  @else
-                    {{ $speaker->name }}
-                  @endif
-                @endforeach
-              </td>
-              <td>{{ $topic->event->name }}</td>
-              <td><a href="{{ route('admin.topic.edit', ['slug' => $topic->slug]) }}">Edit</a> | <a href="#" data-href="{{ route('admin.topic.delete', ['slug' => $topic->slug]) }}" data-toggle="modal" data-target="#modal-action">Delete</a></td>
-            </tr>
-            @endforeach
-      		</tbody> --}}
       	</table>
       </div>
       @else
@@ -95,6 +72,36 @@ table.dataTable thead th.sorting_desc:after {
 @endsection
 
 @section('additional-scripts')
+  @if($topics > 0)
+  <script src="{{ asset('js/datatables.min.js') }}"></script>
+  <script type="text/javascript">
+    $(function() {
+      $('#tableTopics').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('admin.topic.ajax') }}',
+        columns: [
+          { data: 'DT_Row_Index', name: 'DT_Row_Index' },
+          { data: 'title', name: 'title' },
+          { data: 'speakers', name: 'speakers' },
+          { data: 'event', name: 'event' },
+          { data: 'action', name: 'action' }
+        ],
+        language: {
+          oPaginate: {
+            sNext: '<i class="fa fa-forward"></i>',
+            sPrevious: '<i class="fa fa-backward"></i>',
+            sFirst: '<i class="fa fa-step-backward"></i>',
+            sLast: '<i class="fa fa-step-forward"></i>'
+          }
+        },
+        pagingType: 'full_numbers',
+        bLengthChange: false,
+        bSort: false,
+      })
+    })
+  </script>
+  @endif
   @component('components.alerts.modal-action')
   <h4>Yakin ingin menghapus data ini?</h4>
   @endcomponent
