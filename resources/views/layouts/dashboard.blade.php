@@ -2,12 +2,13 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="phpbali">
-    <meta name="author" content="PHPBali">
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="canonical" href="{{ url()->current() }}" />
+    @include('partials.meta')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app-dashboard.css') }}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,16 +37,14 @@
 </head>
 
 <body>
-    <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
     </div>
     <div id="wrapper">
-        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
                 <div class="top-left-part" style="height: 60px">
-                    <a class="logo" href="/" target="_blank">
+                    <a class="logo" href="{{ route('admin.home') }}">
                         <h2 style="text-align: center;color: #fff;">PHPBali</h2>
                     </a>
                 </div>
@@ -80,11 +79,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-header -->
-            <!-- /.navbar-top-links -->
-            <!-- /.navbar-static-side -->
         </nav>
-        <!-- Left navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
@@ -125,19 +120,13 @@
                 </ul>
             </div>
         </div>
-        <!-- Left navbar-header end -->
-        <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 @yield('content')
             </div>
-            <!-- /.container-fluid -->
             <footer class="footer text-center"> 2018 &copy; PHPBali </footer>
         </div>
-        <!-- /#page-wrapper -->
     </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
     <script src="{{ asset('js/app-dashboard.js') }}"></script>
     @yield('additional-scripts')
 </body>
