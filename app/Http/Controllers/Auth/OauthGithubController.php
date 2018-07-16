@@ -34,12 +34,12 @@ class OauthGithubController extends Controller
             return Redirect::to(route('oauth.github.provider'));
         }
 
-    	$authUser = $this->findOrCreateUser($user);
+        $authUser = $this->findOrCreateUser($user);
 
         Auth::login($authUser, true);
 
-        return Redirect::to(route('home'));
-    }	
+        return Redirect::to(route('index'));
+    }   
 
     /**
      * Return user if exists; create and return if doesn't
@@ -49,18 +49,36 @@ class OauthGithubController extends Controller
      */
     private function findOrCreateUser($githubUser)
     {
-        if ($authUser = User::where('github_id', $githubUser->getId())->first()) {
-            return $authUser;
-        }
+         $checkUser = User::where('github_id', $githubUser->getId())
+        ->first();
 
-        return User::create([
-            'name' => $githubUser->getName(),
-            'email' => $githubUser->getEmail(),
-            'slug' => str_slug($githubUser->getName()),
-            'github_id' => $githubUser->getId(),
-            'photos' => $githubUser->getAvatar(),
-            'verify_token' => str_random(60),
-            'verified' => 1
-        ]);
+        if ($checkUser) {
+            return $checkUser;
+        }else{
+            $checkAgain = User::where('email', $githubUser->getEmail())
+            ->first();
+            if($checkAgain){
+                $checkAgain->update([
+                    'name' => $githubUser->getName(),
+                    'email' => $githubUser->getEmail(),
+                    'slug' => str_slug($githubUser->getName()),
+                    'github_id' => $githubUser->getId(),
+                    'photos' => $githubUser->getAvatar(),
+                    'verify_token' => str_random(60), 
+                ]);
+                
+                return $checkAgain;
+            }else{
+                return User::create([
+                    'name' => $githubUser->getName(),
+                    'email' => $githubUser->getEmail(),
+                    'slug' => str_slug($githubUser->getName()),
+                    'github_id' => $githubUser->getId(),
+                    'photos' => $githubUser->getAvatar(),
+                    'verify_token' => str_random(60),
+                    'verified' => 1
+                ]);
+            }
+        }
     }
 }
