@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Admin;
 use Hash;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -29,41 +30,37 @@ class AdminController extends Controller
         return view('backendViews.admin.home');
     }
 
-    public function show($id) {
-        $admins = new Admin;
-
-        $adminmeta = $admins::where('id', $id)->first();
+    public function show() {
+        $adminmeta = Auth::guard('admin')->user();
 
         return view('backendViews.admin.profile')->with('adminmeta', $adminmeta);
     }
 
-    public function edit($id) {
-        $admins = new Admin;
-
-        $adminmeta = $admins::where('id', $id)->first();
+    public function edit() {
+        $adminmeta = Auth::guard('admin')->user();
 
         return view('backendViews.admin.edit')->with('adminmeta', $adminmeta);
     }
 
-    public function update(Request $request, $id) {
-        $admins = new Admin;
-
-        $request->validate([
-            'name',
-            'email' => 'email',
-            'password'
+    public function update(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,'.Auth::guard('admin')->user()->id,
+            'password' => 'required|string|min:6',
         ]);
 
-        $oldAdminMeta = $admins::where('id', $id)->first();
+        if($validator->fails()) {
+            return redirect()->back()->with('Error', $validator->errors()->first());
+        }
 
-        $newAdminMeta = [
+        $update = Auth::guard('admin')->user()->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ];
+        ]);
 
-        $oldAdminMeta->update($newAdminMeta);
-
-        return redirect()->route('admin.home')->with('success', 'Profil Berhasil di Update');
+        if($update){
+            return redirect()->route('admin.home')->with('Success', 'Profil Berhasil di Update');
+        }
     }
 }

@@ -16,7 +16,7 @@
   <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
-    	<li><a href="{{ route('admin.profile', Auth::guard('admin')->user()->id) }}">Profile</a></li>
+    	<li><a href="{{ route('admin.profile') }}">Profile</a></li>
       <li class="active">Edit Profile</li>
     </ol>
   </div>
@@ -24,7 +24,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="white-box">
-            <form class="form-horizontal form-material" method="POST" action="{{ route('admin.profile.update', Auth::guard('admin')->user()->id) }}">
+            <form class="form-horizontal form-material" method="POST" action="{{ route('admin.profile.update') }}">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value=" PUT">
                 <div class="form-group">
@@ -59,12 +59,32 @@
 </div>
 @endsection
 
-@if(Session::get('Error'))
-  @component('components.alerts.modal')
-    @slot('title')
-      Operasi Gagal!
-    @endslot
+@section('additional-scripts')
+ @if(Session::get('Success') || Session::get('Error'))
+    @component('components.alerts.modal')
+      @if(Session::get('Success'))
+        @slot('title')
+          Operasi Sukses!
+        @endslot
 
-    <h3>{{ Session::get('Error') }}</h3>
-  @endcomponent
-@endif
+        <h3>{{ Session::get('Success') }}</h3>
+      @endif
+
+      @if(Session::get('Error'))
+        @slot('title')
+          Operasi Gagal!
+        @endslot
+
+        <h3>{{ Session::get('Error') }}</h3>
+      @endif
+    @endcomponent
+  @endif
+
+  @if(Session::get('Success') || Session::get('Error'))
+  <script>
+    $(document).ready(function() {
+      $('#modal-dialog').modal('show');
+    });
+  </script>
+  @endif
+@endsection

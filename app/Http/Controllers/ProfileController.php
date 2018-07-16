@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Registered;
 use App\User;
 use Auth;
 use Image;
+use File;
 
 class ProfileController extends Controller
 {
@@ -16,16 +16,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->has('profile') && $request->has('member')) {
-            $id = $request->get('profile');
-            $className = 'profile-page';
-            $user = User::where('id',$id)->first();
-            return view('profile.index',['user'=>$user,'class-name'=>$className]);
-        }else {
-            return redirect('/');
-        }
+        $className = 'profile-page';
+        $user = Auth::guard('web')->user();
+        return view('profile.index')
+        ->with('user', $user)
+        ->with('class-name', $className);
     }
 
     /**
@@ -34,75 +31,77 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit()
     {
-        if($request->has('profile') && $request->has('member')) {
-            $id = $request->get('profile');
-            $user = User::where('id',$id)->first();
-            return view('profile.edit',['user'=>$user]);
-        }else {
-            return abort(404);
-        }
+        $user = Auth::guard('web')->user();
+        return view('profile.edit')
+        ->with('user', $user);
     }
 
     public function update(Request $request) {
-        $this->validateUpdate($request->all())->validate();
-
-        event(new Registered($user = $this->processUpdate($request->all())));
-
-        return redirect()->back()->with(['status'=>'Data Updated!','header'=>'Good Job!']);
-    }
-
-    protected function validateUpdate(array $data) {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name'  => 'required|string',
-            'email' => 'required|unique:users,email,'.Auth::user()->id,
-            'about' => 'required'
+            'email' => 'required|unique:users,email,'.Auth::guard('web')->user()->id,
         ]);
+        if($validator->fails()){
+            return redirect()->back()->with([
+                'status'=>'error',
+                'header'=>'Oops! Something went wrong!',
+                'msg' => $validator->errors()->first(),
+            ]);
+        }
+        $update = Auth::guard('web')->user()->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'website' => $request->website,
+            'about' => $request->about
+        ]);
+        if($update) {
+            return redirect()->back()->with([
+                'status'=>'success',
+                'header'=>'Operation Success!',
+                'msg' => 'Your profile successfully edited!',
+            ]);
+        }
     }
 
-    protected function processUpdate(array $data) {
-        $user = User::where('id',Auth::user()->id)
-                ->update([
-                    'name'  => $data['name'],
-                    'email' => $data['email'],
-                    'website'   => $data['website'],
-                    'about'     => $data['about']
-                ]);
-        return $user;
-    }
-
-    // update avatar
     public function updateavatar(Request $request) {
-        $this->validateImage($request->all())->validate();
-        $photos = $this->uploadImage($request->file('photos'));
-
-        $user = User::findOrFail(Auth::user()->id);
-        $user->photos = $photos;
-        $user->save();
-
-        return redirect()->back()->with(['status'=>'Avatar Updates','header'=>'Good Job!']);
-    }
-
-    protected function validateImage(array $data) {
-        return Validator::make($data, [
-            'photos'    => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        $validator = Validator::make($request->all(), [
+            'photos' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
-    }
 
-    protected function uploadImage($file) {
-        $image = $file;
-        $fileName = str_slug(Auth::user()->name).time().'.'.$image->getClientOriginalExtension();
-        $destinationPath = public_path('/thumb');
-        $img = Image::make($image->getRealPath());
-        $img->resize(200,200, function($constrait) {
+        if($validator->fails()){
+            return redirect()->back()->with([
+                'status'=>'error',
+                'header'=>'Oops! Something went wrong!',
+                'msg' => $validator->errors()->first(),
+            ]);
+        }
+
+        $imagePath = $request->photos;
+        $fileName = str_slug(Auth::user()->email).time().'.'.$imagePath->getClientOriginalExtension();
+        $resizedImage = Image::make($imagePath)->resize(150, null, function($constrait) {
             $constrait->aspectRatio();
-        })->save($destinationPath.'/'.$fileName);
+        });
 
-        $destinationPath =  public_path('/img/avatar');
-        $image->move($destinationPath,$fileName);
+        // Check dulu apakah img sudah ada
+        if (File::exists(public_path().'/img/avatar/'.$fileName)) {
+            File::delete(public_path().'/img/avatar/'.$fileName);
+        }
 
-        return $fileName;
+        //simpan img
+        $resizedImage->save('img/avatar/'.$fileName, 85); //tidak lupa di compress jg
+
+        //kirim nama file ke database
+        $storeImg = Auth::guard('web')->user()->update(['photos' => $fileName]);
+
+        if($storeImg) {
+            return redirect()->back()->with([
+                'status'=>'success',
+                'header'=>'Operation Success!',
+                'msg' => 'Your avatar profile successfully updated!',
+            ]);
+        }
     }
 
     /**
@@ -114,9 +113,10 @@ class ProfileController extends Controller
      */
     public function member(Request $request, $slug)
     {
-        if($slug) {
+        if(isset($slug)) {
             $member = User::where('slug',$slug)->first();
-            return view('profile.index',['user'=>$member]);
+            return view('profile.index')
+            ->with('user', $user);
         }else {
             return abort(404);
         }

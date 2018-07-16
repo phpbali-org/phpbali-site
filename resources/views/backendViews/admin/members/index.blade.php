@@ -1,17 +1,31 @@
 @extends('layouts.dashboard')
 @section('additional-style')
+@if($members > 0)
+<link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}" />
+
 <style>
 .table .short-text td {
-    white-space: nowrap;
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.table th, .table td{
-    text-align: center;
+.table th, .table td {
+  text-align: center;
+}
+
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    font-family: FontAwesome;
 }
 </style>
+@endif
 @endsection
 @section('content')
 <div class="row bg-title">
@@ -31,9 +45,9 @@
         </div>
         <div style="clear:both;"></div>
         <div class="white-box">
-            @if(count($members) > 0)
+            @if($members > 0)
             <div class="table-responsive">
-        	    <table class="table">
+        	    <table id="tableMembers" class="table">
     		        <thead>
 	                    <tr>
 	                        <th>#</th>
@@ -43,27 +57,11 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($members as $member)
-                        <tr class="short-text">
-		                    <td>{{ $loop->iteration }}</td>
-                            <td>{{ $member->name }}</td>
-                            <td>{{ $member->email }}</td>
-                            <th>
-                                @if ($member->is_staff == 1)
-                                    Ya
-                                @elseif ($member->is_staff == 0)
-                                    Tidak
-                                @endif
-                            </th>
-                            <td>
-                                <a href="{{ route('admin.members.edit', ['member' => $member->id]) }}">Edit</a> |
-                                <a href="#" data-href="{{ route('admin.members.delete', ['member' => $member->id]) }}" data-toggle="modal" data-target="#modal-action">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
+            </div>
+            @else
+            <div class="text-center">
+              <h3>Tidak ada data yang ditemukan</h3>
             </div>
             @endif
         </div>
@@ -72,6 +70,36 @@
 @endsection
 
 @section('additional-scripts')
+  @if($members > 0)
+  <script src="{{ asset('js/datatables.min.js') }}"></script>
+  <script type="text/javascript">
+    $(function() {
+      $('#tableMembers').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('admin.members.ajax') }}',
+        columns: [
+          { data: 'DT_Row_Index', name: 'DT_Row_Index' },
+          { data: 'name', name: 'name' },
+          { data: 'email', name: 'email' },
+          { data: 'status', name: 'status' },
+          { data: 'action', name: 'action' }
+        ],
+        language: {
+          oPaginate: {
+            sNext: '<i class="fa fa-forward"></i>',
+            sPrevious: '<i class="fa fa-backward"></i>',
+            sFirst: '<i class="fa fa-step-backward"></i>',
+            sLast: '<i class="fa fa-step-forward"></i>'
+          }
+        },
+        pagingType: 'full_numbers',
+        bLengthChange: false,
+        bSort: false,
+      })
+    })
+  </script>
+  @endif
   @component('components.alerts.modal-action')
   <h4>Yakin ingin menghapus data ini?</h4>
   @endcomponent

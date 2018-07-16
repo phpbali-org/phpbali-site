@@ -48,6 +48,7 @@
         "redux-logger": "^3.0.6",
         "ree-validate": "^2.0.2",
         "sweetalert2": "^7.16.0",
+        "uglify-js": "^3.4.4",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1"
     }

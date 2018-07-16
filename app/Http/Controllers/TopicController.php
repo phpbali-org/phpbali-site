@@ -10,6 +10,7 @@ use App\User;
 use App\Events;
 use DB;
 use Carbon\Carbon;
+use DataTables;
 
 class TopicController extends Controller
 {
@@ -24,15 +25,47 @@ class TopicController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a view page of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $topics = Topics::where('deleted', 0)->paginate(15);
+        $topics = Topics::where('deleted', 0)->count();
         return view('backendViews.admin.topics.index')
         ->with('topics', $topics);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jsonIndex()
+    {
+        $topics = Topics::query();
+        $data = DataTables::eloquent($topics)
+            ->filter(function($query) {
+                $query->where('deleted', 0);
+            })
+            ->addColumn('speakers', function(Topics $topic) {
+                $speakers = [];
+                foreach ($topic->speakers as $speaker) {
+                    $speakers[] = $speaker->name;
+                }
+                return implode(',', $speakers);
+            })
+            ->addColumn('event', function(Topics $topic) {
+                return $topic->event->name;
+            })
+            ->addColumn('action', function(Topics $topic) {
+                return '
+                    <a href="'.route("admin.topic.edit", ["slug" => $topic->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.topic.delete", ["slug" => $topic->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                ';
+            })
+            ->addIndexColumn()
+            ->toJson();
+        return $data;
     }
 
     /**
@@ -65,7 +98,7 @@ class TopicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         $checker = Topics::where('title', $request->title)->where('deleted',  0)->count();
@@ -83,7 +116,7 @@ class TopicController extends Controller
 
             if ($execute) {
                 $id_topic = Topics::find($execute->id);
-                $id_topic->speakers()->sync($request->get('id_user'));
+                $id_topic->speakers()->sync($request->get('id_user'), false);
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil dibuat!');
             }
@@ -134,7 +167,7 @@ class TopicController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         $checker = Topics::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted',  0)->count();
@@ -152,7 +185,7 @@ class TopicController extends Controller
 
             if ($execute) {
                 $id_topic = Topics::where('slug', str_slug($request->title, '-'))->first();
-                $id_topic->speakers()->sync($request->get('id_user'));
+                $id_topic->speakers()->sync($request->get('id_user'), false);
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil diedit!');
             }

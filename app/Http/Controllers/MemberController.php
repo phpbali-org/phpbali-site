@@ -9,6 +9,7 @@ use DB;
 use Image;
 use File;
 use Hash;
+use DataTables;
 
 class MemberController extends Controller
 {
@@ -25,16 +26,47 @@ class MemberController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a view page of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $members = User::where('verified', '1')->paginate(15);
+        $members = User::where('verified', '1')->count();
         return view('backendViews.admin.members.index')
+
         ->with('members', $members);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jsonIndex()
+    {
+        $members = User::query();
+        $data = DataTables::eloquent($members)
+            ->filter(function($query) {
+                $query->where('verified', 1);
+            })
+            ->addColumn('status', function(User $member) {
+                if($member->is_staff == 1){
+                    return 'Yes';
+                }else{
+                    return 'No';
+                }
+            })
+            ->addColumn('action', function(User $member) {
+                return '
+                    <a href="'.route("admin.members.edit", ["slug" => $member->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.members.delete", ["slug" => $member->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                ';
+            })
+            ->addIndexColumn()
+            ->toJson();
+        return $data;
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -61,13 +93,13 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'name'  => 'required|string',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         if($request->has('photos'))
@@ -77,11 +109,13 @@ class MemberController extends Controller
                 'img_event' => 'mimes:jpg,png,jpeg|max:2048'
             ]);
             if ($validatorImg->fails()) {
-                return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                return redirect()->back()->with('Error', $validatorImg->errors()->first());
             }
             $img = $request->file('photos');
             $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
-            $imgFile = Image::make($img);
+            $imgFile = Image::make($img)->resize(150, null, function($constrait) {
+                $constrait->aspectRatio();
+            });
 
             // Check dulu apakah img sudah ada
             if (File::exists(public_path().'/img/avatar/'.$photos)) {
@@ -170,12 +204,12 @@ class MemberController extends Controller
         if(!isset($user->verify_token))
         {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required|email',
+                'name'  => 'required|string',
+                'email' => 'required|unique:users,email',
             ]);
 
             if ($validator->fails()) {
-                return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+                return redirect()->back()->with('Error', $validator->errors()->first());
             }
 
             if($request->has('photos'))
@@ -185,11 +219,13 @@ class MemberController extends Controller
                     'img_event' => 'mimes:jpg,png,jpeg|max:2048'
                 ]);
                 if ($validatorImg->fails()) {
-                    return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                    return redirect()->back()->with('Error', $validator->errors()->first());
                 }
                 $img = $request->file('photos');
                 $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
-                $imgFile = Image::make($img);
+                $imgFile = Image::make($img)->resize(150, null, function($constrait) {
+                    $constrait->aspectRatio();
+                });;
 
                 // Check dulu apakah img sudah ada
                 if (File::exists(public_path().'/img/avatar/'.$photos)) {

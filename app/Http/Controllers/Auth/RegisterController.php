@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
 use App\User;
 use App\VerifyUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Mail\VerifyRegister;
 use Mail;
 
@@ -26,89 +24,86 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'about' => 'required',
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'about' => $data['about'],
-            'slug' => str_slug($data['name']),
-            'password' => Hash::make($data['password']),
-            'verify_token' => str_random(60)
-        ]);
-
-        Mail::to($user->email)->send(new VerifyRegister($user));
-        return $user;
+        return view('auth.register');
     }
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'about' => 'required|string',
+        ]);
 
-        event(new Registered($user = $this->create($request->all())));
+        if($validator->fails()) {
+            return redirect()->back()->with([
+              'msg' => $validator->errors()->first(),
+              'header' => 'Oops! Something went wrong!',
+              'status' => 'error'
+            ]);
+        }
 
-        return view('mails.verification');
+        $createUser = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'about' => $request->about,
+            'slug' => str_slug($request->name),
+            'password' => Hash::make($request->password),
+            'verify_token' => str_random(60)
+        ]);
+
+        if($createUser) {
+            $sendMail = Mail::to($createUser->email)->send(new VerifyRegister($createUser));
+            return redirect()->back()->with([
+              'msg' => 'You have successfully registered. An email is sent to you for verification',
+              'header' => 'Operation Success!',
+              'status' => 'success'
+            ]);
+        }else{
+            return redirect()->back()->with([
+              'msg' => 'Registration Failed! Error code 500',
+              'header' => 'Oops! Something went wrong!',
+              'status' => 'error'
+            ]);
+        }
     }
 
     public function verify($token)
     {
-        if ( ! $token){
-            return  redirect('login')->with('flash-error','Email Verification Token not provided!');
+        if (!$token){
+            return redirect('login')->with([
+              'msg' => 'Invalid Token!',
+              'header' => 'Oops! Something went wrong!',
+              'status' => 'error'
+            ]);
         }
 
         $user = User::where('verify_token',$token)->first();
 
-        if ( ! $user){
-            return  redirect('login')->with('flash-error','Invalid Email Verification Token!');
+        if (!$user){
+            return redirect('login')->with([
+              'msg' => 'Invalid Token!',
+              'header' => 'Oops! Something went wrong!',
+              'status' => 'error'
+            ]);
         }
 
         $user->verified = 1;
-        $user->verify_token = null;
 
         if ($user->save()) {
-            return redirect('login')->with('flash-error','Email confirmed!');
+            return redirect('login')->with([
+              'msg' => 'Congratulations you can use this account now! Welcome to PHPBali!',
+              'header' => 'Operation Success!',
+              'status' => 'success'
+            ]);
         }
-
     }
 }

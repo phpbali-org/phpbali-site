@@ -11,6 +11,7 @@ use DB;
 use Carbon\Carbon;
 use Image;
 use File;
+use DataTables;
 
 class EventController extends Controller
 {
@@ -25,15 +26,42 @@ class EventController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Show the index page of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $events = Events::where('deleted', 0)->paginate(15);
-        return view('backendViews.admin.events.index')
-        ->with('events', $events);
+        return view('backendViews.admin.events.index');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return toJson
+     */
+    public function jsonIndex()
+    {
+        $events = Events::query();
+        $data = DataTables::eloquent($events)
+            ->filter(function($query) {
+                $query->where('deleted', 0);
+            })
+            ->addColumn('status', function(Events $event) {
+                if($event->published == 1){
+                    return 'Published';
+                }else{
+                    return 'Not Published';
+                }
+            })
+            ->addColumn('action', function(Events $event) {
+                return '
+                    <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                ';
+            })
+            ->addIndexColumn()
+            ->toJson();
+        return $data;
     }
 
     /**
@@ -69,7 +97,7 @@ class EventController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         $checker = Events::where('name', $request->name)->where('deleted',  0)->count();
@@ -91,11 +119,13 @@ class EventController extends Controller
                 'img_event' => 'mimes:jpg,png,jpeg|max:2048'
             ]);
             if ($validatorImg->fails()) {
-                return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                return redirect()->back()->with('Error', $validatorImg->errors()->first());
             }
             $img = $request->file('img_event');
             $file_name = $slug.'.'.$img->getClientOriginalExtension();
-            $imgFile = Image::make($img)->fit(1200, 900);
+            $imgFile = Image::make($img)->resize(2880, null, function ($constraint) { 
+                $constraint->aspectRatio(); 
+            });
 
             // Check dulu apakah img sudah ada
             if (File::exists(public_path().'/img/bg-event/'.$file_name)) {
@@ -173,7 +203,7 @@ class EventController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', 'Pastikan anda mengisi seluruh field yang diminta!');
+            return redirect()->back()->with('Error', $valdiator->errors()->first());
         }
 
         $checker = Events::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted',  0)->count();
@@ -196,11 +226,13 @@ class EventController extends Controller
                     'img_event' => 'mimes:jpg,png,jpeg|max:2048'
                 ]);
                 if ($validatorImg->fails()) {
-                    return redirect()->back()->with('Error', 'File yang diupload tidak sesuai kriteria. (Pastikan image tersebut bertipe JPG atau PNG dan ukuran kurang dari 2 MB)');
+                    return redirect()->back()->with('Error', $validatorImg->errors()->first());
                 }
                 $img = $request->file('img_event');
                 $file_name = $slug.'.'.$img->getClientOriginalExtension();
-                $imgFile = Image::make($img)->fit(1200, 900);
+                $imgFile = Image::make($img)->resize(2880, null, function ($constraint) { 
+                    $constraint->aspectRatio(); 
+                });
 
                 // Check dulu apakah img sudah ada
                 if (File::exists(public_path().'/img/bg-event/'.$file_name)) {

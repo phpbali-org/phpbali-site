@@ -10,13 +10,11 @@
             </div>
             <h3 class="title">{{ $user->name }}</h3>
             @if(Auth::guard('web')->check())
-                @if (Auth::user()->id == $user->id)
-                    <div class="content">
-                        <div class="social-description">
-                            <a href="{{ url('/update' .'?'. http_build_query(['member' => strtolower(str_slug(Auth::user()->name)),'profile' => Auth::user()->id ])) }}" class="btn btn-info">Update</a>
-                        </div>
+                <div class="content">
+                    <div class="social-description">
+                        <a href="{{ route('myprofile.update') }}" class="btn btn-info">Update</a>
                     </div>
-                @endif
+                </div>
             @endif
         </div>
     </div>
@@ -25,11 +23,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <a href="{{ url('member') }}" class="btn btn-sm btn-primary">All Member</a>
+                    <a href="{{ route('member.list') }}" class="btn btn-sm btn-primary">See other members</a>
                 </div>
             </div>
             <h3 class="title">About me</h3>
-            <h5 class="description text-center">{{ $user->about }}.</h5>
+            <h5 class="description text-center">
+                @if(isset($user->about))
+                    {{ $user->about }}
+                @else
+                    <p>Not Described</p>
+                @endif
+            </h5>
         </div>
     </div>
 @endsection

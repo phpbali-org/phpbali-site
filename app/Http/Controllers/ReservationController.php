@@ -9,11 +9,6 @@ use App\Events;
 
 class ReservationController extends Controller
 {
- //    public function __construct()
-	// {
-	//     $this->middleware('auth');
-	// }
-
 	public function rsvp(Request $request, $slug) {
 		// check if user registered
 		if (Auth::guest()) {
@@ -26,12 +21,18 @@ class ReservationController extends Controller
 			if ($rsvpChecker < 1) {
 				$rsvp = $this->createReservation($id_events->id, Auth::user()->id);
 				if($rsvp){
-					return redirect()->back()->with(['status'=>'Thank you for register to this event. Admin will contact you later!','header'=>'Good Job']);
-				}else{
-					return redirect()->back()->with(['status'=>'Something were wrong! please contact an Administrator','header'=>'Good Job']);
+					return redirect()->back()->with([
+						'msg'=>'Thank you for register to this event. Admin will contact you later!',
+						'header'=>'Operation Success',
+						'status'=>'success'
+					]);
 				}
 			}else {
-				return redirect('/')->with(['status'=>'You have been register to this event!','header'=>'Something wrong!']);
+				return redirect('/')->with([
+					'status'=>'You already register to this event!',
+					'header'=>'Oops! Something went wrong!',
+					'status'=>'error'
+				]);
 			}
 			
 		}
