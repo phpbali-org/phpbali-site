@@ -75,7 +75,8 @@
 		                        	}
 		                        @endphp
 		                        @if(!$value['exists'])
-					                <div class="col-md-12" >
+					                @if($loop->first)
+					               <div class="col-md-12" >
 					                    <div class="card card-contact card-raised card-plain">
 					                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
 					                            {{ csrf_field() }}
@@ -86,6 +87,15 @@
 					                        </form>
 					                    </div>
 					                </div>
+					                @else
+					                <div class="col-md-12" >
+					                    <div class="card card-contact card-raised card-plain">
+					                        <div class="text-center">
+					                            <button type="button" class="btn btn-info btn-lg btn-round ">Event Done</button>
+					                        </div>
+					                    </div>
+					                </div>
+					                @endif
 					            @else
 					                <div class="col-md-12" >
 					                    <div class="card card-contact card-raised card-plain">
@@ -96,7 +106,8 @@
 					                </div>
 					            @endif
 					        @else
-					        	<div class="col-md-12" >
+					        	@if($loop->first)
+				               <div class="col-md-12" >
 				                    <div class="card card-contact card-raised card-plain">
 				                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
 				                            {{ csrf_field() }}
@@ -107,6 +118,15 @@
 				                        </form>
 				                    </div>
 				                </div>
+				                @else
+				                <div class="col-md-12" >
+				                    <div class="card card-contact card-raised card-plain">
+				                        <div class="text-center">
+				                            <button type="button" class="btn btn-info btn-lg btn-round ">Event Done</button>
+				                        </div>
+				                    </div>
+				                </div>
+				                @endif
 					        @endif
 	                    @else
 	                        <h1 class="title">No Event Yet!</h1>
