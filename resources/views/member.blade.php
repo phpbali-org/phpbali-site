@@ -36,7 +36,7 @@
 @endsection
 
 @section('content')
-	<div class="page-header page-header-small" filter-color="orange">
+    <div class="page-header page-header-small" filter-color="orange">
         <div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../img/bg3.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
         </div>
         <div class="content-center">
@@ -44,15 +44,15 @@
             <hr class="text-white">
         </div>
     </div>
-	<div class="main">
-		<div class="section">
-			<div class="container">
-				<div class="row">
-				    <div class="col-xs-12 text-center">
-				        <ul class="list-unstyled list-inline text-center attendees-list">
+    <div class="main">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <ul class="list-unstyled list-inline text-center attendees-list">
                     @foreach($member as $member)
                     <li>
-                        <a href="{{ url('/member/'.$member->slug) }}" class="img-attendance">
+                        <a href="{{ route('member.index', ['slug' => $member->slug]) }}" class="img-attendance">
                             <div class="img-wrapper">
                                 <img src="{{ $member->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $member->name }}" data-container="body" data-animation="true" />
                             </div>
@@ -60,9 +60,9 @@
                     </li>
                     @endforeach
                 </ul>
-				    </div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

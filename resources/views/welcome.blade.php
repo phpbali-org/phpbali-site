@@ -177,7 +177,7 @@
                         <ul class="list-unstyled list-inline text-center attendees-list">
                             @foreach($event->rsvp as $rsvp)
                             <li>
-                                <a href="{{ url('/member/'.$rsvp->user->slug) }}" class="img-attendance">
+                                <a href="{{ route('member.index', ['slug' => $rsvp->user->slug]) }}" class="img-attendance">
                                     <div class="img-wrapper">
                                         <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
                                     </div>

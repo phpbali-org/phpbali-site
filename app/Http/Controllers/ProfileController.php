@@ -114,7 +114,7 @@ class ProfileController extends Controller
     public function member(Request $request, $slug)
     {
         if(isset($slug)) {
-            $member = User::where('slug',$slug)->first();
+            $user = User::where('slug',$slug)->first();
             return view('profile.index')
             ->with('user', $user);
         }else {
