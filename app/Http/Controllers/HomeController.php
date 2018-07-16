@@ -31,10 +31,12 @@ class HomeController extends Controller
             $rsvpChecker = 0;
         }
         $rsvpCounter = 0;
-        foreach($event->rsvp as $rsvp){
-            if (!empty($rsvp->user->name)) {
-                $rsvpCounter = $rsvpCounter + 1;
-            } 
+        if(!empty($event->rsvp)){
+            foreach($event->rsvp as $rsvp){
+                if (!empty($rsvp->user->name)) {
+                    $rsvpCounter = $rsvpCounter + 1;
+                } 
+            }
         }
         return view('welcome')
         ->with('event', $event)

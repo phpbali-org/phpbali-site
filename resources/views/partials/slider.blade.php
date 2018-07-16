@@ -35,7 +35,7 @@
                 <div class="col-md-2 ml-auto mr-auto" id="reservation">
                     <div class="card card-contact card-raised card-plain">
                         <div class="text-center">
-                            <a href="{{ route('home.rsvp') }}" class="btn btn-info btn-lg btn-round ">RSVP NOW</a>
+                            <a href="{{ route('home.rsvp', ['slug' => $event->slug]) }}" class="btn btn-info btn-lg btn-round ">RSVP NOW</a>
                         </div>
                     </div>
                 </div>

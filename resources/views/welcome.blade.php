@@ -173,7 +173,7 @@
                         <h2 class="title">{{ $rsvpCounter }} People are Attending</h2>
                         <hr>
                         <br />
-                        @if($event->rsvp)
+                        @if(!empty($event->rsvp))
                         <ul class="list-unstyled list-inline text-center attendees-list">
                             @foreach($event->rsvp as $rsvp)
                                 @if(!empty($rsvp->user->name))

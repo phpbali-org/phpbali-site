@@ -19,8 +19,8 @@ class ReservationController extends Controller
         $this->middleware('auth');
     }
 
-	public function rsvp() {
-		$id_events = Events::first();
+	public function rsvp($slug) {
+		$id_events = Events::where('slug', $slug)->first();
 		$rsvpChecker = Reservation::where('id_events', $id_events->id)->where('id_user', Auth::id())->count();
 		if ($rsvpChecker < 1) {
 			$rsvp = $this->createReservation($id_events->id, Auth::guard('web')->user()->id);
