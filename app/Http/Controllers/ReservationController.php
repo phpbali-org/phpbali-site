@@ -9,32 +9,34 @@ use App\Events;
 
 class ReservationController extends Controller
 {
-	public function rsvp(Request $request, $slug) {
-		// check if user registered
-		if (Auth::guest()) {
-			return redirect()->route('login');
-		}else {
-			// select data event
-			$id_events = Events::where('slug', $slug)->first();
-			// count
-			$rsvpChecker = Reservation::where('id_events', $id_events->id)->where('id_user', Auth::id())->count();
-			if ($rsvpChecker < 1) {
-				$rsvp = $this->createReservation($id_events->id, Auth::user()->id);
-				if($rsvp){
-					return redirect()->back()->with([
-						'msg'=>'Thank you for register to this event. Admin will contact you later!',
-						'header'=>'Operation Success',
-						'status'=>'success'
-					]);
-				}
-			}else {
-				return redirect('/')->with([
-					'status'=>'You already register to this event!',
-					'header'=>'Oops! Something went wrong!',
-					'status'=>'error'
+	/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+	public function rsvp() {
+		$id_events = Events::first();
+		$rsvpChecker = Reservation::where('id_events', $id_events->id)->where('id_user', Auth::id())->count();
+		if ($rsvpChecker < 1) {
+			$rsvp = $this->createReservation($id_events->id, Auth::guard('web')->user()->id);
+			if($rsvp){
+				return redirect()->back()->with([
+					'msg'=>'Thank you for register to this event. Admin will contact you later!',
+					'header'=>'Operation Success',
+					'status'=>'success'
 				]);
 			}
-			
+		}else {
+			return redirect('/')->with([
+				'status'=>'You already register to this event!',
+				'header'=>'Oops! Something went wrong!',
+				'status'=>'error'
+			]);
 		}
 	}
 

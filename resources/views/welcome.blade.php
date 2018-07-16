@@ -170,19 +170,21 @@
                 @if(isset($event))
                 <div class="row">
                     <div class="col-md-12 ml-auto mr-auto">
-                        <h2 class="title">{{ count($event->rsvp) }} People are Attending</h2>
+                        <h2 class="title">{{ $rsvpCounter }} People are Attending</h2>
                         <hr>
                         <br />
-                        @if(count($event->rsvp) > 0)
+                        @if($event->rsvp)
                         <ul class="list-unstyled list-inline text-center attendees-list">
                             @foreach($event->rsvp as $rsvp)
-                            <li>
-                                <a href="{{ route('member.index', ['slug' => $rsvp->user->slug]) }}" class="img-attendance">
-                                    <div class="img-wrapper">
-                                        <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
-                                    </div>
-                                </a>
-                            </li>
+                                @if(!empty($rsvp->user->name))
+                                <li>
+                                    <a href="{{ route('member.index', ['slug' => $rsvp->user->slug]) }}" class="img-attendance">
+                                        <div class="img-wrapper">
+                                            <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                             @endforeach
                         </ul>
                         @else

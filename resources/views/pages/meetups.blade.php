@@ -78,13 +78,9 @@
 					                @if($loop->first)
 					               <div class="col-md-12" >
 					                    <div class="card card-contact card-raised card-plain">
-					                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
-					                            {{ csrf_field() }}
-					                            <input type="hidden" name="slug" value="{{ $event->slug }}">
-					                            <div class="text-center">
-					                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
-					                            </div>
-					                        </form>
+					                        <div class="text-center">
+					                            <a href="{{ route('home.rsvp') }}" class="btn btn-info btn-lg btn-round ">RSVP NOW</a>
+					                        </div>
 					                    </div>
 					                </div>
 					                @else
@@ -109,13 +105,9 @@
 					        	@if($loop->first)
 				               <div class="col-md-12" >
 				                    <div class="card card-contact card-raised card-plain">
-				                        <form action="{{ url('/rsvp/'.$event->slug) }}" method="post">
-				                            {{ csrf_field() }}
-				                            <input type="hidden" name="slug" value="{{ $event->slug }}">
-				                            <div class="text-center">
-				                                <button type="submit" class="btn btn-info btn-lg btn-round ">RSVP NOW</button>
-				                            </div>
-				                        </form>
+				                        <div class="text-center">
+				                            <a href="{{ route('home.rsvp') }}" class="btn btn-info btn-lg btn-round ">RSVP NOW</a>
+				                        </div>
 				                    </div>
 				                </div>
 				                @else

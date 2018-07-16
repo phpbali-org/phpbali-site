@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Events;
 use App\Topics;
 use App\Reservation;
@@ -19,15 +20,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $event = Events::where('published', 1)->where('deleted', 0)->orderBy('created_at', 'desc')->first();
+        $event = Events::with('rsvp')
+        ->where('published', 1)
+        ->where('deleted', 0)
+        ->orderBy('created_at', 'desc')
+        ->first();
         if(isset($event)){
             $rsvpChecker = Reservation::where('id_events', $event->id)->where('id_user', Auth::id())->count();
         }else{
             $rsvpChecker = 0;
         }
+        $rsvpCounter = 0;
+        foreach($event->rsvp as $rsvp){
+            if (!empty($rsvp->user->name)) {
+                $rsvpCounter = $rsvpCounter + 1;
+            } 
+        }
         return view('welcome')
         ->with('event', $event)
-        ->with('rsvpChecker', $rsvpChecker);
+        ->with('rsvpChecker', $rsvpChecker)
+        ->with('rsvpCounter', $rsvpCounter);
     }
 
     public function meetups() 

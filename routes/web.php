@@ -19,7 +19,7 @@ Route::get('/profile/{slug}','ProfileController@member')->name('member.index');
 Route::get('/members','ProfileController@allmember')->name('member.list');
 
 // Reservation
-Route::post('/rsvp/{slug}','ReservationController@rsvp')->middleware('web');
+Route::get('/rsvp','ReservationController@rsvp')->name('home.rsvp')->middleware('web');
 
 // meetups
 Route::get('meetups','HomeController@meetups')->name('home.meetups');
