@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+@section('image-meta')
+    @if(isset($event))
+        {{ asset('img/bg-event/'.$event->photos) }}
+    @else
+        {{ asset('img/bg-event/header.jpg') }}
+    @endif
+@endsection
 @section('content')
     <div class="page-header page-header-small" filter-color="orange">
         <div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../img/bg3.jpg&quot;); transform: translate3d(0px, 0px, 0px);">

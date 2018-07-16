@@ -1,5 +1,11 @@
 @extends('layouts.verifiedemail')
-
+@section('image-meta')
+    @if(isset($event))
+        {{ asset('img/bg-event/'.$event->photos) }}
+    @else
+        {{ asset('img/bg-event/header.jpg') }}
+    @endif
+@endsection
 @section('content')
 <div class="container" style="margin-top: 88px;">
     <div class="row">

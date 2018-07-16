@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+@section('image-meta')
+    @if(isset($event))
+        {{ asset('img/bg-event/'.$event->photos) }}
+    @else
+        {{ asset('img/bg-event/header.jpg') }}
+    @endif
+@endsection
 @section('additional-styles')
 <style>
     .list-unstyled li{
