@@ -10,12 +10,12 @@
                     <h5>Member</h5>
                     <ul class="links-vertical">
                         <li>
-                            <a href="{{ url('/member') }}" class="text-muted">
+                            <a href="{{ route('member.list') }}" class="text-muted">
                                Member
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('register') }}" class="text-muted">
+                            <a href="{{ route('register') }}" class="text-muted">
                                 Become Member
                             </a>
                         </li>
