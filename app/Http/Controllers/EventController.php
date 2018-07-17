@@ -44,17 +44,17 @@ class EventController extends Controller
     {
         $events = Events::query();
         $data = DataTables::eloquent($events)
-            ->filter(function($query) {
+            ->filter(function ($query) {
                 $query->where('deleted', 0);
             })
-            ->addColumn('status', function(Events $event) {
-                if($event->published == 1){
+            ->addColumn('status', function (Events $event) {
+                if ($event->published == 1) {
                     return 'Published';
-                }else{
+                } else {
                     return 'Not Published';
                 }
             })
-            ->addColumn('action', function(Events $event) {
+            ->addColumn('action', function (Events $event) {
                 return '
                     <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
@@ -100,7 +100,7 @@ class EventController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Events::where('name', $request->name)->where('deleted',  0)->count();
+        $checker = Events::where('name', $request->name)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
@@ -123,8 +123,8 @@ class EventController extends Controller
             }
             $img = $request->file('img_event');
             $file_name = $slug.'.'.$img->getClientOriginalExtension();
-            $imgFile = Image::make($img)->resize(2880, null, function ($constraint) { 
-                $constraint->aspectRatio(); 
+            $imgFile = Image::make($img)->resize(2880, null, function ($constraint) {
+                $constraint->aspectRatio();
             });
 
             // Check dulu apakah img sudah ada
@@ -134,7 +134,7 @@ class EventController extends Controller
 
             //simpan img
             $imgFile->save('img/bg-event/'.$file_name, 85); //tidak lupa di compress jg
-            
+
             //kirim data ke database
             $data = [
                 'name' => $request->name,
@@ -206,7 +206,7 @@ class EventController extends Controller
             return redirect()->back()->with('Error', $valdiator->errors()->first());
         }
 
-        $checker = Events::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted',  0)->count();
+        $checker = Events::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
@@ -220,7 +220,7 @@ class EventController extends Controller
                 $published = 0;
             }
 
-            if($request->has('img_event')){
+            if ($request->has('img_event')) {
                 //Process the image data
                 $validatorImg = Validator::make($request->all(), [
                     'img_event' => 'mimes:jpg,png,jpeg|max:2048'
@@ -230,8 +230,8 @@ class EventController extends Controller
                 }
                 $img = $request->file('img_event');
                 $file_name = $slug.'.'.$img->getClientOriginalExtension();
-                $imgFile = Image::make($img)->resize(2880, null, function ($constraint) { 
-                    $constraint->aspectRatio(); 
+                $imgFile = Image::make($img)->resize(2880, null, function ($constraint) {
+                    $constraint->aspectRatio();
                 });
 
                 // Check dulu apakah img sudah ada
@@ -244,7 +244,7 @@ class EventController extends Controller
             }
 
             if (isset($request->place) && isset($request->latitude) && isset($request->longitude)) {
-                if($request->has('img_event')){
+                if ($request->has('img_event')) {
                     $data = [
                         'name' => $request->name,
                         'slug' => $editedSlug,
@@ -258,7 +258,7 @@ class EventController extends Controller
                         'longitude' => $request->longitude,
                         'published' => $published
                     ];
-                }else{
+                } else {
                     $data = [
                         'name' => $request->name,
                         'slug' => $editedSlug,
@@ -273,7 +273,7 @@ class EventController extends Controller
                     ];
                 }
             } else {
-                if($request->has('img_event')){
+                if ($request->has('img_event')) {
                     $data = [
                         'name' => $request->name,
                         'slug' => $editedSlug,
@@ -283,7 +283,7 @@ class EventController extends Controller
                         'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                         'published' => $published
                     ];
-                }else{
+                } else {
                     $data = [
                         'name' => $request->name,
                         'slug' => $editedSlug,
