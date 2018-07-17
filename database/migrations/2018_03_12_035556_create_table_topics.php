@@ -16,7 +16,7 @@ class CreateTableTopics extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->increments('id');
             $table->text('slug');
-            $table->tinyInteger('id_event');
+            $table->integer('event_id');
             $table->text('title');
             $table->text('desc');
             $table->tinyInteger('deleted')->default(0);

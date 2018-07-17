@@ -14,11 +14,11 @@ class CreateTableSpeakerTopic extends Migration
     public function up()
     {
         Schema::create('topic_speaker', function (Blueprint $table) {
-            $table->increments('id');
-            $table->tinyInteger('id_topic');
-            $table->tinyInteger('id_user');
+            $table->integer('topic_id');
+            $table->integer('user_id');
             $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
+            $table->unique(['user_id', 'topic_id']);
         });
     }
 
