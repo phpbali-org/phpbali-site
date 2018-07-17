@@ -58,10 +58,14 @@ class OauthGithubController extends Controller
             $checkAgain = User::where('email', $githubUser->getEmail())
             ->first();
             if($checkAgain){
+                $username = $githubUser->getEmail();
+                if(!empty($githubUser->getName())){
+                    $username = $githubUser->getName();
+                }
                 $checkAgain->update([
-                    'name' => $githubUser->getName(),
+                    'name' => $username,
                     'email' => $githubUser->getEmail(),
-                    'slug' => str_slug($githubUser->getName()),
+                    'slug' => str_slug($username).'-'.$githubUser->getId(),
                     'github_id' => $githubUser->getId(),
                     'photos' => $githubUser->getAvatar(),
                     'verify_token' => str_random(60), 
@@ -69,10 +73,14 @@ class OauthGithubController extends Controller
                 
                 return $checkAgain;
             }else{
+                 $username = $githubUser->getEmail();
+                if(!empty($githubUser->getName())){
+                    $username = $githubUser->getName();
+                }
                 return User::create([
-                    'name' => $githubUser->getName(),
+                    'name' => $username,
                     'email' => $githubUser->getEmail(),
-                    'slug' => str_slug($githubUser->getName()),
+                    'slug' => str_slug($username).'-'.$githubUser->getId(),
                     'github_id' => $githubUser->getId(),
                     'photos' => $githubUser->getAvatar(),
                     'verify_token' => str_random(60),
