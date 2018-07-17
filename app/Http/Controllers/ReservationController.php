@@ -41,7 +41,7 @@ class ReservationController extends Controller
 	}
 
 	protected function createReservation($id_event, $id_user) {
-		$rsvp = Reservation::create([
+		$rsvp = Reservation::updateOrCreate([
 			'id_events'	=> $id_event,
 			'id_user'	=> $id_user
 		]);
