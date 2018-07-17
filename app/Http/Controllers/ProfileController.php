@@ -39,7 +39,7 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request) {
-        $validator = Validator::make($data, [
+        $validator = Validator::make($request->all(), [
             'name'  => 'required|string',
             'email' => 'required|unique:users,email,'.Auth::guard('web')->user()->id,
         ]);
