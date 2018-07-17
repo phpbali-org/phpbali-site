@@ -9,7 +9,7 @@ use App\Events;
 
 class ReservationController extends Controller
 {
-	/**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -19,32 +19,33 @@ class ReservationController extends Controller
         $this->middleware('auth');
     }
 
-	public function rsvp($slug) {
-		$id_events = Events::where('slug', $slug)->first();
-		$rsvpChecker = Reservation::where('id_events', $id_events->id)->where('id_user', Auth::id())->count();
-		if ($rsvpChecker < 1) {
-			$rsvp = $this->createReservation($id_events->id, Auth::guard('web')->user()->id);
-			if($rsvp){
-				return redirect()->back()->with([
-					'msg'=>'Thank you for register to this event. Admin will contact you later!',
-					'header'=>'Operation Success',
-					'status'=>'success'
-				]);
-			}
-		}else {
-			return redirect('/')->with([
-				'status'=>'You already register to this event!',
-				'header'=>'Oops! Something went wrong!',
-				'status'=>'error'
-			]);
-		}
-	}
+    public function rsvp($slug)
+    {
+        $event = Events::where('slug', $slug)->first();
+        $rsvpChecker = Reservation::where('event_id', $event->id)->where('user_id', Auth::id())->count();
+        if ($rsvpChecker < 1) {
+            $rsvp = $this->createReservation($event->id, Auth::guard('web')->user()->id);
+            if ($rsvp) {
+                return redirect()->back()->with([
+                    'msg'=>'Thank you for register to this event. Admin will contact you later!',
+                    'header'=>'Operation Success',
+                    'status'=>'success'
+                ]);
+            }
+        } else {
+            return redirect('/')->with([
+                'status'=>'You already register to this event!',
+                'header'=>'Oops! Something went wrong!',
+                'status'=>'error'
+            ]);
+        }
+    }
 
-	protected function createReservation($id_event, $id_user) {
-		$rsvp = Reservation::updateOrCreate([
-			'id_events'	=> $id_event,
-			'id_user'	=> $id_user
-		]);
-		return $rsvp;
-	}
+    protected function createReservation($event_id, $user_id)
+    {
+        return Reservation::firstOrCreate([
+            'event_id'    => $event_id,
+            'user_id'    => $user_id
+        ]);
+    }
 }

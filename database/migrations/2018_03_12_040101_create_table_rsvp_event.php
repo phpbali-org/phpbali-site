@@ -14,10 +14,10 @@ class CreateTableRsvpEvent extends Migration
     public function up()
     {
         Schema::create('rsvp_events', function (Blueprint $table) {
-            $table->increments('id');
-            $table->tinyInteger('id_events');
-            $table->tinyInteger('id_user');
+            $table->integer('event_id');
+            $table->integer('user_id');
             $table->timestamps();
+            $table->unique(['user_id', 'event_id']);
         });
     }
 
