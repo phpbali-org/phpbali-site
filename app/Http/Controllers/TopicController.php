@@ -108,15 +108,15 @@ class TopicController extends Controller
             $data = [
                 'slug' => str_slug($request->title, '-'),
                 'title' => $request->title,
-                'id_event' => $request->id_event,
+                'event_id' => $request->id_event,
                 'desc' => $request->desc
             ];
 
             $execute = Topics::create($data);
 
             if ($execute) {
-                $id_topic = Topics::find($execute->id);
-                $id_topic->speakers()->sync($request->get('id_user'), false);
+                $topic = Topics::find($execute->id);
+                $topic->speakers()->sync($request->get('id_user'));
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil dibuat!');
             }
@@ -177,15 +177,15 @@ class TopicController extends Controller
             $data = [
                 'slug' => str_slug($request->title, '-'),
                 'title' => $request->title,
-                'id_event' => $request->id_event,
+                'event_id' => $request->id_event,
                 'desc' => $request->desc
             ];
 
             $execute = Topics::where('slug', $slug)->update($data);
 
             if ($execute) {
-                $id_topic = Topics::where('slug', str_slug($request->title, '-'))->first();
-                $id_topic->speakers()->sync($request->get('id_user'), false);
+                $topic = Topics::where('slug', str_slug($request->title, '-'))->first();
+                $topic->speakers()->sync($request->get('id_user'));
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil diedit!');
             }
