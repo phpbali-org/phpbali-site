@@ -25,17 +25,17 @@ class HomeController extends Controller
         ->where('deleted', 0)
         ->orderBy('created_at', 'desc')
         ->first();
-        if(isset($event)){
-            $rsvpChecker = Reservation::where('id_events', $event->id)->where('id_user', Auth::id())->count();
-        }else{
+        if (isset($event)) {
+            $rsvpChecker = Reservation::where('event_id', $event->id)->where('user_id', Auth::id())->count();
+        } else {
             $rsvpChecker = 0;
         }
         $rsvpCounter = 0;
-        if(!empty($event->rsvp)){
-            foreach($event->rsvp as $rsvp){
+        if (!empty($event->rsvp)) {
+            foreach ($event->rsvp as $rsvp) {
                 if (!empty($rsvp->user->name)) {
                     $rsvpCounter = $rsvpCounter + 1;
-                } 
+                }
             }
         }
         return view('welcome')
@@ -44,13 +44,13 @@ class HomeController extends Controller
         ->with('rsvpCounter', $rsvpCounter);
     }
 
-    public function meetups() 
+    public function meetups()
     {
         $event = Events::where('published', 1)->orderBy('created_at', 'desc')->get();
-        if(isset($event)){
+        if (isset($event)) {
             $events = $event;
             $is_register = 0;
-        }else{
+        } else {
             $rsvpChecker = 0;
         }
         return view('pages.meetups')

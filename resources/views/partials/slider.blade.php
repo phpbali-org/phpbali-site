@@ -18,7 +18,7 @@
                         <div class="col-md-12 ml-auto mr-auto text-center">
                             @if(isset($event))
                                 <h1 class="title">{{ $event->name }}</h1>
-                                <h4 class="description text-white">{{ Carbon\Carbon::parse($event->start_date)->format('D, d M Y') }} — {{ Carbon\Carbon::parse($event->start_date)->format('H:i a') }} - {{ Carbon\Carbon::parse($event->end_date)->format('H:i a') }}</h4>
+                                <h4 class="description text-white">{{ Carbon\Carbon::parse($event->start_date)->format('D, d M Y') }} — {{ Carbon\Carbon::parse($event->start_date)->format('g:i A') }} - {{ Carbon\Carbon::parse($event->end_date)->format('g:i A') }}</h4>
                                 <h5 class="description text-white">{{ $event->place_name }} — <a href="http://maps.google.com.au/?daddr={{ $event->place_name }}"  target="_blank" style="color: #fff;">Directions</a></h5>
                             @else
                                 <h1 class="title">No Event Yet!</h1>
