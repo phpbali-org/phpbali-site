@@ -173,15 +173,21 @@
                         <h2 class="title">{{ $rsvpCounter }} People are Attending</h2>
                         <hr>
                         <br />
-                        @if(!empty($event->rsvp))
+                        @if($event->rsvp)
                         <ul class="list-unstyled list-inline text-center attendees-list">
                             @foreach($event->rsvp as $rsvp)
                                 @if(!empty($rsvp->user->name))
                                 <li>
                                     <a href="{{ route('member.index', ['slug' => $rsvp->user->slug]) }}" class="img-attendance">
+                                        @if(!empty($rsvp->user->avatar()))
                                         <div class="img-wrapper">
                                             <img src="{{ $rsvp->user->avatar() }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
                                         </div>
+                                        @else
+                                        <div class="img-wrapper">
+                                            <img src="{{ asset('img/avatar/default-avatar.png') }}" data-toggle="tooltip" data-placement="top" title="{{ $rsvp->user->name }}" data-container="body" data-animation="true" />
+                                        </div>
+                                        @endif
                                     </a>
                                 </li>
                                 @endif
