@@ -10,6 +10,7 @@ use Image;
 use File;
 use Hash;
 use DataTables;
+use Illuminate\Validation\Rule;
 
 class MemberController extends Controller
 {
@@ -47,19 +48,19 @@ class MemberController extends Controller
     {
         $members = User::query();
         $data = DataTables::eloquent($members)
-            ->filter(function($query) {
+            ->filter(function ($query) {
                 $query->where('verified', 1);
             })
-            ->addColumn('status', function(User $member) {
-                if($member->is_staff == 1){
+            ->addColumn('status', function (User $member) {
+                if ($member->is_staff == 1) {
                     return 'Yes';
-                }else{
+                } else {
                     return 'No';
                 }
             })
-            ->addColumn('action', function(User $member) {
+            ->addColumn('action', function (User $member) {
                 return '
-                    <a href="'.route("admin.members.edit", ["slug" => $member->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.members.delete", ["slug" => $member->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                    <a href="'.route("admin.members.edit", ["id" => $member->id]).'">Edit</a> | <a href="#" data-href="'.route("admin.members.delete", ["slug" => $member->id]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
             })
             ->addIndexColumn()
@@ -102,8 +103,7 @@ class MemberController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        if($request->has('photos'))
-        {
+        if ($request->has('photos')) {
             //Process the image data
             $validatorImg = Validator::make($request->all(), [
                 'img_event' => 'mimes:jpg,png,jpeg|max:2048'
@@ -113,7 +113,7 @@ class MemberController extends Controller
             }
             $img = $request->file('photos');
             $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
-            $imgFile = Image::make($img)->resize(150, null, function($constrait) {
+            $imgFile = Image::make($img)->resize(150, null, function ($constrait) {
                 $constrait->aspectRatio();
             });
 
@@ -124,13 +124,12 @@ class MemberController extends Controller
 
             //simpan img
             $imgFile->save('img/avatar/'.$photos, 85); //tidak lupa di compress jg
-        }else{
+        } else {
             $photos = 'default-avatar.png';
         }
 
         $checker = User::where('email', $request->email)->count();
-        if($checker < 1)
-        {
+        if ($checker < 1) {
             $store = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -140,7 +139,7 @@ class MemberController extends Controller
                 'is_staff' => $request->is_staff,
                 'verified' => self::VERIFIED
             ]);
-        }else{
+        } else {
             return redirect()->back()->with('Error', 'User tersebut telah terdaftar!');
         }
 
@@ -176,10 +175,9 @@ class MemberController extends Controller
         );
 
         $member = User::where('id', $id)->first();
-        if(isset($member->verify_token))
-        {
+        if (isset($member->verify_token)) {
             $editable = false;
-        }else{
+        } else {
             $editable = true;
         }
 
@@ -198,22 +196,21 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $user = User::where('id', $id)->first();
 
-        if(!isset($user->verify_token))
-        {
+        if (!isset($user->verify_token)) {
             $validator = Validator::make($request->all(), [
                 'name'  => 'required|string',
-                'email' => 'required|unique:users,email',
+                'email' => ['required',
+                    Rule::unique('users')->ignore($user->id)
+                ]
             ]);
 
             if ($validator->fails()) {
                 return redirect()->back()->with('Error', $validator->errors()->first());
             }
 
-            if($request->has('photos'))
-            {
+            if ($request->has('photos')) {
                 //Process the image data
                 $validatorImg = Validator::make($request->all(), [
                     'img_event' => 'mimes:jpg,png,jpeg|max:2048'
@@ -223,9 +220,10 @@ class MemberController extends Controller
                 }
                 $img = $request->file('photos');
                 $photos = str_slug($request->name).'.'.$img->getClientOriginalExtension();
-                $imgFile = Image::make($img)->resize(150, null, function($constrait) {
+                $imgFile = Image::make($img)->resize(150, null, function ($constrait) {
                     $constrait->aspectRatio();
-                });;
+                });
+                ;
 
                 // Check dulu apakah img sudah ada
                 if (File::exists(public_path().'/img/avatar/'.$photos)) {
@@ -234,15 +232,13 @@ class MemberController extends Controller
 
                 //simpan img
                 $imgFile->save('img/avatar/'.$photos, 85); //tidak lupa di compress jg
-            }else{
+            } else {
                 $photos = $user->photos; // ambil gambar yg terpasang saat ini
             }
 
             $checker = User::where('email', $request->email)->where('id', '<>', $id)->count();
-            if($checker < 1)
-            {
-                if($request->has('password'))
-                {
+            if ($checker < 1) {
+                if ($request->has('password')) {
                     $update = User::where('id', $id)->update([
                         'name' => $request->name,
                         'email' => $request->email,
@@ -252,7 +248,7 @@ class MemberController extends Controller
                         'is_staff' => $request->is_staff,
                         'verified' => self::VERIFIED
                     ]);
-                }else{
+                } else {
                     $update = User::where('id', $id)->update([
                         'name' => $request->name,
                         'email' => $request->email,
@@ -262,10 +258,10 @@ class MemberController extends Controller
                         'verified' => self::VERIFIED
                     ]);
                 }
-            }else{
+            } else {
                 return redirect()->back()->with('Error', 'User dengan email tersebut telah terdaftar!');
             }
-        }else{
+        } else {
             $update = $user->update(['is_staff' => $request->is_staff]);
         }
 
