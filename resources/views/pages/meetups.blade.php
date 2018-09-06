@@ -20,7 +20,7 @@
 							<div class="card">
 								<div class="card-header" data-background-color="red">
 									<ul class="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color="orange">
-										<li class="nav-item ">{{ Carbon\Carbon::parse($event->start_date)->format('F ') }} </li>
+										<li class="nav-item ">{{ Carbon\Carbon::parse($event->start_date)->format('F') }} </li>
 									</ul>
 								</div>
 								<p style="font-size: 3.5em;margin-bottom: 0px;" class="text-center">{{ Carbon\Carbon::parse($event->start_date)->format('d') }}</p>
@@ -32,7 +32,7 @@
 						@if(isset($event))
 	                        <div class="col-md-12">
 	                        	<h3 class="title-event">{{ $event->name }}</h3>
-		                        <h4 class="description ">{{ Carbon\Carbon::parse($event->start_date)->format('l, d F Y') }} — {{ Carbon\Carbon::parse($event->start_date)->format('H:i a') }} - {{ Carbon\Carbon::parse($event->end_date)->format('H:i a') }}</h4>
+		                        <h4 class="description ">{{ Carbon\Carbon::parse($event->start_date)->format('l, d F Y') }} — {{ Carbon\Carbon::parse($event->start_date)->format('g:i A') }} - {{ Carbon\Carbon::parse($event->end_date)->format('g:i A') }}</h4>
 		                        <p class="description ">{{ $event->place_name }} — <a href="http://maps.google.com.au/?daddr={{ $event->place_name }}"  target="_blank">Directions</a></p>
 
 		                        <div class="row">
