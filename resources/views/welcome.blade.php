@@ -91,40 +91,44 @@
                         <h2 class="title">What the topic?</h2>
                         <hr>
                         <br />
-                        <p class="card-description">{!! $event->desc !!}</p>
+                        @if (date('Y-m-d') <= Carbon\Carbon::parse($event->start_date)->format('Y-m-d'))
+                            <p class="card-description">{!! $event->desc !!}</p>
+                        @else
+                            <h3 class="text-center">There's no topic yet</h3>
+                        @endif
                         <br />
                     </div>
                 </div>
-                @if(count($event->topic) > 0)
+                @if(count($event->topic) > 0 && (date('Y-m-d') <= Carbon\Carbon::parse($event->start_date)->format('Y-m-d')))
                     @foreach($event->topic as $topic)
                         @if($loop->first)
                             <div class="row" style="margin-bottom: 20px;">
                         @endif
-                                <div class="col-md-6">
-                                    <div class="topic-style">
-                                        <div class="col-xs-3">
-                                            <div class="speaker-avatar-wrapper">
-                                                @foreach($topic->speakers as $speaker)
-                                                <img src="{{ $speaker->avatar() }}" alt="{{ $speaker->name }}">
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-9">
-                                             <div class="desc-topic-style">
-                                                 <h5 class="topic-title">{{ $topic->title }}</h5>
-                                                 <p class="topic-sub-title">
-                                                    By
-                                                    @foreach($topic->speakers as $speaker)
-                                                        {{ $speaker->name }}
-                                                    @endforeach
-                                                 </p>
-                                                 <div class="topic-desc">
-                                                    {!! $topic->desc !!}
-                                                 </div>
-                                             </div>
+                            <div class="col-md-6">
+                                <div class="topic-style">
+                                    <div class="col-xs-3">
+                                        <div class="speaker-avatar-wrapper">
+                                            @foreach($topic->speakers as $speaker)
+                                            <img src="{{ $speaker->avatar() }}" alt="{{ $speaker->name }}">
+                                            @endforeach
                                         </div>
                                     </div>
+                                    <div class="col-xs-9">
+                                         <div class="desc-topic-style">
+                                             <h5 class="topic-title">{{ $topic->title }}</h5>
+                                             <p class="topic-sub-title">
+                                                By
+                                                @foreach($topic->speakers as $speaker)
+                                                    {{ $speaker->name }}
+                                                @endforeach
+                                             </p>
+                                             <div class="topic-desc">
+                                                {!! $topic->desc !!}
+                                             </div>
+                                         </div>
+                                    </div>
                                 </div>
+                            </div>
                         @if($loop->iteration == 2 && !$loop->last)
                             </div>
                             <div class="row" style="margin-bottom: 20px;">
@@ -167,7 +171,7 @@
 
         <div class="cd-section" style="margin-bottom: 20px;">
             <div class="container">
-                @if(isset($event))
+                @if(isset($event) && (date('Y-m-d') <= Carbon\Carbon::parse($event->start_date)->format('Y-m-d')))
                 <div class="row">
                     <div class="col-md-12 ml-auto mr-auto">
                         <h2 class="title">{{ $rsvpCounter }} People are Attending</h2>
