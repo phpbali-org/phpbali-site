@@ -91,15 +91,11 @@
                         <h2 class="title">What the topic?</h2>
                         <hr>
                         <br />
-                        @if (date('Y-m-d') <= Carbon\Carbon::parse($event->start_date)->format('Y-m-d'))
-                            <p class="card-description">{!! $event->desc !!}</p>
-                        @else
-                            <h3 class="text-center">There's no topic yet</h3>
-                        @endif
+                        <p class="card-description">{!! $event->desc !!}</p>
                         <br />
                     </div>
                 </div>
-                @if(count($event->topic) > 0 && (date('Y-m-d') <= Carbon\Carbon::parse($event->start_date)->format('Y-m-d')))
+                @if(count($event->topic) > 0)
                     @foreach($event->topic as $topic)
                         @if($loop->first)
                             <div class="row" style="margin-bottom: 20px;">
@@ -145,7 +141,7 @@
                         <h2 class="title">What the topic?</h2>
                         <hr>
                         <br />
-                        <h3 class="text-center">There's no topic yet</h3>
+                        <p class="text-center">There's no topic yet</p>
                         <br />
                     </div>
                 </div>
@@ -171,7 +167,7 @@
 
         <div class="cd-section" style="margin-bottom: 20px;">
             <div class="container">
-                @if(isset($event) && (date('Y-m-d') <= Carbon\Carbon::parse($event->start_date)->format('Y-m-d')))
+                @if(isset($event))
                 <div class="row">
                     <div class="col-md-12 ml-auto mr-auto">
                         <h2 class="title">{{ $rsvpCounter }} People are Attending</h2>
