@@ -21,10 +21,24 @@
     @include('partials.meta')
     @yield('additional-styles')
     <style>
-        @media(max-width: 860px)
+        @media(max-width: 991px)
         {
             .navbar{
-                padding: 18px;
+                padding: 0px 18px;
+            }
+        }
+
+        @media screen and (max-width: 991px) {
+            .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
+                color: #212529 !important;
+                font-weight: bold;
+            }
+            .navbar-collapse[data-color="blue"]:after {
+                background: #e9ecef;
+                /*background: -webkit-linear-gradient(#2CA8FF 0%, #000 80%); */
+                /*background: -o-linear-gradient(#2CA8FF 0%, #000 80%);*/
+                /*background: -moz-linear-gradient(#2CA8FF 0%, #000 80%);*/
+                /* background: linear-gradient(#2CA8FF 0%, #000 80%); */
             }
         }
     </style>

@@ -11,7 +11,29 @@
                         $imgUrl = asset('img/bg-event/'.$event->photos);
                     }
                 @endphp
-                <div class="page-header-image" style="background-image: url('{{$imgUrl}}')"></div>
+                @if (isset($event))
+                    @if ($event->mobile_photos)
+                        <style type="text/css">
+                            @media screen and (max-width: 991px) {
+                                .page-header-image {
+                                    background-image: url('/img/bg-event/{{ $event->mobile_photos }}') !important;
+                                }
+                            }
+                        </style>
+                    @endif
+                    <style type="text/css">
+                        .page-header-image {
+                            background-image: url('/img/bg-event/{{ $event->photos }}');
+                        }
+                    </style>
+                @else
+                    <style type="text/css">
+                        .page-header-image {
+                            background-image: url('https://res.cloudinary.com/phpbali/image/upload/c_scale,q_auto:good,w_2401/v1536239463/phpbali-firstmeetup.webp');
+                        }
+                    </style>
+                @endif
+                <div class="page-header-image"></div>
                 <div class="content-center">
                     <div class="row">
                         <div class="col-md-12 ml-auto mr-auto text-center">

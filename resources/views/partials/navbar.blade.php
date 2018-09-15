@@ -1,7 +1,8 @@
 <div class="container">
     <div class="navbar-translate">
         <a class="navbar-brand" href="{{ url('/') }}" rel="tooltip" data-placement="bottom" >
-            {{ config('app.name', 'Laravel') }}
+            <img src="{{ asset('img/favicon.png') }}" class="img-fluid" alt="PHP Bali Community" style="width: 50px;">
+            {{-- {{ config('app.name', 'Laravel') }} --}}
         </a>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar bar1"></span>
