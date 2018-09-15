@@ -21,7 +21,7 @@
     @include('partials.meta')
     @yield('additional-styles')
     <style>
-        @media(max-width: 991px)
+        @media screen and (max-width: 991px)
         {
             .navbar{
                 padding: 0px 18px;
@@ -35,10 +35,6 @@
             }
             .navbar-collapse[data-color="blue"]:after {
                 background: #e9ecef;
-                /*background: -webkit-linear-gradient(#2CA8FF 0%, #000 80%); */
-                /*background: -o-linear-gradient(#2CA8FF 0%, #000 80%);*/
-                /*background: -moz-linear-gradient(#2CA8FF 0%, #000 80%);*/
-                /* background: linear-gradient(#2CA8FF 0%, #000 80%); */
             }
         }
     </style>
