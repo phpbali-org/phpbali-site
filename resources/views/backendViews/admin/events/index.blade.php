@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('additional-style')
-@if(isset($event))
+@if(isset($eventss))
 <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}" />
 
 <style>
@@ -45,7 +45,7 @@ table.dataTable thead th.sorting_desc:after {
     </div>
     <div style="clear:both;"></div>
       <div class="white-box">
-        @if(isset($event))
+        @if(isset($events))
         <div class="table-responsive">
         	<table id="tableEvent" class="table">
         		<thead>
@@ -70,7 +70,7 @@ table.dataTable thead th.sorting_desc:after {
 @endsection
 
 @section('additional-scripts')
-  @if(isset($event))
+  @if(isset($events))
   <script src="{{ asset('js/datatables.min.js') }}"></script>
   <script type="text/javascript">
     $(function() {

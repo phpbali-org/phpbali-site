@@ -9,7 +9,7 @@
   width: unset !important;
   margin-right: 14px;
 }
-.bg-preview{
+.bg-preview, .mobile-bg-preview {
   display: none;
 }
 </style>
@@ -38,10 +38,17 @@
   				</div>
   			</div>
         <div class="form-group">
-          <label class="col-xs-12">Image Background for Event</label>
+          <label class="col-xs-12">Image Background for Event (Web)</label>
           <div class="col-xs-12">
             <img class="bg-preview" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
             <input id="img_event" name="img_event" type="file" accept="image/*" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12">Image Background for Event (Mobile)</label>
+          <div class="col-xs-12">
+            <img class="mobile-bg-preview" id="mobile-bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+            <input id="mobile_photos" name="mobile_photos" type="file" accept="image/*" required/>
           </div>
         </div>
         <div class="form-group">
@@ -164,26 +171,47 @@ function init() {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#bg-preview').attr('src', e.target.result);
+                if (input.id === 'img_event') {
+                    $('#bg-preview').attr('src', e.target.result);
+                } else if (input.id === 'mobile_photos') {
+                    $('#mobile-bg-preview').attr('src', e.target.result);
+                }
             };
 
             reader.readAsDataURL(input.files[0]);
         }
 
-        if($('#bg-preview').css('display') == 'none'){
-          $('#bg-preview').slideToggle();
+        if (input.id === 'img_event') {
+            if ($('#bg-preview').css('display') == 'none') {
+                $('#bg-preview').slideToggle();
+            }
+        } else if (input.id === 'mobile_photos') {
+            if ($('#mobile-bg-preview').css('display') == 'none') {
+                $('#mobile-bg-preview').slideToggle();
+            }
         }
     };
 
     $("#img_event").change(function () {
         var file = this.files[0], img;
-      if (Math.round(file.size / (1024 * 1024)) > 2) {
-         alert('Image yang di upload terlalu besar! (Max: 2MB)');
-         this.value = '';
-         return false;
-      }else{
-        readURL(this);
-      }
+        if (Math.round(file.size / (1024 * 1024)) > 2) {
+            alert('Image yang di upload terlalu besar! (Max: 2MB)');
+            this.value = '';
+            return false;
+        } else {
+            readURL(this);
+        }
+    });
+
+    $("#mobile_photos").change(function () {
+        var file = this.files[0], img;
+        if (Math.round(file.size / (1024 * 1024)) > 2) {
+            alert('Image yang di upload terlalu besar! (Max: 2MB)');
+            this.value = '';
+            return false;
+        } else {
+            readURL(this);
+        }
     });
 </script>
 @endsection

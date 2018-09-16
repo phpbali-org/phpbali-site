@@ -41,11 +41,17 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-12">Image Background for Event</label>
+          <label class="col-xs-12">Image Background for Event (Web)</label>
           <div class="col-xs-12">
             <img class="bg-preview" src="{{ asset('img/bg-event/'.$event->photos) }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
             <input id="img_event" name="img_event" type="file" accept="image/*"/>
-            <small>Lewatkan saja bagian ini, jika tidak ada perubahan pada gambar</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12">Image Background for Event (Mobile)</label>
+          <div class="col-xs-12">
+            <img class="mobile-bg-preview" src="{{ asset('img/bg-event/'.$event->mobile_photos) }}" id="mobile-bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+            <input id="mobile_photos" name="mobile_photos" type="file" accept="image/*"/>
           </div>
         </div>
   			<div class="form-group">
@@ -163,22 +169,47 @@ function init() {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#bg-preview').attr('src', e.target.result);
+                if (input.id === 'img_event') {
+                    $('#bg-preview').attr('src', e.target.result);
+                } else if (input.id === 'mobile_photos') {
+                    $('#mobile-bg-preview').attr('src', e.target.result);
+                }
             };
 
             reader.readAsDataURL(input.files[0]);
+        }
+
+        if (input.id === 'img_event') {
+            if ($('#bg-preview').css('display') == 'none') {
+                $('#bg-preview').slideToggle();
+            }
+        } else if (input.id === 'mobile_photos') {
+            if ($('#mobile-bg-preview').css('display') == 'none') {
+                $('#mobile-bg-preview').slideToggle();
+            }
         }
     };
 
     $("#img_event").change(function () {
         var file = this.files[0], img;
-      if (Math.round(file.size / (1024 * 1024)) > 2) {
-         alert('Image yang di upload terlalu besar! (Max: 2MB)');
-         this.value = '';
-         return false;
-      }else{
-        readURL(this);
-      }
+        if (Math.round(file.size / (1024 * 1024)) > 2) {
+            alert('Image yang di upload terlalu besar! (Max: 2MB)');
+            this.value = '';
+            return false;
+        } else {
+            readURL(this);
+        }
+    });
+
+    $("#mobile_photos").change(function () {
+        var file = this.files[0], img;
+        if (Math.round(file.size / (1024 * 1024)) > 2) {
+            alert('Image yang di upload terlalu besar! (Max: 2MB)');
+            this.value = '';
+            return false;
+        } else {
+            readURL(this);
+        }
     });
 </script>
 @endsection

@@ -32,7 +32,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('backendViews.admin.events.index');
+        $events = Events::where('deleted', 0)->get();
+        return view('backendViews.admin.events.index', ['events' => $events]);
     }
 
     /**
@@ -86,6 +87,7 @@ class EventController extends Controller
             'name' => 'required',
             'desc' => 'required',
             'img_event' => 'required',
+            'mobile_photos' => 'required',
             'tanggal_acara_start_date' => 'required',
             'waktu_acara_start_date' => 'required',
             'tanggal_acara_end_date' => 'required',
@@ -116,31 +118,43 @@ class EventController extends Controller
 
             //Process the image data
             $validatorImg = Validator::make($request->all(), [
-                'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                'img_event' => 'mimes:jpg,png,jpeg|max:2048',
+                'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048',
             ]);
+
             if ($validatorImg->fails()) {
                 return redirect()->back()->with('Error', $validatorImg->errors()->first());
             }
-            $img = $request->file('img_event');
-            $file_name = $slug.'.'.$img->getClientOriginalExtension();
-            $imgFile = Image::make($img)->resize(2880, null, function ($constraint) {
+
+            $web_photos = $request->file('img_event');
+            $web_file_name = $slug.'_web.'.$web_photos->getClientOriginalExtension();
+            // BUG: this is make the size of image more than 1 MB.
+            $webImgFile = Image::make($web_photos)->resize(2880, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-
-            // Check dulu apakah img sudah ada
-            if (File::exists(public_path().'/img/bg-event/'.$file_name)) {
-                File::delete(public_path().'/img/bg-event/'.$file_name);
+            // Check dulu apakah img untuk web sudah ada
+            if (File::exists(public_path().'/img/bg-event/'.$web_file_name)) {
+                File::delete(public_path().'/img/bg-event/'.$web_file_name);
             }
+            // Simpan img web
+            $webImgFile->save('img/bg-event/'.$web_file_name, 85); // tidak lupa di compress jg
 
-            //simpan img
-            $imgFile->save('img/bg-event/'.$file_name, 85); //tidak lupa di compress jg
+            // Mobile photos
+            $mobile_photos = $request->file('mobile_photos');
+            $mobile_file_name = $slug.'_mobile.'.$mobile_photos->getClientOriginalExtension();
+            $mobieImgFile = Image::make($mobile_photos);
+            if (File::exists(public_path().'/img/bg-event/'.$mobile_file_name)) {
+                File::delete(public_path().'/img/bg-event/'.$mobile_file_name);
+            }
+            $mobieImgFile->save('img/bg-event/'.$mobile_file_name, 85); // tidak lupa di compress jg
 
             //kirim data ke database
             $data = [
                 'name' => $request->name,
                 'slug' => $slug,
                 'desc' => $request->desc,
-                'photos' => $file_name,
+                'photos' => $web_file_name,
+                'mobile_photos' => $mobile_file_name,
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                 'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                 'place' => $request->place,
@@ -210,92 +224,89 @@ class EventController extends Controller
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
-            //gathering data
+            // Gathering data
+
             $start_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_start_date.' '.$request->waktu_acara_start_date);
             $end_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_end_date.' '.$request->waktu_acara_end_date);
             $editedSlug = str_slug($request->name, '-');
+
             if ($request->has('published')) {
                 $published = $request->published;
             } else {
                 $published = 0;
             }
 
+            $data = [
+                'name' => $request->name,
+                'slug' => $editedSlug,
+                'desc' => $request->desc,
+                'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
+                'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                'place_name' => $request->place_name,
+                'published' => $published,
+            ];
+
             if ($request->has('img_event')) {
-                //Process the image data
+                // Process the image data
                 $validatorImg = Validator::make($request->all(), [
                     'img_event' => 'mimes:jpg,png,jpeg|max:2048'
                 ]);
+
                 if ($validatorImg->fails()) {
                     return redirect()->back()->with('Error', $validatorImg->errors()->first());
                 }
-                $img = $request->file('img_event');
-                $file_name = $slug.'.'.$img->getClientOriginalExtension();
-                $imgFile = Image::make($img)->resize(2880, null, function ($constraint) {
+
+                $web_photos = $request->file('img_event');
+                $web_file_name = $slug.'_web.'.$web_photos->getClientOriginalExtension();
+                // BUG: this is make the size of image more than 1 MB.
+                $webImgFile = Image::make($web_photos)->resize(2880, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-
-                // Check dulu apakah img sudah ada
-                if (File::exists(public_path().'/img/bg-event/'.$file_name)) {
-                    File::delete(public_path().'/img/bg-event/'.$file_name);
+                // Check dulu apakah img untuk web sudah ada
+                if (File::exists(public_path().'/img/bg-event/'.$web_file_name)) {
+                    File::delete(public_path().'/img/bg-event/'.$web_file_name);
                 }
+                // Simpan img web
+                $webImgFile->save('img/bg-event/'.$web_file_name, 85); // tidak lupa di compress jg
 
-                //simpan img
-                $imgFile->save('img/bg-event/'.$file_name, 85); //tidak lupa di compress jg
+                $data['photos'] = $web_file_name;
             }
 
-            if (isset($request->place) && isset($request->latitude) && isset($request->longitude)) {
-                if ($request->has('img_event')) {
-                    $data = [
-                        'name' => $request->name,
-                        'slug' => $editedSlug,
-                        'desc' => $request->desc,
-                        'photos' => $file_name,
-                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                        'place' => $request->place,
-                        'place_name' => $request->place_name,
-                        'latitude' => $request->latitude,
-                        'longitude' => $request->longitude,
-                        'published' => $published
-                    ];
-                } else {
-                    $data = [
-                        'name' => $request->name,
-                        'slug' => $editedSlug,
-                        'desc' => $request->desc,
-                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                        'place' => $request->place,
-                        'place_name' => $request->place_name,
-                        'latitude' => $request->latitude,
-                        'longitude' => $request->longitude,
-                        'published' => $published
-                    ];
+            if ($request->has('mobile_photos')) {
+                // Process the image data
+                $validatorImg = Validator::make($request->all(), [
+                    'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048'
+                ]);
+
+                if ($validatorImg->fails()) {
+                    return redirect()->back()->with('Error', $validatorImg->errors()->first());
                 }
-            } else {
-                if ($request->has('img_event')) {
-                    $data = [
-                        'name' => $request->name,
-                        'slug' => $editedSlug,
-                        'desc' => $request->desc,
-                        'photos' => $file_name,
-                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                        'published' => $published
-                    ];
-                } else {
-                    $data = [
-                        'name' => $request->name,
-                        'slug' => $editedSlug,
-                        'desc' => $request->desc,
-                        'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                        'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                        'published' => $published
-                    ];
+
+                // Mobile photos
+                $mobile_photos = $request->file('mobile_photos');
+                $mobile_file_name = $slug.'_mobile.'.$mobile_photos->getClientOriginalExtension();
+                $mobieImgFile = Image::make($mobile_photos);
+                if (File::exists(public_path().'/img/bg-event/'.$mobile_file_name)) {
+                    File::delete(public_path().'/img/bg-event/'.$mobile_file_name);
                 }
+                $mobieImgFile->save('img/bg-event/'.$mobile_file_name, 85); // tidak lupa di compress jg
+
+                $data['mobile_photos'] = $mobile_file_name;
             }
 
-            //process data
+            if ($request->has('place')) {
+                $data['place'] = $request->place;
+            }
+
+            if ($request->has('latitude')) {
+                $data['latitude'] = $request->latitude;
+            }
+
+            if ($request->has('longitude')) {
+                $data['longitude'] = $request->longitude;
+            }
+
+            // Update data
             $execute = Events::where('slug', $slug)->update($data);
 
             if ($execute) {
