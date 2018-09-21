@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Events;
+use App\Event;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 
@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if(Schema::hasTable('events'))
         {
-            $event = Events::where('published',1)
+            $event = Event::where('published',1)
                 ->orderBy('created_at','desc')
                 ->with('topic')
                 ->with('rsvp')

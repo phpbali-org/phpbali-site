@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use App\Events;
+use App\Event;
 use App\Topics;
 use App\Reservation;
 use App\Conduct;
@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $event = Events::with('rsvp')
+        $event = Event::with('rsvp')
         ->where('published', 1)
         ->where('deleted', 0)
         ->orderBy('created_at', 'desc')
@@ -46,7 +46,7 @@ class HomeController extends Controller
 
     public function meetups()
     {
-        $event = Events::where('published', 1)->orderBy('created_at', 'desc')->get();
+        $event = Event::where('published', 1)->orderBy('created_at', 'desc')->get();
         if (isset($event)) {
             $events = $event;
             $is_register = 0;

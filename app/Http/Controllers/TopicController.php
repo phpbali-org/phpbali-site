@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Topics;
 use App\User;
-use App\Events;
+use App\Event;
 use DB;
 use Carbon\Carbon;
 use DataTables;
@@ -76,7 +76,7 @@ class TopicController extends Controller
     public function create()
     {
         $users = User::all();
-        $events = Events::where('deleted', 0)->get();
+        $events = Event::where('deleted', 0)->get();
         return view('backendViews.admin.topics.add')
         ->with('users', $users)
         ->with('events', $events);
@@ -141,7 +141,7 @@ class TopicController extends Controller
         }
 
         $users = User::all();
-        $events = Events::where('deleted', 0)->get();
+        $events = Event::where('deleted', 0)->get();
 
         return view('backendViews.admin.topics.edit')
         ->with('topic', $topic)

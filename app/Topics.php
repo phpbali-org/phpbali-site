@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\Events;
+use App\Event;
 
 class Topics extends Model
 {
@@ -18,6 +18,6 @@ class Topics extends Model
 
     public function event()
     {
-    	return $this->belongsTo('App\Events', 'event_id');
+    	return $this->belongsTo('App\Event', 'event_id');
     }
 }

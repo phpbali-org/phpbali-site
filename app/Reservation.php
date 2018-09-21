@@ -10,7 +10,7 @@ class Reservation extends Model
     protected $fillable= ['event_id','user_id'];
 
     public function events() {
-    	return $this->belongsTo("App\Events","event_id");
+    	return $this->belongsTo("App\Event","event_id");
     }
 
     public function user() {
