@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use App\Event;
-use App\Topics;
-use App\Reservation;
-use App\Conduct;
-use App\User;
+use App\Models\Event;
+use App\Models\Topics;
+use App\Models\Reservation;
+use App\Models\Conduct;
+use App\Models\User;
 use Auth;
 
 class HomeController extends Controller

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use Auth;
 use Validator;
 use Session;
@@ -47,7 +47,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function showLoginForm() 
+    public function showLoginForm()
     {
         return view('auth.login');
     }

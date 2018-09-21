@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Topics;
-use App\User;
-use App\Event;
+use App\Models\Topics;
+use App\Models\User;
+use App\Models\Event;
 use DB;
 use Carbon\Carbon;
 use DataTables;

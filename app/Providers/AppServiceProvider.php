@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Event;
+use App\Models\Event;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 

@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Topics;
+use App\Models\Reservation;
 
 class Event extends Model
 {
@@ -15,7 +17,7 @@ class Event extends Model
 
     public function topic()
     {
-        return $this->hasMany("App\Topics", "event_id");
+        return $this->hasMany(Topics::class, "event_id");
     }
 
     public function speakers()
@@ -25,6 +27,6 @@ class Event extends Model
 
     public function rsvp()
     {
-        return $this->hasMany("App\Reservation", "event_id");
+        return $this->hasMany(Reservation::class, "event_id");
     }
 }

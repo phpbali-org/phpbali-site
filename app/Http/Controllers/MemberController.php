@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\User;
+use App\Models\User;
 use DB;
 use Image;
 use File;

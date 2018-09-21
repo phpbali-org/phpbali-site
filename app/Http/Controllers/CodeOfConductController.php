@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Conduct;
+use App\Models\Conduct;
 use Validator;
 
 class CodeOfConductController extends Controller
@@ -38,7 +38,7 @@ class CodeOfConductController extends Controller
     	if($checker < 1)
     	{
     		$data = ['desc' => $request->desc];
-    		
+
     		$execute = Conduct::create($data);
 
     		if($execute)
@@ -49,7 +49,7 @@ class CodeOfConductController extends Controller
     		}
     	}else{
     		$data = ['desc' => $request->desc];
-    		
+
     		$execute = Conduct::where('id', 1)->update($data);
 
     		if($execute)
@@ -59,5 +59,5 @@ class CodeOfConductController extends Controller
     			return redirect()->back()->with('Error', 'Terdapat kesalahan! Silahkan hubungi pihak administrator');
     		}
     	}
-    }	
+    }
 }

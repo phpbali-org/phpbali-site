@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Event;
+use App\Models\User;
 
 class Reservation extends Model
 {
@@ -10,10 +12,10 @@ class Reservation extends Model
     protected $fillable= ['event_id','user_id'];
 
     public function events() {
-    	return $this->belongsTo("App\Event","event_id");
+    	return $this->belongsTo(Event::class, "event_id");
     }
 
     public function user() {
-    	return $this->belongsTo("App\User","user_id");
+    	return $this->belongsTo(User::class, "user_id");
     }
 }

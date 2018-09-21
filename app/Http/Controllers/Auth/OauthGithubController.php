@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Auth;
 use Socialite;
 use Redirect;
@@ -39,7 +39,7 @@ class OauthGithubController extends Controller
         Auth::login($authUser, true);
 
         return Redirect::to(route('index'));
-    }   
+    }
 
     /**
      * Return user if exists; create and return if doesn't
@@ -68,9 +68,9 @@ class OauthGithubController extends Controller
                     'slug' => str_slug($username).'-'.$githubUser->getId(),
                     'github_id' => $githubUser->getId(),
                     'photos' => $githubUser->getAvatar(),
-                    'verify_token' => str_random(60), 
+                    'verify_token' => str_random(60),
                 ]);
-                
+
                 return $checkAgain;
             }else{
                  $username = $githubUser->getEmail();

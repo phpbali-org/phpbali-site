@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
 use Session;
-use App\Admin;
+use App\Models\Admin;
 
 class AdminLoginController extends Controller
 {

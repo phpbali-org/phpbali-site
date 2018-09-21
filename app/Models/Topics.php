@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
-use App\Event;
+use App\Models\User;
+use App\Models\Event;
 
 class Topics extends Model
 {
@@ -13,11 +13,11 @@ class Topics extends Model
 
     public function speakers()
     {
-    	return $this->belongsToMany('App\User', 'topic_speaker', 'topic_id', 'user_id')->withTimestamps();
+    	return $this->belongsToMany(User::class, 'topic_speaker', 'topic_id', 'user_id')->withTimestamps();
     }
 
     public function event()
     {
-    	return $this->belongsTo('App\Event', 'event_id');
+    	return $this->belongsTo(Event::class, 'event_id');
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Reservation;
+use App\Models\Reservation;
 use Auth;
-use App\Event;
+use App\Models\Event;
 
 class ReservationController extends Controller
 {

@@ -1,9 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Reservation;
 
 class User extends Authenticatable
 {
@@ -28,7 +29,7 @@ class User extends Authenticatable
     ];
 
     public function rsvp() {
-        return $this->hasMany("App\Reservation","id_user");
+        return $this->hasMany(Reservation::class, "id_user");
     }
 
     public function avatar(){
