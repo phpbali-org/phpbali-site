@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Event;
 
-class Topics extends Model
+class Topic extends Model
 {
     protected $table = 'topics';
     protected $fillable = ['slug', 'event_id', 'title', 'meetup', 'desc', 'deleted'];

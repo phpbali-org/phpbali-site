@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Topics;
+use App\Models\Topic;
 use App\Models\Reservation;
 
 class Event extends Model
@@ -17,7 +17,7 @@ class Event extends Model
 
     public function topic()
     {
-        return $this->hasMany(Topics::class, "event_id");
+        return $this->hasMany(Topic::class, "event_id");
     }
 
     public function speakers()

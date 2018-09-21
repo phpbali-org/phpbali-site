@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Models\Topics;
+use App\Models\Topic;
 use App\Models\User;
 use App\Models\Event;
 use DB;
@@ -31,7 +31,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topics::where('deleted', 0)->count();
+        $topics = Topic::where('deleted', 0)->count();
         return view('backendViews.admin.topics.index')
         ->with('topics', $topics);
     }
@@ -43,22 +43,22 @@ class TopicController extends Controller
      */
     public function jsonIndex()
     {
-        $topics = Topics::query();
+        $topics = Topic::query();
         $data = DataTables::eloquent($topics)
             ->filter(function($query) {
                 $query->where('deleted', 0);
             })
-            ->addColumn('speakers', function(Topics $topic) {
+            ->addColumn('speakers', function(Topic $topic) {
                 $speakers = [];
                 foreach ($topic->speakers as $speaker) {
                     $speakers[] = $speaker->name;
                 }
                 return implode(',', $speakers);
             })
-            ->addColumn('event', function(Topics $topic) {
+            ->addColumn('event', function(Topic $topic) {
                 return $topic->event->name;
             })
-            ->addColumn('action', function(Topics $topic) {
+            ->addColumn('action', function(Topic $topic) {
                 return '
                     <a href="'.route("admin.topic.edit", ["slug" => $topic->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.topic.delete", ["slug" => $topic->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
@@ -101,7 +101,7 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Topics::where('title', $request->title)->where('deleted',  0)->count();
+        $checker = Topic::where('title', $request->title)->where('deleted',  0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
@@ -112,10 +112,10 @@ class TopicController extends Controller
                 'desc' => $request->desc
             ];
 
-            $execute = Topics::create($data);
+            $execute = Topic::create($data);
 
             if ($execute) {
-                $topic = Topics::find($execute->id);
+                $topic = Topic::find($execute->id);
                 $topic->speakers()->sync($request->get('id_user'));
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil dibuat!');
@@ -131,7 +131,7 @@ class TopicController extends Controller
      */
     public function edit($slug)
     {
-        $topic = Topics::where('slug', $slug)->where('deleted', 0)->first();
+        $topic = Topic::where('slug', $slug)->where('deleted', 0)->first();
 
         $selected_user_id = array();
 
@@ -170,7 +170,7 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Topics::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted',  0)->count();
+        $checker = Topic::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted',  0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
@@ -181,10 +181,10 @@ class TopicController extends Controller
                 'desc' => $request->desc
             ];
 
-            $execute = Topics::where('slug', $slug)->update($data);
+            $execute = Topic::where('slug', $slug)->update($data);
 
             if ($execute) {
-                $topic = Topics::where('slug', str_slug($request->title, '-'))->first();
+                $topic = Topic::where('slug', str_slug($request->title, '-'))->first();
                 $topic->speakers()->sync($request->get('id_user'));
 
                 return redirect()->route('admin.topic')->with('Success', 'Topik berhasil diedit!');
@@ -201,7 +201,7 @@ class TopicController extends Controller
     public function destroy($slug)
     {
         $data = ['deleted' => 1];
-        $execute = Topics::where('slug', $slug)->update($data);
+        $execute = Topic::where('slug', $slug)->update($data);
 
         return redirect()->route('admin.topic')->with('Success', 'Topik berhasil dihapus!');
     }
