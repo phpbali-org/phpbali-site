@@ -64,7 +64,7 @@
 	{
 		margin: 0;
 	}
-	
+
 	.about-organizers .col-sm-4{
 	    margin-bottom: 20px;
 	}
@@ -85,8 +85,14 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<h1 class="title">About</h1>
-					<p class="lead">Every 3rd Thursday of the month you'll find us talking about what we're doing and what's happening around us in the world of PHP.</p>
-					<p class="lead">PHPBali wouldn't be possible without our organisers:</p>
+					<p class="lead">
+                        This community talks about PHP and web technology.
+                        Each two of months (if it's possible), we'll do a meetup or workshop.
+                        We are open to collaborate with another tech community.
+                    </p>
+					<p class="lead">
+                        PHPBali wouldn't be possible without our organisers:
+                    </p>
 				</div>
 			</div>
 		</div>
