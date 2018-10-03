@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Topics;
-use App\User;
-use App\Events;
+use App\Models\User;
+use App\Models\Event;
 use DB;
 use Carbon\Carbon;
 use Image;
@@ -32,7 +31,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Events::where('deleted', 0)->get();
+        $events = Event::where('deleted', 0)->get();
         return view('backendViews.admin.events.index', ['events' => $events]);
     }
 
@@ -43,19 +42,19 @@ class EventController extends Controller
      */
     public function jsonIndex()
     {
-        $events = Events::query();
+        $events = Event::query();
         $data = DataTables::eloquent($events)
             ->filter(function ($query) {
                 $query->where('deleted', 0);
             })
-            ->addColumn('status', function (Events $event) {
+            ->addColumn('status', function (Event $event) {
                 if ($event->published == 1) {
                     return 'Published';
                 } else {
                     return 'Not Published';
                 }
             })
-            ->addColumn('action', function (Events $event) {
+            ->addColumn('action', function (Event $event) {
                 return '
                     <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
@@ -102,7 +101,7 @@ class EventController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Events::where('name', $request->name)->where('deleted', 0)->count();
+        $checker = Event::where('name', $request->name)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
@@ -165,7 +164,7 @@ class EventController extends Controller
             ];
 
             //process data
-            $execute = Events::create($data);
+            $execute = Event::create($data);
 
             if ($execute) {
                 return redirect()->route('admin.event')->with('Success', 'Event telah berhasil di buat, jangan lupa untuk membuat topic nya juga!');
@@ -183,7 +182,7 @@ class EventController extends Controller
      */
     public function edit($slug)
     {
-        $event = Events::where('slug', $slug)->where('deleted', 0)->first();
+        $event = Event::where('slug', $slug)->where('deleted', 0)->first();
 
         $tanggal_acara_start_date = date('d/M/Y', strtotime($event->start_date));
         $tanggal_acara_end_date = date('d/M/Y', strtotime($event->end_date));
@@ -220,7 +219,7 @@ class EventController extends Controller
             return redirect()->back()->with('Error', $valdiator->errors()->first());
         }
 
-        $checker = Events::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted', 0)->count();
+        $checker = Event::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
@@ -307,7 +306,7 @@ class EventController extends Controller
             }
 
             // Update data
-            $execute = Events::where('slug', $slug)->update($data);
+            $execute = Event::where('slug', $slug)->update($data);
 
             if ($execute) {
                 return redirect()->route('admin.event')->with('Success', 'Event telah berhasil diedit');
@@ -326,7 +325,7 @@ class EventController extends Controller
     public function destroy($slug)
     {
         $data = ['deleted' => 1];
-        $execute = Events::where('slug', $slug)->update($data);
+        $execute = Event::where('slug', $slug)->update($data);
         if ($execute) {
             return redirect()->route('admin.event')->with('Success', 'Event telah berhasil dihapus!');
         } else {

@@ -1,13 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Topic;
+use App\Models\Reservation;
 
-class Events extends Model
+class Event extends Model
 {
     protected $table = 'events';
-    
+
     protected $fillable = [
         'slug', 'name', 'desc', 'start_date', 'end_date', 'place', 'place_name',
         'latitude', 'longitude', 'published', 'deleted', 'photos', 'mobile_photos'
@@ -15,7 +17,7 @@ class Events extends Model
 
     public function topic()
     {
-        return $this->hasMany("App\Topics", "event_id");
+        return $this->hasMany(Topic::class, "event_id");
     }
 
     public function speakers()
@@ -25,6 +27,6 @@ class Events extends Model
 
     public function rsvp()
     {
-        return $this->hasMany("App\Reservation", "event_id");
+        return $this->hasMany(Reservation::class, "event_id");
     }
 }

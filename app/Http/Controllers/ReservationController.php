@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Reservation;
+use App\Models\Reservation;
 use Auth;
-use App\Events;
+use App\Models\Event;
 
 class ReservationController extends Controller
 {
@@ -21,7 +21,7 @@ class ReservationController extends Controller
 
     public function rsvp($slug)
     {
-        $event = Events::where('slug', $slug)->first();
+        $event = Event::where('slug', $slug)->first();
         $rsvpChecker = Reservation::where('event_id', $event->id)->where('user_id', Auth::id())->count();
         if ($rsvpChecker < 1) {
             $rsvp = $this->createReservation($event->id, Auth::guard('web')->user()->id);

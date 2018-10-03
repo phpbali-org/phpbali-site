@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Admin;
+use App\Models\Admin;
 use Hash;
 use Auth;
 
