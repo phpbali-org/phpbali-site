@@ -27,3 +27,6 @@ di `DB_DATABASE`
 1. Jalankan perintah `cp .env.example .env` di command prompt atau terminal. Edit konfigurasi database `DB_DATABASE=phpbali` dan `DB_PASSWORD=root` pada file `.env`.
 1. Jalankan perintah `docker-compose up` di command prompt atau terminal.
 1. Jalankan perintah `docker-compose exec app php artisan migrate --seed` di command prompt atau terminal.
+
+## Berkontribusi
+Kami terbuka dengan kontribusi Anda, entah itu berupa memberi tanda bintang ⭐️ pada repository ini, mengirimkan [issue](https://github.com/w3id/webunconfid-website/issues) dan pull request. Untuk detailnya silahkan dibaca di halaman [kontribusi](CONTRIBUTING.md).
