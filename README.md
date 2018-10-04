@@ -29,4 +29,4 @@ di `DB_DATABASE`
 1. Jalankan perintah `docker-compose exec app php artisan migrate --seed` di command prompt atau terminal.
 
 ## Berkontribusi
-Kami terbuka dengan kontribusi Anda, entah itu berupa memberi tanda bintang ⭐️ pada repository ini, mengirimkan [issue](https://github.com/w3id/webunconfid-website/issues) dan pull request. Untuk detailnya silahkan dibaca di halaman [kontribusi](CONTRIBUTING.md).
+Kami terbuka dengan kontribusi Anda, entah itu berupa memberi tanda bintang ⭐️ pada repository ini, mengirimkan [issue](https://github.com/BaliPHP/phpbali-site/issues) dan pull request. Untuk detailnya silahkan dibaca di halaman [kontribusi](CONTRIBUTING.md).
