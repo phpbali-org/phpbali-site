@@ -16,6 +16,7 @@ services:
       - ./site.conf:/etc/nginx/conf.d/default.conf
     links:
       - app
+      - db
     restart: unless-stopped
   adminer:
     image: adminer
