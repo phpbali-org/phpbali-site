@@ -78,22 +78,25 @@ class ProfileController extends Controller
             ]);
         }
 
-        $imagePath = $request->photos;
-        $fileName = str_slug(Auth::user()->email).time().'.'.$imagePath->getClientOriginalExtension();
-        $resizedImage = Image::make($imagePath)->resize(150, null, function($constrait) {
-            $constrait->aspectRatio();
+        $photoPath = $request->photos;
+        $avatarName = str_slug(Auth::user()->email).'.'.$photoPath->getClientOriginalExtension();
+        $avatar = Image::make($photoPath->getRealPath());
+        $avatar->resize(150, null, function($constraint) {
+            $constraint->aspectRatio();
         });
+        $avatar->stream();
 
         // Check dulu apakah img sudah ada
-        if (File::exists(public_path().'/img/avatar/'.$fileName)) {
-            File::delete(public_path().'/img/avatar/'.$fileName);
+        if (\Storage::disk('avatar')->exists($avatarName)) {
+            \Storage::disk('avatar')->delete($avatarName);
         }
 
-        //simpan img
-        $resizedImage->save('img/avatar/'.$fileName, 85); //tidak lupa di compress jg
+        // Save avatar
+        $uploadAvatar = \Storage::disk('avatar')->put($avatarName, $avatar, 'public');
 
-        //kirim nama file ke database
-        $storeImg = Auth::guard('web')->user()->update(['photos' => $fileName]);
+        $storeImg = Auth::guard('web')->user()->update([
+            'photos' => $avatarName,
+        ]);
 
         if($storeImg) {
             return redirect()->back()->with([

@@ -32,12 +32,14 @@ class User extends Authenticatable
         return $this->hasMany(Reservation::class, "id_user");
     }
 
-    public function avatar(){
-        if($this->github_id)
-        {
+    public function avatar()
+    {
+        if (isset($this->photos)) {
+            return \Storage::disk('avatar')->url($this->photos);
+        } else if (isset($this->github_id)) {
             return 'https://avatars2.githubusercontent.com/u/'.$this->github_id.'?v=4';
-        }else{
-            return '/img/avatar/'.$this->photos;
+        } else {
+            // TODO: Setup default avatar
         }
     }
 }
