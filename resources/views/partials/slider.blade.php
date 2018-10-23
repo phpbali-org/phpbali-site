@@ -16,14 +16,14 @@
                         <style type="text/css">
                             @media screen and (max-width: 991px) {
                                 .page-header-image {
-                                    background-image: url('/img/bg-event/{{ $event->mobile_photos }}') !important;
+                                    background-image: url({{ $event->mobilePhotoUrl() }}) !important;
                                 }
                             }
                         </style>
                     @endif
                     <style type="text/css">
                         .page-header-image {
-                            background-image: url('/img/bg-event/{{ $event->photos }}');
+                            background-image: url({{ $event->photoUrl() }})
                         }
                     </style>
                 @else

@@ -125,35 +125,41 @@ class EventController extends Controller
                 return redirect()->back()->with('Error', $validatorImg->errors()->first());
             }
 
-            $web_photos = $request->file('img_event');
-            $web_file_name = $slug.'_web.'.$web_photos->getClientOriginalExtension();
-            // BUG: this is make the size of image more than 1 MB.
-            $webImgFile = Image::make($web_photos)->resize(2880, null, function ($constraint) {
+            $webPhoto = $request->img_event;
+            $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();;
+            $webImgEvent = Image::make($webPhoto->getRealPath());
+            $webImgEvent->resize(1024, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            // Check dulu apakah img untuk web sudah ada
-            if (File::exists(public_path().'/img/bg-event/'.$web_file_name)) {
-                File::delete(public_path().'/img/bg-event/'.$web_file_name);
-            }
-            // Simpan img web
-            $webImgFile->save('img/bg-event/'.$web_file_name, 85); // tidak lupa di compress jg
+            $webImgEvent->stream();
 
-            // Mobile photos
-            $mobile_photos = $request->file('mobile_photos');
-            $mobile_file_name = $slug.'_mobile.'.$mobile_photos->getClientOriginalExtension();
-            $mobieImgFile = Image::make($mobile_photos);
-            if (File::exists(public_path().'/img/bg-event/'.$mobile_file_name)) {
-                File::delete(public_path().'/img/bg-event/'.$mobile_file_name);
+            // Check dulu apakah img bg event sudah ada
+            if (\Storage::disk('bg-event')->exists($webPhotoName)) {
+                \Storage::disk('bg-event')->delete($webPhotoName);
             }
-            $mobieImgFile->save('img/bg-event/'.$mobile_file_name, 85); // tidak lupa di compress jg
 
-            //kirim data ke database
-            $data = [
+            // Save web img bg event
+            $uploadWebImgEvent = \Storage::disk('bg-event')->put($webPhotoName, $webImgEvent, 'public');
+
+            $mobilePhoto = $request->mobile_photos;
+            $mobilePhotoName = $slug.'_mobile.'.$mobilePhoto->getClientOriginalExtension();
+            $mobileImgEvent = Image::make($mobilePhoto->getRealPath());
+            $mobileImgEvent->stream();
+
+            if (\Storage::disk('bg-event')->exists($mobilePhotoName)) {
+                \Storage::disk('bg-event')->delete($mobilePhotoName);
+            }
+
+            // Save web img bg event
+            $uploadMobileImgEvent = \Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
+
+            // Process data
+            $execute = Event::create([
                 'name' => $request->name,
                 'slug' => $slug,
                 'desc' => $request->desc,
-                'photos' => $web_file_name,
-                'mobile_photos' => $mobile_file_name,
+                'photos' => $webPhotoName,
+                'mobile_photos' => $mobilePhotoName,
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
                 'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
                 'place' => $request->place,
@@ -161,10 +167,7 @@ class EventController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'published' => $published
-            ];
-
-            //process data
-            $execute = Event::create($data);
+            ]);
 
             if ($execute) {
                 return redirect()->route('admin.event')->with('Success', 'Event telah berhasil di buat, jangan lupa untuk membuat topic nya juga!');
@@ -255,20 +258,23 @@ class EventController extends Controller
                     return redirect()->back()->with('Error', $validatorImg->errors()->first());
                 }
 
-                $web_photos = $request->file('img_event');
-                $web_file_name = $slug.'_web.'.$web_photos->getClientOriginalExtension();
-                // BUG: this is make the size of image more than 1 MB.
-                $webImgFile = Image::make($web_photos)->resize(2880, null, function ($constraint) {
+                $webPhoto = $request->img_event;
+                $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();;
+                $webImgEvent = Image::make($webPhoto->getRealPath());
+                $webImgEvent->resize(1024, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-                // Check dulu apakah img untuk web sudah ada
-                if (File::exists(public_path().'/img/bg-event/'.$web_file_name)) {
-                    File::delete(public_path().'/img/bg-event/'.$web_file_name);
-                }
-                // Simpan img web
-                $webImgFile->save('img/bg-event/'.$web_file_name, 85); // tidak lupa di compress jg
+                $webImgEvent->stream();
 
-                $data['photos'] = $web_file_name;
+                // Check dulu apakah img bg event sudah ada
+                if (\Storage::disk('bg-event')->exists($webPhotoName)) {
+                    \Storage::disk('bg-event')->delete($webPhotoName);
+                }
+
+                // Save web img bg event
+                $uploadWebImgEvent = \Storage::disk('bg-event')->put($webPhotoName, $webImgEvent, 'public');
+
+                $data['photos'] = $webPhotoName;
             }
 
             if ($request->has('mobile_photos')) {
@@ -282,15 +288,19 @@ class EventController extends Controller
                 }
 
                 // Mobile photos
-                $mobile_photos = $request->file('mobile_photos');
-                $mobile_file_name = $slug.'_mobile.'.$mobile_photos->getClientOriginalExtension();
-                $mobieImgFile = Image::make($mobile_photos);
-                if (File::exists(public_path().'/img/bg-event/'.$mobile_file_name)) {
-                    File::delete(public_path().'/img/bg-event/'.$mobile_file_name);
-                }
-                $mobieImgFile->save('img/bg-event/'.$mobile_file_name, 85); // tidak lupa di compress jg
+                $mobilePhoto = $request->mobile_photos;
+                $mobilePhotoName = $slug.'_mobile.'.$mobilePhoto->getClientOriginalExtension();
+                $mobileImgEvent = Image::make($mobilePhoto->getRealPath());
+                $mobileImgEvent->stream();
 
-                $data['mobile_photos'] = $mobile_file_name;
+                if (\Storage::disk('bg-event')->exists($mobilePhotoName)) {
+                    \Storage::disk('bg-event')->delete($mobilePhotoName);
+                }
+
+                // Save mobile img bg event
+                $uploadMobileImgEvent = \Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
+
+                $data['mobile_photos'] = $mobilePhotoName;
             }
 
             if ($request->has('place')) {

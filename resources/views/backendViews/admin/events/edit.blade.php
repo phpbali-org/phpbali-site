@@ -43,14 +43,14 @@
         <div class="form-group">
           <label class="col-xs-12">Image Background for Event (Web)</label>
           <div class="col-xs-12">
-            <img class="bg-preview" src="{{ asset('img/bg-event/'.$event->photos) }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+            <img class="bg-preview" src="{{ $event->photoUrl() }}" id="bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
             <input id="img_event" name="img_event" type="file" accept="image/*"/>
           </div>
         </div>
         <div class="form-group">
           <label class="col-xs-12">Image Background for Event (Mobile)</label>
           <div class="col-xs-12">
-            <img class="mobile-bg-preview" src="{{ asset('img/bg-event/'.$event->mobile_photos) }}" id="mobile-bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
+            <img class="mobile-bg-preview" src="{{ $event->mobilePhotoUrl() }}" id="mobile-bg-preview" style="height: 300px; width: auto; margin-top: 10px; margin-bottom: 10px;"/>
             <input id="mobile_photos" name="mobile_photos" type="file" accept="image/*"/>
           </div>
         </div>

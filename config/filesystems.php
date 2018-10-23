@@ -71,6 +71,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'bg-event' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/bg-event'),
+            'url' => env('APP_URL').'/storage/bg-event',
+            'visibility' => 'public',
+        ],
     ],
 
 ];
