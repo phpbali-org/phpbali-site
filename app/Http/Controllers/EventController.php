@@ -8,6 +8,7 @@ use App\Models\Event;
 use Carbon\Carbon;
 use Image;
 use DataTables;
+use Storage;
 
 class EventController extends Controller
 {
@@ -124,7 +125,6 @@ class EventController extends Controller
 
             $webPhoto = $request->img_event;
             $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
-            ;
             $webImgEvent = Image::make($webPhoto->getRealPath());
             $webImgEvent->resize(1024, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -132,8 +132,8 @@ class EventController extends Controller
             $webImgEvent->stream();
 
             // Check dulu apakah img bg event sudah ada
-            if (\Storage::disk('bg-event')->exists($webPhotoName)) {
-                \Storage::disk('bg-event')->delete($webPhotoName);
+            if (Storage::disk('bg-event')->exists($webPhotoName)) {
+                Storage::disk('bg-event')->delete($webPhotoName);
             }
 
             // Save web img bg event
@@ -144,12 +144,12 @@ class EventController extends Controller
             $mobileImgEvent = Image::make($mobilePhoto->getRealPath());
             $mobileImgEvent->stream();
 
-            if (\Storage::disk('bg-event')->exists($mobilePhotoName)) {
-                \Storage::disk('bg-event')->delete($mobilePhotoName);
+            if (Storage::disk('bg-event')->exists($mobilePhotoName)) {
+                Storage::disk('bg-event')->delete($mobilePhotoName);
             }
 
             // Save web img bg event
-            $uploadMobileImgEvent = \Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
+            $uploadMobileImgEvent = Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
 
             // Process data
             $execute = Event::create([
@@ -217,15 +217,19 @@ class EventController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', $valdiator->errors()->first());
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Event::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted', 0)->count();
+        $checker = Event::query()
+            ->where('name', $request->name)
+            ->where('slug', '<>', $slug)
+            ->where('deleted', 0)
+            ->count();
+
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
             // Gathering data
-
             $start_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_start_date.' '.$request->waktu_acara_start_date);
             $end_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_end_date.' '.$request->waktu_acara_end_date);
             $editedSlug = str_slug($request->name, '-');
@@ -258,7 +262,6 @@ class EventController extends Controller
 
                 $webPhoto = $request->img_event;
                 $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
-                ;
                 $webImgEvent = Image::make($webPhoto->getRealPath());
                 $webImgEvent->resize(1024, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -266,12 +269,12 @@ class EventController extends Controller
                 $webImgEvent->stream();
 
                 // Check dulu apakah img bg event sudah ada
-                if (\Storage::disk('bg-event')->exists($webPhotoName)) {
-                    \Storage::disk('bg-event')->delete($webPhotoName);
+                if (Storage::disk('bg-event')->exists($webPhotoName)) {
+                    Storage::disk('bg-event')->delete($webPhotoName);
                 }
 
                 // Save web img bg event
-                $uploadWebImgEvent = \Storage::disk('bg-event')->put($webPhotoName, $webImgEvent, 'public');
+                $uploadWebImgEvent = Storage::disk('bg-event')->put($webPhotoName, $webImgEvent, 'public');
 
                 $data['photos'] = $webPhotoName;
             }
@@ -292,12 +295,12 @@ class EventController extends Controller
                 $mobileImgEvent = Image::make($mobilePhoto->getRealPath());
                 $mobileImgEvent->stream();
 
-                if (\Storage::disk('bg-event')->exists($mobilePhotoName)) {
-                    \Storage::disk('bg-event')->delete($mobilePhotoName);
+                if (Storage::disk('bg-event')->exists($mobilePhotoName)) {
+                    Storage::disk('bg-event')->delete($mobilePhotoName);
                 }
 
                 // Save mobile img bg event
-                $uploadMobileImgEvent = \Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
+                $uploadMobileImgEvent = Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
 
                 $data['mobile_photos'] = $mobilePhotoName;
             }

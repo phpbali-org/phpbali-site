@@ -4,6 +4,26 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    public function tables()
+    {
+        return collect(json_decode(json_encode(DB::select('SHOW TABLES')), true))
+            ->map(function ($item) {
+                return array_values($item)[0];
+            })->filter(function ($item) {
+                return $item != 'migrations';
+            });
+    }
+
+    protected function truncateTables()
+    {
+        Schema::disableForeignKeyConstraints();
+        foreach ($this->tables() as $table) {
+            DB::table($table)->truncate();
+            $this->command->info("Truncated: {$table}");
+        }
+        Schema::enableForeignKeyConstraints();
+    }
+
     /**
      * Run the database seeds.
      *
@@ -11,11 +31,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        DB::table('admins')->insert([
-            'name' => 'Super Admin',
-            'email' => 'admin@phpbali.com',
-            'password' => bcrypt('phpbaliadmin002'),
-        ]);
+        if (app()->environment('production')) {
+            exit('I just stopped you getting fired.');
+        }
+
+        $this->truncateTables();
+
+        $this->call(UsersSeeder::class);
+        $this->call(AdminsSeeder::class);
+        $this->call(EventsSeeder::class);
     }
 }
