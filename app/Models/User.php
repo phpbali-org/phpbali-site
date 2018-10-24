@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Reservation;
 
 class User extends Authenticatable
 {
@@ -38,7 +37,8 @@ class User extends Authenticatable
         'password', 'remember_token','auth_token'
     ];
 
-    public function rsvp() {
+    public function rsvp()
+    {
         return $this->hasMany(Reservation::class, "id_user");
     }
 
@@ -46,7 +46,7 @@ class User extends Authenticatable
     {
         if (isset($this->photos)) {
             return \Storage::disk('avatar')->url($this->photos);
-        } else if (isset($this->github_id)) {
+        } elseif (isset($this->github_id)) {
             return 'https://avatars2.githubusercontent.com/u/'.$this->github_id.'?v=4';
         } else {
             // TODO: Setup default avatar

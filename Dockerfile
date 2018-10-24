@@ -19,5 +19,5 @@ WORKDIR /usr/web
 
 COPY . .
 
-RUN composer install --no-interaction
+# RUN composer install --no-interaction
 

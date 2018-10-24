@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
@@ -49,17 +48,17 @@ class OauthGithubController extends Controller
      */
     private function findOrCreateUser($githubUser)
     {
-         $checkUser = User::where('github_id', $githubUser->getId())
+        $checkUser = User::where('github_id', $githubUser->getId())
         ->first();
 
         if ($checkUser) {
             return $checkUser;
-        }else{
+        } else {
             $checkAgain = User::where('email', $githubUser->getEmail())
             ->first();
-            if($checkAgain){
+            if ($checkAgain) {
                 $username = $githubUser->getEmail();
-                if(!empty($githubUser->getName())){
+                if (!empty($githubUser->getName())) {
                     $username = $githubUser->getName();
                 }
                 $checkAgain->update([
@@ -72,9 +71,9 @@ class OauthGithubController extends Controller
                 ]);
 
                 return $checkAgain;
-            }else{
-                 $username = $githubUser->getEmail();
-                if(!empty($githubUser->getName())){
+            } else {
+                $username = $githubUser->getEmail();
+                if (!empty($githubUser->getName())) {
                     $username = $githubUser->getName();
                 }
                 return User::create([

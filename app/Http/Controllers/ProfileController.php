@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Auth;
 use Image;
-use File;
 
 class ProfileController extends Controller
 {
@@ -38,12 +37,13 @@ class ProfileController extends Controller
         ->with('user', $user);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string',
             'email' => 'required|unique:users,email,'.Auth::guard('web')->user()->id,
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->with([
                 'status'=>'error',
                 'header'=>'Oops! Something went wrong!',
@@ -56,7 +56,7 @@ class ProfileController extends Controller
             'website' => $request->website,
             'about' => $request->about
         ]);
-        if($update) {
+        if ($update) {
             return redirect()->back()->with([
                 'status'=>'success',
                 'header'=>'Operation Success!',
@@ -65,12 +65,13 @@ class ProfileController extends Controller
         }
     }
 
-    public function updateavatar(Request $request) {
+    public function updateavatar(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'photos' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->with([
                 'status'=>'error',
                 'header'=>'Oops! Something went wrong!',
@@ -81,7 +82,7 @@ class ProfileController extends Controller
         $photoPath = $request->photos;
         $avatarName = str_slug(Auth::user()->email).'.'.$photoPath->getClientOriginalExtension();
         $avatar = Image::make($photoPath->getRealPath());
-        $avatar->resize(150, null, function($constraint) {
+        $avatar->resize(150, null, function ($constraint) {
             $constraint->aspectRatio();
         });
         $avatar->stream();
@@ -98,7 +99,7 @@ class ProfileController extends Controller
             'photos' => $avatarName,
         ]);
 
-        if($storeImg) {
+        if ($storeImg) {
             return redirect()->back()->with([
                 'status'=>'success',
                 'header'=>'Operation Success!',
@@ -116,18 +117,19 @@ class ProfileController extends Controller
      */
     public function member(Request $request, $slug)
     {
-        if(isset($slug)) {
-            $user = User::where('slug',$slug)->first();
+        if (isset($slug)) {
+            $user = User::where('slug', $slug)->first();
             return view('profile.index')
             ->with('user', $user);
-        }else {
+        } else {
             return abort(404);
         }
     }
 
-    public function allmember() {
-        $member = User::where('verified', 1)->orderBy('name','asc')->get();
-        return view('member',['member'=>$member]);
+    public function allmember()
+    {
+        $member = User::where('verified', 1)->orderBy('name', 'asc')->get();
+        return view('member', ['member'=>$member]);
     }
 
     /**

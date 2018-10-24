@@ -33,7 +33,7 @@ class LoginController extends Controller
         if (!isset($user)) {
             $message = "Your email is invalid! Please enter a valid email";
         } else {
-            if($verified_status == 0) {
+            if ($verified_status == 0) {
                 $message = "Sorry, your account is not verified. Please verify your account first";
             } else {
                 $message = "Your password does not match our credentials!";
@@ -59,7 +59,7 @@ class LoginController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->with([
               'msg' => $validator->errors()->first(),
               'header' => 'Oops! Something went wrong!',
@@ -73,14 +73,14 @@ class LoginController extends Controller
             'verified' => 1,
         ];
 
-        if(Auth::attempt($fields, $request->remember)){
+        if (Auth::attempt($fields, $request->remember)) {
             return redirect()->intended(route('index'));
-        }else{
+        } else {
             $user = User::where('email', $request->email)->first();
 
-            if(isset($user)){
+            if (isset($user)) {
                 return $this->respondFailedLogin($user, $user->verified);
-            }else{
+            } else {
                 return $this->respondFailedLogin($user, 0);
             }
         }
@@ -88,10 +88,10 @@ class LoginController extends Controller
 
     public function logout()
     {
-      if(Auth::guard('web')->check()){
-        Auth::guard('web')->logout();
-        Session::flush();
-      }
-      return redirect()->to(route('index'));
+        if (Auth::guard('web')->check()) {
+            Auth::guard('web')->logout();
+            Session::flush();
+        }
+        return redirect()->to(route('index'));
     }
 }

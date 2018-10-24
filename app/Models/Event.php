@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Topic;
-use App\Models\Reservation;
 
 class Event extends Model
 {
