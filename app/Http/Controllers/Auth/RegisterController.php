@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\VerifyUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +42,7 @@ class RegisterController extends Controller
             'about' => 'required|string',
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->with([
               'msg' => $validator->errors()->first(),
               'header' => 'Oops! Something went wrong!',
@@ -60,14 +59,14 @@ class RegisterController extends Controller
             'verify_token' => str_random(60)
         ]);
 
-        if($createUser) {
+        if ($createUser) {
             $sendMail = Mail::to($createUser->email)->send(new VerifyRegister($createUser));
             return redirect()->back()->with([
               'msg' => 'You have successfully registered. An email is sent to you for verification',
               'header' => 'Operation Success!',
               'status' => 'success'
             ]);
-        }else{
+        } else {
             return redirect()->back()->with([
               'msg' => 'Registration Failed! Error code 500',
               'header' => 'Oops! Something went wrong!',
@@ -78,7 +77,7 @@ class RegisterController extends Controller
 
     public function verify($token)
     {
-        if (!$token){
+        if (!$token) {
             return redirect('login')->with([
               'msg' => 'Invalid Token!',
               'header' => 'Oops! Something went wrong!',
@@ -86,9 +85,9 @@ class RegisterController extends Controller
             ]);
         }
 
-        $user = User::where('verify_token',$token)->first();
+        $user = User::where('verify_token', $token)->first();
 
-        if (!$user){
+        if (!$user) {
             return redirect('login')->with([
               'msg' => 'Invalid Token!',
               'header' => 'Oops! Something went wrong!',

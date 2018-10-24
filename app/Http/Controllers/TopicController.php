@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Topic;
 use App\Models\User;
 use App\Models\Event;
-use DB;
-use Carbon\Carbon;
 use DataTables;
 
 class TopicController extends Controller
@@ -45,20 +42,20 @@ class TopicController extends Controller
     {
         $topics = Topic::query();
         $data = DataTables::eloquent($topics)
-            ->filter(function($query) {
+            ->filter(function ($query) {
                 $query->where('deleted', 0);
             })
-            ->addColumn('speakers', function(Topic $topic) {
+            ->addColumn('speakers', function (Topic $topic) {
                 $speakers = [];
                 foreach ($topic->speakers as $speaker) {
                     $speakers[] = $speaker->name;
                 }
                 return implode(',', $speakers);
             })
-            ->addColumn('event', function(Topic $topic) {
+            ->addColumn('event', function (Topic $topic) {
                 return $topic->event->name;
             })
-            ->addColumn('action', function(Topic $topic) {
+            ->addColumn('action', function (Topic $topic) {
                 return '
                     <a href="'.route("admin.topic.edit", ["slug" => $topic->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.topic.delete", ["slug" => $topic->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
@@ -101,7 +98,7 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Topic::where('title', $request->title)->where('deleted',  0)->count();
+        $checker = Topic::where('title', $request->title)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
@@ -170,7 +167,7 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Topic::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted',  0)->count();
+        $checker = Topic::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {

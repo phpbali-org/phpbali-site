@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Models\User;
 use App\Models\Event;
-use DB;
 use Carbon\Carbon;
 use Image;
-use File;
 use DataTables;
 
 class EventController extends Controller
@@ -126,7 +123,8 @@ class EventController extends Controller
             }
 
             $webPhoto = $request->img_event;
-            $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();;
+            $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
+            ;
             $webImgEvent = Image::make($webPhoto->getRealPath());
             $webImgEvent->resize(1024, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -259,7 +257,8 @@ class EventController extends Controller
                 }
 
                 $webPhoto = $request->img_event;
-                $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();;
+                $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
+                ;
                 $webImgEvent = Image::make($webPhoto->getRealPath());
                 $webImgEvent->resize(1024, null, function ($constraint) {
                     $constraint->aspectRatio();
