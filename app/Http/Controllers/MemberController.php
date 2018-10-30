@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Validator;
 use App\Models\User;
-use Image;
+use DataTables;
 use File;
 use Hash;
-use DataTables;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Image;
+use Validator;
 
 class MemberController extends Controller
 {
@@ -33,6 +33,7 @@ class MemberController extends Controller
     public function index()
     {
         $members = User::where('verified', '1')->count();
+
         return view('backendViews.admin.members.index')
 
         ->with('members', $members);
@@ -59,14 +60,14 @@ class MemberController extends Controller
             })
             ->addColumn('action', function (User $member) {
                 return '
-                    <a href="'.route("admin.members.edit", ["id" => $member->id]).'">Edit</a> | <a href="#" data-href="'.route("admin.members.delete", ["slug" => $member->id]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                    <a href="'.route('admin.members.edit', ['id' => $member->id]).'">Edit</a> | <a href="#" data-href="'.route('admin.members.delete', ['slug' => $member->id]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
             })
             ->addIndexColumn()
             ->toJson();
+
         return $data;
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -75,10 +76,10 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $generalOptions = array(
+        $generalOptions = [
             '0' => 'No',
-            '1' => 'Yes'
-        );
+            '1' => 'Yes',
+        ];
 
         return view('backendViews.admin.members.add')
         ->with('general_options', $generalOptions);
@@ -87,14 +88,15 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'  => 'required|string',
-            'email' => 'required|unique:users,email',
+            'name'     => 'required|string',
+            'email'    => 'required|unique:users,email',
             'password' => 'required|string|min:6',
         ]);
 
@@ -105,7 +107,7 @@ class MemberController extends Controller
         if ($request->has('photos')) {
             //Process the image data
             $validatorImg = Validator::make($request->all(), [
-                'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                'img_event' => 'mimes:jpg,png,jpeg|max:2048',
             ]);
             if ($validatorImg->fails()) {
                 return redirect()->back()->with('Error', $validatorImg->errors()->first());
@@ -130,13 +132,13 @@ class MemberController extends Controller
         $checker = User::where('email', $request->email)->count();
         if ($checker < 1) {
             $store = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'slug' => str_slug($request->name),
-                'photos' => $photos,
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'slug'     => str_slug($request->name),
+                'photos'   => $photos,
                 'password' => Hash::make($request->password),
                 'is_staff' => $request->is_staff,
-                'verified' => self::VERIFIED
+                'verified' => self::VERIFIED,
             ]);
         } else {
             return redirect()->back()->with('Error', 'User tersebut telah terdaftar!');
@@ -152,7 +154,8 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -163,15 +166,16 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $generalOptions = array(
+        $generalOptions = [
             '0' => 'No',
-            '1' => 'Yes'
-        );
+            '1' => 'Yes',
+        ];
 
         $member = User::where('id', $id)->first();
         if (isset($member->verify_token)) {
@@ -189,8 +193,9 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -201,8 +206,8 @@ class MemberController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'  => 'required|string',
                 'email' => ['required',
-                    Rule::unique('users')->ignore($user->id)
-                ]
+                    Rule::unique('users')->ignore($user->id),
+                ],
             ]);
 
             if ($validator->fails()) {
@@ -212,7 +217,7 @@ class MemberController extends Controller
             if ($request->has('photos')) {
                 //Process the image data
                 $validatorImg = Validator::make($request->all(), [
-                    'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                    'img_event' => 'mimes:jpg,png,jpeg|max:2048',
                 ]);
                 if ($validatorImg->fails()) {
                     return redirect()->back()->with('Error', $validator->errors()->first());
@@ -222,7 +227,6 @@ class MemberController extends Controller
                 $imgFile = Image::make($img)->resize(150, null, function ($constrait) {
                     $constrait->aspectRatio();
                 });
-                ;
 
                 // Check dulu apakah img sudah ada
                 if (File::exists(public_path().'/img/avatar/'.$photos)) {
@@ -239,22 +243,22 @@ class MemberController extends Controller
             if ($checker < 1) {
                 if ($request->has('password')) {
                     $update = User::where('id', $id)->update([
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'slug' => str_slug($request->name),
-                        'photos' => $photos,
+                        'name'     => $request->name,
+                        'email'    => $request->email,
+                        'slug'     => str_slug($request->name),
+                        'photos'   => $photos,
                         'password' => Hash::make($request->password),
                         'is_staff' => $request->is_staff,
-                        'verified' => self::VERIFIED
+                        'verified' => self::VERIFIED,
                     ]);
                 } else {
                     $update = User::where('id', $id)->update([
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'slug' => str_slug($request->name),
-                        'photos' => $photos,
+                        'name'     => $request->name,
+                        'email'    => $request->email,
+                        'slug'     => str_slug($request->name),
+                        'photos'   => $photos,
                         'is_staff' => $request->is_staff,
-                        'verified' => self::VERIFIED
+                        'verified' => self::VERIFIED,
                     ]);
                 }
             } else {
@@ -274,7 +278,8 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

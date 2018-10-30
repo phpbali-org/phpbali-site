@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Models\Event;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,10 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(Schema::hasTable('events'))
-        {
-            $event = Event::where('published',1)
-                ->orderBy('created_at','desc')
+        if (Schema::hasTable('events')) {
+            $event = Event::where('published', 1)
+                ->orderBy('created_at', 'desc')
                 ->with('topic')
                 ->with('rsvp')
                 ->first();
