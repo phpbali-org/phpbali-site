@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Validator;
 use App\Models\Event;
 use Carbon\Carbon;
-use Image;
 use DataTables;
+use Illuminate\Http\Request;
+use Image;
+use Validator;
 
 class EventController extends Controller
 {
@@ -29,6 +29,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::where('deleted', 0)->get();
+
         return view('backendViews.admin.events.index', ['events' => $events]);
     }
 
@@ -53,11 +54,12 @@ class EventController extends Controller
             })
             ->addColumn('action', function (Event $event) {
                 return '
-                    <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                    <a href="'.route('admin.event.edit', ['slug' => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route('admin.event.delete', ['slug' => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
             })
             ->addIndexColumn()
             ->toJson();
+
         return $data;
     }
 
@@ -74,24 +76,25 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'desc' => 'required',
-            'img_event' => 'required',
-            'mobile_photos' => 'required',
+            'name'                     => 'required',
+            'desc'                     => 'required',
+            'img_event'                => 'required',
+            'mobile_photos'            => 'required',
             'tanggal_acara_start_date' => 'required',
-            'waktu_acara_start_date' => 'required',
-            'tanggal_acara_end_date' => 'required',
-            'waktu_acara_end_date' => 'required',
-            'place' => 'required',
-            'place_name' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required'
+            'waktu_acara_start_date'   => 'required',
+            'tanggal_acara_end_date'   => 'required',
+            'waktu_acara_end_date'     => 'required',
+            'place'                    => 'required',
+            'place_name'               => 'required',
+            'latitude'                 => 'required',
+            'longitude'                => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -114,7 +117,7 @@ class EventController extends Controller
 
             //Process the image data
             $validatorImg = Validator::make($request->all(), [
-                'img_event' => 'mimes:jpg,png,jpeg|max:2048',
+                'img_event'     => 'mimes:jpg,png,jpeg|max:2048',
                 'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048',
             ]);
 
@@ -124,7 +127,7 @@ class EventController extends Controller
 
             $webPhoto = $request->img_event;
             $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
-            ;
+
             $webImgEvent = Image::make($webPhoto->getRealPath());
             $webImgEvent->resize(1024, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -153,18 +156,18 @@ class EventController extends Controller
 
             // Process data
             $execute = Event::create([
-                'name' => $request->name,
-                'slug' => $slug,
-                'desc' => $request->desc,
-                'photos' => $webPhotoName,
+                'name'          => $request->name,
+                'slug'          => $slug,
+                'desc'          => $request->desc,
+                'photos'        => $webPhotoName,
                 'mobile_photos' => $mobilePhotoName,
-                'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                'place' => $request->place,
-                'place_name' => $request->place_name,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'published' => $published
+                'start_date'    => date('Y-m-d H:i:s', strtotime($start_date)),
+                'end_date'      => date('Y-m-d H:i:s', strtotime($end_date)),
+                'place'         => $request->place,
+                'place_name'    => $request->place_name,
+                'latitude'      => $request->latitude,
+                'longitude'     => $request->longitude,
+                'published'     => $published,
             ]);
 
             if ($execute) {
@@ -178,7 +181,8 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  String  $slug
+     * @param string $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
@@ -201,19 +205,20 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  String  $slug
+     * @param \Illuminate\Http\Request $request
+     * @param string                   $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'desc' => 'required',
+            'name'                     => 'required',
+            'desc'                     => 'required',
             'tanggal_acara_start_date' => 'required',
-            'waktu_acara_start_date' => 'required',
-            'tanggal_acara_end_date' => 'required',
-            'waktu_acara_end_date' => 'required',
+            'waktu_acara_start_date'   => 'required',
+            'tanggal_acara_end_date'   => 'required',
+            'waktu_acara_end_date'     => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -237,19 +242,19 @@ class EventController extends Controller
             }
 
             $data = [
-                'name' => $request->name,
-                'slug' => $editedSlug,
-                'desc' => $request->desc,
+                'name'       => $request->name,
+                'slug'       => $editedSlug,
+                'desc'       => $request->desc,
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                'end_date'   => date('Y-m-d H:i:s', strtotime($end_date)),
                 'place_name' => $request->place_name,
-                'published' => $published,
+                'published'  => $published,
             ];
 
             if ($request->has('img_event')) {
                 // Process the image data
                 $validatorImg = Validator::make($request->all(), [
-                    'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                    'img_event' => 'mimes:jpg,png,jpeg|max:2048',
                 ]);
 
                 if ($validatorImg->fails()) {
@@ -258,7 +263,7 @@ class EventController extends Controller
 
                 $webPhoto = $request->img_event;
                 $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
-                ;
+
                 $webImgEvent = Image::make($webPhoto->getRealPath());
                 $webImgEvent->resize(1024, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -279,7 +284,7 @@ class EventController extends Controller
             if ($request->has('mobile_photos')) {
                 // Process the image data
                 $validatorImg = Validator::make($request->all(), [
-                    'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048'
+                    'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048',
                 ]);
 
                 if ($validatorImg->fails()) {
@@ -328,7 +333,8 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  String  $slug
+     * @param string $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($slug)

@@ -10,20 +10,20 @@ class Article extends Model
     use SoftDeletes;
     protected $table = 'articles';
     protected $fillable = [
-        'thumbnail','title','description','content',
-        'slug','published','published_at'
+        'thumbnail', 'title', 'description', 'content',
+        'slug', 'published', 'published_at',
     ];
 
-    protected $dates = ['deleted_at','published_at'];
+    protected $dates = ['deleted_at', 'published_at'];
 
     protected $casts = [
-        'published'		=> 'boolean'
+        'published'		=> 'boolean',
     ];
 
     public function scopePublished($query)
     {
         return $query->where([
-            'published' => true
+            'published' => true,
         ]);
     }
 
@@ -65,7 +65,7 @@ class Article extends Model
         return static::with([
             'user' => function ($query) {
                 $query->select('id', 'first_name', 'last_name');
-            }
+            },
         ])
             ->published()
             ->where('slug', $slug)

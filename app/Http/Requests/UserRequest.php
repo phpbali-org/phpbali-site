@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'last_name'         => 'required|min:3',
             'email'             => [
                 'required',
-                Rule::unique('users')->ignore(Auth::user()->id)
+                Rule::unique('users')->ignore(Auth::user()->id),
             ],
         ];
     }

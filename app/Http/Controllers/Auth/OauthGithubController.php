@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
-use Socialite;
 use Redirect;
+use Socialite;
 
 class OauthGithubController extends Controller
 {
@@ -41,9 +41,10 @@ class OauthGithubController extends Controller
     }
 
     /**
-     * Return user if exists; create and return if doesn't
+     * Return user if exists; create and return if doesn't.
      *
      * @param $githubUser
+     *
      * @return User
      */
     private function findOrCreateUser($githubUser)
@@ -62,11 +63,11 @@ class OauthGithubController extends Controller
                     $username = $githubUser->getName();
                 }
                 $checkAgain->update([
-                    'name' => $username,
-                    'email' => $githubUser->getEmail(),
-                    'slug' => str_slug($username).'-'.$githubUser->getId(),
-                    'github_id' => $githubUser->getId(),
-                    'photos' => $githubUser->getAvatar(),
+                    'name'         => $username,
+                    'email'        => $githubUser->getEmail(),
+                    'slug'         => str_slug($username).'-'.$githubUser->getId(),
+                    'github_id'    => $githubUser->getId(),
+                    'photos'       => $githubUser->getAvatar(),
                     'verify_token' => str_random(60),
                 ]);
 
@@ -76,14 +77,15 @@ class OauthGithubController extends Controller
                 if (!empty($githubUser->getName())) {
                     $username = $githubUser->getName();
                 }
+
                 return User::create([
-                    'name' => $username,
-                    'email' => $githubUser->getEmail(),
-                    'slug' => str_slug($username).'-'.$githubUser->getId(),
-                    'github_id' => $githubUser->getId(),
-                    'photos' => $githubUser->getAvatar(),
+                    'name'         => $username,
+                    'email'        => $githubUser->getEmail(),
+                    'slug'         => str_slug($username).'-'.$githubUser->getId(),
+                    'github_id'    => $githubUser->getId(),
+                    'photos'       => $githubUser->getAvatar(),
                     'verify_token' => str_random(60),
-                    'verified' => 1
+                    'verified'     => 1,
                 ]);
             }
         }

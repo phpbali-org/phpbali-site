@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -34,12 +34,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','auth_token'
+        'password', 'remember_token', 'auth_token',
     ];
 
     public function rsvp()
     {
-        return $this->hasMany(Reservation::class, "id_user");
+        return $this->hasMany(Reservation::class, 'id_user');
     }
 
     public function avatar()
