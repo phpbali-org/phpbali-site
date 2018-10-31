@@ -30,7 +30,7 @@ class ArticleRequest extends FormRequest
             'content'       => 'required|min:10',
             'thumbnail'     => 'nullable',
             'published'     => 'nullable|boolean',
-            'published_at'  => 'nullable|date'
+            'published_at'  => 'nullable|date',
         ];
     }
 }

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use App\Models\Event;
-use App\Models\Topics;
-use App\Models\Reservation;
 use App\Models\Conduct;
+use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\User;
 use Auth;
 
@@ -38,6 +35,7 @@ class HomeController extends Controller
                 }
             }
         }
+
         return view('welcome')
         ->with('event', $event)
         ->with('rsvpChecker', $rsvpChecker)
@@ -53,6 +51,7 @@ class HomeController extends Controller
         } else {
             $rsvpChecker = 0;
         }
+
         return view('pages.meetups')
         ->with('events', $events)
         ->with('rsvpChecker', $is_register);
@@ -62,6 +61,7 @@ class HomeController extends Controller
     {
         $conduct = Conduct::first();
         $organiser = User::where('is_staff', 1)->get();
+
         return view('pages.codeconduct')
         ->with('conduct', $conduct)
         ->with('organiser', $organiser);

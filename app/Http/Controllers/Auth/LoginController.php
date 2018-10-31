@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
-use Validator;
+use Illuminate\Http\Request;
 use Session;
+use Validator;
 
 class LoginController extends Controller
 {
@@ -29,21 +29,21 @@ class LoginController extends Controller
 
     protected function respondFailedLogin($user, $verified_status)
     {
-        $message = "";
+        $message = '';
         if (!isset($user)) {
-            $message = "Your email is invalid! Please enter a valid email";
+            $message = 'Your email is invalid! Please enter a valid email';
         } else {
-            if($verified_status == 0) {
-                $message = "Sorry, your account is not verified. Please verify your account first";
+            if ($verified_status == 0) {
+                $message = 'Sorry, your account is not verified. Please verify your account first';
             } else {
-                $message = "Your password does not match our credentials!";
+                $message = 'Your password does not match our credentials!';
             }
         }
 
         return redirect()->back()->with([
-          'msg' => $message,
+          'msg'    => $message,
           'header' => 'Oops! Something went wrong!',
-          'status' => 'error'
+          'status' => 'error',
         ]);
     }
 
@@ -55,32 +55,32 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
+            'email'    => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->with([
-              'msg' => $validator->errors()->first(),
+              'msg'    => $validator->errors()->first(),
               'header' => 'Oops! Something went wrong!',
-              'status' => 'error'
+              'status' => 'error',
             ]);
         }
 
         $fields = [
-            'email' => $request->email,
+            'email'    => $request->email,
             'password' => $request->password,
             'verified' => 1,
         ];
 
-        if(Auth::attempt($fields, $request->remember)){
+        if (Auth::attempt($fields, $request->remember)) {
             return redirect()->intended(route('index'));
-        }else{
+        } else {
             $user = User::where('email', $request->email)->first();
 
-            if(isset($user)){
+            if (isset($user)) {
                 return $this->respondFailedLogin($user, $user->verified);
-            }else{
+            } else {
                 return $this->respondFailedLogin($user, 0);
             }
         }
@@ -88,10 +88,11 @@ class LoginController extends Controller
 
     public function logout()
     {
-      if(Auth::guard('web')->check()){
-        Auth::guard('web')->logout();
-        Session::flush();
-      }
-      return redirect()->to(route('index'));
+        if (Auth::guard('web')->check()) {
+            Auth::guard('web')->logout();
+            Session::flush();
+        }
+
+        return redirect()->to(route('index'));
     }
 }

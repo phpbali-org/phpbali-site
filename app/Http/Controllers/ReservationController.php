@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Event;
 use App\Models\Reservation;
 use Auth;
-use App\Models\Event;
 
 class ReservationController extends Controller
 {
@@ -27,16 +26,16 @@ class ReservationController extends Controller
             $rsvp = $this->createReservation($event->id, Auth::guard('web')->user()->id);
             if ($rsvp) {
                 return redirect()->back()->with([
-                    'msg'=>'Thank you for register to this event. Admin will contact you later!',
-                    'header'=>'Operation Success',
-                    'status'=>'success'
+                    'msg'   => 'Thank you for register to this event. Admin will contact you later!',
+                    'header'=> 'Operation Success',
+                    'status'=> 'success',
                 ]);
             }
         } else {
             return redirect('/')->with([
-                'status'=>'You already register to this event!',
-                'header'=>'Oops! Something went wrong!',
-                'status'=>'error'
+                'status'=> 'You already register to this event!',
+                'header'=> 'Oops! Something went wrong!',
+                'status'=> 'error',
             ]);
         }
     }
@@ -45,7 +44,7 @@ class ReservationController extends Controller
     {
         return Reservation::firstOrCreate([
             'event_id'    => $event_id,
-            'user_id'    => $user_id
+            'user_id'     => $user_id,
         ]);
     }
 }

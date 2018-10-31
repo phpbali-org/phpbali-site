@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Image;
-use File;
 
 class ProfileController extends Controller
 {
@@ -20,6 +19,7 @@ class ProfileController extends Controller
     {
         $className = 'profile-page';
         $user = Auth::guard('web')->user();
+
         return view('profile.index')
         ->with('user', $user)
         ->with('class-name', $className);
@@ -28,78 +28,85 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit()
     {
         $user = Auth::guard('web')->user();
+
         return view('profile.edit')
         ->with('user', $user);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string',
             'email' => 'required|unique:users,email,'.Auth::guard('web')->user()->id,
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->with([
-                'status'=>'error',
-                'header'=>'Oops! Something went wrong!',
-                'msg' => $validator->errors()->first(),
+                'status'=> 'error',
+                'header'=> 'Oops! Something went wrong!',
+                'msg'   => $validator->errors()->first(),
             ]);
         }
         $update = Auth::guard('web')->user()->update([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'    => $request->name,
+            'email'   => $request->email,
             'website' => $request->website,
-            'about' => $request->about
+            'about'   => $request->about,
         ]);
-        if($update) {
+        if ($update) {
             return redirect()->back()->with([
-                'status'=>'success',
-                'header'=>'Operation Success!',
-                'msg' => 'Your profile successfully edited!',
+                'status'=> 'success',
+                'header'=> 'Operation Success!',
+                'msg'   => 'Your profile successfully edited!',
             ]);
         }
     }
 
-    public function updateavatar(Request $request) {
+    public function updateavatar(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'photos' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'photos' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->with([
-                'status'=>'error',
-                'header'=>'Oops! Something went wrong!',
-                'msg' => $validator->errors()->first(),
+                'status'=> 'error',
+                'header'=> 'Oops! Something went wrong!',
+                'msg'   => $validator->errors()->first(),
             ]);
         }
 
-        $imagePath = $request->photos;
-        $fileName = str_slug(Auth::user()->email).time().'.'.$imagePath->getClientOriginalExtension();
-        $resizedImage = Image::make($imagePath)->resize(150, null, function($constrait) {
-            $constrait->aspectRatio();
+        $photoPath = $request->photos;
+        $avatarName = str_slug(Auth::user()->email).'.'.$photoPath->getClientOriginalExtension();
+        $avatar = Image::make($photoPath->getRealPath());
+        $avatar->resize(150, null, function ($constraint) {
+            $constraint->aspectRatio();
         });
+        $avatar->stream();
 
         // Check dulu apakah img sudah ada
-        if (File::exists(public_path().'/img/avatar/'.$fileName)) {
-            File::delete(public_path().'/img/avatar/'.$fileName);
+        if (\Storage::disk('avatar')->exists($avatarName)) {
+            \Storage::disk('avatar')->delete($avatarName);
         }
 
-        //simpan img
-        $resizedImage->save('img/avatar/'.$fileName, 85); //tidak lupa di compress jg
+        // Save avatar
+        $uploadAvatar = \Storage::disk('avatar')->put($avatarName, $avatar, 'public');
 
-        //kirim nama file ke database
-        $storeImg = Auth::guard('web')->user()->update(['photos' => $fileName]);
+        $storeImg = Auth::guard('web')->user()->update([
+            'photos' => $avatarName,
+        ]);
 
-        if($storeImg) {
+        if ($storeImg) {
             return redirect()->back()->with([
-                'status'=>'success',
-                'header'=>'Operation Success!',
-                'msg' => 'Your avatar profile successfully updated!',
+                'status'=> 'success',
+                'header'=> 'Operation Success!',
+                'msg'   => 'Your avatar profile successfully updated!',
             ]);
         }
     }
@@ -107,30 +114,35 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function member(Request $request, $slug)
     {
-        if(isset($slug)) {
-            $user = User::where('slug',$slug)->first();
+        if (isset($slug)) {
+            $user = User::where('slug', $slug)->first();
+
             return view('profile.index')
             ->with('user', $user);
-        }else {
+        } else {
             return abort(404);
         }
     }
 
-    public function allmember() {
-        $member = User::where('verified', 1)->orderBy('name','asc')->get();
-        return view('member',['member'=>$member]);
+    public function allmember()
+    {
+        $member = User::where('verified', 1)->orderBy('name', 'asc')->get();
+
+        return view('member', ['member'=>$member]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

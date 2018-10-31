@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Validator;
-use App\Models\User;
 use App\Models\Event;
-use DB;
 use Carbon\Carbon;
-use Image;
-use File;
 use DataTables;
+use Illuminate\Http\Request;
+use Image;
+use Validator;
 
 class EventController extends Controller
 {
@@ -32,6 +29,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::where('deleted', 0)->get();
+
         return view('backendViews.admin.events.index', ['events' => $events]);
     }
 
@@ -56,11 +54,12 @@ class EventController extends Controller
             })
             ->addColumn('action', function (Event $event) {
                 return '
-                    <a href="'.route("admin.event.edit", ["slug" => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.event.delete", ["slug" => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                    <a href="'.route('admin.event.edit', ['slug' => $event->slug]).'">Edit</a> | <a href="#" data-href="'.route('admin.event.delete', ['slug' => $event->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
             })
             ->addIndexColumn()
             ->toJson();
+
         return $data;
     }
 
@@ -77,24 +76,25 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'desc' => 'required',
-            'img_event' => 'required',
-            'mobile_photos' => 'required',
+            'name'                     => 'required',
+            'desc'                     => 'required',
+            'img_event'                => 'required',
+            'mobile_photos'            => 'required',
             'tanggal_acara_start_date' => 'required',
-            'waktu_acara_start_date' => 'required',
-            'tanggal_acara_end_date' => 'required',
-            'waktu_acara_end_date' => 'required',
-            'place' => 'required',
-            'place_name' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required'
+            'waktu_acara_start_date'   => 'required',
+            'tanggal_acara_end_date'   => 'required',
+            'waktu_acara_end_date'     => 'required',
+            'place'                    => 'required',
+            'place_name'               => 'required',
+            'latitude'                 => 'required',
+            'longitude'                => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -117,7 +117,7 @@ class EventController extends Controller
 
             //Process the image data
             $validatorImg = Validator::make($request->all(), [
-                'img_event' => 'mimes:jpg,png,jpeg|max:2048',
+                'img_event'     => 'mimes:jpg,png,jpeg|max:2048',
                 'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048',
             ]);
 
@@ -125,46 +125,50 @@ class EventController extends Controller
                 return redirect()->back()->with('Error', $validatorImg->errors()->first());
             }
 
-            $web_photos = $request->file('img_event');
-            $web_file_name = $slug.'_web.'.$web_photos->getClientOriginalExtension();
-            // BUG: this is make the size of image more than 1 MB.
-            $webImgFile = Image::make($web_photos)->resize(2880, null, function ($constraint) {
+            $webPhoto = $request->img_event;
+            $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
+
+            $webImgEvent = Image::make($webPhoto->getRealPath());
+            $webImgEvent->resize(1024, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            // Check dulu apakah img untuk web sudah ada
-            if (File::exists(public_path().'/img/bg-event/'.$web_file_name)) {
-                File::delete(public_path().'/img/bg-event/'.$web_file_name);
+            $webImgEvent->stream();
+
+            // Check dulu apakah img bg event sudah ada
+            if (\Storage::disk('bg-event')->exists($webPhotoName)) {
+                \Storage::disk('bg-event')->delete($webPhotoName);
             }
-            // Simpan img web
-            $webImgFile->save('img/bg-event/'.$web_file_name, 85); // tidak lupa di compress jg
 
-            // Mobile photos
-            $mobile_photos = $request->file('mobile_photos');
-            $mobile_file_name = $slug.'_mobile.'.$mobile_photos->getClientOriginalExtension();
-            $mobieImgFile = Image::make($mobile_photos);
-            if (File::exists(public_path().'/img/bg-event/'.$mobile_file_name)) {
-                File::delete(public_path().'/img/bg-event/'.$mobile_file_name);
+            // Save web img bg event
+            $uploadWebImgEvent = \Storage::disk('bg-event')->put($webPhotoName, $webImgEvent, 'public');
+
+            $mobilePhoto = $request->mobile_photos;
+            $mobilePhotoName = $slug.'_mobile.'.$mobilePhoto->getClientOriginalExtension();
+            $mobileImgEvent = Image::make($mobilePhoto->getRealPath());
+            $mobileImgEvent->stream();
+
+            if (\Storage::disk('bg-event')->exists($mobilePhotoName)) {
+                \Storage::disk('bg-event')->delete($mobilePhotoName);
             }
-            $mobieImgFile->save('img/bg-event/'.$mobile_file_name, 85); // tidak lupa di compress jg
 
-            //kirim data ke database
-            $data = [
-                'name' => $request->name,
-                'slug' => $slug,
-                'desc' => $request->desc,
-                'photos' => $web_file_name,
-                'mobile_photos' => $mobile_file_name,
-                'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
-                'place' => $request->place,
-                'place_name' => $request->place_name,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'published' => $published
-            ];
+            // Save web img bg event
+            $uploadMobileImgEvent = \Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
 
-            //process data
-            $execute = Event::create($data);
+            // Process data
+            $execute = Event::create([
+                'name'          => $request->name,
+                'slug'          => $slug,
+                'desc'          => $request->desc,
+                'photos'        => $webPhotoName,
+                'mobile_photos' => $mobilePhotoName,
+                'start_date'    => date('Y-m-d H:i:s', strtotime($start_date)),
+                'end_date'      => date('Y-m-d H:i:s', strtotime($end_date)),
+                'place'         => $request->place,
+                'place_name'    => $request->place_name,
+                'latitude'      => $request->latitude,
+                'longitude'     => $request->longitude,
+                'published'     => $published,
+            ]);
 
             if ($execute) {
                 return redirect()->route('admin.event')->with('Success', 'Event telah berhasil di buat, jangan lupa untuk membuat topic nya juga!');
@@ -177,7 +181,8 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  String  $slug
+     * @param string $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
@@ -200,19 +205,20 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  String  $slug
+     * @param \Illuminate\Http\Request $request
+     * @param string                   $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'desc' => 'required',
+            'name'                     => 'required',
+            'desc'                     => 'required',
             'tanggal_acara_start_date' => 'required',
-            'waktu_acara_start_date' => 'required',
-            'tanggal_acara_end_date' => 'required',
-            'waktu_acara_end_date' => 'required',
+            'waktu_acara_start_date'   => 'required',
+            'tanggal_acara_end_date'   => 'required',
+            'waktu_acara_end_date'     => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -236,45 +242,49 @@ class EventController extends Controller
             }
 
             $data = [
-                'name' => $request->name,
-                'slug' => $editedSlug,
-                'desc' => $request->desc,
+                'name'       => $request->name,
+                'slug'       => $editedSlug,
+                'desc'       => $request->desc,
                 'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                'end_date' => date('Y-m-d H:i:s', strtotime($end_date)),
+                'end_date'   => date('Y-m-d H:i:s', strtotime($end_date)),
                 'place_name' => $request->place_name,
-                'published' => $published,
+                'published'  => $published,
             ];
 
             if ($request->has('img_event')) {
                 // Process the image data
                 $validatorImg = Validator::make($request->all(), [
-                    'img_event' => 'mimes:jpg,png,jpeg|max:2048'
+                    'img_event' => 'mimes:jpg,png,jpeg|max:2048',
                 ]);
 
                 if ($validatorImg->fails()) {
                     return redirect()->back()->with('Error', $validatorImg->errors()->first());
                 }
 
-                $web_photos = $request->file('img_event');
-                $web_file_name = $slug.'_web.'.$web_photos->getClientOriginalExtension();
-                // BUG: this is make the size of image more than 1 MB.
-                $webImgFile = Image::make($web_photos)->resize(2880, null, function ($constraint) {
+                $webPhoto = $request->img_event;
+                $webPhotoName = $slug.'_web.'.$webPhoto->getClientOriginalExtension();
+
+                $webImgEvent = Image::make($webPhoto->getRealPath());
+                $webImgEvent->resize(1024, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-                // Check dulu apakah img untuk web sudah ada
-                if (File::exists(public_path().'/img/bg-event/'.$web_file_name)) {
-                    File::delete(public_path().'/img/bg-event/'.$web_file_name);
-                }
-                // Simpan img web
-                $webImgFile->save('img/bg-event/'.$web_file_name, 85); // tidak lupa di compress jg
+                $webImgEvent->stream();
 
-                $data['photos'] = $web_file_name;
+                // Check dulu apakah img bg event sudah ada
+                if (\Storage::disk('bg-event')->exists($webPhotoName)) {
+                    \Storage::disk('bg-event')->delete($webPhotoName);
+                }
+
+                // Save web img bg event
+                $uploadWebImgEvent = \Storage::disk('bg-event')->put($webPhotoName, $webImgEvent, 'public');
+
+                $data['photos'] = $webPhotoName;
             }
 
             if ($request->has('mobile_photos')) {
                 // Process the image data
                 $validatorImg = Validator::make($request->all(), [
-                    'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048'
+                    'mobile_photos' => 'mimes:jpg,png,jpeg|max:2048',
                 ]);
 
                 if ($validatorImg->fails()) {
@@ -282,15 +292,19 @@ class EventController extends Controller
                 }
 
                 // Mobile photos
-                $mobile_photos = $request->file('mobile_photos');
-                $mobile_file_name = $slug.'_mobile.'.$mobile_photos->getClientOriginalExtension();
-                $mobieImgFile = Image::make($mobile_photos);
-                if (File::exists(public_path().'/img/bg-event/'.$mobile_file_name)) {
-                    File::delete(public_path().'/img/bg-event/'.$mobile_file_name);
-                }
-                $mobieImgFile->save('img/bg-event/'.$mobile_file_name, 85); // tidak lupa di compress jg
+                $mobilePhoto = $request->mobile_photos;
+                $mobilePhotoName = $slug.'_mobile.'.$mobilePhoto->getClientOriginalExtension();
+                $mobileImgEvent = Image::make($mobilePhoto->getRealPath());
+                $mobileImgEvent->stream();
 
-                $data['mobile_photos'] = $mobile_file_name;
+                if (\Storage::disk('bg-event')->exists($mobilePhotoName)) {
+                    \Storage::disk('bg-event')->delete($mobilePhotoName);
+                }
+
+                // Save mobile img bg event
+                $uploadMobileImgEvent = \Storage::disk('bg-event')->put($mobilePhotoName, $mobileImgEvent, 'public');
+
+                $data['mobile_photos'] = $mobilePhotoName;
             }
 
             if ($request->has('place')) {
@@ -319,7 +333,8 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  String  $slug
+     * @param string $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($slug)

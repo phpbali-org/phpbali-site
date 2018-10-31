@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
-use Socialite;
 use Redirect;
+use Socialite;
 
 class OauthGithubController extends Controller
 {
@@ -42,49 +41,51 @@ class OauthGithubController extends Controller
     }
 
     /**
-     * Return user if exists; create and return if doesn't
+     * Return user if exists; create and return if doesn't.
      *
      * @param $githubUser
+     *
      * @return User
      */
     private function findOrCreateUser($githubUser)
     {
-         $checkUser = User::where('github_id', $githubUser->getId())
+        $checkUser = User::where('github_id', $githubUser->getId())
         ->first();
 
         if ($checkUser) {
             return $checkUser;
-        }else{
+        } else {
             $checkAgain = User::where('email', $githubUser->getEmail())
             ->first();
-            if($checkAgain){
+            if ($checkAgain) {
                 $username = $githubUser->getEmail();
-                if(!empty($githubUser->getName())){
+                if (!empty($githubUser->getName())) {
                     $username = $githubUser->getName();
                 }
                 $checkAgain->update([
-                    'name' => $username,
-                    'email' => $githubUser->getEmail(),
-                    'slug' => str_slug($username).'-'.$githubUser->getId(),
-                    'github_id' => $githubUser->getId(),
-                    'photos' => $githubUser->getAvatar(),
+                    'name'         => $username,
+                    'email'        => $githubUser->getEmail(),
+                    'slug'         => str_slug($username).'-'.$githubUser->getId(),
+                    'github_id'    => $githubUser->getId(),
+                    'photos'       => $githubUser->getAvatar(),
                     'verify_token' => str_random(60),
                 ]);
 
                 return $checkAgain;
-            }else{
-                 $username = $githubUser->getEmail();
-                if(!empty($githubUser->getName())){
+            } else {
+                $username = $githubUser->getEmail();
+                if (!empty($githubUser->getName())) {
                     $username = $githubUser->getName();
                 }
+
                 return User::create([
-                    'name' => $username,
-                    'email' => $githubUser->getEmail(),
-                    'slug' => str_slug($username).'-'.$githubUser->getId(),
-                    'github_id' => $githubUser->getId(),
-                    'photos' => $githubUser->getAvatar(),
+                    'name'         => $username,
+                    'email'        => $githubUser->getEmail(),
+                    'slug'         => str_slug($username).'-'.$githubUser->getId(),
+                    'github_id'    => $githubUser->getId(),
+                    'photos'       => $githubUser->getAvatar(),
                     'verify_token' => str_random(60),
-                    'verified' => 1
+                    'verified'     => 1,
                 ]);
             }
         }
