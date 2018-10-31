@@ -21,12 +21,12 @@ class Event extends Model
         'published',
         'deleted',
         'photos',
-        'mobile_photos'
+        'mobile_photos',
     ];
 
     public function topic()
     {
-        return $this->hasMany(Topic::class, "event_id");
+        return $this->hasMany(Topic::class, 'event_id');
     }
 
     public function speakers()
@@ -36,7 +36,7 @@ class Event extends Model
 
     public function rsvp()
     {
-        return $this->hasMany(Reservation::class, "event_id");
+        return $this->hasMany(Reservation::class, 'event_id');
     }
 
     public function photoUrl()

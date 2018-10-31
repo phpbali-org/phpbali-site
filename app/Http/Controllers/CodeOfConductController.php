@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Conduct;
+use Illuminate\Http\Request;
 use Validator;
 
 class CodeOfConductController extends Controller
@@ -24,7 +24,7 @@ class CodeOfConductController extends Controller
     public function saveChanges(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'desc' => 'required'
+            'desc' => 'required',
         ]);
 
         if ($validator->fails()) {

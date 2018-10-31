@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
 use Validator;
-use Hash;
-use Auth;
 
 class AdminController extends Controller
 {
@@ -46,8 +46,8 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:admins,email,'.Auth::guard('admin')->user()->id,
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:admins,email,'.Auth::guard('admin')->user()->id,
             'password' => 'required|string|min:6',
         ]);
 
@@ -56,9 +56,9 @@ class AdminController extends Controller
         }
 
         $update = Auth::guard('admin')->user()->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
         if ($update) {

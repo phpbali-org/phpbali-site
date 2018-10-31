@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Validator;
+use App\Models\Event;
 use App\Models\Topic;
 use App\Models\User;
-use App\Models\Event;
 use DataTables;
+use Illuminate\Http\Request;
+use Validator;
 
 class TopicController extends Controller
 {
@@ -29,6 +29,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::where('deleted', 0)->count();
+
         return view('backendViews.admin.topics.index')
         ->with('topics', $topics);
     }
@@ -50,6 +51,7 @@ class TopicController extends Controller
                 foreach ($topic->speakers as $speaker) {
                     $speakers[] = $speaker->name;
                 }
+
                 return implode(',', $speakers);
             })
             ->addColumn('event', function (Topic $topic) {
@@ -57,11 +59,12 @@ class TopicController extends Controller
             })
             ->addColumn('action', function (Topic $topic) {
                 return '
-                    <a href="'.route("admin.topic.edit", ["slug" => $topic->slug]).'">Edit</a> | <a href="#" data-href="'.route("admin.topic.delete", ["slug" => $topic->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
+                    <a href="'.route('admin.topic.edit', ['slug' => $topic->slug]).'">Edit</a> | <a href="#" data-href="'.route('admin.topic.delete', ['slug' => $topic->slug]).'" data-toggle="modal" data-target="#modal-action">Delete</a>
                 ';
             })
             ->addIndexColumn()
             ->toJson();
+
         return $data;
     }
 
@@ -74,6 +77,7 @@ class TopicController extends Controller
     {
         $users = User::all();
         $events = Event::where('deleted', 0)->get();
+
         return view('backendViews.admin.topics.add')
         ->with('users', $users)
         ->with('events', $events);
@@ -82,16 +86,17 @@ class TopicController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            'title'    => 'required',
             'id_event' => 'required',
-            'id_user' => 'required',
-            'desc' => 'required'
+            'id_user'  => 'required',
+            'desc'     => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -103,10 +108,10 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
             $data = [
-                'slug' => str_slug($request->title, '-'),
-                'title' => $request->title,
+                'slug'     => str_slug($request->title, '-'),
+                'title'    => $request->title,
                 'event_id' => $request->id_event,
-                'desc' => $request->desc
+                'desc'     => $request->desc,
             ];
 
             $execute = Topic::create($data);
@@ -123,14 +128,15 @@ class TopicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  String  $slug
+     * @param string $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
     {
         $topic = Topic::where('slug', $slug)->where('deleted', 0)->first();
 
-        $selected_user_id = array();
+        $selected_user_id = [];
 
         //dapatkan selected user
         foreach ($topic->speakers as $speaker) {
@@ -150,17 +156,18 @@ class TopicController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  String  $slug
+     * @param \Illuminate\Http\Request $request
+     * @param string                   $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            'title'    => 'required',
             'id_event' => 'required',
-            'id_user' => 'required',
-            'desc' => 'required'
+            'id_user'  => 'required',
+            'desc'     => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -172,10 +179,10 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
             $data = [
-                'slug' => str_slug($request->title, '-'),
-                'title' => $request->title,
+                'slug'     => str_slug($request->title, '-'),
+                'title'    => $request->title,
                 'event_id' => $request->id_event,
-                'desc' => $request->desc
+                'desc'     => $request->desc,
             ];
 
             $execute = Topic::where('slug', $slug)->update($data);
@@ -192,7 +199,8 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  String  $id
+     * @param string $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($slug)
