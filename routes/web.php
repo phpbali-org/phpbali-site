@@ -68,3 +68,5 @@ Route::prefix('adminpage')->group(function () {
     Route::put('/profile/edit', 'AdminController@update')->name('admin.profile.update');
     Route::get('/', 'AdminController@index')->name('admin.home');
 });
+
+Route::get('/lorem', 'TestController@foo');
