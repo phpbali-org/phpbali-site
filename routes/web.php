@@ -71,4 +71,4 @@ Route::get('/', 'TestController@index');
 //     Route::get('/', 'AdminController@index')->name('admin.home');
 // });
 
-// Route::get('/lorem', 'TestController@foo');
+Route::get('/lorem', 'TestController@foo');
