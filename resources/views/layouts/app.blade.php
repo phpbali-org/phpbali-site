@@ -60,7 +60,7 @@
     <script src="{{ asset('js/sweetalert2.js') }}" type="text/javascript"></script>
     @include('components.alerts.message')
     @yield('additional-scripts')
-    @if($event)
+    @isset($event)
         <script>
             function initMap(){
                 var myLatlng = new google.maps.LatLng({{$event->latitude}}, {{$event->longitude}});

@@ -44,12 +44,12 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        if (isset($this->photos)) {
-            return \Storage::disk('avatar')->url($this->photos);
-        } elseif (isset($this->github_id)) {
+        if (isset($this->github_id)) {
             return 'https://avatars2.githubusercontent.com/u/'.$this->github_id.'?v=4';
         } else {
-            // TODO: Setup default avatar
+            if (isset($this->photos)) {
+                return \Storage::disk('avatar')->url($this->photos);
+            }
         }
     }
 }
