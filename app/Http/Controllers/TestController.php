@@ -13,4 +13,9 @@ class TestController extends Controller
     {
         return 'foo';
     }
+
+    public function qux()
+    {
+        return 'what are you looking for?';
+    }
 }
