@@ -70,3 +70,4 @@ Route::prefix('adminpage')->group(function () {
 });
 
 Route::get('/lorem', 'TestController@foo');
+Route::get('/test', 'TestController@index');
