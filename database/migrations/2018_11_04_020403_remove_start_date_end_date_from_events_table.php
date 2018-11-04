@@ -14,8 +14,12 @@ class RemoveStartDateEndDateFromEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            if (Schema::hasColumn('start_date', 'end_date')) {
-                $table->dropColumn(['start_date', 'end_date']);
+            if (Schema::hasColumn('events', 'start_date')) {
+                $table->dropColumn('start_date');
+            }
+
+            if (Schema::hasColumn('events', 'end_date')) {
+                $table->dropColumn('end_date');
             }
         });
     }

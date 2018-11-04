@@ -14,8 +14,12 @@ class AddDatetimeToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->dateTime('start_datetime');
-            $table->dateTime('end_datetime');
+            if (!Schema::hasColumn('events', 'start_datetime')) {
+                $table->dateTime('start_datetime');
+            }
+            if (!Schema::hasColumn('events', 'end_datetime')) {
+                $table->dateTime('end_datetime');
+            }
         });
     }
 
