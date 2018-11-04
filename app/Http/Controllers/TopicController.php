@@ -28,7 +28,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::where('deleted', 0)->count();
+        $topics = Topic::count();
 
         return view('backendViews.admin.topics.index')
         ->with('topics', $topics);
@@ -43,9 +43,6 @@ class TopicController extends Controller
     {
         $topics = Topic::query();
         $data = DataTables::eloquent($topics)
-            ->filter(function ($query) {
-                $query->where('deleted', 0);
-            })
             ->addColumn('speakers', function (Topic $topic) {
                 $speakers = [];
                 foreach ($topic->speakers as $speaker) {
@@ -76,7 +73,7 @@ class TopicController extends Controller
     public function create()
     {
         $users = User::all();
-        $events = Event::where('deleted', 0)->get();
+        $events = Event::get();
 
         return view('backendViews.admin.topics.add')
         ->with('users', $users)
@@ -103,18 +100,16 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Topic::where('title', $request->title)->where('deleted', 0)->count();
+        $checker = Topic::where('title', $request->title)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
-            $data = [
+            $execute = Topic::create([
                 'slug'     => str_slug($request->title, '-'),
                 'title'    => $request->title,
                 'event_id' => $request->id_event,
                 'desc'     => $request->desc,
-            ];
-
-            $execute = Topic::create($data);
+            ]);
 
             if ($execute) {
                 $topic = Topic::find($execute->id);
@@ -134,7 +129,7 @@ class TopicController extends Controller
      */
     public function edit($slug)
     {
-        $topic = Topic::where('slug', $slug)->where('deleted', 0)->first();
+        $topic = Topic::where('slug', $slug)->first();
 
         $selected_user_id = [];
 
@@ -144,7 +139,7 @@ class TopicController extends Controller
         }
 
         $users = User::all();
-        $events = Event::where('deleted', 0)->get();
+        $events = Event::get();
 
         return view('backendViews.admin.topics.edit')
         ->with('topic', $topic)
@@ -174,18 +169,16 @@ class TopicController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Topic::where('title', $request->title)->where('slug', '<>', $slug)->where('deleted', 0)->count();
+        $checker = Topic::where('title', $request->title)->where('slug', '<>', $slug)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Topik tersebut sudah ada, silahkan inputkan topik yang belum ada!');
         } else {
-            $data = [
+            $execute = Topic::where('slug', $slug)->update([
                 'slug'     => str_slug($request->title, '-'),
                 'title'    => $request->title,
                 'event_id' => $request->id_event,
                 'desc'     => $request->desc,
-            ];
-
-            $execute = Topic::where('slug', $slug)->update($data);
+            ]);
 
             if ($execute) {
                 $topic = Topic::where('slug', str_slug($request->title, '-'))->first();
@@ -205,8 +198,7 @@ class TopicController extends Controller
      */
     public function destroy($slug)
     {
-        $data = ['deleted' => 1];
-        $execute = Topic::where('slug', $slug)->update($data);
+        Topic::where('slug', $slug)->delete();
 
         return redirect()->route('admin.topic')->with('Success', 'Topik berhasil dihapus!');
     }
