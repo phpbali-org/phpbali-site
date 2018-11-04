@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
 use Image;
@@ -230,13 +229,13 @@ class EventController extends Controller
             }
 
             $data = [
-                'name'       => $request->name,
-                'slug'       => $editedSlug,
-                'desc'       => $request->desc,
+                'name'           => $request->name,
+                'slug'           => $editedSlug,
+                'desc'           => $request->desc,
                 'start_datetime' => date('Y-m-d H:i:s', strtotime($request->start_datetime)),
                 'end_datetime'   => date('Y-m-d H:i:s', strtotime($request->end_datetime)),
-                'place_name' => $request->place_name,
-                'published'  => $published,
+                'place_name'     => $request->place_name,
+                'published'      => $published,
             ];
 
             if ($request->has('img_event')) {
