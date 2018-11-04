@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Topic;
 use DataTables;
 use Illuminate\Http\Request;
 use Image;
@@ -27,7 +28,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('deleted', 0)->get();
+        $events = Event::all();
 
         return view('backendViews.admin.events.index', ['events' => $events]);
     }
@@ -41,9 +42,6 @@ class EventController extends Controller
     {
         $events = Event::query();
         $data = DataTables::eloquent($events)
-            ->filter(function ($query) {
-                $query->where('deleted', 0);
-            })
             ->addColumn('status', function (Event $event) {
                 if ($event->published == 1) {
                     return 'Published';
@@ -183,7 +181,7 @@ class EventController extends Controller
      */
     public function edit($slug)
     {
-        $event = Event::where('slug', $slug)->where('deleted', 0)->first();
+        $event = Event::where('slug', $slug)->first();
 
         $start_datetime = date('d-m-Y H:i', strtotime($event->start_datetime));
 
@@ -216,7 +214,7 @@ class EventController extends Controller
             return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
-        $checker = Event::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted', 0)->count();
+        $checker = Event::where('name', $request->name)->where('slug', '<>', $slug)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
@@ -326,12 +324,14 @@ class EventController extends Controller
      */
     public function destroy($slug)
     {
-        $data = ['deleted' => 1];
-        $execute = Event::where('slug', $slug)->update($data);
-        if ($execute) {
-            return redirect()->route('admin.event')->with('Success', 'Event telah berhasil dihapus!');
-        } else {
-            return redirect()->back()->with('Error', 'Telah terjadi kesalahan, silahkan hubungi administrator!');
+        $event = Event::where('slug', $slug)->first();
+        $topics = Topic::where('event_id', $event->id);
+
+        if (isset($topics)) {
+            $topics->delete();
         }
+        $event->delete();
+
+        return redirect()->route('admin.event')->with('Success', 'Event telah berhasil dihapus!');
     }
 }

@@ -19,7 +19,6 @@ class HomeController extends Controller
     {
         $event = Event::with('rsvp')
         ->where('published', 1)
-        ->where('deleted', 0)
         ->orderBy('created_at', 'desc')
         ->first();
         if (isset($event)) {

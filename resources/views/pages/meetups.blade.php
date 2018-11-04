@@ -36,7 +36,7 @@
 		                        <p class="description ">{{ $event->place_name }} — <a href="http://maps.google.com.au/?daddr={{ $event->place_name }}"  target="_blank">Directions</a></p>
 
 		                        <div class="row">
-                                	<div class="col-md-12"><p class="description">{{ $event->desc}}</p></div>
+                                	<div class="col-md-12"><p class="description">{{ $event->desc }}</p></div>
 	                                @if(count($event->topic) > 0)
 	                                	<div style="margin-top: 20px;" class="col-md-12 text-center"><h3>What the topics?</h3></div>
 	                                    @foreach($event->topic as $topic)
