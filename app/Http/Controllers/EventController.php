@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
 use Image;
@@ -87,10 +86,8 @@ class EventController extends Controller
             'desc'                     => 'required',
             'img_event'                => 'required',
             'mobile_photos'            => 'required',
-            'tanggal_acara_start_date' => 'required',
-            'waktu_acara_start_date'   => 'required',
-            'tanggal_acara_end_date'   => 'required',
-            'waktu_acara_end_date'     => 'required',
+            'start_datetime'           => 'required',
+            'end_datetime'             => 'required',
             'place'                    => 'required',
             'place_name'               => 'required',
             'latitude'                 => 'required',
@@ -106,8 +103,7 @@ class EventController extends Controller
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
             //gathering data
-            $start_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_start_date.' '.$request->waktu_acara_start_date);
-            $end_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_end_date.' '.$request->waktu_acara_end_date);
+
             $slug = str_slug($request->name, '-');
             if ($request->has('published')) {
                 $published = $request->published;
@@ -161,8 +157,8 @@ class EventController extends Controller
                 'desc'          => $request->desc,
                 'photos'        => $webPhotoName,
                 'mobile_photos' => $mobilePhotoName,
-                'start_date'    => date('Y-m-d H:i:s', strtotime($start_date)),
-                'end_date'      => date('Y-m-d H:i:s', strtotime($end_date)),
+                'start_datetime'=> date('Y-m-d H:i:s', strtotime($request->start_datetime)),
+                'end_datetime'  => date('Y-m-d H:i:s', strtotime($request->end_datetime)),
                 'place'         => $request->place,
                 'place_name'    => $request->place_name,
                 'latitude'      => $request->latitude,
@@ -189,17 +185,14 @@ class EventController extends Controller
     {
         $event = Event::where('slug', $slug)->where('deleted', 0)->first();
 
-        $tanggal_acara_start_date = date('d/M/Y', strtotime($event->start_date));
-        $tanggal_acara_end_date = date('d/M/Y', strtotime($event->end_date));
-        $waktu_acara_start_date = date('H:i A', strtotime($event->start_date));
-        $waktu_acara_end_date = date('H:i A', strtotime($event->end_date));
+        $start_datetime = date('d-m-Y H:i', strtotime($event->start_datetime));
+
+        $end_datetime = date('d-m-Y H:i', strtotime($event->end_datetime));
 
         return view('backendViews.admin.events.edit')
         ->with('event', $event)
-        ->with('tanggal_acara_start_date', $tanggal_acara_start_date)
-        ->with('tanggal_acara_end_date', $tanggal_acara_end_date)
-        ->with('waktu_acara_start_date', $waktu_acara_start_date)
-        ->with('waktu_acara_end_date', $waktu_acara_end_date);
+        ->with('start_datetime', $start_datetime)
+        ->with('end_datetime', $end_datetime);
     }
 
     /**
@@ -213,26 +206,20 @@ class EventController extends Controller
     public function update(Request $request, $slug)
     {
         $validator = Validator::make($request->all(), [
-            'name'                     => 'required',
-            'desc'                     => 'required',
-            'tanggal_acara_start_date' => 'required',
-            'waktu_acara_start_date'   => 'required',
-            'tanggal_acara_end_date'   => 'required',
-            'waktu_acara_end_date'     => 'required',
+            'name'             => 'required',
+            'desc'             => 'required',
+            'start_datetime'   => 'required',
+            'end_datetime'     => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('Error', $valdiator->errors()->first());
+            return redirect()->back()->with('Error', $validator->errors()->first());
         }
 
         $checker = Event::where('name', $request->name)->where('slug', '<>', $slug)->where('deleted', 0)->count();
         if ($checker > 0) {
             return redirect()->back()->with('Error', 'Judul tersebut sudah digunakan, silahkan inputkan judul yang belum digunakan!');
         } else {
-            // Gathering data
-
-            $start_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_start_date.' '.$request->waktu_acara_start_date);
-            $end_date = Carbon::createFromFormat('d/M/Y H:i A', $request->tanggal_acara_end_date.' '.$request->waktu_acara_end_date);
             $editedSlug = str_slug($request->name, '-');
 
             if ($request->has('published')) {
@@ -242,13 +229,13 @@ class EventController extends Controller
             }
 
             $data = [
-                'name'       => $request->name,
-                'slug'       => $editedSlug,
-                'desc'       => $request->desc,
-                'start_date' => date('Y-m-d H:i:s', strtotime($start_date)),
-                'end_date'   => date('Y-m-d H:i:s', strtotime($end_date)),
-                'place_name' => $request->place_name,
-                'published'  => $published,
+                'name'           => $request->name,
+                'slug'           => $editedSlug,
+                'desc'           => $request->desc,
+                'start_datetime' => date('Y-m-d H:i:s', strtotime($request->start_datetime)),
+                'end_datetime'   => date('Y-m-d H:i:s', strtotime($request->end_datetime)),
+                'place_name'     => $request->place_name,
+                'published'      => $published,
             ];
 
             if ($request->has('img_event')) {
