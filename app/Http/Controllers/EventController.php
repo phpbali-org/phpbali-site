@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Topic;
 use DataTables;
 use Illuminate\Http\Request;
 use Image;
@@ -323,11 +324,14 @@ class EventController extends Controller
      */
     public function destroy($slug)
     {
-        $execute = Event::where('slug', $slug)->delete();
-        if ($execute) {
-            return redirect()->route('admin.event')->with('Success', 'Event telah berhasil dihapus!');
-        } else {
-            return redirect()->back()->with('Error', 'Telah terjadi kesalahan, silahkan hubungi administrator!');
+        $event = Event::where('slug', $slug)->first();
+        $topics = Topic::where('event_id', $event->id);
+
+        if (isset($topics)) {
+            $topics->delete();
         }
+        $event->delete();
+
+        return redirect()->route('admin.event')->with('Success', 'Event telah berhasil dihapus!');
     }
 }
