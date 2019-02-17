@@ -88,7 +88,7 @@
             @if(isset($event))
                 <div class="row">
                     <div class="col-md-12 ml-auto mr-auto">
-                        <h2 class="title">What the topic?</h2>
+                        <h2 class="title">What the topics?</h2>
                         <hr>
                         <br />
                         <p class="card-description">{!! $event->desc !!}</p>
