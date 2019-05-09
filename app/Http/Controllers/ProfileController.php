@@ -6,7 +6,6 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Image;
 
 class ProfileController extends Controller
 {
