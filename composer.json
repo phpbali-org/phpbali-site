@@ -9,11 +9,11 @@
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.4",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "5.8.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
         "renatomarinho/laravel-page-speed": "^1.8",
-        "yajra/laravel-datatables-oracle": "~8.0"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
