@@ -6,7 +6,6 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Image;
 
 class ProfileController extends Controller
 {
@@ -64,49 +63,6 @@ class ProfileController extends Controller
                 'status'=> 'success',
                 'header'=> 'Operation Success!',
                 'msg'   => 'Your profile successfully edited!',
-            ]);
-        }
-    }
-
-    public function updateavatar(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'photos' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->with([
-                'status'=> 'error',
-                'header'=> 'Oops! Something went wrong!',
-                'msg'   => $validator->errors()->first(),
-            ]);
-        }
-
-        $photoPath = $request->photos;
-        $avatarName = str_slug(Auth::user()->email).'.'.$photoPath->getClientOriginalExtension();
-        $avatar = Image::make($photoPath->getRealPath());
-        $avatar->resize(150, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $avatar->stream();
-
-        // Check dulu apakah img sudah ada
-        if (\Storage::disk('avatar')->exists($avatarName)) {
-            \Storage::disk('avatar')->delete($avatarName);
-        }
-
-        // Save avatar
-        $uploadAvatar = \Storage::disk('avatar')->put($avatarName, $avatar, 'public');
-
-        $storeImg = Auth::guard('web')->user()->update([
-            'photos' => $avatarName,
-        ]);
-
-        if ($storeImg) {
-            return redirect()->back()->with([
-                'status'=> 'success',
-                'header'=> 'Operation Success!',
-                'msg'   => 'Your avatar profile successfully updated!',
             ]);
         }
     }

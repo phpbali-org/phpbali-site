@@ -15,7 +15,6 @@ Route::get('auth/github/callback', 'Auth\OauthGithubController@handleProviderCal
 Route::get('/myprofile', 'ProfileController@index')->name('myprofile.index')->middleware('web');
 Route::get('/myprofile/update/', 'ProfileController@edit')->name('myprofile.update')->middleware('web');
 Route::post('/myprofile/update/', 'ProfileController@update')->name('myprofile.update.submit')->middleware('web');
-Route::post('/myprofile/update/avatar', 'ProfileController@updateavatar')->name('myprofile.update.avatar.submit')->middleware('web');
 Route::get('/profile/{slug}', 'ProfileController@member')->name('member.index');
 Route::get('/members', 'ProfileController@allmember')->name('member.list');
 
