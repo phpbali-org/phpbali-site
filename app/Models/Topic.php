@@ -11,12 +11,7 @@ class Topic extends Model
 
     protected $dates = ['deleted_at'];
     protected $table = 'topics';
-    protected $fillable = ['slug', 'event_id', 'title', 'meetup', 'desc', 'deleted'];
-
-    public function speakers()
-    {
-        return $this->belongsToMany(User::class, 'topic_speaker', 'topic_id', 'user_id')->withTimestamps();
-    }
+    protected $guarded = [];
 
     public function event()
     {

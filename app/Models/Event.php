@@ -13,44 +13,15 @@ class Event extends Model
 
     protected $table = 'events';
 
-    protected $fillable = [
-        'slug',
-        'name',
-        'desc',
-        'start_datetime',
-        'end_datetime',
-        'place',
-        'place_name',
-        'latitude',
-        'longitude',
-        'published',
-        'deleted',
-        'photos',
-        'mobile_photos',
-    ];
+    protected $guarded = ['photos', 'mobile_photos', 'latitude', 'longitude', 'place'];
 
-    public function topic()
+    public function topics()
     {
         return $this->hasMany(Topic::class, 'event_id');
     }
 
-    public function speakers()
-    {
-        return $this->topic->speakers;
-    }
-
-    public function rsvp()
+    public function reservations()
     {
         return $this->hasMany(Reservation::class, 'event_id');
-    }
-
-    public function photoUrl()
-    {
-        return \Storage::disk('bg-event')->url($this->photos);
-    }
-
-    public function mobilePhotoUrl()
-    {
-        return \Storage::disk('bg-event')->url($this->mobile_photos);
     }
 }
