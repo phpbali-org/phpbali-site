@@ -13,4 +13,4 @@ Setiap kali Anda menghadiri kegiatan yang diselenggarakan oleh PHPBali baik seba
 
 ## Diskusi
 
-Jika Anda ingin berdiskusi tentang pemrograman PHP dan pengembangan web silahkan bergabung di grup telegram [PHPBali](https://t.me/phpbali).
+Jika Anda ingin berdiskusi tentang pemrograman PHP dan pengembangan web silahkan bergabung di grup [telegram PHPBali](https://t.me/phpbali).

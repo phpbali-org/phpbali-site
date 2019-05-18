@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <article>
-        {!! $content !!}
-    </article>
+    <div class="about">
+        <article>
+            {!! $content !!}
+        </article>
+    </div>
 @endsection
