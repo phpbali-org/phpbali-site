@@ -33,7 +33,7 @@
                                 {{ $topic->title }}
                             </div>
                             <p class="block mt-1 text-lg leading-tight font-semibold text-gray-900">{{ $topic->speaker_name }}</p>
-                            <p class="mt-2 text-gray-600">{{ $topic->desc }}</p>
+                            <p class="mt-2 text-black">{{ $topic->desc }}</p>
                         </div>
                     </div>
                 </div>
