@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Cache\Repository as Cache;
+use Illuminate\Filesystem\Filesystem;
 
 class AboutController extends Controller
 {
@@ -24,8 +24,9 @@ class AboutController extends Controller
     /**
      * Create a new documentation instance.
      *
-     * @param  Filesystem  $files
-     * @param  Cache  $cache
+     * @param Filesystem $files
+     * @param Cache      $cache
+     *
      * @return void
      */
     public function __construct(Filesystem $files, Cache $cache)

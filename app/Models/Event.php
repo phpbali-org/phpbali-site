@@ -32,10 +32,10 @@ class Event extends Model
 
         if ($start_datetime->isSameDay($end_datetime)) {
             return $start_datetime->isoFormat('LL');
-        } else if (!$start_datetime->isSameDay($end_datetime) && $start_datetime->isSameMonth($end_datetime))  {
-            return $start_datetime->day . '-' . $end_datetime->day . $start_datetime->monthName . $start_datetime->year;
+        } elseif (!$start_datetime->isSameDay($end_datetime) && $start_datetime->isSameMonth($end_datetime)) {
+            return $start_datetime->day.'-'.$end_datetime->day.$start_datetime->monthName.$start_datetime->year;
         } else {
-            return $start_datetime->day . $start_datetime->monthName . '-' . $end_datetime->day . $end_datetime->monthName . $end_datetime->year;
+            return $start_datetime->day.$start_datetime->monthName.'-'.$end_datetime->day.$end_datetime->monthName.$end_datetime->year;
         }
     }
 
@@ -44,7 +44,7 @@ class Event extends Model
         $start_datetime = \Carbon\Carbon::parse($this->start_datetime, 'Asia/Makassar')->locale('id');
         $end_datetime = \Carbon\Carbon::parse($this->end_datetime, 'Asia/Makassar')->locale('id');
 
-        return $start_datetime->format('H:i') . ' - ' . $end_datetime->format('H:i') . ' WITA';
+        return $start_datetime->format('H:i').' - '.$end_datetime->format('H:i').' WITA';
     }
 
     public function isOngoing()
