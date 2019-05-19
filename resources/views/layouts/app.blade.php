@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         @yield('style')
     </head>
-    <body class="bg-gray-100">
+    <body>
         <div class="flex flex-col min-h-screen">
             @include('components.header')
 

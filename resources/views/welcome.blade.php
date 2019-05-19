@@ -23,7 +23,7 @@
 
         <div class="flex flex-col items-center">
             @foreach ($topics as $topic)
-                <div class="bg-white rounded-lg overflow-hidden border border-gray-400 p-4 p-8 m-4 md:w-3/4">
+                <div class="rounded-lg overflow-hidden border border-gray-400 p-4 p-8 m-4 md:w-3/4">
                     <div class="md:flex">
                         <div class="md:flex-shrink-0">
                             <img src="{{ gravatar_url($topic->speaker_email) }}" alt="Speaker avatar" class="rounded-full md:w-16 max-w-xs" width="100">
