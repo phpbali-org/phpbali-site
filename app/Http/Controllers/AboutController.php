@@ -37,7 +37,6 @@ class AboutController extends Controller
     public function index()
     {
         $content = markdown($this->files->get(base_path('resources/docs/about.md')));
-
         return view('about', compact('content'));
     }
 }

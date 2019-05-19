@@ -6,10 +6,10 @@
         </a>
       </div>
       <div class="text-sm flex items-center">
-        <a href="/about" class="block lg:inline-block lg:mt-0 text-black font-bold mr-4 {{ request()->is('about') ? 'underline' : 'hover:underline'}}">
+        <a href="/about" class="block lg:inline-block lg:mt-0 text-black font-bold mr-4 {{ isActive('about') }}">
           TENTANG
         </a>
-        <a href="/activities" class="block lg:inline-block lg:mt-0 text-black font-bold mr-4 {{ request()->is('activities') ? 'underline' : 'hover:underline'}}">
+        <a href="/activities" class="block lg:inline-block lg:mt-0 text-black font-bold mr-4 {{ isActive('activities') }}">
           KEGIATAN
         </a>
       </div>

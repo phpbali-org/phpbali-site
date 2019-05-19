@@ -13,3 +13,8 @@ function markdown($text)
 {
     return (new Parsedown)->text($text);
 }
+
+function isActive($path)
+{
+    return request()->is($path) ? 'underline' : 'hover:underline';
+}
