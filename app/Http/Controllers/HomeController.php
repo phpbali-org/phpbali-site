@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $title = 'Beranda';
+
         $event = Event::with('reservations')
         ->where('published', 1)
         ->orderBy('created_at', 'desc')
@@ -20,6 +22,6 @@ class HomeController extends Controller
         $attended_count = $event->reservations()->whereNotNull('attended_at')->count();
 
         return view('welcome',
-            compact('event', 'topics', 'reservation_count', 'attended_count'));
+            compact('title', 'event', 'topics', 'reservation_count', 'attended_count'));
     }
 }
