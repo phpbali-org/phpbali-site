@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="text-center my-8">
+    <div class="text-center my-8 mx-4">
         <h1 class="text-3xl mb-4">{{ $event->name }}</h1>
 
         <p>{{ $event->place_name }}</p>
