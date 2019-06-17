@@ -5,16 +5,23 @@
 @endsection
 
 @section('content')
-    <div class="text-center my-8 mx-4">
-        <h1 class="text-3xl mb-4">{{ $event->name }}</h1>
+    <div class="my-8 mx-auto">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold mb-4">
+                {{ $event->name }}
+            </h1>
 
-        <p>{{ $event->place_name }}</p>
-        <address>{{ $event->address }}</address>
-
-        <div class="mt-4">
-            <p>{{ $event->eventDate() }}</p>
-            <p>{{ $event->eventTime() }}</p>
+            <div class="my-4">
+                <div class="uppercase tracking-wide text-sm text-indigo-600 font-bold">
+                    <time>{{ $event->eventDate() }} {{ $event->eventTime() }}</time>
+                </div>
+                <address class="mt-2 text-gray-600 mx-4">
+                    <strong>{{ $event->place_name }}</strong> . {{ $event->address }}
+                </address>
+            </div>
         </div>
+
+        <p class="text-justify break-words mx-4">{{ $event->desc }}</p>
     </div>
 
     <div class="mt-8">
@@ -25,15 +32,21 @@
             @foreach ($topics as $topic)
                 <div class="rounded-lg overflow-hidden border border-gray-400 p-4 p-8 m-4 md:w-3/4">
                     <div class="md:flex">
-                        <div class="md:flex-shrink-0">
-                            <img src="{{ gravatar_url($topic->speaker_email) }}" alt="Speaker avatar" class="rounded-full md:w-16 max-w-xs" width="100">
-                        </div>
                         <div class="mt-4 md:mt-0 md:ml-6">
                             <div class="uppercase tracking-wide text-sm text-indigo-600 font-bold">
                                 {{ $topic->title }}
                             </div>
-                            <p class="block mt-1 text-lg leading-tight font-semibold text-gray-900">{{ $topic->speaker_name }}</p>
                             <p class="mt-2 text-black">{{ $topic->desc }}</p>
+                                <ul class="flex flex-wrap items-center mt-4">
+                                    @foreach ($topic->speakers()->get() as $speaker)
+                                        <li class="flex items-center md:w-1/2">
+                                            <img src="{{ $speaker->avatar() }}" alt="Speaker's avatar" class="rounded-full md:w-16 max-w-xs my-4" width="50">
+                                            <div class="mt-0 mx-4">
+                                                <p class="">{{ $speaker->name }}</p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
                         </div>
                     </div>
                 </div>
