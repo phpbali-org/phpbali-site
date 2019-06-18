@@ -108,8 +108,8 @@
 
 @section('script')
 <script>
-    const title = document.getElementById('eventTitle').value;
-    const text = document.getElementById('eventDesc').value;
+    const title = document.getElementById('eventTitle').textContent;
+    const text = document.getElementById('eventDesc').textContent;
     const url = document.querySelector('link[rel=canonical]') && document.querySelector('link[rel=canonical]').href || window.location.href;
     document.getElementById('shareBtn').addEventListener('click', () => {
         if (navigator.share) {
