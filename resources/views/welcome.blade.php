@@ -119,6 +119,9 @@
                 url
             })
             .then(() => {
+                if (window.ga && ga.create) {
+                    ga('send', 'event', 'Button', 'share', 'Share Event PHPBali');
+                }
                 console.log('Successful share');
             })
             .catch((error) => {
