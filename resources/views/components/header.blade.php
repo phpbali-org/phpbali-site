@@ -13,15 +13,13 @@
         </div>
         <div class="flex flex-col items-center">
             @if (auth()->check())
-                <a href="/profile">
-                    <img src="{{ gravatar_url(auth()->user()->email) }}" alt="User profile" width="50" height="50" class="rounded-full">
-                </a>
+                <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
                 <form action="/logout" method="post">
                     @csrf
                     <button type="submit">Logout</button>
                 </form>
             @else
-                <a href="/login" class="block lg:inline-block lg:mt-0 text-black font-bold">LOGIN</a>
+                <a href="/login/github" class="block lg:inline-block lg:mt-0 text-black font-bold">LOGIN</a>
             @endif
         </div>
     </nav>
