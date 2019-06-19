@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Socialite;
 
@@ -20,7 +21,7 @@ class AuthController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback($provider, Request $request)
     {
         try {
             $user = Socialite::driver($provider)->user();
@@ -43,6 +44,18 @@ class AuthController extends Controller
             $newUser->save();
 
             Auth::login($newUser, true);
+        }
+
+        // Check if event slug is exist then find the event based on slug
+        if ($request->has('event_slug')) {
+            $event = Event::where('slug', $request->event_slug)->first();
+            // If event is exist then register user to meetup event
+            if (!empty($event)) {
+                auth()->user()->reservation()->create([
+                    'user_id' => auth()->user()->id,
+                    'event_id' => $event->id
+                ]);
+            }
         }
 
         return redirect('/');

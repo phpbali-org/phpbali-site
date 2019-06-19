@@ -3,7 +3,7 @@
 Route::get('/', 'HomeController@index');
 
 // Reservation
-Route::post('register/{provider}', 'ReservationController@doReservation');
+Route::get('register/{provider}', 'ReservationController@doReservation');
 
 // Event
 Route::get('events', 'EventController@index');
