@@ -12,6 +12,11 @@ class User extends Authenticatable
 
     protected $guarded = ['photos'];
 
+    protected $casts = [
+        'is_staff' => 'boolean',
+        'is_admin' => 'boolean'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -21,12 +26,30 @@ class User extends Authenticatable
         'password', 'remember_token', 'auth_token',
     ];
 
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class, 'id_user');
+    }
+
     public function avatar()
     {
-        if (isset($this->github_id)) {
-            return 'https://avatars2.githubusercontent.com/u/'.$this->github_id.'?v=4';
-        } else {
-            return gravatar_url($this->email);
+        switch ($this->provider_name) {
+            case 'github':
+                return $this->photos;
+                break;
+            default:
+                return gravatar_url($this->email);
+                break;
         }
+    }
+
+    public function isStaff()
+    {
+        return $this->is_staff === true;
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin === true;
     }
 }
