@@ -12,7 +12,7 @@
             </a>
             @if (auth()->check())
                 @if (auth()->user()->isStaff() || auth()->user()->isAdmin())
-                    <a href="/users" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4">PENGGUNA</a>
+                    <a href="/users" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4 {{ isActive('users') }}">PENGGUNA</a>
                 @endif
             @endif
         </div>
