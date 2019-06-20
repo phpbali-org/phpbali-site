@@ -7,9 +7,14 @@
             <a href="/about" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4 {{ isActive('about') }}">
                 TENTANG
             </a>
-            <a href="/activities" class="block lg:inline-block lg:mt-0 text-black font-bold {{ isActive('activities') }}">
+            <a href="/activities" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4 {{ isActive('activities') }}">
                 KEGIATAN
             </a>
+            @if (auth()->check())
+                @if (auth()->user()->isStaff() || auth()->user()->isAdmin())
+                    <a href="/users" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4">PENGGUNA</a>
+                @endif
+            @endif
         </div>
         <div class="flex flex-col items-center">
             @if (auth()->check())
