@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>{{ config('app.name', 'Laravel') }} - {{ $title }}</title>
+        <title>{{ config('app.name', 'Laravel') }} @if(isset($title)) - {{ $title }} @endif</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="title" content="PHPBali">
         <meta name="description" content="Komunitas pemrograman PHP di Bali. Diskusi tentang PHP dan pengembangan web">
@@ -10,16 +10,18 @@
         <link rel="icon" type=image/png href="{{ asset('favicon.png') }}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ config('app.url') }}">
-        <meta property="og:title" content="{{ config('app.name', 'Laravel') }} - {{ $title }}">
+        <meta property="og:title" content="{{ config('app.name', 'Laravel') }} - @if(isset($title)) - {{ $title }} @endif">
         <meta property="og:description" content="Komunitas pemrograman PHP di Bali. Diskusi tentang PHP dan pengembangan web">
         <meta property="og:image" content="{{ asset('img/phpbali-logo.png') }}">
         <meta property="twitter:url" content="{{ config('app.url') }}">
-        <meta property="twitter:title" content="{{ config('app.name', 'Laravel') }} - {{ $title }}">
+        <meta property="twitter:title" content="{{ config('app.name', 'Laravel') }} - @if(isset($title)) - {{ $title }} @endif">
         <meta property="twitter:description" content="Komunitas pemrograman PHP di Bali. Diskusi tentang PHP dan pengembangan web">
         <meta property="twitter:image" content="{{ asset('img/phpbali-logo.png') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @yield('plugins.css')
         @yield('style')
+        @yield('plugins.js')
         @if (config('app.env') === 'production')
             <script src="https://www.google-analytics.com/analytics.js" defer></script>
             <script defer>

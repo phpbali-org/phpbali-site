@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class SetColumnsNullableOnRsvpEvents extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::table('rsvp_events', function (Blueprint $table) {
+            $table->string('name_of_registrant')->nullable()->change();
+            $table->string('registrant_email')->nullable()->change();
         });
     }
 
@@ -27,6 +26,8 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::table('rsvp_events', function (Blueprint $table) {
+            //
+        });
     }
 }
