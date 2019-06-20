@@ -7,7 +7,7 @@
             <a href="/about" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4 {{ isActive('about') }}">
                 TENTANG
             </a>
-            <a href="/activities" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4 {{ isActive('activities') }}">
+            <a href="/events" class="block lg:inline-block lg:mt-0 text-black font-bold mx-4 {{ isActive('activities') }}">
                 KEGIATAN
             </a>
             @if (auth()->check())
