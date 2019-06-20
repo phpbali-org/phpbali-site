@@ -16,7 +16,7 @@ class AuthController extends Controller
         return Socialite::driver('github')->redirect();
     }
 
-    public function handleProviderCallback(Request $request)
+    public function handleProviderCallback($events = null, $event_slug = null)
     {
         try {
             $user = Socialite::driver('github')->user();
@@ -47,11 +47,10 @@ class AuthController extends Controller
             Auth::login($newUser, true);
         }
 
-        // Check if event slug is exist then find the event based on slug
-        if ($request->has('event_slug')) {
-            $event = Event::where('slug', $request->event_slug)->first();
-            // If event is exist then register user to meetup event
-            if (!empty($event)) {
+        if (!empty($events) && !empty($event_slug)) {
+            $event = Event::where('slug', $event_slug)->first();
+            // Check if event is exists and has not finished yet.
+            if (!empty($event) && !$event->hasFinished()) {
                 // Check if user doesn't register yet
                 if ($event->reservations()->where('user_id', auth()->user()->id)->get()->isEmpty()) {
                     auth()->user()->reservation()->create([
