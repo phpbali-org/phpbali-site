@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('plugins.css')
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
+@endsection
+
+@section('plugins.js')
+    <script src="{{ asset('js/flatpickr.min.js') }}" async></script>
+@endsection
+
 @section('content')
     <div class="w-full max-w-full m-auto">
       <form class="rounded px-8 pt-6 pb-8 mb-4" method="post" action="/events/store">
