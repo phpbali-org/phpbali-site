@@ -3,7 +3,7 @@
 Route::get('/', 'HomeController@index');
 
 // Reservation
-Route::get('register/{provider}', 'ReservationController@doReservation');
+Route::get('register/github', 'ReservationController@doReservation');
 
 // Event
 Route::get('events', 'EventController@index');
@@ -11,10 +11,9 @@ Route::get('events', 'EventController@index');
 // About
 Route::get('about', 'AboutController@index');
 
-Route::get('login', 'AuthController@showLoginForm');
 // Oauth Github
-Route::get('login/{provider}', 'AuthController@redirectToProvider');
-Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
+Route::get('login/github', 'AuthController@redirectToProvider')->name('login');
+Route::get('login/github/callback', 'AuthController@handleProviderCallback');
 
 Route::post('logout', 'AuthController@logout');
 

@@ -11,20 +11,15 @@ use Socialite;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function redirectToProvider()
     {
-        return view('auth');
+        return Socialite::driver('github')->redirect();
     }
 
-    public function redirectToProvider($provider)
-    {
-        return Socialite::driver($provider)->redirect();
-    }
-
-    public function handleProviderCallback($provider, Request $request)
+    public function handleProviderCallback(Request $request)
     {
         try {
-            $user = Socialite::driver($provider)->user();
+            $user = Socialite::driver('github')->user();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Ada masalah, silahkan dicoba lagi.');
         }
@@ -35,7 +30,7 @@ class AuthController extends Controller
             Auth::login($existingUser, true);
         } else {
             $newUser = new User;
-            $newUser->provider_name = $provider;
+            $newUser->provider_name = 'github';
             $newUser->provider_id = $user->getId();
             $newUser->name = $user->getName();
             $newUser->email = $user->getEmail();
