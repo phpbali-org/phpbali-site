@@ -20,7 +20,9 @@ class ReservationController extends Controller
         ->first();
 
         return Socialite::driver('github')
-            ->redirectUrl(env('GITHUB_CALLBACK_URL')."?event_slug={$event->slug}")
+            ->with([
+                'redirect_uri' => url("/login/github/callback{$event->path()}")
+            ])
             ->redirect();
     }
 }
