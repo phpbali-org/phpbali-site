@@ -27,6 +27,12 @@ class AuthController extends Controller
         $existingUser = User::where('email', $user->getEmail())->first();
 
         if (!empty($existingUser)) {
+            // Update provider name and id if existing user login with github
+            if (empty($existingUser->provider_name)) {
+                $existingUser->provider_name = 'github';
+                $existingUser->provider_id = $user->getId();
+            }
+
             Auth::login($existingUser, true);
         } else {
             $newUser = new User;
