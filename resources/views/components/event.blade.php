@@ -10,10 +10,12 @@
             <address class="mt-2 text-gray-600">
                 <strong>{{ $event->place_name }}</strong> . {{ $event->address }}
             </address>
-            <div class="flex flex-col md:flex-row">
-                <p>{{ $event->totalReservation() }} orang telah mendaftar</p>
-                <p class="md:ml-4">{{ $event->totalAttendance() }} orang telah hadir</p>
-            </div>
+            @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
+                <div class="flex flex-col md:flex-row">
+                    <p>{{ $event->totalReservation() }} orang telah mendaftar</p>
+                    <p class="md:ml-4">{{ $event->totalAttendance() }} orang telah hadir</p>
+                </div>
+            @endif
         </div>
     </div>
     @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
