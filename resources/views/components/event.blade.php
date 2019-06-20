@@ -16,19 +16,21 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-end">
-        @if ($event->published)
-            <form action="{{ $event->path() . "/unpublish" }}" method="post">
-                <input type="hidden" name="_method" value="PUT">
-                @csrf
-                <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Batal publikasi</button>
-            </form>
-        @else
-            <form action="{{ $event->path() . "/publish" }}" method="post">
-                <input type="hidden" name="_method" value="PUT">
-                @csrf
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Publikasi</button>
-            </form>
-        @endif
-    </div>
+    @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
+        <div class="flex justify-end">
+            @if ($event->published)
+                <form action="{{ $event->path() . "/unpublish" }}" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    @csrf
+                    <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Batal publikasi</button>
+                </form>
+            @else
+                <form action="{{ $event->path() . "/publish" }}" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Publikasi</button>
+                </form>
+            @endif
+        </div>
+    @endif
 </div>
