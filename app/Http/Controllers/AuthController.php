@@ -51,10 +51,13 @@ class AuthController extends Controller
             $event = Event::where('slug', $request->event_slug)->first();
             // If event is exist then register user to meetup event
             if (!empty($event)) {
-                auth()->user()->reservation()->create([
-                    'user_id' => auth()->user()->id,
-                    'event_id' => $event->id
-                ]);
+                // Check if user doesn't register yet
+                if ($event->reservations()->where('user_id', auth()->user()->id)->get()->isEmpty()) {
+                    auth()->user()->reservation()->create([
+                        'user_id' => auth()->user()->id,
+                        'event_id' => $event->id
+                    ]);
+                }
             }
         }
 

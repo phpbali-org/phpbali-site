@@ -130,4 +130,15 @@ class EventController extends Controller
 
         return redirect('/events');
     }
+
+    public function register(Event $event)
+    {
+        // TODO: Add response that registration successful
+        auth()->user()->reservation()->create([
+            'event_id' => $event->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect('/');
+    }
 }

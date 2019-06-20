@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('events/{event}', 'EventController@show');
     Route::put('events/{event}/publish', 'EventController@publish');
     Route::put('events/{event}/unpublish', 'EventController@unpublish');
+    Route::put('events/{event}/register', 'EventController@register');
 
     Route::get('events/{event}/topics/create', 'TopicController@create');
     Route::post('events/{event}/topics/store', 'TopicController@store');

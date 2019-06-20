@@ -8,6 +8,9 @@ use App\Models\Event;
 
 class ReservationController extends Controller
 {
+    /**
+     * Do reservation by using Github Oauth
+     */
     public function doReservation($provider)
     {
         // Get current event

@@ -75,13 +75,17 @@
             </div>
             {{-- Cek apakah user sudah mendaftar atau belum --}}
             @if (auth()->check())
-                @unless ($event->reservations()->where('user_id', auth()->user()->id))
+                @if ($event->reservations()->where('user_id', auth()->user()->id)->get()->isEmpty())
                     <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
                     {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
                     <div class="flex flex-col items-center m-4">
-                        <a href="/register/github" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Login with Github</a>
+                        <form action="{{ $event->path() . "/register" }}" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            @csrf
+                            <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Daftar</button>
+                        </div>
                     </div>
-                @endunless
+                @endif
             @else
                 <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
                 {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
