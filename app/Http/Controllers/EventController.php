@@ -10,13 +10,17 @@ class EventController extends Controller
     {
         $title = 'Daftar Acara';
 
-        $previous_events = Event::where('published', 1)
-            ->where('end_datetime', '<', \Carbon\Carbon::parse(new \DateTime('Asia/Makassar')))
-            ->orderBy('end_datetime', 'desc')
-            ->limit(10)
-            ->get();
+        if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin())) {
+            $events = Event::orderBy('created_at', 'desc')->get();
+        } else {
+            $events = Event::where('published', 1)
+                ->where('end_datetime', '<', \Carbon\Carbon::parse(new \DateTime('Asia/Makassar')))
+                ->orderBy('end_datetime', 'desc')
+                ->limit(10)
+                ->get();
+        }
 
-        return view('activities', compact('title', 'previous_events'));
+        return view('app.events.index', compact('title', 'events'));
     }
 
     /**
