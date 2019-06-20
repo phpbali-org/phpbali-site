@@ -3,7 +3,7 @@
 Route::get('/', 'HomeController@index');
 
 // Reservation
-Route::get('register/github', 'ReservationController@doReservation');
+// Route::get('register/github', 'ReservationController@doReservation');
 
 // Event
 Route::get('events', 'EventController@index');

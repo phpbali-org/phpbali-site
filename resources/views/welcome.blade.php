@@ -87,11 +87,11 @@
                     </div>
                 @endif
             @else
-                <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
+                {{-- <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2> --}}
                 {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
-                <div class="flex flex-col items-center m-4">
-                    <a href="/register/github" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Login with Github</a>
-                </div>
+                {{-- <div class="flex flex-col items-center m-4"> --}}
+                    {{-- <a href="/register/github" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Login with Github</a> --}}
+                {{-- </div> --}}
             @endif
         @endif
     </div>
