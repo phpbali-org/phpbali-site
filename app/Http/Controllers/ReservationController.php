@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Socialite;
 use App\Models\Event;
+use Socialite;
 
 class ReservationController extends Controller
 {
     /**
-     * Do reservation by using Github Oauth
+     * Do reservation by using Github Oauth.
      */
     public function doReservation()
     {
@@ -21,7 +20,7 @@ class ReservationController extends Controller
 
         return Socialite::driver('github')
             ->with([
-                'redirect_uri' => url("/login/github/callback{$event->path()}")
+                'redirect_uri' => url("/login/github/callback{$event->path()}"),
             ])
             ->redirect();
     }

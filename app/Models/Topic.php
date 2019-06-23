@@ -30,19 +30,19 @@ class Topic extends Model
 
         // Get any that could possibly be related.
         // This cuts the queries down by doing it once.
-        $allSlugs = Topic::select('slug')->where('slug', 'like', $slug.'%')
+        $allSlugs = self::select('slug')->where('slug', 'like', $slug.'%')
             ->where('id', '<>', $id)
             ->get();
 
         // If we haven't used it before then we are all good.
-        if (! $allSlugs->contains('slug', $slug)) {
+        if (!$allSlugs->contains('slug', $slug)) {
             return $slug;
         }
 
         // Just append numbers like a savage until we find not used.
         for ($i = 1; $i <= 10; $i++) {
             $newSlug = $slug.'-'.$i;
-            if (! $allSlugs->contains('slug', $newSlug)) {
+            if (!$allSlugs->contains('slug', $newSlug)) {
                 return $newSlug;
             }
         }

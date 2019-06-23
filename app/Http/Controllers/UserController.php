@@ -15,6 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('app.users.index', compact('users'));
     }
 
@@ -31,17 +32,18 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email'
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email',
         ]);
 
-        $user = new User;
+        $user = new User();
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -54,7 +56,8 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -65,7 +68,8 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -76,8 +80,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User                $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -88,7 +93,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
