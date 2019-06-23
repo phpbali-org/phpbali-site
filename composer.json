@@ -9,6 +9,7 @@
         "doctrine/dbal": "^2.8",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
+        "grkamil/laravel-telegram-logging": "dev-master",
         "laravel/framework": "5.8.*",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0"
