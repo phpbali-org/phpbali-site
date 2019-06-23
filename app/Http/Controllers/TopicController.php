@@ -16,7 +16,6 @@ class TopicController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -27,6 +26,7 @@ class TopicController extends Controller
     public function create(Event $event)
     {
         $users = User::all();
+
         return view('app.topics.create', compact('users', 'event'));
     }
 
@@ -41,10 +41,10 @@ class TopicController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'desc' => 'required',
+            'desc'  => 'required',
         ]);
 
-        $topic = new Topic;
+        $topic = new Topic();
 
         $topic->title = $request->title;
         $topic->desc = $request->desc;
@@ -67,19 +67,18 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \App\Models\Topic $topic
+     *
+     * @param \App\Models\Topic        $topic
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function update(Topic $topic, Request $request)
     {
-
     }
 
     /**
@@ -91,6 +90,5 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
-
     }
 }
