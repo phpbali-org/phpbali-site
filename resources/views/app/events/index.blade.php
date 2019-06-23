@@ -8,7 +8,7 @@
             @include('components.event', ['event' => $event])
         @endforeach
 
-        @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
+        @if (auth()->check() && auth()->user()->isAdmin())
             <div class="flex flex-col align-end fixed z-1000" style="bottom: 24px; right: 24px;">
                 <a href="events/create" class="relative rounded-full shadow border bg-white hover:bg-gray-100 text-gray-800 border-gray-400 py-4 px-4">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fill-current w-8 h-8">
