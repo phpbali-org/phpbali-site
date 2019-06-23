@@ -7,7 +7,6 @@ Route::get('register/github', 'ReservationController@doReservation');
 
 // Event
 Route::get('events', 'EventController@index');
-Route::get('events/{event}', 'EventController@show');
 
 // About
 Route::get('about', 'AboutController@index');
@@ -43,3 +42,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('events/{event}/attendees/create', 'AttendeeController@create');
     });
 });
+
+// Fixed bug cannot create and store event. I think because Laravel read route sequentially.
+Route::get('events/{event}', 'EventController@show');
