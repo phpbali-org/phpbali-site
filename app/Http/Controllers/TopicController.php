@@ -42,6 +42,8 @@ class TopicController extends Controller
         $request->validate([
             'title' => 'required',
             'desc' => 'required',
+            'speakers' => 'required|array|min:1',
+            'speakers.*' => 'required|min:1'
         ]);
 
         $topic = new Topic;
