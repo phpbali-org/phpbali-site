@@ -5,7 +5,7 @@
 @endsection
 
 @section('plugins.js')
-    <script src="{{ asset('js/flatpickr.min.js') }}" async></script>
+    <script src="{{ asset('js/flatpickr.js') }}" async></script>
 @endsection
 
 @section('content')
@@ -80,16 +80,21 @@
 
 @section('script')
 <script>
-    flatpickr("#eventStartDateTime", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true
-    });
+// Detect if a document has loaded with JavaScript
+document.onreadystatechange = function () {
+    if (document.readyState === 'complete') {
+        flatpickr("#eventStartDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        });
 
-    flatpickr("#eventEndDateTime", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true
-    });
+        flatpickr("#eventEndDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        });
+    }
+}
 </script>
 @endsection

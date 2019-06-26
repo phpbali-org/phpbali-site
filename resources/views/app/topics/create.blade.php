@@ -61,10 +61,13 @@
 
 @section('script')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    new Choices('#topicSpeaker', {
-        removeItemButton: true,
-    });
-});
+// Detect if a document has loaded with JavaScript
+document.onreadystatechange = function () {
+    if (document.readyState === 'complete') {
+        new Choices('#topicSpeaker', {
+            removeItemButton: true,
+        });
+    }
+}
 </script>
 @endsection

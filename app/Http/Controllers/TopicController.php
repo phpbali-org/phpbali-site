@@ -40,8 +40,10 @@ class TopicController extends Controller
     public function store(Event $event, Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'desc'  => 'required',
+            'title'      => 'required',
+            'desc'       => 'required',
+            'speakers'   => 'required|array|min:1',
+            'speakers.*' => 'required|min:1',
         ]);
 
         $topic = new Topic();
