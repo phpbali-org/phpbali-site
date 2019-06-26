@@ -44,15 +44,15 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'desc' => 'required',
-            'place_name' => 'required',
-            'address' => 'required',
+            'name'           => 'required',
+            'desc'           => 'required',
+            'place_name'     => 'required',
+            'address'        => 'required',
             'start_datetime' => 'required',
-            'end_datetime' => 'required'
+            'end_datetime'   => 'required',
         ]);
 
-        $event = new Event;
+        $event = new Event();
 
         $event->name = $request->name;
         $event->desc = $request->desc;
@@ -72,9 +72,11 @@ class EventController extends Controller
     }
 
     /**
-     * Show event
-     * @param  Event  $event [description]
-     * @return [type]        [description]
+     * Show event.
+     *
+     * @param Event $event [description]
+     *
+     * @return [type] [description]
      */
     public function show(Event $event)
     {
@@ -92,20 +94,18 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Event $event
+     * @param \App\Models\Event        $event
      *
      * @return \Illuminate\Http\Response
      */
     public function update(Event $event, Request $request)
     {
-
     }
 
     /**
@@ -117,7 +117,6 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-
     }
 
     // Publish event
@@ -141,7 +140,7 @@ class EventController extends Controller
         // TODO: Add response that registration successful
         auth()->user()->reservation()->create([
             'event_id' => $event->id,
-            'user_id' => auth()->user()->id,
+            'user_id'  => auth()->user()->id,
         ]);
 
         return redirect('/');

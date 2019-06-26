@@ -18,7 +18,7 @@ class Event extends Model
     protected $hidden = ['photos', 'mobile_photos', 'latitude', 'longitude', 'place'];
 
     protected $casts = [
-        'published' => 'boolean'
+        'published' => 'boolean',
     ];
 
     public function topics()
@@ -73,7 +73,7 @@ class Event extends Model
     // Get last event
     public static function lastEvent()
     {
-        return Event::where('published', 1)
+        return self::where('published', 1)
         ->orderBy('created_at', 'desc')
         ->first();
     }
@@ -81,7 +81,7 @@ class Event extends Model
     // Get total reservations
     public function totalReservation()
     {
-        return Event::where('id', $this->id)
+        return self::where('id', $this->id)
         ->first()
         ->reservations()
         ->count();
@@ -90,7 +90,7 @@ class Event extends Model
     // Get total attendance
     public function totalAttendance()
     {
-        return Event::where('id', $this->id)
+        return self::where('id', $this->id)
         ->first()
         ->reservations()
         ->whereNotNull('attended_at')
@@ -115,19 +115,19 @@ class Event extends Model
 
         // Get any that could possibly be related.
         // This cuts the queries down by doing it once.
-        $allSlugs = Event::select('slug')->where('slug', 'like', $slug.'%')
+        $allSlugs = self::select('slug')->where('slug', 'like', $slug.'%')
             ->where('id', '<>', $id)
             ->get();
 
         // If we haven't used it before then we are all good.
-        if (! $allSlugs->contains('slug', $slug)) {
+        if (!$allSlugs->contains('slug', $slug)) {
             return $slug;
         }
 
         // Just append numbers like a savage until we find not used.
         for ($i = 1; $i <= 10; $i++) {
             $newSlug = $slug.'-'.$i;
-            if (! $allSlugs->contains('slug', $newSlug)) {
+            if (!$allSlugs->contains('slug', $newSlug)) {
                 return $newSlug;
             }
         }

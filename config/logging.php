@@ -68,9 +68,9 @@ return [
 
         'telegram' => [
             'driver' => 'custom',
-            'via' => Logger\TelegramLogger::class,
-            'level' => 'debug'
-        ]
+            'via'    => Logger\TelegramLogger::class,
+            'level'  => 'debug',
+        ],
     ],
 
 ];
