@@ -7589,12 +7589,12 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-#openSidebarMenu:checked ~ #sidebarMenu {
+#menuToggle:checked ~ #sidebarMenu {
   -webkit-transform: translateX(0);
           transform: translateX(0);
 }
 
-#openSidebarMenu, #closeSidebarMenu {
+#menuToggle {
   transition: all 0.3s;
   box-sizing: border-box;
   display: none;
@@ -7610,8 +7610,29 @@ body {
   left: 1rem;
 }
 
+@media (max-width: 699px) {
+  .menuUnderlay {
+    display: block;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: opacity .3s cubic-bezier(0,0,.31,1);
+  }
+
+  #menuToggle:checked ~ .menuUnderlay {
+    opacity: .7;
+    pointer-events: auto;
+  }
+}
+
 @media (min-width: 768px) {
-  .sidebarIconToggle, #openSidebarMenu {
+  .sidebarIconToggle, #menuToggle {
     display: none;
   }
 
@@ -7633,7 +7654,7 @@ body {
     height: auto;
     width: auto;
     margin-top: 5rem;
-    margin-left: 4rem;
+    margin-left: 1rem;
   }
 
   #sidebarMenu li:first-child {
