@@ -18,15 +18,21 @@
                 @endif
             </ul>
         </nav>
-        <div class="flex items-center">
+        <div class="relative">
+            <div class="flex items-center">
+                @if (auth()->check())
+                    <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
+                @else
+                    <a href="/login/github" class="block lg:inline-block lg:mt-0 text-black font-bold">LOGIN</a>
+                @endif
+            </div>
             @if (auth()->check())
-                <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
-                <form action="/logout" method="post">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
-            @else
-                <a href="/login/github" class="block lg:inline-block lg:mt-0 text-black font-bold">LOGIN</a>
+                <div class="absolute bg-card py-2 rounded shadow mt-2 pin-r">
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
             @endif
         </div>
     </div>
