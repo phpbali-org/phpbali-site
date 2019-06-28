@@ -15,12 +15,10 @@ body {
 #sidebarMenu {
     height: 100%;
     position: fixed;
-    display: none;
-    left: 3rem;
+    left: 0;
     top: 5rem;
     width: 250px;
     margin-top: -5rem;
-    margin-left: -3rem;
     transform: translateX(-250px);
     transition: transform 250ms ease-in-out;
     z-index: 999;
@@ -43,7 +41,6 @@ body {
 
 #openSidebarMenu:checked ~ #sidebarMenu {
     transform: translateX(0);
-    display: block;
 }
 
 #openSidebarMenu, #closeSidebarMenu {
