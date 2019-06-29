@@ -23,15 +23,22 @@
     <div class="mt-8">
         <h1 class="text-3xl mb-4 text-center">TOPIK</h1>
         <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
-
-        @include('components.topics', ['event', $event])
+        <div class="flex flex-col items-center">
+            @foreach ($topics as $topic)
+                @include('components.topic', ['event' => $topic])
+            @endforeach
+        </div>
     </div>
 
     <div class="mt-8">
         <h1 class="text-3xl mb-4 text-center">PARTISIPAN</h1>
         <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
         @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
-            @include('components.participants', ['event', $event])
+            <div class="flex flex-col items-center">
+                @foreach ($event->reservations()->get() as $participant)
+                    @include('components.participant', ['participant' => $participant])
+                @endforeach
+            </div>
         @else
             @if ($event->isOngoing() || $event->hasFinished())
                 @if (empty($attended_count))
