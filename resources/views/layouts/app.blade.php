@@ -18,7 +18,7 @@
         <meta property="twitter:description" content="Komunitas pemrograman PHP di Bali. Diskusi tentang PHP dan pengembangan web">
         <meta property="twitter:image" content="{{ asset('img/phpbali-logo.png') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         @yield('plugins.css')
         @yield('style')
         @yield('plugins.js')

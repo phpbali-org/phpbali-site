@@ -16,3 +16,7 @@ mix.postCss('resources/css/app.css', 'public/css', [
   require('tailwindcss'),
 ])
 .purgeCss();
+
+if (mix.inProduction()) {
+  mix.version();
+}
