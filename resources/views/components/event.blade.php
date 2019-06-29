@@ -1,4 +1,4 @@
-<div class="rounded-lg overflow-hidden border border-gray-400 p-4 p-8 m-4">
+<div class="rounded-lg overflow-hidden border border-gray-400 p-6 m-4">
     <div class="md:flex">
         <div class="mt-4 md:mt-0 md:ml-6">
             <div class="uppercase tracking-wide text-sm text-indigo-600 font-bold">
@@ -19,7 +19,7 @@
         </div>
     </div>
     @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
-        <div class="flex justify-end">
+        <div class="flex justify-end mt-4">
             @if ($event->published)
                 <form action="{{ $event->path() . "/unpublish" }}" method="post">
                     <input type="hidden" name="_method" value="PUT">
