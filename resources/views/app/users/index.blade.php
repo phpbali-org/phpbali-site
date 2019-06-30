@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-3xl font-bold text-center">Pengguna</h1>
     <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
-    <div class="m-auto">
+    <div class="flex flex-col items-center">
         @foreach ($users as $user)
             @include('components.user', ['user' => $user])
         @endforeach

@@ -1,7 +1,15 @@
-<div class="flex items-center bg-white rounded-lg p-6 m-4 shadow overflow-hidden">
-    <img class="h-16 w-16 md:h-24 md:w-24 rounded-full mr-auto" src="{{ $user->avatar() }}">
-    <div class="flex flex-col text-left my-auto mr-auto">
-        <h2 class="text-lg">{{ $user->name }}</h2>
-        <p class="text-gray-600">{{ $user->email }}</p>
+<div class="rounded-lg overflow-hidden bg-white shadow p-8 m-4 w-3/4">
+    <div class="flex flex-col md:flex-row items-center">
+        <div class="md:flex-shrink-0">
+            <img src="{{ $user->avatar() }}" alt="Attendee's avatar" class="rounded-full md:w-16 max-w-xs" width="50">
+        </div>
+        <div class="flex flex-col md:ml-4 mt-4 md:mt-0 items-center md:items-start">
+            <p>
+                {{ $user->name }}
+            </p>
+            <p class="text-gray-600 text-sm">
+                {{ $user->email }}
+            </p>
+        </div>
     </div>
 </div>

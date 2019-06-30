@@ -42,7 +42,7 @@
             @endif
         </div>
         @if (auth()->check())
-            <div class="absolute py-2 mt-2 pin-r">
+            <div class="absolute py-2 pin-r">
                 <form action="/logout" method="post">
                     @csrf
                     <button type="submit">Logout</button>
