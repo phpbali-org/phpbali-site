@@ -38,41 +38,49 @@
     <div class="mt-8">
         <h1 class="text-3xl mb-4 text-center">PARTISIPAN</h1>
         <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
-        {{-- Jika user telah mendaftar dan kegiatan belum berlangsung maka kalimatnya: "X orang telah mendaftar"
-        Jika user telah hadir dan kegiatan sedang/sudah berlangsung maka kalimatnya: "X orang telah hadir" --}}
-        @if ($event->isOngoing() || $event->hasFinished())
-            @if (empty($attended_count))
-                <p class="text-center text-2xl font-bold m-8">Belum ada yang hadir. Cepat datang!</p>
-            @else
-                <div class="text-center my-8">
-                    <p class="text-4xl font-bold">{{ $attended_count }}</p>
-                    <p>Orang telah hadir</p>
-                </div>
-            @endif
-        @else
-            <div class="text-center my-8">
-                <p class="text-4xl font-bold">{{ $reservation_count }}</p>
-                <p>Orang telah mendaftar</p>
+        @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
+            <div class="flex flex-col items-center">
+                @foreach ($event->reservations()->get() as $participant)
+                    @include('components.participant', ['participant' => $participant])
+                @endforeach
             </div>
-            {{-- Cek apakah user sudah mendaftar atau belum --}}
-            @if (auth()->check())
-                @if ($event->reservations()->where('user_id', auth()->user()->id)->get()->isEmpty())
-                    <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
-                    {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
-                    <div class="flex flex-col items-center m-4">
-                        <form action="{{ $event->path() . "/register" }}" method="POST">
-                            <input type="hidden" name="_method" value="PUT">
-                            @csrf
-                            <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Daftar</button>
-                        </div>
+        @else
+            {{-- Jika user telah mendaftar dan kegiatan belum berlangsung maka kalimatnya: "X orang telah mendaftar"
+            Jika user telah hadir dan kegiatan sedang/sudah berlangsung maka kalimatnya: "X orang telah hadir" --}}
+            @if ($event->isOngoing() || $event->hasFinished())
+                @if (empty($attended_count))
+                    <p class="text-center text-2xl font-bold m-8">Belum ada yang hadir. Cepat datang!</p>
+                @else
+                    <div class="text-center my-8">
+                        <p class="text-4xl font-bold">{{ $attended_count }}</p>
+                        <p>Orang telah hadir</p>
                     </div>
                 @endif
             @else
-                <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
-                {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
-                <div class="flex flex-col items-center m-4">
-                    <a href="/register/github" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Login with Github</a>
+                <div class="text-center my-8">
+                    <p class="text-4xl font-bold">{{ $reservation_count }}</p>
+                    <p>Orang telah mendaftar</p>
                 </div>
+                {{-- Cek apakah user sudah mendaftar atau belum --}}
+                @if (auth()->check())
+                    @if ($event->reservations()->where('user_id', auth()->user()->id)->get()->isEmpty())
+                        <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
+                        {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
+                        <div class="flex flex-col items-center m-4">
+                            <form action="{{ $event->path() . "/register" }}" method="POST">
+                                <input type="hidden" name="_method" value="PUT">
+                                @csrf
+                                <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Daftar</button>
+                            </div>
+                        </div>
+                    @endif
+                @else
+                    <h2 class="text-2xl text-center mt-8">Silahkan daftar di sini!</h2>
+                    {{-- Tampilkan form ini jika kegiatan belum berlangsung --}}
+                    <div class="flex flex-col items-center m-4">
+                        <a href="/register/github" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4">Login with Github</a>
+                    </div>
+                @endif
             @endif
         @endif
     </div>
