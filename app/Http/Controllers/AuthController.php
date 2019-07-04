@@ -36,7 +36,7 @@ class AuthController extends Controller
             $newUser = new User();
             $newUser->provider_name = 'github';
             $newUser->provider_id = $user->getId();
-            $newUser->name = $user->getName();
+            $newUser->name = !empty($user->getName()) ? $user->getName() : $user->getNickname();
             $newUser->email = $user->getEmail();
             $newUser->photos = $user->getAvatar();
 
