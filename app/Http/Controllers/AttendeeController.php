@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AttendeeController extends Controller
 {
+    const PRESENT = 1;
+
     /**
      * Display a listing of the resource.
      *
@@ -86,5 +89,28 @@ class AttendeeController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function attendance(Event $event)
+    {
+        $user = User::where('id', request()->input('participant_id'))->first();
+
+        if (request()->input('has_attended') === self::PRESENT) {
+            $event->reservations()->where('user_id', request()->input('participant_id'))->update([
+                'attended_at' => date('Y-m-d H:i:s', time()),
+            ]);
+
+            return response()->json([
+                'message' => "{$user->name} telah hadir",
+            ]);
+        } else {
+            $event->reservations()->where('user_id', request()->input('participant_id'))->update([
+                'attended_at' => null,
+            ]);
+
+            return response()->json([
+                'message' => "{$user->name} batal hadir",
+            ]);
+        }
     }
 }
