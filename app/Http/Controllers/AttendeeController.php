@@ -97,11 +97,11 @@ class AttendeeController extends Controller
 
         if (request()->input('has_attended') === self::PRESENT) {
             $event->reservations()->where('user_id', request()->input('participant_id'))->update([
-                'attended_at' => date('Y-m-d H:i:s', time())
+                'attended_at' => date('Y-m-d H:i:s', time()),
             ]);
 
             return response()->json([
-                "message" => "{$user->name} telah hadir"
+                'message' => "{$user->name} telah hadir",
             ]);
         } else {
             $event->reservations()->where('user_id', request()->input('participant_id'))->update([
@@ -109,7 +109,7 @@ class AttendeeController extends Controller
             ]);
 
             return response()->json([
-                "message" => "{$user->name} batal hadir"
+                'message' => "{$user->name} batal hadir",
             ]);
         }
     }
