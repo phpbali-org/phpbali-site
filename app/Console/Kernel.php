@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\ReminderOneDayBeforeEvent',
     ];
 
     /**
@@ -27,6 +27,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('reminder:one-day-before-event')
+                ->dailyAt('19:00')
+                ->timezone('Asia/Makassar');
     }
 
     /**
