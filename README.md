@@ -1,19 +1,12 @@
 # phpbali-site
 Website Komunitas PHPBali.
 
-## Prasyarat
-Website ini menggunakan Laravel versi 5.7. Jadi pastikan Anda menggunakan PHP minimal versi 7.1.3 atau lebih dan Anda pernah mencoba belajar PHP dan MySQL serta belajar Laravel sebelumnya.
-
-## Catatan
-Untuk login ke halaman admin: `phpbali-site.test/adminpage/login`, berikut email dan passwordnya:
-```
-email: admin@phpbali.com,
-password: phpbaliadmin002,
-```
+## Teknologi
+Teknologi yang digunakan adalah Laravel, Tailwind CSS, dan Github untuk autentikasi.
 
 ## Instalasi
 * Buka terminal atau command prompt,
-* Masukan perintah ```git clone url_repo``` (contoh: ```git clone https://github.com/BaliPHP/phpbali-site.git```) dan pindah ke direktori phpbali-site.
+* Masukan perintah ```git clone https://github.com/BaliPHP/phpbali-site.git```.
 * Jalankan perintah ```composer install```
 * Buat file ```.env``` (dengan menyalin pola yang telah di sediakan di .env.example)
 * Buat database baru di MySQL (misalnya: ```phpbali_site```). Selanjutnya pasang nama database tersebut
