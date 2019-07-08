@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Event;
 use App\Models\User;
+use Illuminate\Console\Command;
 
 class ReminderOneDayBeforeEvent extends Command
 {
@@ -52,6 +52,7 @@ class ReminderOneDayBeforeEvent extends Command
             $participants = $event->reservations()->get()->map(function ($participant) {
                 $event = Event::where('id', $participant['event_id'])->first();
                 $user = User::where('id', $participant['user_id'])->first();
+
                 return $user->notify(new \App\Notifications\ReminderOneDayBeforeEvent($event, $user));
             });
         }
