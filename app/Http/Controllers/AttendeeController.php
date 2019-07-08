@@ -106,7 +106,7 @@ class AttendeeController extends Controller
                 ]);
             } else {
                 return response()->json([
-                    'message' => "{$user->name} sudah hadir daritadi"
+                    'message' => "{$user->name} sudah hadir daritadi",
                 ]);
             }
         } else {
