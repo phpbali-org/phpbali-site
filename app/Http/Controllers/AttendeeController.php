@@ -96,13 +96,19 @@ class AttendeeController extends Controller
         $user = User::where('id', request()->input('participant_id'))->first();
 
         if (request()->input('has_attended') === self::PRESENT) {
-            $event->reservations()->where('user_id', request()->input('participant_id'))->update([
-                'attended_at' => date('Y-m-d H:i:s', time()),
-            ]);
+            if (empty($event->reservations()->where('user_id', request()->input('participant_id'))->first()->attended_at)) {
+                $event->reservations()->where('user_id', request()->input('participant_id'))->update([
+                    'attended_at' => date('Y-m-d H:i:s', time()),
+                ]);
 
-            return response()->json([
-                'message' => "{$user->name} telah hadir",
-            ]);
+                return response()->json([
+                    'message' => "{$user->name} telah hadir",
+                ]);
+            } else {
+                return response()->json([
+                    'message' => "{$user->name} sudah hadir daritadi",
+                ]);
+            }
         } else {
             $event->reservations()->where('user_id', request()->input('participant_id'))->update([
                 'attended_at' => null,

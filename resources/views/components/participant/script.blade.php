@@ -1,5 +1,7 @@
 <script>
 const $participants = document.getElementsByName('participant_id');
+const $participantFilter = document.getElementById('participantFilter');
+
 if ($participants !== null) {
     $participants.forEach( ($participant) => {
         $participant.addEventListener('click', (e) => {
@@ -70,5 +72,21 @@ if ($participants !== null) {
             }
         })
     })
+}
+
+if ($participantFilter !== null) {
+    $participantFilter.addEventListener('keyup', (e) => {
+        const filter = e.target.value.toUpperCase();
+
+        $participantIdentity = document.querySelectorAll('.participant__identity');
+        for (var i = 0; i < $participantIdentity.length; i++) {
+            const name = $participantIdentity[i].querySelector('.participant__name').textContent.trim();
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                $participantIdentity[i].style.display = "";
+            } else {
+                $participantIdentity[i].style.display = "none";
+            }
+        }
+    });
 }
 </script>

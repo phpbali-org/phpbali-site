@@ -33,6 +33,7 @@
     <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
     @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
         <div class="flex flex-col items-center">
+            <input type="text" id="participantFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama partisipan...">
             @foreach ($event->reservations()->get() as $participant)
                 @include('components.participant', ['participant' => $participant])
             @endforeach
