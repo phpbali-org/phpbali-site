@@ -13,10 +13,12 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="flex justify-end ml-auto">
-                <a href="{{ route('topic.edit', ['event' => $event, 'topic' => $topic]) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mr-4">Edit</a>
-                <button type="button" data-id="{{ $topic->id }}" data-href="{{ $event->path()."/topics/{$topic->slug}" }}" class="delete__topic bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow">Hapus</button>
-            </div>
+            @if (auth()->check() && auth()->user()->isAdmin())
+                <div class="flex justify-end ml-auto">
+                    <a href="{{ route('topic.edit', ['event' => $event, 'topic' => $topic]) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mr-4">Edit</a>
+                    <button type="button" data-id="{{ $topic->id }}" data-href="{{ $event->path()."/topics/{$topic->slug}" }}" class="delete__topic bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow">Hapus</button>
+                </div>
+            @endif
         </div>
     </div>
 </div>
