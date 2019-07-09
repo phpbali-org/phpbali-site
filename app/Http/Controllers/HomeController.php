@@ -17,11 +17,7 @@ class HomeController extends Controller
 
         $topics = $event->topics()->get();
 
-        $reservation_count = $event->reservations()->count();
-
-        $attended_count = $event->reservations()->whereNotNull('attended_at')->count();
-
         return view('welcome',
-            compact('title', 'event', 'topics', 'reservation_count', 'attended_count'));
+            compact('title', 'event', 'topics'));
     }
 }
