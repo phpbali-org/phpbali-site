@@ -15,7 +15,7 @@ class EventController extends Controller
             $events = Event::orderBy('created_at', 'desc')->get();
         } else {
             $events = Event::where('published', 1)
-                ->where('end_datetime', '<', \Carbon\Carbon::parse(new \DateTime('Asia/Makassar')))
+                // ->where('end_datetime', '<', \Carbon\Carbon::parse(new \DateTime('Asia/Makassar')))
                 ->orderBy('end_datetime', 'desc')
                 ->limit(10)
                 ->get();
