@@ -42,17 +42,17 @@
         {{-- Jika user telah mendaftar dan kegiatan belum berlangsung maka kalimatnya: "X orang telah mendaftar"
         Jika user telah hadir dan kegiatan sedang/sudah berlangsung maka kalimatnya: "X orang telah hadir" --}}
         @if ($event->isOngoing() || $event->hasFinished())
-            @if (empty($attended_count))
+            @if (empty($event->totalAttendance()))
                 <p class="text-center text-2xl font-bold m-8">Belum ada yang hadir. Cepat datang!</p>
             @else
                 <div class="text-center my-8">
-                    <p class="text-4xl font-bold">{{ $attended_count }}</p>
+                    <p class="text-4xl font-bold">{{ $event->totalAttendance() }}</p>
                     <p>Orang telah hadir</p>
                 </div>
             @endif
         @else
             <div class="text-center my-8">
-                <p class="text-4xl font-bold">{{ $reservation_count }}</p>
+                <p class="text-4xl font-bold">{{ $event->totalReservation() }}</p>
                 <p>Orang telah mendaftar</p>
             </div>
             {{-- Cek apakah user sudah mendaftar atau belum --}}
