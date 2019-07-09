@@ -70,6 +70,7 @@ class TopicController extends Controller
     public function edit(Event $event, Topic $topic)
     {
         $users = User::all();
+
         return view('app.topics.edit', compact('event', 'topic', 'users'));
     }
 
@@ -120,13 +121,13 @@ class TopicController extends Controller
         $result = $event->topics()->where('id', $topic->id)->delete();
         if ($result) {
             return response()->json([
-                'status' => 'ok',
-                'message' => 'Topik ini berhasil dihapus'
+                'status'  => 'ok',
+                'message' => 'Topik ini berhasil dihapus',
             ]);
         } else {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Topik ini gagal dihapus'
+                'status'  => 'error',
+                'message' => 'Topik ini gagal dihapus',
             ]);
         }
     }

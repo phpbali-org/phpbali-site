@@ -146,13 +146,13 @@ class EventController extends Controller
 
         if ($result) {
             return response()->json([
-                'status' => 'ok',
-                'message' => 'Event ini berhasil dihapus'
+                'status'  => 'ok',
+                'message' => 'Event ini berhasil dihapus',
             ]);
         } else {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Event ini gagal dihapus'
+                'status'  => 'error',
+                'message' => 'Event ini gagal dihapus',
             ]);
         }
     }
