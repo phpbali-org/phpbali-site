@@ -27,7 +27,7 @@ class AttendeeController extends Controller
      */
     public function create(Event $event)
     {
-        return view('app.attendees.create');
+        return view('app.attendees.create', compact('event'));
     }
 
     /**
@@ -37,9 +37,34 @@ class AttendeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Event $event, Request $request)
     {
-        //
+        $request->validate([
+            'name'           => 'required',
+            'email'           => 'required|email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!empty($user)) {
+            $user->reservation()->create([
+                'user_id'  => $user->id,
+                'event_id' => $event->id,
+            ]);
+        } else {
+            $newUser = new User();
+            $newUser->name = $request->name;
+            $newUser->email = $request->email;
+
+            $newUser->save();
+
+            $newUser->reservation()->create([
+                'user_id' => $newUser->id,
+                'event_id' => $event->id,
+            ]);
+        }
+
+        return redirect('/');
     }
 
     /**

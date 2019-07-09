@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     // Attendee
     Route::middleware(['admin', 'staff'])->group(function () {
         Route::get('events/{event}/attendees/create', 'AttendeeController@create');
-        Route::post('events/{event}/attendees/attendance', 'AttendeeController@attendance');
+        Route::post('events/{event}/attendees/store', 'AttendeeController@store');
     });
 });
 
