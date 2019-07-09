@@ -23,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('events/create', 'EventController@create');
         Route::post('events/store', 'EventController@store');
+        Route::get('events/{event}/edit', 'EventController@edit');
+        Route::put('events/{event}/update', 'EventController@update');
         Route::put('events/{event}/publish', 'EventController@publish');
         Route::put('events/{event}/unpublish', 'EventController@unpublish');
 

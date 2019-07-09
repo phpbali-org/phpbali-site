@@ -94,6 +94,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        return view('app.events.edit', compact('event'));
     }
 
     /**
@@ -106,6 +107,31 @@ class EventController extends Controller
      */
     public function update(Event $event, Request $request)
     {
+        $request->validate([
+            'name'           => 'required',
+            'desc'           => 'required',
+            'place_name'     => 'required',
+            'address'        => 'required',
+            'start_datetime' => 'required',
+            'end_datetime'   => 'required',
+        ]);
+
+        $event = Event::where('id', $event->id)->first();
+
+        $event->name = $request->name;
+        $event->desc = $request->desc;
+        $event->place_name = $request->place_name;
+        $event->address = $request->address;
+
+        $event->start_datetime = $request->start_datetime;
+        $event->end_datetime = $request->end_datetime;
+
+        // Slug
+        $event->slug = Event::createSlug($request->name, $event->id);
+
+        $event->save();
+
+        return redirect($event->path());
     }
 
     /**
