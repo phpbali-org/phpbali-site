@@ -23,11 +23,17 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('events/create', 'EventController@create');
         Route::post('events/store', 'EventController@store');
+        Route::get('events/{event}/edit', 'EventController@edit');
+        Route::put('events/{event}/update', 'EventController@update');
         Route::put('events/{event}/publish', 'EventController@publish');
         Route::put('events/{event}/unpublish', 'EventController@unpublish');
+        Route::delete('events/{event}', 'EventController@destroy');
 
         Route::get('events/{event}/topics/create', 'TopicController@create');
         Route::post('events/{event}/topics/store', 'TopicController@store');
+        Route::get('events/{event}/topics/{topic}/edit', 'TopicController@edit')->name('topic.edit');
+        Route::put('events/{event}/topics/{topic}/update', 'TopicController@update')->name('topic.update');
+        Route::delete('events/{event}/topics/{topic}', 'TopicController@destroy')->name('topic.destroy');
 
         Route::get('users', 'UserController@index');
         Route::get('users/create', 'UserController@create');
@@ -40,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     // Attendee
     Route::middleware(['admin', 'staff'])->group(function () {
         Route::get('events/{event}/attendees/create', 'AttendeeController@create');
+        Route::post('events/{event}/attendees/store', 'AttendeeController@store');
         Route::post('events/{event}/attendees/attendance', 'AttendeeController@attendance');
     });
 });

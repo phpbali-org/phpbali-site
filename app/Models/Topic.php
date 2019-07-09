@@ -30,7 +30,7 @@ class Topic extends Model
 
         // Get any that could possibly be related.
         // This cuts the queries down by doing it once.
-        $allSlugs = self::select('slug')->where('slug', 'like', $slug.'%')
+        $allSlugs = self::select('slug')->where('slug', 'like', '%'.$slug.'%')
             ->where('id', '<>', $id)
             ->get();
 
@@ -48,5 +48,10 @@ class Topic extends Model
         }
 
         throw new \Exception('Can not create a unique slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

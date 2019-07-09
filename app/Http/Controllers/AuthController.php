@@ -29,6 +29,7 @@ class AuthController extends Controller
             if (empty($existingUser->provider_name)) {
                 $existingUser->provider_name = 'github';
                 $existingUser->provider_id = $user->getId();
+                $existingUser->photos = $user->getAvatar();
             }
 
             Auth::login($existingUser, true);

@@ -59,7 +59,6 @@ class EventController extends Controller
         $event->place_name = $request->place_name;
         $event->address = $request->address;
 
-        // Todo parsing input to datetime with carbon
         $event->start_datetime = $request->start_datetime;
         $event->end_datetime = $request->end_datetime;
 
@@ -94,6 +93,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        return view('app.events.edit', compact('event'));
     }
 
     /**
@@ -106,6 +106,31 @@ class EventController extends Controller
      */
     public function update(Event $event, Request $request)
     {
+        $request->validate([
+            'name'           => 'required',
+            'desc'           => 'required',
+            'place_name'     => 'required',
+            'address'        => 'required',
+            'start_datetime' => 'required',
+            'end_datetime'   => 'required',
+        ]);
+
+        $event = Event::where('id', $event->id)->first();
+
+        $event->name = $request->name;
+        $event->desc = $request->desc;
+        $event->place_name = $request->place_name;
+        $event->address = $request->address;
+
+        $event->start_datetime = $request->start_datetime;
+        $event->end_datetime = $request->end_datetime;
+
+        // Slug
+        $event->slug = Event::createSlug($request->name, $event->id);
+
+        $event->save();
+
+        return redirect($event->path());
     }
 
     /**
@@ -117,6 +142,19 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        $result = $event->delete();
+
+        if ($result) {
+            return response()->json([
+                'status'  => 'ok',
+                'message' => 'Event ini berhasil dihapus',
+            ]);
+        } else {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Event ini gagal dihapus',
+            ]);
+        }
     }
 
     // Publish event
