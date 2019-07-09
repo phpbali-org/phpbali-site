@@ -19,3 +19,7 @@
         @endif
     </div>
 @endsection
+
+@section('script')
+    @include('components.event.script');
+@endsection

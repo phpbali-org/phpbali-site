@@ -23,7 +23,10 @@
 
     <div class="flex flex-col items-center">
         @foreach ($topics as $topic)
-            @include('components.topic', ['topic' => $topic])
+            @include('components.topic', [
+                'event' => $event,
+                'topic' => $topic
+            ])
         @endforeach
     </div>
 </div>

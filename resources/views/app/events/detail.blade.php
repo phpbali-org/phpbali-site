@@ -24,4 +24,6 @@
     @include('components.participant.script', [
         'event' => $event,
     ])
+
+    @include('components.topic.script')
 @endsection
