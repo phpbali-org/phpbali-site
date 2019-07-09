@@ -40,7 +40,7 @@ class AttendeeController extends Controller
     public function store(Event $event, Request $request)
     {
         $request->validate([
-            'name'           => 'required',
+            'name'            => 'required',
             'email'           => 'required|email',
         ]);
 
@@ -59,7 +59,7 @@ class AttendeeController extends Controller
             $newUser->save();
 
             $newUser->reservation()->create([
-                'user_id' => $newUser->id,
+                'user_id'  => $newUser->id,
                 'event_id' => $event->id,
             ]);
         }
