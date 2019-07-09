@@ -1,4 +1,4 @@
-<div class="rounded-lg overflow-hidden border border-gray-400 p-4 p-8 m-4 md:w-3/4">
+<div class="rounded-lg overflow-hidden border border-gray-400 p-8 m-4 md:w-3/4">
     <div class="md:flex">
         <div class="mt-4 md:mt-0 md:ml-6">
             <div class="uppercase tracking-wide text-sm text-indigo-600 font-bold">
