@@ -59,7 +59,6 @@ class EventController extends Controller
         $event->place_name = $request->place_name;
         $event->address = $request->address;
 
-        // Todo parsing input to datetime with carbon
         $event->start_datetime = $request->start_datetime;
         $event->end_datetime = $request->end_datetime;
 
