@@ -15,7 +15,7 @@ class HomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->first();
 
-        $topics = $event->topics()->get();
+        $topics = !empty($event) ? $event->topics()->get() : null;
 
         return view('welcome',
             compact('title', 'event', 'topics'));
