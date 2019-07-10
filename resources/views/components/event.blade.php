@@ -20,6 +20,7 @@
     </div>
     @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
         <div class="flex justify-end mt-4 ml-auto">
+            <button type="button" data-id="{{ $event->id }}" data-href="{{ $event->path() }}" class="mr-4 delete__event bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow">Hapus</button>
             @if ($event->published)
                 <form action="{{ $event->path() . "/unpublish" }}" method="post">
                     <input type="hidden" name="_method" value="PUT">
@@ -33,7 +34,6 @@
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Publikasi</button>
                 </form>
             @endif
-            <button type="button" data-id="{{ $event->id }}" data-href="{{ $event->path() }}" class="ml-4 delete__event bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow">Hapus</button>
         </div>
     @endif
 </div>
