@@ -81,7 +81,7 @@ class EventController extends Controller
     {
         $topics = $event->topics()->get();
 
-        return view('app.events.detail', compact('event', 'topics'));
+        return view('components.event.page', compact('event', 'topics'));
     }
 
     /**
