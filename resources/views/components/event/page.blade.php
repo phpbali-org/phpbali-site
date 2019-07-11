@@ -120,6 +120,8 @@
     @endif
 
     @include('components.snackbar.snackbar')
+
+    @include('components.modal.modal')
 @endsection
 
 @section('script')
@@ -243,5 +245,81 @@ if ($participantFilter !== null) {
     });
 }
 @endif
+
+const $deleteTopicBtn = document.querySelectorAll('.delete__topic');
+if ($deleteTopicBtn !== null) {
+    $deleteTopicBtn.forEach( ($deleteBtn) => {
+        $deleteBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const $warningDialog = document.getElementById('warningDialog');
+            const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
+            const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
+            const $warningDialogCancelBtn = document.getElementById('warningDialogCancelBtn');
+            const $warningDialogTitle = document.getElementById('warningDialogTitle');
+            const $warningDialogMessage = document.getElementById('warningDialogMessage')
+            $warningDialog.classList.remove('hidden');
+            $warningDialog.classList.add('block');
+            $warningDialogTitle.textContent = `Menghapus Topik?`;
+            $warningDialogMessage.textContent = `Anda akan menghapus topik dengan judul ${$deleteBtn.getAttribute('data-title')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
+            $warningDialogCloseBtn.addEventListener('click', (e) => {
+                $warningDialog.classList.remove('block');
+                $warningDialog.classList.add('hidden');
+            });
+            window.onclick = (e) => {
+                if (e.target === $warningDialog) {
+                    $warningDialog.classList.remove('block');
+                    $warningDialog.classList.add('hidden');
+                }
+            }
+            $warningDialogCancelBtn.addEventListener('click', (e) => {
+                $warningDialog.classList.remove('block');
+                $warningDialog.classList.add('hidden');
+            });
+            $warningDialogConfirmBtn.addEventListener('click', (e) => {
+                fetch(
+                $deleteBtn.getAttribute('data-href'), {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    method: 'DELETE',
+                    credentials: 'same-origin',
+                })
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    if (data.status === "ok") {
+                        $warningDialog.classList.remove('block');
+                        $warningDialog.classList.add('hidden');
+                        const $snackbar = document.getElementById('snackbar');
+                        $snackbar.textContent = data.message;
+                        $snackbar.className = "show";
+                        setTimeout( () => {
+                            $snackbar.className = $snackbar.className.replace("show", "");
+                        }, 2000);
+                        setTimeout( () => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        $warningDialog.classList.remove('block');
+                        $warningDialog.classList.add('hidden');
+                        const $snackbar = document.getElementById('snackbar');
+                        $snackbar.textContent = data.message;
+                        $snackbar.className = "show";
+                        setTimeout( () => {
+                            $snackbar.className = $snackbar.className.replace("show", "");
+                        }, 2000);
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            })
+        });
+    });
+}
 </script>
 @endsection
