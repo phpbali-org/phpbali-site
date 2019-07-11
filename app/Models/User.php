@@ -51,4 +51,15 @@ class User extends Authenticatable
     {
         return $this->is_admin === true;
     }
+
+    public function scopeExists($query, $provider, $providerId, $email)
+    {
+        return $query->where(function ($query) use ($provider, $providerId) {
+                    $query->where('provider_name', $provider)
+                        ->where('provider_id', $providerId);
+                })
+                ->orWhere(function ($query) use ($email) {
+                    $query->where('email', $email);
+                });
+    }
 }
