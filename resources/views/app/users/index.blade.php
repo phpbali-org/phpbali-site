@@ -9,6 +9,14 @@
     <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
     <div class="flex flex-col items-center">
         <input type="text" id="userFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama pengguna...">
+        <div class="inline-block relative w-3/4 mt-4">
+            <select id="authorityFilter" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Akses pengguna</option>
+                <option value="1">Admin & staf</option>
+                <option value="2">Admin</option>
+                <option value="3">Staf</option>
+            </select>
+        </div>
         @foreach ($users as $user)
             @include('components.user.card', ['user' => $user])
         @endforeach
@@ -44,6 +52,22 @@ if ($userFilter !== null) {
             }
         }
     });
+}
+
+const $authorityFilter = document.getElementById('authorityFilter');
+$authorityFilter.onchange = (e) => {
+    const filter = e.target.value;
+    console.log(filter);
+
+    $userIdentity = document.querySelectorAll('.user__identity');
+    for (var i = 0; i < $userIdentity.length; i++) {
+        const value = $userIdentity[i].querySelector('.user__authority').textContent.trim();
+        if (value.indexOf(filter) > -1) {
+            $userIdentity[i].style.display = "";
+        } else {
+            $userIdentity[i].style.display = "none";
+        }
+    }
 }
 
 const $deleteUserBtn = document.querySelectorAll('.delete__user');
