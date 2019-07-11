@@ -9,37 +9,43 @@ use Socialite;
 
 class AuthController extends Controller
 {
-    public function redirectToProvider()
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback($events = null, $event_slug = null)
+    public function handleProviderCallback($provider, $events = null, $event_slug = null)
     {
         try {
-            $user = Socialite::driver('github')->user();
+            $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Ada masalah, silahkan dicoba lagi.');
         }
 
-        $existingUser = User::where('email', $user->getEmail())->first();
+        $existingUser = User::where('provider_name', $provider)
+                        ->where('provider_id', $user->getId())
+                        ->first();
 
         if (!empty($existingUser)) {
             // Update provider name and id if existing user login with Github
             if (empty($existingUser->provider_name)) {
-                $existingUser->provider_name = 'github';
+                $existingUser->provider_name = $provider;
                 $existingUser->provider_id = $user->getId();
                 $existingUser->photos = $user->getAvatar();
             }
 
+            $existingUser->username = !empty($existingUser->username) ? $existingUser->username : $user->getNickname();
+            $existingUser->save();
+
             Auth::login($existingUser, true);
         } else {
             $newUser = new User();
-            $newUser->provider_name = 'github';
+            $newUser->provider_name = $provider;
             $newUser->provider_id = $user->getId();
             $newUser->name = !empty($user->getName()) ? $user->getName() : $user->getNickname();
-            $newUser->email = $user->getEmail();
+            $newUser->email = !empty($user->getEmail()) ? $user->getEmail() : 'no-email@phpbali.com';
             $newUser->photos = $user->getAvatar();
+            $newUser->username = $user->getNickname();
 
             $newUser->save();
 
