@@ -22,9 +22,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors('Ada masalah, silahkan dicoba lagi.');
         }
 
-        $existingUser = User::where('provider_name', $provider)
-                        ->where('provider_id', $user->getId())
-                        ->first();
+        $existingUser = User::exists($provider, $user->getId(), $user->getEmail())->first();
 
         if (!empty($existingUser)) {
             // Update provider name and id if existing user login with Github

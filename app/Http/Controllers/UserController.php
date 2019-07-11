@@ -47,6 +47,8 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->is_staff = $request->is_staff;
+        $user->is_admin = $request->is_admin;
 
         $user->save();
 
@@ -74,7 +76,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('app.users.edit', compact('user'));
     }
 
     /**
@@ -87,7 +89,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->is_staff = $request->is_staff;
+        $user->is_admin = $request->is_admin;
+
+        $user->save();
+
+        return redirect('users');
     }
 
     /**
@@ -99,6 +113,18 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $result = $user->delete();
+
+        if ($result) {
+            return response()->json([
+                'status'  => 'ok',
+                'message' => 'User ini berhasil dihapus',
+            ]);
+        } else {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'User ini gagal dihapus',
+            ]);
+        }
     }
 }

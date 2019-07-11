@@ -34,7 +34,7 @@ class User extends Authenticatable
     {
         switch ($this->provider_name) {
             case 'github':
-                return $this->photos;
+                return "https://avatars1.githubusercontent.com/u/{$this->provider_id}?v=4";
                 break;
             default:
                 return gravatar_url($this->email);
@@ -50,5 +50,21 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->is_admin === true;
+    }
+
+    public function scopeExists($query, $provider, $providerId, $email)
+    {
+        return $query->where(function ($query) use ($provider, $providerId) {
+            $query->where('provider_name', $provider)
+                        ->where('provider_id', $providerId);
+        })
+                ->orWhere(function ($query) use ($email) {
+                    $query->where('email', $email);
+                });
+    }
+
+    public function path()
+    {
+        return '/users/'.$this->id;
     }
 }
