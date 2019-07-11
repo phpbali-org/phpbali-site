@@ -4,6 +4,7 @@
     <h1 class="text-3xl text-center mt-4">PENGGUNA</h1>
     <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
     <div class="flex flex-col items-center">
+        <input type="text" id="userFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama pengguna...">
         @foreach ($users as $user)
             @include('components.user.card', ['user' => $user])
         @endforeach
@@ -16,4 +17,25 @@
             </svg>
         </a>
     </div>
+@endsection
+
+@section('script')
+<script>
+const $userFilter = document.getElementById('userFilter');
+if ($userFilter !== null) {
+    $userFilter.addEventListener('keyup', (e) => {
+        const filter = e.target.value.toUpperCase();
+
+        $userIdentity = document.querySelectorAll('.user__identity');
+        for (var i = 0; i < $userIdentity.length; i++) {
+            const name = $userIdentity[i].querySelector('.user__name').textContent.trim();
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                $userIdentity[i].style.display = "";
+            } else {
+                $userIdentity[i].style.display = "none";
+            }
+        }
+    });
+}
+</script>
 @endsection
