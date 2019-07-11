@@ -62,4 +62,9 @@ class User extends Authenticatable
                     $query->where('email', $email);
                 });
     }
+
+    public function path()
+    {
+        return '/users/'.$this->id;
+    }
 }

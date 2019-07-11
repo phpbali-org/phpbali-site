@@ -38,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users', 'UserController@index');
         Route::get('users/create', 'UserController@create');
         Route::post('users/store', 'UserController@store');
+        Route::get('users/{user}/edit', 'UserController@edit')->name('user.edit');
+        Route::put('users/{user}/update', 'UserController@update');
+        Route::delete('users/{user}', 'UserController@destroy');
     });
 
     // Register event for authenticated user
