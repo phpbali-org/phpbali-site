@@ -4,7 +4,7 @@
     <h1 class="text-center text-3xl mt-4">DAFTAR KEGIATAN</h1>
     <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
     @foreach ($events as $event)
-        @include('components.event', ['event' => $event])
+        @include('components.event.card', ['event' => $event])
     @endforeach
 
     @if (auth()->check() && auth()->user()->isAdmin())
@@ -19,5 +19,35 @@
 @endsection
 
 @section('script')
-    @include('components.event.script');
+<script>
+const $deleteEventBtn = document.querySelectorAll('.delete__event');
+$deleteEventBtn.forEach( ($deleteBtn) => {
+    $deleteBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        fetch(e.target.getAttribute('data-href'), {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            method: 'DELETE',
+            credentials: 'same-origin',
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            if (data.status === "ok") {
+                window.location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    });
+});
+</script>
 @endsection

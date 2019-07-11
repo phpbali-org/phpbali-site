@@ -10,7 +10,7 @@ class ReservationController extends Controller
     /**
      * Do reservation by using Github Oauth.
      */
-    public function doReservation()
+    public function doReservation($provider)
     {
         // Get current event
         $event = Event::with('reservations')
@@ -18,9 +18,9 @@ class ReservationController extends Controller
         ->orderBy('created_at', 'desc')
         ->first();
 
-        return Socialite::driver('github')
+        return Socialite::driver($provider)
             ->with([
-                'redirect_uri' => url("/login/github/callback{$event->path()}"),
+                'redirect_uri' => url("/login/{$provider}/callback{$event->path()}"),
             ])
             ->redirect();
     }
