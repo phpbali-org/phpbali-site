@@ -34,7 +34,7 @@ class User extends Authenticatable
     {
         switch ($this->provider_name) {
             case 'github':
-                return $this->photos;
+                return "https://avatars1.githubusercontent.com/u/{$this->provider_id}?v=4";
                 break;
             default:
                 return gravatar_url($this->email);
