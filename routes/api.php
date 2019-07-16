@@ -10,3 +10,13 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+use App\Http\Resources\Event as EventResource;
+use App\Models\Event;
+
+Route::get('/event/last', function () {
+    return new EventResource(Event::with('reservations')
+    ->where('published', 1)
+    ->orderBy('created_at', 'desc')
+    ->first());
+});
