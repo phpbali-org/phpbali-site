@@ -11,8 +11,8 @@
 |
 */
 
-use App\Models\Event;
 use App\Http\Resources\Event as EventResource;
+use App\Models\Event;
 
 Route::get('/event/last', function () {
     return new EventResource(Event::with('reservations')
