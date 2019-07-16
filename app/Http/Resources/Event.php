@@ -26,7 +26,7 @@ class Event extends JsonResource
             'address'      => $this->address,
             'desc'         => $this->desc,
             'topics'       => TopicResource::collection($this->topics),
-            'reservations' => ReservationResource::collection($this->reservations),
+            'reservations' => ReservationResource::collection($this->reservations->sortByDesc('created_at')),
         ];
     }
 }
