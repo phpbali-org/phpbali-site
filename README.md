@@ -20,6 +20,7 @@ di `DB_DATABASE`
 1. Jalankan perintah `cp .env.example .env` di command prompt atau terminal. Edit konfigurasi database `DB_DATABASE=phpbali`, `DB_HOST=db` dan `DB_PASSWORD=root` pada file `.env`.
 1. Jalankan perintah `docker-compose up` di command prompt atau terminal.
 1. Jalankan perintah `composer install` pada service `app` dengan menjalankan perintah `docker-compose exec app composer install`
+1. Jalankan perintah `docker-compose exec app php artisan key:generate` di command prompt atau terminal.
 1. Jalankan perintah `docker-compose exec app php artisan migrate --seed` di command prompt atau terminal.
 
 ## Berkontribusi
