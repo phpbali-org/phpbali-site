@@ -20,9 +20,8 @@
         <meta property="twitter:image" content="{{ asset('img/phpbali-logo.png') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        @yield('plugins.css')
-        @yield('style')
-        @yield('plugins.js')
+        @stack('style')
+        @stack('script')
         @if (config('app.env') === 'production')
             <script src="https://www.google-analytics.com/analytics.js" defer></script>
             <script defer>
@@ -46,7 +45,5 @@
 
             @include('components.footer')
         </div>
-
-        @yield('script')
     </body>
 </html>
