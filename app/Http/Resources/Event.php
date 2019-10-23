@@ -17,6 +17,10 @@ class Event extends JsonResource
      */
     public function toArray($request)
     {
+        if (is_null($this->resource)) {
+            return [];
+        }
+
         return [
             'id'           => $this->id,
             'name'         => $this->name,
