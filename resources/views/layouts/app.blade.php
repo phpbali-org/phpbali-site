@@ -11,18 +11,17 @@
         <link rel="icon" type=image/png href="{{ asset('favicon.png') }}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ config('app.url') }}">
-        <meta property="og:title" content="{{ config('app.name', 'Laravel') }} - @if(isset($title)){{ $title }}@endif">
+        <meta property="og:title" content="{{ isset($title) ? $title.' - ' : null }}{{ config('app.name') }}">
         <meta property="og:description" content="Komunitas pemrograman PHP di Bali. Diskusi tentang PHP dan pengembangan web">
         <meta property="og:image" content="{{ asset('img/phpbali-logo.png') }}">
         <meta property="twitter:url" content="{{ config('app.url') }}">
-        <meta property="twitter:title" content="{{ config('app.name', 'Laravel') }} - @if(isset($title)){{ $title }}@endif">
+        <meta property="twitter:title" content="{{ isset($title) ? $title.' - ' : null }}{{ config('app.name') }}">
         <meta property="twitter:description" content="Komunitas pemrograman PHP di Bali. Diskusi tentang PHP dan pengembangan web">
         <meta property="twitter:image" content="{{ asset('img/phpbali-logo.png') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        @yield('plugins.css')
-        @yield('style')
-        @yield('plugins.js')
+        @stack('style')
+        @stack('script')
         @if (config('app.env') === 'production')
             <script src="https://www.google-analytics.com/analytics.js" defer></script>
             <script defer>
@@ -46,7 +45,5 @@
 
             @include('components.footer')
         </div>
-
-        @yield('script')
     </body>
 </html>

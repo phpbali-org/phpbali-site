@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('plugins.css')
+@push('style')
     <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
-@endsection
+@endpush
 
-@section('plugins.js')
+@prepend('script')
     <script src="{{ asset('js/flatpickr.js') }}" async></script>
-@endsection
+@endprepend
 
 @section('content')
     <div class="w-full max-w-full m-auto">
@@ -19,7 +19,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
 <script>
 // Detect if a document has loaded with JavaScript
 document.onreadystatechange = function () {
@@ -38,4 +38,4 @@ document.onreadystatechange = function () {
     }
 }
 </script>
-@endsection
+@endpush

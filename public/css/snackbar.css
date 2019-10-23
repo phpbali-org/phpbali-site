@@ -1,4 +1,3 @@
-<style>
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
@@ -44,4 +43,3 @@
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
-</style>

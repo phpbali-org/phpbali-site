@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
-    @include('components.snackbar.style')
+    <link rel="stylesheet" href="{{ asset('css/snackbar.css') }}">
 @endsection
 
 @section('content')
@@ -21,9 +21,10 @@
         </div>
     @endif
 
-    @include('components.snackbar.snackbar')
+    {{-- Snackbar --}}
+    <div id="snackbar"></div>
 
-    @include('components.modal.modal')
+    @include('components.modal')
 @endsection
 
 @section('script')
