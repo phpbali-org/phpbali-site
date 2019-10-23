@@ -12,7 +12,8 @@
         "grkamil/laravel-telegram-logging": "dev-master",
         "laravel/framework": "5.8.*",
         "laravel/socialite": "^4.1",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "spatie/laravel-cors": "^1.6"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
