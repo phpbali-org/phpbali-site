@@ -122,7 +122,7 @@
     {{-- Snackbar --}}
     <div id="snackbar"></div>
 
-    @include('components.modal.modal')
+    @include('components.modal')
 @endsection
 
 @push('script')
