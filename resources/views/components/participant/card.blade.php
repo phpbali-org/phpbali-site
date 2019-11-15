@@ -7,7 +7,7 @@
     </form>
     <div class="flex flex-col md:flex-row items-center">
         <div class="md:flex-shrink-0">
-            <img src="{{ gravatar_url($participant->user()->first()->email) }}" alt="Attendee's avatar" class="rounded-full md:w-16 max-w-xs" width="50">
+            <img data-src="{{ gravatar_url($participant->user()->first()->email) }}" alt="Attendee's avatar" class="rounded-full md:w-16 max-w-xs" width="50">
         </div>
         <div class="flex flex-col md:ml-4 mt-4 md:mt-0 items-center md:items-start">
             <p class="participant__name">
