@@ -9,15 +9,12 @@
 @endprepend
 
 @section('content')
-    <div class="w-full max-w-full m-auto">
-        <form class="rounded px-8 pt-6 pb-8 mb-4" method="post" action="{{ $event->path() . "/topics/store" }}">
-            @include('components.topic.form', [
-                'topic' => new \App\Models\Topic,
-                'users' => $users,
-                'speakers' => collect([]),
-            ])
-        </form>
-    </div>
+    @include('components.topic.form', [
+        'topic' => new \App\Models\Topic,
+        'users' => $users,
+        'speakers' => collect([]),
+        'action' => $event->path() . "/topics/store"
+    ])
 @endsection
 
 @push('script')
