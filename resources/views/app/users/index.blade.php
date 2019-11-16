@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('style')
+@push('style')
     <link rel="stylesheet" href="{{ asset('css/snackbar.css') }}">
-@endsection
+@endpush
 
 @section('content')
     <h1 class="text-3xl text-center mt-4">PENGGUNA</h1>
@@ -36,7 +36,7 @@
     @include('components.modal')
 @endsection
 
-@section('script')
+@push('script')
 <script>
 const $userFilter = document.getElementById('userFilter');
 if ($userFilter !== null) {
@@ -147,4 +147,4 @@ if ($deleteUserBtn !== null) {
     });
 }
 </script>
-@endsection
+@endpush
