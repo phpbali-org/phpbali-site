@@ -31,7 +31,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('app.events.create');
+        return view('page.event.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class EventController extends Controller
     {
         $topics = $event->topics()->get();
 
-        return view('components.event.page', compact('event', 'topics'));
+        return view('pages.event', compact('event', 'topics'));
     }
 
     /**
@@ -93,7 +93,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('app.events.edit', compact('event'));
+        return view('pages.event.edit', compact('event'));
     }
 
     /**

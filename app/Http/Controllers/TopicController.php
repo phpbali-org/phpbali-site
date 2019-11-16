@@ -27,7 +27,7 @@ class TopicController extends Controller
     {
         $users = User::all();
 
-        return view('app.topics.create', compact('users', 'event'));
+        return view('pages.topic.create', compact('users', 'event'));
     }
 
     /**
@@ -71,7 +71,7 @@ class TopicController extends Controller
     {
         $users = User::all();
 
-        return view('app.topics.edit', compact('event', 'topic', 'users'));
+        return view('pages.topic.edit', compact('event', 'topic', 'users'));
     }
 
     /**
