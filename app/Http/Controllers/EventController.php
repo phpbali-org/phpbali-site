@@ -21,7 +21,7 @@ class EventController extends Controller
                 ->get();
         }
 
-        return view('app.events.index', compact('title', 'events'));
+        return view('pages.events', compact('title', 'events'));
     }
 
     /**
