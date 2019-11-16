@@ -6,7 +6,7 @@
             <ul class="flex flex-wrap items-center mt-4">
                 @foreach ($topic->speakers()->get() as $speaker)
                     <li class="flex items-center md:w-1/2">
-                        <img src="{{ $speaker->avatar() }}" alt="Speaker's avatar" class="rounded-full md:w-16 max-w-xs my-4" width="50">
+                        <img data-src="{{ $speaker->avatar() }}" alt="Speaker's avatar" class="rounded-full md:w-16 max-w-xs my-4" width="50">
                         <div class="mt-0 mx-4">
                             <p class="">{{ $speaker->name }}</p>
                         </div>

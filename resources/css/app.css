@@ -63,7 +63,7 @@ body {
     left: 0;
     top: 5rem;
     width: 250px;
-    margin-top: -5rem;
+    margin-top: -4.2rem;
     transform: translateX(-250px);
     transition: transform 250ms ease-in-out;
     z-index: 999;

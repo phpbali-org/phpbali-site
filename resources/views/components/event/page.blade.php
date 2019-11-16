@@ -27,7 +27,7 @@
 
         <div class="mt-8">
             <h1 class="text-3xl mb-4 text-center">TOPIK</h1>
-            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
+            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
 
             <div class="flex flex-col items-center">
                 @foreach ($topics as $topic)
@@ -41,7 +41,7 @@
 
         <div class="mt-8">
             <h1 class="text-3xl mb-4 text-center">PARTISIPAN</h1>
-            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
+            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
             @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
                 <div class="flex flex-col items-center">
                     <input type="text" id="participantFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama partisipan...">
@@ -327,4 +327,5 @@ document.onreadystatechange = function() {
     }
 }
 </script>
+<script src="{{ asset('js/lazy-avatar.js') }}" defer></script>
 @endpush

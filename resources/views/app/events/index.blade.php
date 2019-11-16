@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('style')
+@push('style')
     <link rel="stylesheet" href="{{ asset('css/snackbar.css') }}">
-@endsection
+@endpush
 
 @section('content')
     <h1 class="text-center text-3xl mt-4">DAFTAR KEGIATAN</h1>
-    <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2">
+    <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
     @foreach ($events as $event)
         @include('components.event.card', ['event' => $event])
     @endforeach
@@ -27,7 +27,7 @@
     @include('components.modal')
 @endsection
 
-@section('script')
+@push('script')
 <script>
 const $deleteEventBtn = document.querySelectorAll('.delete__event');
 $deleteEventBtn.forEach( ($deleteBtn) => {
@@ -103,4 +103,4 @@ $deleteEventBtn.forEach( ($deleteBtn) => {
     });
 });
 </script>
-@endsection
+@endpush
