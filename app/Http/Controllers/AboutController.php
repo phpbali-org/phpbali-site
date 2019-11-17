@@ -40,6 +40,6 @@ class AboutController extends Controller
         $title = 'Tentang';
         $content = markdown($this->files->get(base_path('resources/docs/about.md')));
 
-        return view('about', compact('title', 'content'));
+        return view('pages.about', compact('title', 'content'));
     }
 }

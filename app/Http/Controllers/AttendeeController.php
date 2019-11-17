@@ -27,7 +27,7 @@ class AttendeeController extends Controller
      */
     public function create(Event $event)
     {
-        return view('app.attendees.create', compact('event'));
+        return view('pages.participant.create', compact('event'));
     }
 
     /**

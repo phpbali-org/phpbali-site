@@ -8,7 +8,7 @@
         <a href="/" class="ml-12 md:ml-0">
             <img src="{{ asset('img/phpbali-logo.png') }}" alt="PHPBali logo" width="50" height="50">
         </a>
-        <nav id="sidebarMenu" class="md:mr-auto md:flex md:items-center">
+        <nav id="sidebarMenu">
             <label for="menuToggle" class="sidebarIconToggle" aria-label="">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" class="fill-current h-6 w-6"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>
             </label>
@@ -35,14 +35,12 @@
         </nav>
     </div>
     <div class="backdrop"></div>
-    <div class="relative ml-auto">
-        <div class="flex items-center">
-            @if (auth()->check())
-                <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
-            @else
-                <a href="/login/github" class="block lg:inline-block lg:mt-0 text-black font-bold">LOGIN</a>
-            @endif
-        </div>
+    <div class="ml-auto">
+        @if (auth()->check())
+            <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
+        @else
+            <a href="/login/github" class="block lg:inline-block text-black font-bold" style="margin-top: 0.6rem;">LOGIN</a>
+        @endif
         @if (auth()->check())
             <div class="absolute py-2 pin-r">
                 <form action="/logout" method="post">
