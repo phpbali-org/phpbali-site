@@ -39,7 +39,7 @@
         @if (auth()->check())
             <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
         @else
-            <a href="/login/github" class="block lg:inline-block text-black font-bold" style="margin-top: 0.6rem;">LOGIN</a>
+            <a href="/login/github" class="block lg:inline-block text-black font-bold mt-4">LOGIN</a>
         @endif
         @if (auth()->check())
             <div class="absolute py-2 pin-r">
