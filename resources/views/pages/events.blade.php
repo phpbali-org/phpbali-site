@@ -5,11 +5,13 @@
 @endpush
 
 @section('content')
-    <h1 class="text-center text-3xl mt-4">DAFTAR KEGIATAN</h1>
-    <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
-    @foreach ($events as $event)
-        @include('components.event.card', ['event' => $event])
-    @endforeach
+    <div class="my-16">
+        <h1 class="text-center text-3xl mt-4 font-bold">DAFTAR KEGIATAN</h1>
+        <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+        @foreach ($events as $event)
+            @include('components.event.card', ['event' => $event])
+        @endforeach
+    </div>
 
     @if (auth()->check() && auth()->user()->isAdmin())
         <div class="flex flex-col align-end fixed z-1000" style="bottom: 24px; right: 24px;">

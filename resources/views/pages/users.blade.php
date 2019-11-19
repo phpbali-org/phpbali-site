@@ -5,21 +5,23 @@
 @endpush
 
 @section('content')
-    <h1 class="text-3xl text-center mt-4">PENGGUNA</h1>
-    <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
-    <div class="flex flex-col items-center">
-        <input type="text" id="userFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama pengguna...">
-        <div class="inline-block relative w-3/4 mt-4">
-            <select id="authorityFilter" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                <option value="">Akses pengguna</option>
-                <option value="1">Admin & staf</option>
-                <option value="2">Admin</option>
-                <option value="3">Staf</option>
-            </select>
+    <div class="my-16">
+        <h1 class="text-3xl text-center mt-4 font-bold">PENGGUNA</h1>
+        <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+        <div class="flex flex-col items-center">
+            <input type="text" id="userFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama pengguna...">
+            <div class="inline-block relative w-3/4 mt-4">
+                <select id="authorityFilter" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">Akses pengguna</option>
+                    <option value="1">Admin & staf</option>
+                    <option value="2">Admin</option>
+                    <option value="3">Staf</option>
+                </select>
+            </div>
+            @foreach ($users as $user)
+                @include('components.user.card', ['user' => $user])
+            @endforeach
         </div>
-        @foreach ($users as $user)
-            @include('components.user.card', ['user' => $user])
-        @endforeach
     </div>
 
     <div class="flex flex-col align-end fixed z-1000" style="bottom: 24px; right: 24px;">
