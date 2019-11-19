@@ -37,17 +37,17 @@
     <div class="backdrop"></div>
     <div class="ml-auto">
         @if (auth()->check())
-            <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
-        @else
-            <a href="/login/github" class="block lg:inline-block text-black font-bold mt-4">LOGIN</a>
-        @endif
-        @if (auth()->check())
-            <div class="absolute py-2 pin-r">
+            <button id="avatarBtn">
+                <img src="{{ auth()->user()->avatar() }}" alt="User profile" width="50" height="50" class="rounded-full">
+            </button>
+            <div class="absolute bg-white block mt-4 p-2 md:p-3 shadow rounded-b-lg hidden right-1 md:right-2" id="logoutField">
                 <form action="/logout" method="post">
                     @csrf
                     <button type="submit">Logout</button>
                 </form>
             </div>
+        @else
+            <a href="/login/github" class="block lg:inline-block text-black font-bold mt-4">LOGIN</a>
         @endif
     </div>
 </header>
