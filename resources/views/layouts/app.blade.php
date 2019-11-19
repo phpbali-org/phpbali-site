@@ -35,7 +35,7 @@
             </script>
         @endif
     </head>
-    <body>
+    <body class="bg-gray-100">
         <div class="flex flex-col min-h-screen">
             @include('components.header')
 
