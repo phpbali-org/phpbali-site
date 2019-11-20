@@ -54,16 +54,14 @@ body {
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: #fafafa;
 }
 
 #sidebarMenu {
     height: 100%;
     position: fixed;
     left: 0;
-    top: 5rem;
+    top: 0;
     width: 250px;
-    margin-top: -4.2rem;
     transform: translateX(-250px);
     transition: transform 250ms ease-in-out;
     z-index: 999;
@@ -146,7 +144,7 @@ body {
         padding: 0;
         height: auto;
         width: auto;
-        margin-top: 5rem;
+        margin-top: 1rem;
         margin-left: 1rem;
     }
 
@@ -161,12 +159,14 @@ body {
 }
 
 .about {
-    margin: 1rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 .about h1 {
     font-size: 1.875rem;
     text-align: center;
+    font-weight: 700;
 }
 
 .about h2 {

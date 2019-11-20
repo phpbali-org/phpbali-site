@@ -35,7 +35,7 @@
             </script>
         @endif
     </head>
-    <body>
+    <body class="bg-gray-100">
         <div class="flex flex-col min-h-screen">
             @include('components.header')
 
@@ -46,4 +46,20 @@
             @include('components.footer')
         </div>
     </body>
+    <script>
+        // For toggle logout button
+        const $avatarBtn = document.getElementById('avatarBtn');
+        if ($avatarBtn !== null) {
+            $avatarBtn.addEventListener('click', e => {
+                const $logoutField = document.getElementById('logoutField');
+                if ($logoutField.classList.contains("hidden")) {
+                    $logoutField.classList.remove("hidden");
+                    $logoutField.classList.add("block");
+                } else {
+                    $logoutField.classList.remove("block");
+                    $logoutField.classList.add("hidden");
+                }
+            });
+        }
+    </script>
 </html>

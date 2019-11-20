@@ -6,7 +6,7 @@
 
 @section('content')
     @if (!empty($event))
-        <div class="my-8 mx-auto">
+        <div class="my-16">
             <div class="text-center">
                 <h1 class="text-3xl font-bold mb-4" id="eventTitle">
                     {{ $event->name }}
@@ -25,7 +25,7 @@
             <p class="text-justify break-words mx-4" id="eventDesc">{{ $event->desc }}</p>
         </div>
 
-        <div class="mt-8">
+        <div class="my-8">
             <h1 class="text-3xl mb-4 text-center">TOPIK</h1>
             <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
 
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="mt-8">
+        <div class="my-16">
             <h1 class="text-3xl mb-4 text-center">PARTISIPAN</h1>
             <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
             @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))

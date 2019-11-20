@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="about">
-        <article class="m-4 lg:m-16">
+        <article class="mx-4 md:mx-16 lg:mx-32">
             {!! $content !!}
         </article>
     </div>
