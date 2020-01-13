@@ -11719,7 +11719,7 @@ body {
 @media (max-width: 699px) {
   .menuUnderlay {
     display: block;
-    background: #fff;
+    background: #959696;
     opacity: 0;
     pointer-events: none;
     position: fixed;
