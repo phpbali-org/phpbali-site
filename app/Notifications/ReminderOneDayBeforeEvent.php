@@ -49,9 +49,9 @@ class ReminderOneDayBeforeEvent extends Notification implements ShouldQueue
         return (new MailMessage())
             ->subject("Pengingat {$this->event->name}")
             ->markdown('mails.oneday-before-event', [
-            'event' => $this->event,
-            'user'  => $this->user,
-        ]);
+                'event' => $this->event,
+                'user'  => $this->user,
+            ]);
     }
 
     /**
