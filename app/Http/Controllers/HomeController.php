@@ -17,7 +17,9 @@ class HomeController extends Controller
 
         $topics = !empty($event) ? $event->topics()->get() : null;
 
-        return view('pages.event',
-            compact('title', 'event', 'topics'));
+        return view(
+            'pages.event',
+            compact('title', 'event', 'topics')
+        );
     }
 }
