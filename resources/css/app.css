@@ -61,11 +61,12 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 250px;
-    transform: translateX(-250px);
+    width: 260px;
+    transform: translateX(-260px);
     transition: transform 250ms ease-in-out;
     z-index: 999;
     background: white;
+    box-shadow: 2px 0 12px rgba(0,0,0,.4);
 }
 
 #sidebarMenu ul {
@@ -138,6 +139,7 @@ body {
         transition: none !important;
         background: none;
         width: auto;
+        box-shadow: none;
     }
 
     #sidebarMenu ul {
