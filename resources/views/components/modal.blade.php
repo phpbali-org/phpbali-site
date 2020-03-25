@@ -1,4 +1,4 @@
-<div id="warningDialog" role="dialog" class="hidden rounded fixed z-1 pt-32 inset-0 w-full h-screen overflow-auto" style="background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
+<div id="warningDialog" role="dialog" class="hidden rounded fixed z-1 pt-32 inset-0 w-full h-screen overflow-auto">
     <div class="modal__content rounded shadow m-auto p-5 w-4/5 md:w-2/5" style="border: 1px solid #888; background-color: #fefefe;">
         <button class="text-gray-600 float-right text-2xl font-bold hover:text-black hover:no-underline focus:text-black focus:no-underline" id="warningDialogCloseBtn">&times;</button>
         <h3 id="warningDialogTitle" class="text-xl text-center font-bold mb-6"></h3>
