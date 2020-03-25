@@ -1,39 +1,37 @@
-<header class="p-4 flex shadow bg-white">
-    <div class="flex">
-        <label for="menuToggle" class="sidebarIconToggle" aria-label="Toggle Menu" role="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fill-current h-6 w-6"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
-        </label>
-        <input type="checkbox" id="menuToggle">
-        <label for="menuToggle" aria-label="Hide Menu" role="presentation" class="menuUnderlay"></label>
-        <a href="/" class="ml-12 md:ml-0">
-            <img src="{{ asset('img/phpbali-logo.png') }}" alt="PHPBali logo" width="50" height="50">
-        </a>
-        <nav id="sidebarMenu">
-            <label for="menuToggle" class="sidebarIconToggle" aria-label="">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" class="fill-current h-6 w-6"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>
-            </label>
-            <ul class="md:flex md:items-center">
-                <li class="block lg:inline-block md:text-black font-bold m-0 md:mx-4 {{ isActive('about') }}">
-                    <a href="/about">
-                        TENTANG
-                    </a>
-                </li>
-                <li class="block lg:inline-block md:text-black font-bold m-0 md:mx-4 {{ isActive('events') }}">
-                    <a href="/events">
-                        KEGIATAN
-                    </a>
-                </li>
-                @if (auth()->check())
-                    @if (auth()->user()->isStaff() || auth()->user()->isAdmin())
-                        <li class="block lg:inline-block md:text-black font-bold m-0 md:mx-4 {{ isActive('users') }}">
-                            <a href="/users">PENGGUNA</a>
-                        </li>
-                    @endif
+<header class="p-4 flex shadow bg-white items-center">
+    <button class="header__hamburger-btn p-2 md:hidden" aria-label="Open menu">
+        <img src="{{ asset('icons/list.svg') }}" alt="" class="h-6 w-6">
+    </button>
+    <a href="/" class="ml-4 md:ml-0">
+        <img src="{{ asset('img/phpbali-logo.png') }}" alt="PHPBali logo" width="50" height="50">
+    </a>
+    <nav id="sidebarMenu">
+        <div class="flex border-b border-solid border-gray-500 md:border-none p-6 -ml-2 -mt-1 md:hidden">
+            <!-- You can put your logo here ;) -->
+            <button class="nav__hide-btn p-2 ml-auto" aria-label="Close menu">
+              <img src="{{ asset('icons/times.svg') }}" alt="" class="h-6 w-6">
+            </button>
+        </div>
+        <ul class="flex flex-col md:flex-row md:items-center">
+            <li>
+                <a href="/about" class="block md:inline font-bold md:mx-4 hover:bg-gray-200 {{ isActive('about') }}">
+                    TENTANG
+                </a>
+            </li>
+            <li>
+                <a href="/events" class="block md:inline font-bold md:mx-4 hover:bg-gray-200 {{ isActive('events') }}">
+                    KEGIATAN
+                </a>
+            </li>
+            @if (auth()->check())
+                @if (auth()->user()->isStaff() || auth()->user()->isAdmin())
+                    <li>
+                        <a href="/users" class="block md:inline font-bold md:mx-4 hover:bg-gray-200 {{ isActive('users') }}">PENGGUNA</a>
+                    </li>
                 @endif
-            </ul>
-        </nav>
-    </div>
-    <div class="backdrop"></div>
+            @endif
+        </ul>
+    </nav>
     <div class="ml-auto">
         @if (auth()->check())
             <button id="avatarBtn">
@@ -46,7 +44,7 @@
                 </form>
             </div>
         @else
-            <a href="/login/github" class="block lg:inline-block text-black font-bold mt-4">LOGIN</a>
+            <a href="/login/github" class="font-bold hover:bg-gray-200 p-4">LOGIN</a>
         @endif
     </div>
 </header>

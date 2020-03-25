@@ -17,5 +17,5 @@ function markdown($text)
 
 function isActive($path)
 {
-    return request()->is($path) ? 'underline' : 'hover:underline';
+    return request()->is($path) ? 'active' : '';
 }

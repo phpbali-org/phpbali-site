@@ -4,51 +4,6 @@
 
 @tailwind utilities;
 
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-@-webkit-keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-.fadeInUp {
-  -webkit-animation-name: fadeInUp;
-  animation-name: fadeInUp;
-}
-
 body {
     font-family: 'Roboto Mono', monospace;
     width: 100%;
@@ -61,71 +16,41 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 260px;
-    transform: translateX(-260px);
-    transition: transform 250ms ease-in-out;
-    z-index: 999;
+    width: 250px;
+    z-index: 2;
     background: white;
-    box-shadow: 2px 0 12px rgba(0,0,0,.4);
+    transform: translateX(-250px);
+    will-change: transform;
 }
 
-#sidebarMenu ul {
-    margin-top: 4rem;
-}
-
-#sidebarMenu li:first-child {
-    border-top: 1px solid #ddd;
-}
-
-#sidebarMenu li {
+#sidebarMenu li a {
     padding: 1rem;
     border-top: 0;
     border-bottom: 1px solid #ddd;
 }
 
-#menuToggle:checked ~ #sidebarMenu {
-    transform: translateX(0);
+#sidebarMenu li a.active {
+    border-bottom: 2px solid #4299e1;
 }
 
-#menuToggle {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    display: none;
-}
-
-.sidebarIconToggle {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    cursor: pointer;
-    position: absolute;
-    z-index: 999;
-    top: 2rem;
-    left: 1rem;
-}
-
-@media (max-width: 699px) {
-    .menuUnderlay {
-        display: block;
-        background: #959696;
-        opacity: 0;
+@media (max-width: 767px) {
+    .menu-underlay {
+        display: none;
+        background: rgba(0,0,0,0.4);
+        opacity: 1;
         pointer-events: none;
-        position: fixed;
+        position: absolute;
         top: 0;
-        right: 0;
-        bottom: 0;
         left: 0;
         z-index: 1;
+        width: 100%;
+        height: 100vh;
         transition: opacity .3s cubic-bezier(0,0,.31,1);
-    }
-
-    #menuToggle:checked ~ .menuUnderlay {
-        opacity: .7;
-        pointer-events: auto;
     }
 }
 
 @media (min-width: 768px) {
-    .sidebarIconToggle, #menuToggle {
+    .sidebar-icon-toggle {
         display: none;
     }
 
@@ -139,24 +64,11 @@ body {
         transition: none !important;
         background: none;
         width: auto;
-        box-shadow: none;
+        z-index: auto;
     }
 
-    #sidebarMenu ul {
-        padding: 0;
-        height: auto;
-        width: auto;
-        margin-top: 1rem;
-        margin-left: 1rem;
-    }
-
-    #sidebarMenu li:first-child {
-        border-top: none;
-    }
-
-    #sidebarMenu li {
+    #sidebarMenu li a {
         border: none;
-        padding: 0;
     }
 }
 
