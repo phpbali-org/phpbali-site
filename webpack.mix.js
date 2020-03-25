@@ -20,3 +20,5 @@ mix.postCss('resources/css/app.css', 'public/css', [
 if (mix.inProduction()) {
   mix.version();
 }
+
+mix.browserSync('phpbali-site.test');
