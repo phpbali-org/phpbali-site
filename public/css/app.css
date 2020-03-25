@@ -11657,7 +11657,7 @@ body {
     background: rgba(0,0,0,0.4);
     opacity: 1;
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
