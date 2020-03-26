@@ -25,10 +25,8 @@ class AddIsAdminToUsersTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('users', 'is_admin')) {
-            Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn('is_admin');
-            });
-        }
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_admin');
+        });
     }
 }

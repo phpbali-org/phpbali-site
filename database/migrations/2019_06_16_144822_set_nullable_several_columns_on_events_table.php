@@ -17,6 +17,8 @@ class SetNullableSeveralColumnsOnEventsTable extends Migration
             $table->string('place')->nullable()->change();
             $table->string('latitude')->nullable()->change();
             $table->string('longitude')->nullable()->change();
+            $table->string('start_date')->nullable()->change();
+            $table->string('end_date')->nullable()->change();
         });
     }
 

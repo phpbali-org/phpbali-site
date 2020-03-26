@@ -14,12 +14,8 @@ class AddDatetimeToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            if (!Schema::hasColumn('events', 'start_datetime')) {
-                $table->dateTime('start_datetime');
-            }
-            if (!Schema::hasColumn('events', 'end_datetime')) {
-                $table->dateTime('end_datetime');
-            }
+            $table->dateTime('start_datetime')->nullable();
+            $table->dateTime('end_datetime')->nullable();
         });
     }
 
@@ -31,7 +27,8 @@ class AddDatetimeToEventsTable extends Migration
     public function down()
     {
         Schema::table('events', function (Blueprint $table) {
-            //
+            $table->dropColumn('start_datetime');
+            $table->dropColumn('end_datetime');
         });
     }
 }

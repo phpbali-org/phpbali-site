@@ -27,7 +27,7 @@ class AddProvidersToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn(['provider_name', 'provider_id']);
         });
     }
 }
