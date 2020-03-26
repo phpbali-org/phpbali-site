@@ -56,5 +56,3 @@ Route::middleware(['auth'])->group(function () {
 
 // Fixed bug cannot create and store event. I think because Laravel read route sequentially.
 Route::get('events/{event}', 'EventController@show');
-
-Route::get('/test', 'TestController@index');
