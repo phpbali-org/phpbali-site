@@ -1,9 +1,6 @@
 name: CI-CD PHPBali
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   compile-assets:
