@@ -14,8 +14,8 @@ class AddRegistrantToRsvpEventsTable extends Migration
     public function up()
     {
         Schema::table('rsvp_events', function (Blueprint $table) {
-            $table->string('name_of_registrant');
-            $table->string('registrant_email');
+            $table->string('name_of_registrant')->nullable();
+            $table->string('registrant_email')->nullable();
             $table->timestamp('attended_at')->nullable();
         });
     }
@@ -27,12 +27,10 @@ class AddRegistrantToRsvpEventsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumns('rsvp_events', ['name_of_registrant', 'registrant_email', 'attended_at'])) {
-            Schema::table('rsvp_events', function (Blueprint $table) {
-                $table->dropColumn('name_of_registrant');
-                $table->dropColumn('registrant_email');
-                $table->dropColumn('attended_at');
-            });
-        }
+        Schema::table('rsvp_events', function (Blueprint $table) {
+            $table->dropColumn('name_of_registrant');
+            $table->dropColumn('registrant_email');
+            $table->dropColumn('attended_at');
+        });
     }
 }

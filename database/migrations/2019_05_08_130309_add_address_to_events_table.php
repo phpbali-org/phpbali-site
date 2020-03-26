@@ -14,7 +14,7 @@ class AddAddressToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->text('address');
+            $table->text('address')->nullable();
         });
     }
 
@@ -25,10 +25,8 @@ class AddAddressToEventsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('events', 'address')) {
-            Schema::table('events', function (Blueprint $table) {
-                $table->dropColumn('address');
-            });
-        }
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropColumn('address');
+        });
     }
 }

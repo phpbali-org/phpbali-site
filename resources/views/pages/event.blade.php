@@ -254,6 +254,8 @@ document.onreadystatechange = function() {
             $deleteTopicBtn.forEach( ($deleteBtn) => {
                 $deleteBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    document.body.style.overflow = "hidden";
+                    document.querySelector('div.menu-underlay').style.display = "block";
                     const $warningDialog = document.getElementById('warningDialog');
                     const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
                     const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
@@ -262,6 +264,7 @@ document.onreadystatechange = function() {
                     const $warningDialogMessage = document.getElementById('warningDialogMessage')
                     $warningDialog.classList.remove('hidden');
                     $warningDialog.classList.add('block');
+                    $warningDialog.style.zIndex = 1;
                     $warningDialogTitle.textContent = `Menghapus Topik?`;
                     $warningDialogMessage.textContent = `Anda akan menghapus topik dengan judul ${$deleteBtn.getAttribute('data-title')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
                     $warningDialogCloseBtn.addEventListener('click', (e) => {
@@ -275,6 +278,9 @@ document.onreadystatechange = function() {
                         }
                     }
                     $warningDialogCancelBtn.addEventListener('click', (e) => {
+                        document.body.style.overflow = "visible";
+                        document.querySelector('div.menu-underlay').style.display = "none";
+                        $warningDialog.style.zIndex = "auto";
                         $warningDialog.classList.remove('block');
                         $warningDialog.classList.add('hidden');
                     });

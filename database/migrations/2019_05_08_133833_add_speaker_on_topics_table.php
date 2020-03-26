@@ -14,8 +14,8 @@ class AddSpeakerOnTopicsTable extends Migration
     public function up()
     {
         Schema::table('topics', function (Blueprint $table) {
-            $table->string('speaker_name');
-            $table->string('speaker_email');
+            $table->string('speaker_name')->nullable();
+            $table->string('speaker_email')->nullable();
         });
     }
 
@@ -26,11 +26,9 @@ class AddSpeakerOnTopicsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumns('topics', ['speaker_name', 'speaker_email'])) {
-            Schema::table('topics', function (Blueprint $table) {
-                $table->dropColumn('speaker_name');
-                $table->dropColumn('speaker_email');
-            });
-        }
+        Schema::table('topics', function (Blueprint $table) {
+            $table->dropColumn('speaker_name');
+            $table->dropColumn('speaker_email');
+        });
     }
 }
