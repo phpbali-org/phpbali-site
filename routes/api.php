@@ -11,12 +11,4 @@
 |
 */
 
-use App\Http\Resources\Event as EventResource;
-use App\Models\Event;
-
-Route::get('/event/latest', function () {
-    return new EventResource(Event::with('reservations')
-    ->where('published', 1)
-    ->orderBy('created_at', 'desc')
-    ->first());
-});
+Route::get('/event/latest', 'Api\EventController@latest');
