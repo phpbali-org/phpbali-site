@@ -21,7 +21,6 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         @stack('style')
-        @stack('script')
         @if (config('app.env') === 'production')
             <link rel="preconnect" href="https://www.google-analytics.com">
             <script>
@@ -46,6 +45,7 @@
 
             @include('components.footer')
         </div>
+        @stack('script')
     </body>
     <script>
         document.querySelector('button.header__hamburger-btn').addEventListener('click', function () {
