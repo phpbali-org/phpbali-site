@@ -134,4 +134,9 @@ class Event extends Model
 
         throw new \Exception('Can not create a unique slug');
     }
+
+    public function scopeHasPublished($query)
+    {
+        return $query->where('published', 1);
+    }
 }
