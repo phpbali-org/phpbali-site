@@ -14,7 +14,10 @@
         </ul>
         @if (auth()->check() && auth()->user()->isAdmin())
             <div class="flex justify-end">
-                <button type="button" data-href="{{ $event->path()."/topics/{$topic->slug}" }}" data-title="{{ $topic->title }}" class="btn delete__btn">Hapus</button>
+                <button type="button" class="btn delete__btn" 
+                    data-href="{{ $event->path()."/topics/{$topic->slug}" }}" 
+                    data-dialog-title="Menghapus Topik?"
+                    data-dialog-body="Anda akan menghapus topik {{ $topic->title }} dan tidak dapat dikembalikan lagi. Anda yakin?">Hapus</button>
                 <a href="{{ route('topic.edit', ['event' => $event, 'topic' => $topic]) }}" class="btn default__btn">Edit</a>
             </div>
         @endif

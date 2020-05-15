@@ -27,7 +27,10 @@
     @if (auth()->check() && auth()->user()->isAdmin())
         <div class="flex justify-end">
             @if (auth()->user()->id !== $user->id)
-                <button type="button" data-href="{{ $user->path() }}" data-name="{{ $user->name }}" class="btn delete__btn">Hapus</button>
+                <button type="button" class="btn delete__btn"
+                data-href="{{ $user->path() }}"
+                data-dialog-title="Menghapus User?"
+                data-dialog-body="Anda akan menghapus {{ $user->name }} dan tidak dapat dikembalikan lagi. Anda yakin?">Hapus</button>
             @endif
             <a href="{{ route('user.edit', ['user' => $user]) }}" class="btn default__btn">Edit</a>
         </div>

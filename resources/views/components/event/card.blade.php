@@ -18,7 +18,10 @@
     </div>
     @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
         <div class="flex justify-end">
-            <button type="button" data-name="{{ $event->name }}" data-href="{{ $event->path() }}" class="btn delete__btn">Hapus</button>
+            <button type="button" class="btn delete__btn" 
+                data-dialog-title="Menghapus Event?"
+                data-dialog-body="Anda akan menghapus event {{ $event->name }} dan tidak dapat dikembalikan lagi. Anda yakin?"
+                data-href="{{ $event->path() }}">Hapus</button>
             @if ($event->published)
                 <form action="{{ $event->path() . "/unpublish" }}" method="post">
                     <input type="hidden" name="_method" value="PUT">
