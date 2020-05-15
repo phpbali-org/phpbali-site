@@ -40,117 +40,166 @@
 
 @push('script')
 <script>
-document.onreadystatechange = function () {
-    if (document.readyState === 'complete') {
-        const $userFilter = document.getElementById('userFilter');
-        if ($userFilter !== null) {
-            $userFilter.addEventListener('keyup', (e) => {
-                const filter = e.target.value.toUpperCase();
+const $userFilter = document.getElementById('userFilter');
+if ($userFilter !== null) {
+    $userFilter.addEventListener('keyup', (e) => {
+        const filter = e.target.value.toUpperCase();
 
-                $userIdentity = document.querySelectorAll('.user__identity');
-                for (var i = 0; i < $userIdentity.length; i++) {
-                    const name = $userIdentity[i].querySelector('.user__name').textContent.trim();
-                    if (name.toUpperCase().indexOf(filter) > -1) {
-                        $userIdentity[i].style.display = "";
-                    } else {
-                        $userIdentity[i].style.display = "none";
-                    }
-                }
-            });
-        }
-
-        const $authorityFilter = document.getElementById('authorityFilter');
-        $authorityFilter.onchange = (e) => {
-            const filter = e.target.value;
-
-            $userIdentity = document.querySelectorAll('.user__identity');
-            for (var i = 0; i < $userIdentity.length; i++) {
-                const value = $userIdentity[i].querySelector('.user__authority').textContent.trim();
-                if (value.indexOf(filter) > -1) {
-                    $userIdentity[i].style.display = "";
-                } else {
-                    $userIdentity[i].style.display = "none";
-                }
+        $userIdentity = document.querySelectorAll('.user__identity');
+        for (var i = 0; i < $userIdentity.length; i++) {
+            const name = $userIdentity[i].querySelector('.user__name').textContent.trim();
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                $userIdentity[i].style.display = "";
+            } else {
+                $userIdentity[i].style.display = "none";
             }
         }
+    });
+}
 
-        const $deleteUserBtn = document.querySelectorAll('.delete__user');
-        if ($deleteUserBtn !== null) {
-            $deleteUserBtn.forEach( ($deleteBtn) => {
-                $deleteBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const $warningDialog = document.getElementById('warningDialog');
-                    const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
-                    const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
-                    const $warningDialogCancelBtn = document.getElementById('warningDialogCancelBtn');
-                    const $warningDialogTitle = document.getElementById('warningDialogTitle');
-                    const $warningDialogMessage = document.getElementById('warningDialogMessage')
-                    $warningDialog.classList.remove('hidden');
-                    $warningDialog.classList.add('block');
-                    $warningDialogTitle.textContent = `Menghapus User?`;
-                    $warningDialogMessage.textContent = `Anda akan menghapus user bernama ${$deleteBtn.getAttribute('data-name')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
-                    $warningDialogCloseBtn.addEventListener('click', (e) => {
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    window.onclick = (e) => {
-                        if (e.target === $warningDialog) {
-                            $warningDialog.classList.remove('block');
-                            $warningDialog.classList.add('hidden');
-                        }
-                    }
-                    $warningDialogCancelBtn.addEventListener('click', (e) => {
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    $warningDialogConfirmBtn.addEventListener('click', (e) => {
-                        fetch(
-                        $deleteBtn.getAttribute('data-href'), {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            method: 'DELETE',
-                            credentials: 'same-origin',
-                        })
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(data => {
-                            if (data.status === "ok") {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 1000);
-                            } else {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                    })
-                });
-            });
+const $authorityFilter = document.getElementById('authorityFilter');
+$authorityFilter.onchange = (e) => {
+    const filter = e.target.value;
+
+    $userIdentity = document.querySelectorAll('.user__identity');
+    for (var i = 0; i < $userIdentity.length; i++) {
+        const value = $userIdentity[i].querySelector('.user__authority').textContent.trim();
+        if (value.indexOf(filter) > -1) {
+            $userIdentity[i].style.display = "";
+        } else {
+            $userIdentity[i].style.display = "none";
         }
     }
 }
+
+const KEYCODE = {
+    ESC: 27
+}
+const $dialog = document.querySelector('.dialog');
+const $dialogWindow = $dialog.querySelector('.dialog__window');
+const $dialogConfirmBtn = $dialogWindow.querySelector('#dialog__confirm__btn');
+const $dialogCancelBtn = $dialogWindow.querySelector('#dialog__cancel__btn');
+const $dialogMask = $dialog.querySelector('.dialog__mask');
+let $previousActiveElement;
+
+const deleteBtn = document.querySelectorAll('.delete__btn');
+deleteBtn.forEach( ($btn) => {
+    $btn.addEventListener('click', (e) => {
+        openDialog(e, $btn);
+    });
+});
+
+trapFocus($dialogWindow);
+
+function openDialog(e, el) {
+    // Grab a reference to the previous activeElement.
+    // We'll want to restore this when we close the dialog.
+    $previousActiveElement = document.activeElement;
+
+    // Make the dialog visible.
+    $dialog.classList.add('opened');
+    // Hide scrolling body element
+    document.body.style.overflow = "hidden";
+    // Set title of dialog
+    $dialogWindow.querySelector('#dialog__title').textContent = 'Menghapus user?';
+    // Set body of dialog
+    $dialogWindow.querySelector('#dialog__body').textContent = `
+        Anda akan menghapus ${el.getAttribute('data-name')} dan tidak dapat dikembalikan lagi. Anda yakin?
+    `;
+    $dialogConfirmBtn.addEventListener('click', () => {
+        fetch(
+            el.getAttribute('data-href'), {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json, text-plain, */*",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                method: 'DELETE',
+                credentials: 'same-origin',
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                closeDialog();
+                const $snackbar = document.getElementById('snackbar');
+                $snackbar.textContent = data.message;
+                $snackbar.className = "show";
+                setTimeout( () => {
+                    $snackbar.className = $snackbar.className.replace("show", "");
+                }, 2000);
+                if (data.status === "ok") {
+                    setTimeout( () => {
+                        window.location.reload();
+                    }, 500);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    // Listen for things that should close the dialog
+    $dialogMask.addEventListener('click', closeDialog);
+    $dialogCancelBtn.addEventListener('click', closeDialog);
+    document.addEventListener('keydown', checkCloseDialog);
+
+    // Finally, move focus into the first button of dialog.
+    $dialog.querySelector('button').focus();
+}
+
+function checkCloseDialog(e) {
+    if (e.keyCode === KEYCODE.ESC || e.key === 'Escape') {
+        closeDialog();
+    }
+}
+
+function closeDialog() {
+    // Clean up any event listeners.
+    $dialogMask.removeEventListener('click', closeDialog);
+    $dialogCancelBtn.removeEventListener('click', closeDialog);
+    document.removeEventListener('keydown', checkCloseDialog);
+
+    // Remove Hide the dialog.
+    $dialog.classList.remove('opened');
+    // Remove Hide scrolling body element
+    document.body.style.overflow = "visible";
+    // Set title of dialog
+    $dialogWindow.querySelector('#dialog__title').textContent = '';
+    // Set body of dialog
+    $dialogWindow.querySelector('#dialog__body').textContent = '';
+
+    // Restore focus to the previous active element.
+    $previousActiveElement.focus();
+}
+
+function trapFocus(element) {
+    const focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
+    const $firstFocusableEl = focusableEls[0];
+    const $lastFocusableEl = focusableEls[focusableEls.length - 1];
+    const KEYCODE_TAB = 9;
+
+    element.addEventListener('keydown', (e) => {
+        const isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);
+
+        if (!isTabPressed) {
+            return;
+        }
+
+        if (e.shiftKey) { /* shift + tab */
+            if (document.activeElement === $firstFocusableEl) {
+                $lastFocusableEl.focus();
+                e.preventDefault();
+            }
+        } else /* tab */ {
+            if (document.activeElement === $lastFocusableEl) {
+                $firstFocusableEl.focus();
+                e.preventDefault();
+            }
+        }
+    });
+}
 </script>
-<script src="{{ asset('js/lazy-avatar.js') }}" defer></script>
+<script src="{{ asset('js/lazy-avatar.js') }}"></script>
 @endpush
