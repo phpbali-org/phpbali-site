@@ -6,7 +6,7 @@
 
 @section('content')
     @if (!empty($event))
-        <div class="my-16">
+        <div class="m-auto md:w-3/4 my-16">
             <div class="text-center">
                 <h1 class="text-3xl font-bold mb-4" id="eventTitle">
                     {{ $event->name }}
@@ -25,9 +25,9 @@
             <p class="text-justify break-words mx-4" id="eventDesc">{{ $event->desc }}</p>
         </div>
 
-        <div class="my-8">
+        <div class="my-8 md:w-3/4 m-auto">
             <h1 class="text-3xl mb-4 text-center">TOPIK</h1>
-            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+            <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
 
             <div class="flex flex-col items-center">
                 @foreach ($topics as $topic)
@@ -39,13 +39,13 @@
             </div>
         </div>
 
-        <div class="my-16">
+        <div class="my-16 md:w-1/2 m-auto">
             <h1 class="text-3xl mb-4 text-center">PARTISIPAN</h1>
-            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+            <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
             @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
                 <div class="flex flex-col items-center">
                     <input type="text" id="participantFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama partisipan...">
-                    @foreach ($event->reservations()->get()->sortByDesc('created_at') as $participant)
+                    @foreach ($participants as $participant)
                         @include('components.participant.card', ['participant' => $participant])
                     @endforeach
                 </div>
@@ -127,211 +127,126 @@
 
 @push('script')
 <script>
-document.onreadystatechange = function() {
-    if (document.readyState === 'complete') {
-        const title = document.getElementById('eventTitle').textContent.trim();
-        const text = document.getElementById('eventDesc').textContent.trim();
-        const url = document.querySelector('link[rel=canonical]') && document.querySelector('link[rel=canonical]').href || window.location.href;
-        const $shareBtn = document.getElementById('shareBtn');
-        if ($shareBtn !== null) {
-            $shareBtn.addEventListener('click', () => {
-                if (navigator.share) {
-                    navigator.share({
-                        title,
-                        text,
-                        url
-                    })
-                    .then(() => {
-                        if (window.ga && ga.create) {
-                            ga('send', 'event', 'Button', 'share', 'Share Event PHPBali');
-                        }
-                        console.log('Successful share');
-                    })
-                    .catch((error) => {
-                        console.log('Error sharing', error);
-                    })
-                } else {
-                    console.log('Not supported, sorry');
-                }
-            });
-        }
-
-        @if (!empty($event))
-        const $participants = document.getElementsByName('participant_id');
-        const $participantFilter = document.getElementById('participantFilter');
-
-        if ($participants !== null) {
-            $participants.forEach( ($participant) => {
-                $participant.addEventListener('click', (e) => {
-                    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                    const url = '{{ $event->path().'/attendees/attendance' }}';
-                    if (e.target.checked) {
-                        const PRESENT = 1;
-                        fetch(url, {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": token
-                            },
-                            method: 'POST',
-                            credentials: 'same-origin',
-                            body: JSON.stringify({
-                                has_attended: PRESENT,
-                                participant_id: e.target.value
-                            })
-                        })
-                        .then( response => {
-                            return response.json()
-                        })
-                        .then( data => {
-                            const $snackbar = document.getElementById('snackbar');
-                            $snackbar.textContent = data.message;
-                            $snackbar.className = "show";
-                            setTimeout( () => {
-                                $snackbar.className = $snackbar.className.replace("show", "");
-                            }, 3000);
-                            console.log(data)
-                        })
-                        .catch( error => {
-                            console.error(error)
-                        });
-                    } else {
-                        const NOT_PRESENT = 0;
-                        fetch(url, {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": token
-                            },
-                            method: 'POST',
-                            credentials: 'same-origin',
-                            body: JSON.stringify({
-                                has_attended: NOT_PRESENT,
-                                participant_id: e.target.value
-                            })
-                        })
-                        .then( response => {
-                            return response.json()
-                        })
-                        .then( data => {
-                            const $snackbar = document.getElementById('snackbar');
-                            $snackbar.textContent = data.message;
-                            $snackbar.className = "show";
-                            setTimeout( () => {
-                                $snackbar.className = $snackbar.className.replace("show", "");
-                            }, 3000);
-                            console.log(data)
-                        })
-                        .catch( error => {
-                            console.error(error)
-                        });
-                    }
-                })
+const title = document.getElementById('eventTitle').textContent.trim();
+const text = document.getElementById('eventDesc').textContent.trim();
+const url = document.querySelector('link[rel=canonical]') && document.querySelector('link[rel=canonical]').href || window.location.href;
+const $shareBtn = document.getElementById('shareBtn');
+if ($shareBtn !== null) {
+    $shareBtn.addEventListener('click', () => {
+        if (navigator.share) {
+            navigator.share({
+                title,
+                text,
+                url
             })
-        }
-
-        if ($participantFilter !== null) {
-            $participantFilter.addEventListener('keyup', (e) => {
-                const filter = e.target.value.toUpperCase();
-
-                $participantIdentity = document.querySelectorAll('.participant__identity');
-                for (var i = 0; i < $participantIdentity.length; i++) {
-                    const name = $participantIdentity[i].querySelector('.participant__name').textContent.trim();
-                    if (name.toUpperCase().indexOf(filter) > -1) {
-                        $participantIdentity[i].style.display = "";
-                    } else {
-                        $participantIdentity[i].style.display = "none";
-                    }
+            .then(() => {
+                if (window.ga && ga.create) {
+                    ga('send', 'event', 'Button', 'share', 'Share Event PHPBali');
                 }
-            });
+                console.log('Successful share');
+            })
+            .catch((error) => {
+                console.log('Error sharing', error);
+            })
+        } else {
+            console.log('Not supported, sorry');
         }
-        @endif
-
-        const $deleteTopicBtn = document.querySelectorAll('.delete__topic');
-        if ($deleteTopicBtn !== null) {
-            $deleteTopicBtn.forEach( ($deleteBtn) => {
-                $deleteBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.body.style.overflow = "hidden";
-                    document.querySelector('div.menu-underlay').style.display = "block";
-                    const $warningDialog = document.getElementById('warningDialog');
-                    const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
-                    const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
-                    const $warningDialogCancelBtn = document.getElementById('warningDialogCancelBtn');
-                    const $warningDialogTitle = document.getElementById('warningDialogTitle');
-                    const $warningDialogMessage = document.getElementById('warningDialogMessage')
-                    $warningDialog.classList.remove('hidden');
-                    $warningDialog.classList.add('block');
-                    $warningDialog.style.zIndex = 1;
-                    $warningDialogTitle.textContent = `Menghapus Topik?`;
-                    $warningDialogMessage.textContent = `Anda akan menghapus topik dengan judul ${$deleteBtn.getAttribute('data-title')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
-                    $warningDialogCloseBtn.addEventListener('click', (e) => {
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    window.onclick = (e) => {
-                        if (e.target === $warningDialog) {
-                            $warningDialog.classList.remove('block');
-                            $warningDialog.classList.add('hidden');
-                        }
-                    }
-                    $warningDialogCancelBtn.addEventListener('click', (e) => {
-                        document.body.style.overflow = "visible";
-                        document.querySelector('div.menu-underlay').style.display = "none";
-                        $warningDialog.style.zIndex = "auto";
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    $warningDialogConfirmBtn.addEventListener('click', (e) => {
-                        fetch(
-                        $deleteBtn.getAttribute('data-href'), {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            method: 'DELETE',
-                            credentials: 'same-origin',
-                        })
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(data => {
-                            if (data.status === "ok") {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 1000);
-                            } else {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                    })
-                });
-            });
-        }
-    }
+    });
 }
+
+@if (!empty($event))
+const $participants = document.getElementsByName('participant_id');
+const $participantFilter = document.getElementById('participantFilter');
+
+if ($participants !== null) {
+    $participants.forEach( ($participant) => {
+        $participant.addEventListener('click', (e) => {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const url = '{{ $event->path().'/attendees/attendance' }}';
+            if (e.target.checked) {
+                const PRESENT = 1;
+                fetch(url, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        has_attended: PRESENT,
+                        participant_id: e.target.value
+                    })
+                })
+                .then( response => {
+                    return response.json()
+                })
+                .then( data => {
+                    const $snackbar = document.getElementById('snackbar');
+                    $snackbar.textContent = data.message;
+                    $snackbar.className = "show";
+                    setTimeout( () => {
+                        $snackbar.className = $snackbar.className.replace("show", "");
+                    }, 3000);
+                    console.log(data)
+                })
+                .catch( error => {
+                    console.error(error)
+                });
+            } else {
+                const NOT_PRESENT = 0;
+                fetch(url, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        has_attended: NOT_PRESENT,
+                        participant_id: e.target.value
+                    })
+                })
+                .then( response => {
+                    return response.json()
+                })
+                .then( data => {
+                    const $snackbar = document.getElementById('snackbar');
+                    $snackbar.textContent = data.message;
+                    $snackbar.className = "show";
+                    setTimeout( () => {
+                        $snackbar.className = $snackbar.className.replace("show", "");
+                    }, 3000);
+                    console.log(data)
+                })
+                .catch( error => {
+                    console.error(error)
+                });
+            }
+        })
+    })
+}
+
+if ($participantFilter !== null) {
+    $participantFilter.addEventListener('keyup', (e) => {
+        const filter = e.target.value.toUpperCase();
+
+        $participantIdentity = document.querySelectorAll('.participant__identity');
+        for (var i = 0; i < $participantIdentity.length; i++) {
+            const name = $participantIdentity[i].querySelector('.participant__name').textContent.trim();
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                $participantIdentity[i].style.display = "";
+            } else {
+                $participantIdentity[i].style.display = "none";
+            }
+        }
+    });
+}
+@endif
 </script>
-<script src="{{ asset('js/lazy-avatar.js') }}" defer></script>
+<script src="{{ asset('js/dialog.js') }}"></script>
+<script src="{{ asset('js/lazy-avatar.js') }}"></script>
 @endpush

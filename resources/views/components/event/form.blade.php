@@ -1,58 +1,58 @@
-<div class="w-full max-w-full mt-16">
+<div class="w-full md:w-1/2 mt-16 m-auto">
     <form class="rounded px-8 pt-6 pb-8 mb-4" method="post" action="{{ $action }}">
         @isset($_method) @method($_method) @endisset
         @csrf
         <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="eventName">
+        <label class="block text-black text-sm font-bold mb-2" for="eventName">
             Nama Kegiatan
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror" id="eventName" type="text" placeholder="Nama kegiatan" name="name"
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror" id="eventName" type="text" placeholder="Nama kegiatan" name="name"
             value="{{ $event->name }}">
             @error('name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="eventDesc">
+        <label class="block text-black text-sm font-bold mb-2" for="eventDesc">
             Deskripsi Kegiatan
         </label>
-        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('desc') border-red-500 @enderror" id="eventDesc" name="desc">{{ $event->desc }}</textarea>
+        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline @error('desc') border-red-500 @enderror" id="eventDesc" name="desc">{{ $event->desc }}</textarea>
             @error('desc')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="eventPlace">
+        <label class="block text-black text-sm font-bold mb-2" for="eventPlace">
             Tempat
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('place_name') border-red-500 @enderror" id="eventPlace" type="text" placeholder="Tempat" name="place_name" value="{{ $event->place_name }}">
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline @error('place_name') border-red-500 @enderror" id="eventPlace" type="text" placeholder="Tempat" name="place_name" value="{{ $event->place_name }}">
             @error('place_name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="eventAddress">
+        <label class="block text-black text-sm font-bold mb-2" for="eventAddress">
             Alamat
         </label>
-        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('address') border-red-500 @enderror" id="eventAddress" name="address">{{ $event->address }}</textarea>
+        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline @error('address') border-red-500 @enderror" id="eventAddress" name="address">{{ $event->address }}</textarea>
             @error('address')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="eventStartDateTime">
+            <label class="block text-black text-sm font-bold mb-2" for="eventStartDateTime">
                 Tanggal/Waktu Mulai
             </label>
-            <input type="text" name="start_datetime" id="eventStartDateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('start_datetime') border-red-500 @enderror" value="{{ $event->start_datetime }}">
+            <input type="text" name="start_datetime" id="eventStartDateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline @error('start_datetime') border-red-500 @enderror" value="{{ $event->start_datetime }}">
                 @error('start_datetime')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
         </div>
         <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="eventEndDateTime">
+            <label class="block text-black text-sm font-bold mb-2" for="eventEndDateTime">
                 Tanggal/Waktu Selesai
             </label>
-            <input type="text" name="end_datetime" id="eventEndDateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('end_datetime') border-red-500 @enderror" value="{{ $event->end_datetime }}">
+            <input type="text" name="end_datetime" id="eventEndDateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline @error('end_datetime') border-red-500 @enderror" value="{{ $event->end_datetime }}">
                 @error('end_datetime')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror

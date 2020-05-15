@@ -5,9 +5,9 @@
 @endpush
 
 @section('content')
-    <div class="my-16">
+    <div class="my-16 md:w-1/2 m-auto">
         <h1 class="text-3xl text-center mt-4 font-bold">PENGGUNA</h1>
-        <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+        <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
         <div class="flex flex-col items-center">
             <input type="text" id="userFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama pengguna...">
             <div class="inline-block relative w-3/4 mt-4">
@@ -40,117 +40,38 @@
 
 @push('script')
 <script>
-document.onreadystatechange = function () {
-    if (document.readyState === 'complete') {
-        const $userFilter = document.getElementById('userFilter');
-        if ($userFilter !== null) {
-            $userFilter.addEventListener('keyup', (e) => {
-                const filter = e.target.value.toUpperCase();
+const $userFilter = document.getElementById('userFilter');
+if ($userFilter !== null) {
+    $userFilter.addEventListener('keyup', (e) => {
+        const filter = e.target.value.toUpperCase();
 
-                $userIdentity = document.querySelectorAll('.user__identity');
-                for (var i = 0; i < $userIdentity.length; i++) {
-                    const name = $userIdentity[i].querySelector('.user__name').textContent.trim();
-                    if (name.toUpperCase().indexOf(filter) > -1) {
-                        $userIdentity[i].style.display = "";
-                    } else {
-                        $userIdentity[i].style.display = "none";
-                    }
-                }
-            });
-        }
-
-        const $authorityFilter = document.getElementById('authorityFilter');
-        $authorityFilter.onchange = (e) => {
-            const filter = e.target.value;
-
-            $userIdentity = document.querySelectorAll('.user__identity');
-            for (var i = 0; i < $userIdentity.length; i++) {
-                const value = $userIdentity[i].querySelector('.user__authority').textContent.trim();
-                if (value.indexOf(filter) > -1) {
-                    $userIdentity[i].style.display = "";
-                } else {
-                    $userIdentity[i].style.display = "none";
-                }
+        $userIdentity = document.querySelectorAll('.user__identity');
+        for (var i = 0; i < $userIdentity.length; i++) {
+            const name = $userIdentity[i].querySelector('.user__name').textContent.trim();
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                $userIdentity[i].style.display = "";
+            } else {
+                $userIdentity[i].style.display = "none";
             }
         }
+    });
+}
 
-        const $deleteUserBtn = document.querySelectorAll('.delete__user');
-        if ($deleteUserBtn !== null) {
-            $deleteUserBtn.forEach( ($deleteBtn) => {
-                $deleteBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const $warningDialog = document.getElementById('warningDialog');
-                    const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
-                    const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
-                    const $warningDialogCancelBtn = document.getElementById('warningDialogCancelBtn');
-                    const $warningDialogTitle = document.getElementById('warningDialogTitle');
-                    const $warningDialogMessage = document.getElementById('warningDialogMessage')
-                    $warningDialog.classList.remove('hidden');
-                    $warningDialog.classList.add('block');
-                    $warningDialogTitle.textContent = `Menghapus User?`;
-                    $warningDialogMessage.textContent = `Anda akan menghapus user bernama ${$deleteBtn.getAttribute('data-name')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
-                    $warningDialogCloseBtn.addEventListener('click', (e) => {
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    window.onclick = (e) => {
-                        if (e.target === $warningDialog) {
-                            $warningDialog.classList.remove('block');
-                            $warningDialog.classList.add('hidden');
-                        }
-                    }
-                    $warningDialogCancelBtn.addEventListener('click', (e) => {
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    $warningDialogConfirmBtn.addEventListener('click', (e) => {
-                        fetch(
-                        $deleteBtn.getAttribute('data-href'), {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            method: 'DELETE',
-                            credentials: 'same-origin',
-                        })
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(data => {
-                            if (data.status === "ok") {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 1000);
-                            } else {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                    })
-                });
-            });
+const $authorityFilter = document.getElementById('authorityFilter');
+$authorityFilter.onchange = (e) => {
+    const filter = e.target.value;
+
+    $userIdentity = document.querySelectorAll('.user__identity');
+    for (var i = 0; i < $userIdentity.length; i++) {
+        const value = $userIdentity[i].querySelector('.user__authority').textContent.trim();
+        if (value.indexOf(filter) > -1) {
+            $userIdentity[i].style.display = "";
+        } else {
+            $userIdentity[i].style.display = "none";
         }
     }
 }
 </script>
-<script src="{{ asset('js/lazy-avatar.js') }}" defer></script>
+<script src="{{ asset('js/dialog.js') }}"></script>
+<script src="{{ asset('js/lazy-avatar.js') }}"></script>
 @endpush

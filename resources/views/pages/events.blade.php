@@ -7,13 +7,14 @@
 @section('content')
     <div class="my-16">
         <h1 class="text-center text-3xl mt-4 font-bold">DAFTAR KEGIATAN</h1>
-        <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
-        @foreach ($events as $event)
-            @include('components.event.card', ['event' => $event])
-        @endforeach
-    </div>
+        <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
+        <div class="flex flex-col m-auto justify-center items-center md:w-3/4">
+            @foreach ($events as $event)
+                @include('components.event.card', ['event' => $event])
+            @endforeach
+        </div>
 
-    @if (auth()->check() && auth()->user()->isAdmin())
+        @if (auth()->check() && auth()->user()->isAdmin())
         <div class="flex flex-col align-end fixed z-1000" style="bottom: 24px; right: 24px;">
             <a href="events/create" class="relative rounded-full shadow border bg-white hover:bg-gray-100 text-gray-800 border-gray-400 py-4 px-4">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fill-current w-5 h-5">
@@ -21,7 +22,8 @@
                 </svg>
             </a>
         </div>
-    @endif
+        @endif
+    </div>
 
     {{-- Snackbar --}}
     <div id="snackbar"></div>
@@ -30,79 +32,5 @@
 @endsection
 
 @push('script')
-<script>
-const $deleteEventBtn = document.querySelectorAll('.delete__event');
-$deleteEventBtn.forEach( ($deleteBtn) => {
-    $deleteBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const $warningDialog = document.getElementById('warningDialog');
-        const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
-        const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
-        const $warningDialogCancelBtn = document.getElementById('warningDialogCancelBtn');
-        const $warningDialogTitle = document.getElementById('warningDialogTitle');
-        const $warningDialogMessage = document.getElementById('warningDialogMessage')
-        $warningDialog.classList.remove('hidden');
-        $warningDialog.classList.add('block');
-        $warningDialogTitle.textContent = `Menghapus Event?`;
-        $warningDialogMessage.textContent = `Anda akan menghapus event dengan judul ${$deleteBtn.getAttribute('data-name')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
-        $warningDialogCloseBtn.addEventListener('click', (e) => {
-            $warningDialog.classList.remove('block');
-            $warningDialog.classList.add('hidden');
-        });
-        window.onclick = (e) => {
-            if (e.target === $warningDialog) {
-                $warningDialog.classList.remove('block');
-                $warningDialog.classList.add('hidden');
-            }
-        }
-        $warningDialogCancelBtn.addEventListener('click', (e) => {
-            $warningDialog.classList.remove('block');
-            $warningDialog.classList.add('hidden');
-        });
-        $warningDialogConfirmBtn.addEventListener('click', (e) => {
-            fetch(
-            $deleteBtn.getAttribute('data-href'), {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json, text-plain, */*",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                method: 'DELETE',
-                credentials: 'same-origin',
-            })
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                if (data.status === "ok") {
-                    $warningDialog.classList.remove('block');
-                    $warningDialog.classList.add('hidden');
-                    const $snackbar = document.getElementById('snackbar');
-                    $snackbar.textContent = data.message;
-                    $snackbar.className = "show";
-                    setTimeout( () => {
-                        $snackbar.className = $snackbar.className.replace("show", "");
-                    }, 2000);
-                    setTimeout( () => {
-                        window.location.reload();
-                    }, 1000);
-                } else {
-                    $warningDialog.classList.remove('block');
-                    $warningDialog.classList.add('hidden');
-                    const $snackbar = document.getElementById('snackbar');
-                    $snackbar.textContent = data.message;
-                    $snackbar.className = "show";
-                    setTimeout( () => {
-                        $snackbar.className = $snackbar.className.replace("show", "");
-                    }, 2000);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            })
-        })
-    });
-});
-</script>
+<script src="{{ asset('js/dialog.js') }}"></script>
 @endpush

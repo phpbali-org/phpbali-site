@@ -17,9 +17,11 @@ class HomeController extends Controller
 
         $topics = !empty($event) ? $event->topics()->get() : null;
 
+        $participants = $event->reservations()->get()->sortByDesc('created_at');
+
         return view(
             'pages.event',
-            compact('title', 'event', 'topics')
+            compact('title', 'event', 'topics', 'participants')
         );
     }
 }

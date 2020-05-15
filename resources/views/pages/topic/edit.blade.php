@@ -4,10 +4,6 @@
     <link rel="stylesheet" href="{{ asset('css/choices.min.css') }}">
 @endpush
 
-@prepend('script')
-    <script src="{{ asset('js/choices.min.js') }}" async></script>
-@endprepend
-
 @section('content')
     @include('components.topic.form', [
         'topic' => $topic,
@@ -21,14 +17,10 @@
 @endsection
 
 @push('script')
+<script src="{{ asset('js/choices.min.js') }}"></script>
 <script>
-// Detect if a document has loaded with JavaScript
-document.onreadystatechange = function () {
-    if (document.readyState === 'complete') {
-        new Choices('#topicSpeaker', {
-            removeItemButton: true,
-        });
-    }
-}
+new Choices('#topicSpeaker', {
+    removeItemButton: true,
+});
 </script>
 @endpush

@@ -1,19 +1,19 @@
-<div class="w-full max-w-full mt-16">
+<div class="w-full md:w-1/2 mt-16 m-auto">
     <form class="rounded px-8 pt-6 pb-8 mb-4" method="post" action="{{ $action }}">
         @isset($_method) @method($_method) @endisset
         @csrf
         <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+        <label class="block text-black text-sm font-bold mb-2" for="name">
             Nama
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror" id="topicName"
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror" id="name"
             type="text" placeholder="Nama" name="name" value="{{ $user->name }}">
             @error('name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+        <label class="block text-black text-sm font-bold mb-2" for="email">
             Email
         </label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror" id="email"
@@ -23,7 +23,7 @@
             @enderror
         </div>
         <div class="md:flex md:items-center mb-6">
-            <label class="w-full block text-gray-500 font-bold">
+            <label class="w-full block text-black font-bold">
             <input class="mr-2 leading-tight" type="checkbox" name="is_staff" value="1" {{ $user->isStaff() ? 'checked' : '' }}>
             <span class="text-base">
                 Staff
@@ -32,7 +32,7 @@
         </div>
         @if (auth()->user()->isAdmin())
             <div class="md:flex md:items-center mb-6">
-                <label class="w-full block text-gray-500 font-bold">
+                <label class="w-full block text-black font-bold">
                 <input class="mr-2 leading-tight" type="checkbox" name="is_admin" value="1" {{ $user->isAdmin() ? 'checked' : '' }}>
                 <span class="text-base">
                     Admin
