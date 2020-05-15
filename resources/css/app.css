@@ -98,3 +98,65 @@ body {
     text-decoration: underline;
     text-decoration-color: blue;
 }
+
+.show__dialog__btn {
+    @apply py-2 px-4 rounded text-white bg-teal-500;
+}
+
+.show__dialog__btn:hover {
+    @apply bg-teal-600;
+}
+
+.show__dialog__btn:focus {
+    @apply outline-none shadow-outline;
+}
+
+.dialog {
+    @apply hidden;
+}
+
+.dialog.opened {
+    @apply block;
+}
+
+.dialog__window {
+    @apply inline-block;
+    @apply fixed;
+    @apply bg-white;
+    @apply rounded;
+    @apply z-1;
+    @apply p-5;
+    @apply w-4/5;
+    @apply shadow;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#dialog__title {
+    @apply text-lg;
+    @apply font-bold;
+    @apply text-center;
+}
+
+#dialog__body {
+    @apply mt-4;
+}
+
+@screen md {
+    .dialog__window {
+        @apply w-400px;
+    }      
+}
+
+.dialog__mask {
+    @apply fixed;
+    @apply top-0;
+    @apply left-0;
+    @apply h-full;
+    @apply w-full;
+    @apply bg-black;
+    @apply opacity-50;
+    @apply overflow-hidden;
+    @apply z-0;
+}
