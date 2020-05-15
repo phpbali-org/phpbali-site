@@ -1,4 +1,4 @@
-<div class="w-full max-w-full mt-16">
+<div class="w-full md:w-1/2 mt-16 m-auto">
     <form class="rounded px-8 pt-6 pb-8 mb-4" method="post" action="{{ $action }}">
         @isset($_method) @method($_method) @endisset
         @csrf

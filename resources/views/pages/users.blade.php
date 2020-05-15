@@ -5,9 +5,9 @@
 @endpush
 
 @section('content')
-    <div class="my-16">
+    <div class="my-16 md:w-1/2 m-auto">
         <h1 class="text-3xl text-center mt-4 font-bold">PENGGUNA</h1>
-        <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+        <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
         <div class="flex flex-col items-center">
             <input type="text" id="userFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama pengguna...">
             <div class="inline-block relative w-3/4 mt-4">

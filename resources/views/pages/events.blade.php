@@ -7,7 +7,7 @@
 @section('content')
     <div class="my-16">
         <h1 class="text-center text-3xl mt-4 font-bold">DAFTAR KEGIATAN</h1>
-        <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+        <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
         <div class="flex flex-col m-auto justify-center items-center md:w-3/4">
             @foreach ($events as $event)
                 @include('components.event.card', ['event' => $event])

@@ -1,5 +1,7 @@
 # Tentang
 
+<hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
+
 Komunitas PHPBali membahas tentang bahasa pemrograman PHP dan pengembangan web yang ada di Bali. Umumnya kami mengadakan kegiatan minimal 3 kali dalam satu tahun entah dalam bentuk pertemuan (meetup) atau loka karya (workshop).
 
 

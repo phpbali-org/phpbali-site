@@ -6,7 +6,7 @@
 
 @section('content')
     @if (!empty($event))
-        <div class="my-16">
+        <div class="m-auto md:w-3/4 my-16">
             <div class="text-center">
                 <h1 class="text-3xl font-bold mb-4" id="eventTitle">
                     {{ $event->name }}
@@ -25,9 +25,9 @@
             <p class="text-justify break-words mx-4" id="eventDesc">{{ $event->desc }}</p>
         </div>
 
-        <div class="my-8">
+        <div class="my-8 md:w-3/4 m-auto">
             <h1 class="text-3xl mb-4 text-center">TOPIK</h1>
-            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+            <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
 
             <div class="flex flex-col items-center">
                 @foreach ($topics as $topic)
@@ -39,9 +39,9 @@
             </div>
         </div>
 
-        <div class="my-16">
+        <div class="my-16 md:w-1/2 m-auto">
             <h1 class="text-3xl mb-4 text-center">PARTISIPAN</h1>
-            <hr class="my-8 border-b-2 border-gray-200 w-3/4 md:w-1/2 m-auto">
+            <hr class="my-8 border-b-2 border-gray-300 w-1/2 m-auto">
             @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
                 <div class="flex flex-col items-center">
                     <input type="text" id="participantFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama partisipan...">
