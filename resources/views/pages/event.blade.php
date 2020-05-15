@@ -45,7 +45,7 @@
             @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
                 <div class="flex flex-col items-center">
                     <input type="text" id="participantFilter" class="shadow appearance-none border rounded w-3/4 p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari nama partisipan...">
-                    @foreach ($event->reservations()->get()->sortByDesc('created_at') as $participant)
+                    @foreach ($participants as $participant)
                         @include('components.participant.card', ['participant' => $participant])
                     @endforeach
                 </div>
