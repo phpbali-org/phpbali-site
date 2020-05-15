@@ -127,211 +127,254 @@
 
 @push('script')
 <script>
-document.onreadystatechange = function() {
-    if (document.readyState === 'complete') {
-        const title = document.getElementById('eventTitle').textContent.trim();
-        const text = document.getElementById('eventDesc').textContent.trim();
-        const url = document.querySelector('link[rel=canonical]') && document.querySelector('link[rel=canonical]').href || window.location.href;
-        const $shareBtn = document.getElementById('shareBtn');
-        if ($shareBtn !== null) {
-            $shareBtn.addEventListener('click', () => {
-                if (navigator.share) {
-                    navigator.share({
-                        title,
-                        text,
-                        url
-                    })
-                    .then(() => {
-                        if (window.ga && ga.create) {
-                            ga('send', 'event', 'Button', 'share', 'Share Event PHPBali');
-                        }
-                        console.log('Successful share');
-                    })
-                    .catch((error) => {
-                        console.log('Error sharing', error);
-                    })
-                } else {
-                    console.log('Not supported, sorry');
-                }
-            });
-        }
-
-        @if (!empty($event))
-        const $participants = document.getElementsByName('participant_id');
-        const $participantFilter = document.getElementById('participantFilter');
-
-        if ($participants !== null) {
-            $participants.forEach( ($participant) => {
-                $participant.addEventListener('click', (e) => {
-                    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                    const url = '{{ $event->path().'/attendees/attendance' }}';
-                    if (e.target.checked) {
-                        const PRESENT = 1;
-                        fetch(url, {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": token
-                            },
-                            method: 'POST',
-                            credentials: 'same-origin',
-                            body: JSON.stringify({
-                                has_attended: PRESENT,
-                                participant_id: e.target.value
-                            })
-                        })
-                        .then( response => {
-                            return response.json()
-                        })
-                        .then( data => {
-                            const $snackbar = document.getElementById('snackbar');
-                            $snackbar.textContent = data.message;
-                            $snackbar.className = "show";
-                            setTimeout( () => {
-                                $snackbar.className = $snackbar.className.replace("show", "");
-                            }, 3000);
-                            console.log(data)
-                        })
-                        .catch( error => {
-                            console.error(error)
-                        });
-                    } else {
-                        const NOT_PRESENT = 0;
-                        fetch(url, {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": token
-                            },
-                            method: 'POST',
-                            credentials: 'same-origin',
-                            body: JSON.stringify({
-                                has_attended: NOT_PRESENT,
-                                participant_id: e.target.value
-                            })
-                        })
-                        .then( response => {
-                            return response.json()
-                        })
-                        .then( data => {
-                            const $snackbar = document.getElementById('snackbar');
-                            $snackbar.textContent = data.message;
-                            $snackbar.className = "show";
-                            setTimeout( () => {
-                                $snackbar.className = $snackbar.className.replace("show", "");
-                            }, 3000);
-                            console.log(data)
-                        })
-                        .catch( error => {
-                            console.error(error)
-                        });
-                    }
-                })
+const title = document.getElementById('eventTitle').textContent.trim();
+const text = document.getElementById('eventDesc').textContent.trim();
+const url = document.querySelector('link[rel=canonical]') && document.querySelector('link[rel=canonical]').href || window.location.href;
+const $shareBtn = document.getElementById('shareBtn');
+if ($shareBtn !== null) {
+    $shareBtn.addEventListener('click', () => {
+        if (navigator.share) {
+            navigator.share({
+                title,
+                text,
+                url
             })
-        }
-
-        if ($participantFilter !== null) {
-            $participantFilter.addEventListener('keyup', (e) => {
-                const filter = e.target.value.toUpperCase();
-
-                $participantIdentity = document.querySelectorAll('.participant__identity');
-                for (var i = 0; i < $participantIdentity.length; i++) {
-                    const name = $participantIdentity[i].querySelector('.participant__name').textContent.trim();
-                    if (name.toUpperCase().indexOf(filter) > -1) {
-                        $participantIdentity[i].style.display = "";
-                    } else {
-                        $participantIdentity[i].style.display = "none";
-                    }
+            .then(() => {
+                if (window.ga && ga.create) {
+                    ga('send', 'event', 'Button', 'share', 'Share Event PHPBali');
                 }
-            });
+                console.log('Successful share');
+            })
+            .catch((error) => {
+                console.log('Error sharing', error);
+            })
+        } else {
+            console.log('Not supported, sorry');
         }
-        @endif
+    });
+}
 
-        const $deleteTopicBtn = document.querySelectorAll('.delete__topic');
-        if ($deleteTopicBtn !== null) {
-            $deleteTopicBtn.forEach( ($deleteBtn) => {
-                $deleteBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.body.style.overflow = "hidden";
-                    document.querySelector('div.menu-underlay').style.display = "block";
-                    const $warningDialog = document.getElementById('warningDialog');
-                    const $warningDialogCloseBtn = document.getElementById('warningDialogCloseBtn');
-                    const $warningDialogConfirmBtn = document.getElementById('warningDialogConfirmBtn');
-                    const $warningDialogCancelBtn = document.getElementById('warningDialogCancelBtn');
-                    const $warningDialogTitle = document.getElementById('warningDialogTitle');
-                    const $warningDialogMessage = document.getElementById('warningDialogMessage')
-                    $warningDialog.classList.remove('hidden');
-                    $warningDialog.classList.add('block');
-                    $warningDialog.style.zIndex = 1;
-                    $warningDialogTitle.textContent = `Menghapus Topik?`;
-                    $warningDialogMessage.textContent = `Anda akan menghapus topik dengan judul ${$deleteBtn.getAttribute('data-title')} dan tidak dapat dikembalikan lagi. Anda yakin?`;
-                    $warningDialogCloseBtn.addEventListener('click', (e) => {
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    window.onclick = (e) => {
-                        if (e.target === $warningDialog) {
-                            $warningDialog.classList.remove('block');
-                            $warningDialog.classList.add('hidden');
-                        }
-                    }
-                    $warningDialogCancelBtn.addEventListener('click', (e) => {
-                        document.body.style.overflow = "visible";
-                        document.querySelector('div.menu-underlay').style.display = "none";
-                        $warningDialog.style.zIndex = "auto";
-                        $warningDialog.classList.remove('block');
-                        $warningDialog.classList.add('hidden');
-                    });
-                    $warningDialogConfirmBtn.addEventListener('click', (e) => {
-                        fetch(
-                        $deleteBtn.getAttribute('data-href'), {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            method: 'DELETE',
-                            credentials: 'same-origin',
-                        })
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(data => {
-                            if (data.status === "ok") {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 1000);
-                            } else {
-                                $warningDialog.classList.remove('block');
-                                $warningDialog.classList.add('hidden');
-                                const $snackbar = document.getElementById('snackbar');
-                                $snackbar.textContent = data.message;
-                                $snackbar.className = "show";
-                                setTimeout( () => {
-                                    $snackbar.className = $snackbar.className.replace("show", "");
-                                }, 2000);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
+@if (!empty($event))
+const $participants = document.getElementsByName('participant_id');
+const $participantFilter = document.getElementById('participantFilter');
+
+if ($participants !== null) {
+    $participants.forEach( ($participant) => {
+        $participant.addEventListener('click', (e) => {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const url = '{{ $event->path().'/attendees/attendance' }}';
+            if (e.target.checked) {
+                const PRESENT = 1;
+                fetch(url, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        has_attended: PRESENT,
+                        participant_id: e.target.value
                     })
+                })
+                .then( response => {
+                    return response.json()
+                })
+                .then( data => {
+                    const $snackbar = document.getElementById('snackbar');
+                    $snackbar.textContent = data.message;
+                    $snackbar.className = "show";
+                    setTimeout( () => {
+                        $snackbar.className = $snackbar.className.replace("show", "");
+                    }, 3000);
+                    console.log(data)
+                })
+                .catch( error => {
+                    console.error(error)
                 });
-            });
+            } else {
+                const NOT_PRESENT = 0;
+                fetch(url, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        has_attended: NOT_PRESENT,
+                        participant_id: e.target.value
+                    })
+                })
+                .then( response => {
+                    return response.json()
+                })
+                .then( data => {
+                    const $snackbar = document.getElementById('snackbar');
+                    $snackbar.textContent = data.message;
+                    $snackbar.className = "show";
+                    setTimeout( () => {
+                        $snackbar.className = $snackbar.className.replace("show", "");
+                    }, 3000);
+                    console.log(data)
+                })
+                .catch( error => {
+                    console.error(error)
+                });
+            }
+        })
+    })
+}
+
+if ($participantFilter !== null) {
+    $participantFilter.addEventListener('keyup', (e) => {
+        const filter = e.target.value.toUpperCase();
+
+        $participantIdentity = document.querySelectorAll('.participant__identity');
+        for (var i = 0; i < $participantIdentity.length; i++) {
+            const name = $participantIdentity[i].querySelector('.participant__name').textContent.trim();
+            if (name.toUpperCase().indexOf(filter) > -1) {
+                $participantIdentity[i].style.display = "";
+            } else {
+                $participantIdentity[i].style.display = "none";
+            }
         }
+    });
+}
+@endif
+
+const KEYCODE = {
+    ESC: 27
+}
+const $dialog = document.querySelector('.dialog');
+const $dialogWindow = $dialog.querySelector('.dialog__window');
+const $dialogConfirmBtn = $dialogWindow.querySelector('#dialog__confirm__btn');
+const $dialogCancelBtn = $dialogWindow.querySelector('#dialog__cancel__btn');
+const $dialogMask = $dialog.querySelector('.dialog__mask');
+let $previousActiveElement;
+
+const deleteBtn = document.querySelectorAll('.delete__btn');
+deleteBtn.forEach( ($btn) => {
+    $btn.addEventListener('click', (e) => {
+        openDialog(e, $btn);
+    });
+});
+
+trapFocus($dialogWindow);
+
+function openDialog(e, el) {
+    // Grab a reference to the previous activeElement.
+    // We'll want to restore this when we close the dialog.
+    $previousActiveElement = document.activeElement;
+
+    // Make the dialog visible.
+    $dialog.classList.add('opened');
+    // Hide scrolling body element
+    document.body.style.overflow = "hidden";
+    // Set title of dialog
+    $dialogWindow.querySelector('#dialog__title').textContent = 'Menghapus topik?';
+    // Set body of dialog
+    $dialogWindow.querySelector('#dialog__body').textContent = `
+        Anda akan menghapus topik dengan judul ${el.getAttribute('data-title')} dan tidak dapat dikembalikan lagi. Anda yakin?
+    `;
+    $dialogConfirmBtn.addEventListener('click', () => {
+        fetch(
+            el.getAttribute('data-href'), {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json, text-plain, */*",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                method: 'DELETE',
+                credentials: 'same-origin',
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                closeDialog();
+                const $snackbar = document.getElementById('snackbar');
+                $snackbar.textContent = data.message;
+                $snackbar.className = "show";
+                setTimeout( () => {
+                    $snackbar.className = $snackbar.className.replace("show", "");
+                }, 2000);
+                if (data.status === "ok") {
+                    setTimeout( () => {
+                        window.location.reload();
+                    }, 500);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    // Listen for things that should close the dialog
+    $dialogMask.addEventListener('click', closeDialog);
+    $dialogCancelBtn.addEventListener('click', closeDialog);
+    document.addEventListener('keydown', checkCloseDialog);
+
+    // Finally, move focus into the first button of dialog.
+    $dialog.querySelector('button').focus();
+}
+
+function checkCloseDialog(e) {
+    if (e.keyCode === KEYCODE.ESC || e.key === 'Escape') {
+        closeDialog();
     }
 }
+
+function closeDialog() {
+    // Clean up any event listeners.
+    $dialogMask.removeEventListener('click', closeDialog);
+    $dialogCancelBtn.removeEventListener('click', closeDialog);
+    document.removeEventListener('keydown', checkCloseDialog);
+
+    // Remove Hide the dialog.
+    $dialog.classList.remove('opened');
+    // Remove Hide scrolling body element
+    document.body.style.overflow = "visible";
+    // Set title of dialog
+    $dialogWindow.querySelector('#dialog__title').textContent = '';
+    // Set body of dialog
+    $dialogWindow.querySelector('#dialog__body').textContent = '';
+
+    // Restore focus to the previous active element.
+    $previousActiveElement.focus();
+}
+
+function trapFocus(element) {
+    const focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
+    const $firstFocusableEl = focusableEls[0];
+    const $lastFocusableEl = focusableEls[focusableEls.length - 1];
+    const KEYCODE_TAB = 9;
+
+    element.addEventListener('keydown', (e) => {
+        const isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);
+
+        if (!isTabPressed) {
+            return;
+        }
+
+        if (e.shiftKey) { /* shift + tab */
+            if (document.activeElement === $firstFocusableEl) {
+                $lastFocusableEl.focus();
+                e.preventDefault();
+            }
+        } else /* tab */ {
+            if (document.activeElement === $lastFocusableEl) {
+                $firstFocusableEl.focus();
+                e.preventDefault();
+            }
+        }
+    });
+}
 </script>
-<script src="{{ asset('js/lazy-avatar.js') }}" defer></script>
+<script src="{{ asset('js/lazy-avatar.js') }}"></script>
 @endpush
