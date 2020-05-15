@@ -18,18 +18,18 @@
     </div>
     @if (auth()->check() && (auth()->user()->isStaff() || auth()->user()->isAdmin()))
         <div class="flex justify-end">
-            <button type="button" data-name="{{ $event->name }}" data-href="{{ $event->path() }}" class="delete__btn m-4 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow focus:outline-none focus:shadow-outline">Hapus</button>
+            <button type="button" data-name="{{ $event->name }}" data-href="{{ $event->path() }}" class="btn delete__btn">Hapus</button>
             @if ($event->published)
                 <form action="{{ $event->path() . "/unpublish" }}" method="post">
                     <input type="hidden" name="_method" value="PUT">
                     @csrf
-                    <button type="submit" class="m-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow focus:outline-none focus:shadow-outline">Batal publikasi</button>
+                    <button type="submit" class="btn default__btn">Batal publikasi</button>
                 </form>
             @else
                 <form action="{{ $event->path() . "/publish" }}" method="post">
                     <input type="hidden" name="_method" value="PUT">
                     @csrf
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Publikasi</button>
+                    <button type="submit" class="btn primary__btn">Publikasi</button>
                 </form>
             @endif
         </div>

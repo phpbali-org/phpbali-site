@@ -13,9 +13,9 @@
             @endforeach
         </ul>
         @if (auth()->check() && auth()->user()->isAdmin())
-            <div class="flex justify-end ml-auto">
-                <button type="button" data-href="{{ $event->path()."/topics/{$topic->slug}" }}" data-title="{{ $topic->title }}" class="delete__topic mr-4 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 border border-red-600 rounded shadow">Hapus</button>
-                <a href="{{ route('topic.edit', ['event' => $event, 'topic' => $topic]) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
+            <div class="flex justify-end">
+                <button type="button" data-href="{{ $event->path()."/topics/{$topic->slug}" }}" data-title="{{ $topic->title }}" class="btn delete__btn">Hapus</button>
+                <a href="{{ route('topic.edit', ['event' => $event, 'topic' => $topic]) }}" class="btn default__btn">Edit</a>
             </div>
         @endif
     </div>
