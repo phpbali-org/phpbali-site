@@ -1,4 +1,16 @@
 module.exports = {
+  purge: {
+    content: [
+      "app/**/*.php",
+      "resources/**/*.html",
+      "resources/**/*.js",
+      "resources/**/*.php",
+      "resources/**/*.vue"
+    ],
+    options: {
+      whitelist: ['dialog', 'opened']
+    }
+  },
   theme: {
     extend: {
       inset: {
