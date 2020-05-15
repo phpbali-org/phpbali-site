@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,11 +13,8 @@ require('laravel-mix-purgecss');
 
 mix.postCss('resources/css/app.css', 'public/css', [
   require('tailwindcss'),
-])
-.purgeCss();
+]);
 
 if (mix.inProduction()) {
   mix.version();
 }
-
-mix.browserSync('phpbali-site.test');
