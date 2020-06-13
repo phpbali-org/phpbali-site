@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('css/snackbar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/notyf.min.css') }}">
 @endpush
 
 @section('content')
@@ -119,9 +119,6 @@
         </div>
     @endif
 
-    {{-- Snackbar --}}
-    <div id="snackbar"></div>
-
     @include('components.modal')
 @endsection
 
@@ -183,13 +180,13 @@ if ($participants !== null) {
                     return response.json()
                 })
                 .then( data => {
-                    const $snackbar = document.getElementById('snackbar');
-                    $snackbar.textContent = data.message;
-                    $snackbar.className = "show";
-                    setTimeout( () => {
-                        $snackbar.className = $snackbar.className.replace("show", "");
-                    }, 3000);
-                    console.log(data)
+                    const notyf = new Notyf({
+                    position: {
+                            x: 'center',
+                            y: 'bottom'
+                        }
+                    });
+                    notyf.success(data.message);
                 })
                 .catch( error => {
                     console.error(error)
@@ -214,13 +211,13 @@ if ($participants !== null) {
                     return response.json()
                 })
                 .then( data => {
-                    const $snackbar = document.getElementById('snackbar');
-                    $snackbar.textContent = data.message;
-                    $snackbar.className = "show";
-                    setTimeout( () => {
-                        $snackbar.className = $snackbar.className.replace("show", "");
-                    }, 3000);
-                    console.log(data)
+                    const notyf = new Notyf({
+                    position: {
+                            x: 'center',
+                            y: 'bottom'
+                        }
+                    });
+                    notyf.success(data.message);
                 })
                 .catch( error => {
                     console.error(error)
@@ -247,6 +244,7 @@ if ($participantFilter !== null) {
 }
 @endif
 </script>
+<script src="{{ asset('js/notyf.min.js') }}"></script>
 <script src="{{ asset('js/dialog.js') }}"></script>
 <script src="{{ asset('js/lazy-avatar.js') }}"></script>
 @endpush

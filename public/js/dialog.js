@@ -46,12 +46,13 @@ function openDialog(e, el) {
             })
             .then(data => {
                 closeDialog();
-                const $snackbar = document.getElementById('snackbar');
-                $snackbar.textContent = data.message;
-                $snackbar.className = "show";
-                setTimeout( () => {
-                    $snackbar.className = $snackbar.className.replace("show", "");
-                }, 2000);
+                const notyf = new Notyf({
+                    position: {
+                        x: 'center',
+                        y: 'bottom'
+                    }
+                });
+                notyf.success(data.message);
                 if (data.status === "ok") {
                     setTimeout( () => {
                         window.location.reload();

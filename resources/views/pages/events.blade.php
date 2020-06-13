@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('css/snackbar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/notyf.min.css') }}">
 @endpush
 
 @section('content')
@@ -25,12 +25,10 @@
         @endif
     </div>
 
-    {{-- Snackbar --}}
-    <div id="snackbar"></div>
-
     @include('components.modal')
 @endsection
 
 @push('script')
+<script src="{{ asset('js/notyf.min.js') }}"></script>
 <script src="{{ asset('js/dialog.js') }}"></script>
 @endpush
