@@ -80,8 +80,8 @@ class EventController extends Controller
     public function show(Event $event)
     {
         $topics = $event->topics()->get();
-
-        return view('pages.event', compact('event', 'topics'));
+        $participants = $event->reservations()->get()->sortByDesc('created_at');
+        return view('pages.event', compact('event', 'topics', 'participants'));
     }
 
     /**
