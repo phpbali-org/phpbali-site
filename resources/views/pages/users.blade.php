@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('css/snackbar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/notyf.min.css') }}">
 @endpush
 
 @section('content')
@@ -31,9 +31,6 @@
             </svg>
         </a>
     </div>
-
-    {{-- Snackbar --}}
-    <div id="snackbar"></div>
 
     @include('components.modal')
 @endsection
@@ -72,6 +69,7 @@ $authorityFilter.onchange = (e) => {
     }
 }
 </script>
+<script src="{{ asset('js/notyf.min.js') }}"></script>
 <script src="{{ asset('js/dialog.js') }}"></script>
 <script src="{{ asset('js/lazy-avatar.js') }}"></script>
 @endpush
