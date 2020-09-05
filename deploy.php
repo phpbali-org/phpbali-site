@@ -27,8 +27,7 @@ add('rsync', [
     ],
 ]);
 
-// Set up a deployer task to copy secrets to the server.
-// Grabs the dotenv file from the github secret
+// Set up a deployer task to copy secrets from directory env to /var/www/nama-laravel-project in server.
 task('deploy:secrets', function () {
     run('cp $HOME/env/phpbali-site/production/.env {{deploy_path}}/shared');
 });
