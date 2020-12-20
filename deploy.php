@@ -19,7 +19,6 @@ add('rsync', [
     'exclude' => [
         '.git',
         '/.env',
-        '/storage/',
         '/vendor/',
         '/node_modules/',
         '.github',
