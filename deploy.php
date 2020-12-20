@@ -34,7 +34,7 @@ task('deploy:secrets', function () {
 
 // Hosts
 host('production.app.com') // Name of the server
-    ->hostname('68.183.181.69') // Hostname or IP address
+    ->hostname('188.166.235.40') // Hostname or IP address
     ->stage('production') // Deployment stage (production, staging, etc)
     ->user('deployer') // SSH user
     ->set('deploy_path', '/var/www/phpbali-site')
