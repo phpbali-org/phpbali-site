@@ -24,6 +24,16 @@ class AppServiceProvider extends ServiceProvider
         //         ->first();
         //     View::share('event', $event);
         // }
+
+        $view = config('view.compiled');
+        $ssr = config('ssr.node.temp_path');
+        $logs = env('APP_LOGS_PATH');
+        foreach ([$view, $ssr, $logs] as $path) {
+            if (! is_dir($path)) {
+                mkdir($path, 0755, true);
+            }
+        }
+
         if (!app()->isLocal()) {
             \URL::forceScheme('https');
         }
