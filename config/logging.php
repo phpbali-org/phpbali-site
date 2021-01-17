@@ -32,7 +32,7 @@ return [
     'channels' => [
         'stack' => [
             'driver'   => 'stack',
-            'channels' => ['single', 'telegram'],
+            'channels' => ['single'],
         ],
 
         'single' => [
@@ -64,13 +64,7 @@ return [
         'errorlog' => [
             'driver' => 'errorlog',
             'level'  => 'debug',
-        ],
-
-        'telegram' => [
-            'driver' => 'custom',
-            'via'    => Logger\TelegramLogger::class,
-            'level'  => 'debug',
-        ],
+        ]
     ],
 
 ];
