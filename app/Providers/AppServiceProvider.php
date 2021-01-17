@@ -16,15 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // if (Schema::hasTable('events')) {
-        //     $event = Event::where('published', 1)
-        //         ->orderBy('created_at', 'desc')
-        //         ->with('topic')
-        //         ->with('rsvp')
-        //         ->first();
-        //     View::share('event', $event);
-        // }
-
         if (!app()->isLocal()) {
             \URL::forceScheme('https');
 
