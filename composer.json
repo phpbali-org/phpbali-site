@@ -12,7 +12,6 @@
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
-        "grkamil/laravel-telegram-logging": "dev-master",
         "laravel/framework": "^7.0",
         "laravel/helpers": "^1.1",
         "laravel/socialite": "4.3.2",
