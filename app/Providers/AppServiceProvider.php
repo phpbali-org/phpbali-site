@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
         //         ->first();
         //     View::share('event', $event);
         // }
+        if (!app()->isLocal()) {
+            \URL::forceScheme('https');
+        }
     }
 
     /**
