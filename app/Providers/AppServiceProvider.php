@@ -36,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Set custom storage path in production mode
+        if (!app()->isLocal()) {
+            $this->app->instance('path.storage', '/tmp/storage');
+        }        
     }
 }
