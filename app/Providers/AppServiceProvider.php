@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
             $logs = config('vercel.logs_path');
             foreach ([$view, $storage, $logs] as $path) {
                 if (! is_dir($path)) {
-                    mkdir($path, 0775, true);
+                    mkdir($path, 0777, true);
                 }
             }
         }
