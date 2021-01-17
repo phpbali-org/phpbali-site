@@ -16,7 +16,7 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://phpbali.com",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
@@ -28,7 +28,7 @@
         "SSR_TEMP_PATH": "/tmp/ssr",
 
         "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
+        "LOG_CHANNEL": "stack",
         "SESSION_DRIVER": "cookie",
         "NODE_PATH": "node"
     }
