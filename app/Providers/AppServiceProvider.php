@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
 
             $view = config('view.compiled');
-            $storage = config('vercel.storage');
-            $logs = config('vercel.logs_path');
-            foreach ([$view, $storage, $logs] as $path) {
+            $storage = config('vercel.storage_path');
+            // $logs = config('vercel.logs_path');
+            foreach ([$view, $storage] as $path) {
                 if (! is_dir($path)) {
                     mkdir($path, 0775, true);
                 }
