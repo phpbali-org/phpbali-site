@@ -30,7 +30,7 @@
         "SSR_TEMP_PATH": "/tmp/ssr",
 
         "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stack",
+        "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "NODE_PATH": "node"
     }
