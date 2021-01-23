@@ -1,4 +1,4 @@
-# phpbali-site
+# phpbali-site [MOVING TO NEW REPOSITORY: https://github.com/komunitas-phpbali/next-site]
 Website Komunitas PHPBali.
 
 ## Teknologi
